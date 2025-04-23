@@ -16,7 +16,7 @@ namespace BLL
         /// </summary>
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("Hello, World5455555555555555555!+");
         }
     }
 }
