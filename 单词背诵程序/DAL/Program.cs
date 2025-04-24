@@ -14,7 +14,6 @@ namespace DAL
         /// </summary>
         static void Main(string[] args)
         {
-            
             Console.WriteLine("Hello, World!");
         }
     }
