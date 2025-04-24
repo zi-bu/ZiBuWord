@@ -39,10 +39,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(121, 673);
-            button1.Margin = new Padding(5, 4, 5, 4);
+            button1.Location = new Point(158, 430);
             button1.Name = "button1";
-            button1.Size = new Size(493, 63);
+            button1.Size = new Size(114, 58);
             button1.TabIndex = 0;
             button1.Text = "登录";
             button1.UseVisualStyleBackColor = true;
@@ -50,29 +49,26 @@
             // 
             // button2
             // 
-            button2.Location = new Point(121, 763);
-            button2.Margin = new Padding(5, 4, 5, 4);
+            button2.Location = new Point(436, 430);
             button2.Name = "button2";
-            button2.Size = new Size(493, 63);
+            button2.Size = new Size(114, 58);
             button2.TabIndex = 1;
             button2.Text = "注册";
             button2.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(121, 603);
-            textBox1.Margin = new Padding(5, 4, 5, 4);
+            textBox1.Location = new Point(158, 325);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(493, 30);
+            textBox1.Size = new Size(392, 30);
             textBox1.TabIndex = 2;
             textBox1.Text = "密码";
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(121, 531);
-            textBox2.Margin = new Padding(5, 4, 5, 4);
+            textBox2.Location = new Point(158, 253);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(493, 30);
+            textBox2.Size = new Size(392, 30);
             textBox2.TabIndex = 3;
             textBox2.Text = "用户名";
             // 
@@ -101,9 +97,7 @@
             // 
             AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(731, 1002);
-            Controls.Add(pictureBox1);
-            Controls.Add(label1);
+            ClientSize = new Size(742, 681);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(button2);
