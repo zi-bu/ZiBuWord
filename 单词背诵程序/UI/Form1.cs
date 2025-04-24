@@ -28,5 +28,23 @@ namespace UI
         {
 
         }
+
+        /// <summary>
+        /// 这是游客登录按钮的点击事件处理函数。
+        /// <br/>这里由```子布```编写。
+        /// 之后这段代码可能会被改写成一个函数（放入逻辑层），或者直接删除。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void VisitorLogin(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("真的要游客登录吗，你所有的数据将不会保存", " 警告！"
+                , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                Form2 f2 = new Form2();//创建一个新的Form2对象
+                f2.Show();//显示Form2窗口
+                this.Hide();//隐藏当前窗口
+            }
+        }
     }
 }
