@@ -32,9 +32,7 @@
             button2 = new Button();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
-            label1 = new Label();
-            pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            button3 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -49,7 +47,8 @@
             // 
             // button2
             // 
-            button2.Location = new Point(436, 430);
+            button2.Location = new Point(471, 607);
+            button2.Margin = new Padding(5, 4, 5, 4);
             button2.Name = "button2";
             button2.Size = new Size(114, 58);
             button2.TabIndex = 1;
@@ -93,11 +92,23 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click_2;
             // 
+            // button3
+            // 
+            button3.Location = new Point(683, 607);
+            button3.Margin = new Padding(5, 4, 5, 4);
+            button3.Name = "button3";
+            button3.Size = new Size(179, 82);
+            button3.TabIndex = 4;
+            button3.Text = "游客登录";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += VisitorLogin;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(742, 681);
+            ClientSize = new Size(1483, 961);
+            Controls.Add(button3);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(button2);
@@ -117,7 +128,6 @@
         private Button button2;
         private TextBox textBox1;
         private TextBox textBox2;
-        private Label label1;
-        private PictureBox pictureBox1;
+        private Button button3;
     }
 }
