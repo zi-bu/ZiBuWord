@@ -1,4 +1,4 @@
-namespace UI
+﻿namespace UI
 {
     internal static class Program
     {
