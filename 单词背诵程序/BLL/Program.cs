@@ -33,6 +33,7 @@ namespace BLL
             var printaa = from s in list
                          where s.Contains("a")
                          select s;
+            Console.WriteLine();
             foreach (var item in linq2)
             {
                 Console.WriteLine(item);
