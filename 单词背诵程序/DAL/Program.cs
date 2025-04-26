@@ -17,10 +17,32 @@ namespace DAL
         /// </summary>
         static void Main(string[] args)
         {
-            string connectionString = "Server=10.151.196.28,1433; Database=背单词; User Id=sa; Password=114514; TrustServerCertificate=True;";
-            //禁用了SSL证书验证（注意！）
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            List<string> list = new List<string>();
+            list = SqlReader.ReadSqlData("CET4-顺序");
+            foreach (var item in list)
             {
+                Console.WriteLine(item);
+            }
+        }
+        public static class SqlReader
+        {
+            ///<summary>
+            /// 连接数据库与读取数据
+            /// 这里代码是``子布``用来测试数据库连接的。
+            ///</summary>
+
+            public static string connectionString = "Server=10.151.196.28,1433; Database=背单词; User Id=sa; Password=114514; TrustServerCertificate=True;";
+
+            /// <summary>
+            /// 创建一个SqlConnection对象
+            ///<br/>并连接数据库。
+            /// </summary>
+            /// <param name="name"></param>
+            /// <returns></returns>
+            public static SqlConnection SqlConnection(string name)
+            {
+                //禁用了SSL证书验证（注意！）
+                SqlConnection connection = new SqlConnection(connectionString);
                 try
                 {
                     connection.Open();
@@ -38,13 +60,36 @@ namespace DAL
                 {
                     Console.WriteLine("连接未成功打开！");
                 }
-                SqlCommand command = new SqlCommand("SELECT * FROM [dbo].[CET4-顺序]", connection);
+                return connection;
+            }
+
+            /// <summary>
+            /// 读取数据库中的数据<br/>
+            /// "name"是表名
+            /// </summary>
+            /// <param name="name"></param>
+            public static List<string> ReadSqlData(string name)
+            {
+                List<string> list = new List<string>();
+                SqlConnection connection = SqlConnection(name);
+                //禁用了SSL证书验证（注意！）
+                SqlCommand command = new SqlCommand($"SELECT * FROM [dbo].[{name}] ORDER BY LEFT(word, 1) ASC;", connection);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     Console.WriteLine(reader["word"].ToString() + " " + reader["translations"].ToString());
+                    list.Add(reader["word"].ToString());
+                    list.Add(reader["translations"].ToString());
                 }
+                //将数据存入list中
                 reader.Close();
+                return list;
+            }
+
+            public class SqlWriter
+            {
+                public string word { get; set; }
+                public string translations { get; set; }
             }
         }
     }
