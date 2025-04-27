@@ -38,7 +38,7 @@ namespace DAL
             string pos { get; } //Part of Speech词性  
             string translation { get; } //释意  
             string phrase { get; } //短语  
-            string example { get; } //例句  
+            
 
             //定义一个单词的索引器  
             string this[int index] { get; }
