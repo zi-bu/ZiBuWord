@@ -74,7 +74,6 @@ namespace DAL
 
         private formid tableid; //枚举编号，表示单词来自哪个词典
         /// <summary>
-        /// mouse:预计将表编号(枚举如何？)作为参数传入，用于从对应数据库中随机获取单词
         /// mouse:内部采用枚举来表示单词来源，外部调用时传入对应枚举的数值即可
         /// </summary>
         /// <param name="id"></param>
