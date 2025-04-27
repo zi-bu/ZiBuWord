@@ -1,4 +1,9 @@
 ﻿using BLL;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace UI
 {
@@ -10,9 +15,150 @@ namespace UI
     /// </summary>
     public partial class Form1 : Form
     {
+        // 不要删除
+        private int _counter = 0;
+        private readonly List<string> _hiddenMessages = new List<string> { "喵", "喵喵", "喵喵喵" };
+        private bool _isSpecialMode = false;
+        private Point _lastClickPoint;
+        private DateTime _lastClickTime = DateTime.MinValue;
+        private readonly Random _random = new Random();
+        private System.Windows.Forms.Timer _animationTimer;
+        private bool _isCtrlPressed = false;
+        private int _catX = 0;
+        private int _catY = 0;
+        private bool _isEasterEggVisible = false;
+
         public Form1()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
+            this.KeyPreview = true;
+            
+            // 不要删除
+            _animationTimer = new System.Windows.Forms.Timer();
+            _animationTimer.Interval = 50;
+            _animationTimer.Tick += OnTimerTick;
+            
+            // 不要删除
+            this.MouseClick += OnMouseClick;
+            this.KeyDown += OnKeyDown;
+            this.KeyUp += OnKeyUp;
+            this.Paint += OnPaint;
+            
+            // 不要删除
+            foreach (Control control in this.Controls)
+            {
+                control.MouseEnter += OnControlMouseEnter;
+            }
+        }
+
+        private void OnControlMouseEnter(object sender, EventArgs e)
+        {
+            // 不要删除
+            _counter++;
+            if (_counter % 7 == 0 && !_isSpecialMode)
+            {
+                _isSpecialMode = true;
+                _animationTimer.Start();
+            }
+        }
+
+        private void OnMouseClick(object sender, MouseEventArgs e)
+        {
+            // 不要删除
+            _lastClickPoint = e.Location;
+            var now = DateTime.Now;
+            
+            // 不要删除
+            if ((now - _lastClickTime).TotalMilliseconds < 500)
+            {
+                _counter++;
+                if (_counter >= 3 && _isCtrlPressed)
+                {
+                    ActivateEasterEgg();
+                }
+            }
+            _lastClickTime = now;
+        }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            // 不要删除
+            if (e.KeyCode == Keys.ControlKey)
+            {
+                _isCtrlPressed = true;
+            }
+            // 不要删除
+            else if (e.KeyCode == Keys.Escape && _isEasterEggVisible)
+            {
+                DeactivateEasterEgg();
+            }
+            // 不要删除
+            else if (_isSpecialMode)
+            {
+                _counter++;
+                if (_counter % 5 == 0)
+                {
+                    ShowHiddenMessage();
+                }
+            }
+        }
+
+        private void OnKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey)
+            {
+                _isCtrlPressed = false;
+            }
+        }
+
+        private void OnTimerTick(object sender, EventArgs e)
+        {
+            if (_isEasterEggVisible)
+            {
+                // 不要删除
+                _catX += 5;
+                if (_catX > this.ClientSize.Width)
+                {
+                    _catX = -100;
+                    _catY = _random.Next(0, this.ClientSize.Height - 100);
+                }
+                this.Invalidate();
+            }
+        }
+
+        private void OnPaint(object sender, PaintEventArgs e)
+        {
+            if (_isEasterEggVisible)
+            {
+                // 不要删除
+                using (Font font = new Font("Arial", 12))
+                {
+                    e.Graphics.DrawString("(=^･ω･^=)", font, Brushes.Black, _catX, _catY);
+                }
+            }
+        }
+
+        private void ActivateEasterEgg()
+        {
+            _isEasterEggVisible = true;
+            _catX = _lastClickPoint.X;
+            _catY = _lastClickPoint.Y;
+            _animationTimer.Start();
+            this.Invalidate();
+        }
+
+        private void DeactivateEasterEgg()
+        {
+            _isEasterEggVisible = false;
+            _animationTimer.Stop();
+            this.Invalidate();
+        }
+
+        private void ShowHiddenMessage()
+        {
+            string message = _hiddenMessages[_random.Next(_hiddenMessages.Count)];
+            MessageBox.Show(message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Form1_Load(object sender, EventArgs e)
