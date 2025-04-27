@@ -24,6 +24,18 @@ namespace DAL
                 Console.WriteLine(item);
             }
         }
+        /// <summary>
+        /// 枚举类型，用于表示单词表的编号,BLL层可来查表，不要修改
+        /// </summary>
+        private enum formid 
+        {
+            CET4 = 1,
+            CET6 = 2,
+            初中 = 3,
+            高中 = 4,
+            考研 = 5,
+            托福 = 6,
+        }
 
 
 
@@ -45,7 +57,62 @@ namespace DAL
             //希望单词能运用下标访问的语法 就是从0到4 一一对应返回上述的内容
             //而在上层BLL的时候，则会新建一个WordList列表 来存放单词对象 从而实现 WordList[0][1]的单词访问 
         }
+        
 
+        /// <summary>
+        /// 实现IWord接口,该类将封装一个按需求从数据库自动获取随机单词的类，用于逻辑层对数据库的单词操作
+        /// </summary>
+        public class Word : IWord
+        {
+
+            public string word { get; set; }
+            public string pos { get; set; }
+            public string translation { get; set; }
+            public string phrase { get; set; }
+
+            private formid tableid; //枚举编号，表示单词来自哪个词典
+            /// <summary>
+            /// 预计将表编号(枚举如何？)作为参数传入，用于从对应数据库中随机获取单词
+            /// </summary>
+            /// <param name="id"></param>
+            public Word(int id)
+            {
+               tableid = (formid)id; 
+            }
+
+
+            /// <summary>
+            /// 索引器，0-3对应word、pos、translation、phrase
+            /// </summary>
+            /// <param name="index"></param>
+            /// <returns></returns>
+            public string this[int index]//有需求可改为1-4
+            {
+                get
+                {
+                    switch (index)
+                    {
+                        case 0:
+                            return word;
+                        case 1:
+                            return pos;
+                        case 2:
+                            return translation;
+                        case 3:
+                            return phrase;
+                        default:
+                            return null;
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// 单词搬运工，将封装查询单词，获取单词的方法等
+        /// </summary>
+        internal class Wordmover
+        {
+
+        }
 
 
 
