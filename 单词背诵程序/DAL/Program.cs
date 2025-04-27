@@ -26,7 +26,7 @@ namespace DAL
         }
     }
     /// <summary>
-    /// 枚举类型，用于表示单词表的编号,BLL层可来查表，不要修改
+    /// mouse:枚举类型，用于表示单词表的编号,BLL层可来查表，不要修改
     /// </summary>
 
     public enum formid
@@ -61,7 +61,8 @@ namespace DAL
 
 
     /// <summary>
-    /// 实现IWord接口,该类将封装一个按需求从数据库自动获取随机单词的类，用于逻辑层对数据库的单词操作
+    /// mouse:实现IWord接口,该类将封装一个按需求从数据库自动获取随机单词的类，用于逻辑层对数据库的单词操作
+    /// mouse:目前就缺少调取功能，尚且不能使用
     /// </summary>
     public class Word : IWord
     {
@@ -73,7 +74,8 @@ namespace DAL
 
         private formid tableid; //枚举编号，表示单词来自哪个词典
         /// <summary>
-        /// 预计将表编号(枚举如何？)作为参数传入，用于从对应数据库中随机获取单词
+        /// mouse:预计将表编号(枚举如何？)作为参数传入，用于从对应数据库中随机获取单词
+        /// mouse:内部采用枚举来表示单词来源，外部调用时传入对应枚举的数值即可
         /// </summary>
         /// <param name="id"></param>
         public Word(int id)
@@ -83,11 +85,12 @@ namespace DAL
 
 
         /// <summary>
-        /// 索引器，0-3对应word、pos、translation、phrase
+        /// mouse:索引器，0-3对应word、pos、translation、phrase
+        /// mouse:有需求可改为1-4
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public string this[int index]//有需求可改为1-4
+        public string this[int index]
         {
             get
             {
@@ -108,7 +111,7 @@ namespace DAL
         }
     }
     /// <summary>
-    /// 单词搬运工，将封装查询单词，获取单词的方法等
+    /// mouse:单词搬运工，将封装查询单词，获取单词的方法等
     /// </summary>
     internal class Wordmover
     {
