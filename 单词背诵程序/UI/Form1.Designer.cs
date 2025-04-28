@@ -94,7 +94,7 @@
             Controls.Add(button1);
             Name = "Form1";
             Padding = new Padding(16, 14, 16, 14);
-            Text = "Form1";
+            Text = " ";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();

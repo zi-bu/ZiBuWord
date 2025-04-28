@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 //注意这里引用的是Microsoft.Data.SqlClient而不是System.Data.SqlClient(高版本.NET框架已经迁移到Microsoft.Data.SqlClient)
 namespace DAL
 {
@@ -17,11 +18,21 @@ namespace DAL
         /// </summary>
         static void Main(string[] args)
         {
-            List<string> list = new List<string>();
-            list = OldSqlOperation.ReadSqlData("CET4-顺序");
-            foreach (var item in list)
+            #region "过时的测试代码"
+            //List<string> list = new List<string>();
+            //list = OldSqlOperation.ReadSqlData("CET4-顺序");
+            //foreach (var item in list)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            using (var db = new SqlDataContext())
             {
-                Console.WriteLine(item);
+                var students = db.CETs.ToList();
+                foreach (var s in students)
+                {
+                    Console.WriteLine($"{s.word},{s.phrase},{s.translation}");
+                }
             }
         }
     }
@@ -203,5 +214,25 @@ namespace DAL
             return list;
         }
     }
+    public class CET
+    {
+        public string word { get; set; }
+        public string translation { get; set; }
+        public string phrase { get; set; }
+    }
+
+    public class SqlDataContext : DbContext
+    {
+        // 对应数据库中的 Students 表
+        public DbSet<CET> CETs { get; set; }
+
+        // 配置连接 SQL Server
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // 连接字符串（直接硬编码，实际项目建议放到配置文件中）
+            optionsBuilder.UseSqlServer("Server=10.151.196.28;Database=CET-4顺序;Trusted_Connection=True;User Id=sa;Password=114514;");
+        }
+    }
+
 }
 
