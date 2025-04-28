@@ -5,42 +5,40 @@ using System.ComponentModel.DataAnnotations;
 namespace DAL
 {
     /// <summary>
-    /// 这是数据访问层，用于与数据库进行交互。
-    /// 若要单独运行此项目，请右键运行旁边的齿轮图标更换为此项目。
-    /// <br/>写什么函数的时候记得用注释写上昵称（方便看不懂的时候去问）
+    /// 主程序类，用于测试数据库连接和数据操作。
     /// </summary>
     class Program
     {
         /// <summary>
-        /// 测试的东西可以放在main函数这里，也可以打断点进行测试。
-        /// 写函数时可以像这么写注释。这样只用把鼠标放在函数上就能看到注释了。
-        /// <br/>(我不会XML语言)
-        /// 此处代码是``子布``用来测试数据库连接的。
+        /// 程序入口点，主要用于测试数据库连接和读取数据。
         /// </summary>
         static void Main(string[] args)
         {
             #region "过时的测试代码"
-            //List<string> list = new List<string>();
-            //list = OldSqlOperation.ReadSqlData("CET4-顺序");
-            //foreach (var item in list)
-            //{
-            //    Console.WriteLine(item);
-            //}
+            // 旧代码示例：通过 OldSqlOperation 读取数据。
+            // List<string> list = new List<string>();
+            // list = OldSqlOperation.ReadSqlData("考研-顺序");
+            // foreach (var item in list)
+            // {
+            //     Console.WriteLine(item);
+            // }
             #endregion
-            using (var db = new SqlDataContext())
+
+            // 使用 Entity Framework Core 连接数据库并读取数据。
+            using (var db = new SqlDataContext()) // 创建数据库上下文。
             {
-                var students = db.CET4.ToList();
-                foreach (var s in students)
+                var datas = db.考研.ToList(); // 从 考研 表中读取所有数据。
+                foreach (var s in datas) // 遍历数据并输出到控制台。
                 {
-                    Console.WriteLine($"{s.word},{s.phrase},{s.translations}");
+                    Console.WriteLine($"{s.word},{s.phrases},{s.translations}");
                 }
             }
         }
     }
     /// <summary>
-    /// mouse:枚举类型，用于表示单词表的编号,BLL层可来查表，不要修改
+    /// 枚举类型，用于表示单词表的编号。
+    /// 例如：考研 表示四级单词表，CET6 表示六级单词表。
     /// </summary>
-
     public enum formid
     {
         CET4 = 1,
@@ -52,56 +50,45 @@ namespace DAL
     }
 
 
-    ///<summary>
-    ///此处为咕所写的关于BLL层规范单词对象的接口范式
-    ///可以随意修改，此为一种设想
+    /// <summary>
+    /// 单词对象的接口定义，规范单词对象的字段和访问方式。
     /// </summary>
     public interface IWord
     {
-        //作为一个单词对象应被实现的字段包含以下  
-        string word { get; } //单词  
-        string pos { get; } //Part of Speech词性  
-        string translation { get; } //释意  
-        string phrase { get; } //短语  
+        string word { get; } // 单词
+        string pos { get; } // 词性 (Part of Speech)
+        string translation { get; } // 释义
+        string phrase { get; } // 短语
 
-
-
-        //定义一个单词的索引器  
+        // 索引器：通过下标访问单词的不同属性。
         string this[int index] { get; }
-        //希望单词能运用下标访问的语法 就是从0到4 一一对应返回上述的内容
-        //而在上层BLL的时候，则会新建一个WordList列表 来存放单词对象 从而实现 WordList[0][1]的单词访问 
     }
 
 
     /// <summary>
-    /// mouse:实现IWord接口,该类将封装一个按需求从数据库自动获取随机单词的类，用于逻辑层对数据库的单词操作
-    /// mouse:目前就缺少调取功能，尚且不能使用
+    /// 实现 IWord 接口的类，用于封装单词对象。
     /// </summary>
     public class Word : IWord
     {
+        public string word { get; set; } // 单词
+        public string pos { get; set; } // 词性
+        public string translation { get; set; } // 释义
+        public string phrase { get; set; } // 短语
 
-        public string word { get; set; }
-        public string pos { get; set; }
-        public string translation { get; set; }
-        public string phrase { get; set; }
+        private formid tableid; // 单词来源的枚举编号。
 
-        private formid tableid; //枚举编号，表示单词来自哪个词典
         /// <summary>
-        /// mouse:内部采用枚举来表示单词来源，外部调用时传入对应枚举的数值即可
+        /// 构造函数：通过枚举编号指定单词来源。
         /// </summary>
-        /// <param name="id"></param>
         public Word(int id)
         {
             tableid = (formid)id;
         }
 
-
         /// <summary>
-        /// mouse:索引器，0-3对应word、pos、translations、phrase
-        /// mouse:有需求可改为1-4
+        /// 索引器：通过下标访问单词的不同属性。
+        /// 例如：0 返回 word，1 返回 pos，依此类推。
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
         public string this[int index]
         {
             get
@@ -117,17 +104,17 @@ namespace DAL
                     case 3:
                         return phrase;
                     default:
-                        return null;
+                        return null; // 如果下标无效，返回 null。
                 }
             }
         }
     }
     /// <summary>
-    /// mouse:单词搬运工，将封装查询单词，获取单词的方法等
+    /// 单词搬运工类，计划封装查询单词和获取单词的方法（目前未实现）。
     /// </summary>
     internal class Wordmover
     {
-
+        // 目前此类为空，未来可扩展为单词查询和操作的工具类。
     }
 
 
@@ -142,107 +129,111 @@ namespace DAL
 
 
 
-    ///<summary>
-    /// 连接数据库与读取数据
-    /// 这里代码是``子布``用来测试数据库连接的。
-    /// 这里直接使用了原生ADO.NET的SqlClient来连接数据库。<br/>
-    /// 适用场景：需要极致性能、完全控制底层细节，或需要兼容旧代码。<br/>
-    ///优势：<br/>
-    ///直接通过DbConnection、DbCommand等类操作数据库。<br/>
-    ///无额外依赖，适合小型项目或工具类程序。<br/>
-    ///需要手动管理连接和命令对象。<br/>
-    ///准备弃用
-    ///</summary>
+    /// <summary>
+    /// 使用原生 ADO.NET 的类，用于直接操作数据库。
+    /// 适合需要极致性能或兼容旧代码的场景，但已计划弃用。<br/>
+    /// 这个库由```子布```书写完成，不要感谢他的贡献。
+    /// </summary>
     public static class OldSqlOperation
     {
         /// <summary>
-        /// 用于连接数据库的字符串。<br/>
-        /// Server=10.151.196.28,1433;这是在寝室用有线网时的服务器地址。<br/>
-        /// Server=10.162.28.183,1433;这是在自习教室用无线网时的服务器地址。
+        /// 数据库连接字符串。
+        /// 注意：不同网络环境下使用不同的服务器地址。
         /// </summary>
         public static string connectionString = "Server=10.162.28.183,1433; Database=背单词; User Id=sa; Password=114514; Encrypt=False;";
 
         /// <summary>
-        /// 创建一个SqlConnection对象
-        ///<br/>并连接数据库。
+        /// 创建并打开一个 SqlConnection 对象。
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
         public static SqlConnection SqlConnection(string name)
         {
-            //禁用了SSL证书验证（注意！）
-            SqlConnection connection = new SqlConnection(connectionString);
+            SqlConnection connection = new SqlConnection(connectionString); // 创建连接对象。
             try
             {
-                connection.Open();
+                connection.Open(); // 尝试打开连接。
                 Console.WriteLine("连接成功！");
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("连接失败：" + ex.Message);
-            }
-            if (connection.State == System.Data.ConnectionState.Open)
-            {
-                Console.WriteLine("连接已打开！");
-            }
-            else
-            {
-                Console.WriteLine("连接未成功打开！");
+                Console.WriteLine("连接失败：" + ex.Message); // 捕获连接失败的异常。
             }
             return connection;
         }
 
         /// <summary>
-        /// 读取数据库中的数据<br/>
-        /// "name"是表名
+        /// 读取数据库中的数据。
         /// </summary>
-        /// <param name="name"></param>
         public static List<string> ReadSqlData(string name)
         {
-            List<string> list = new List<string>();
-            SqlConnection connection = SqlConnection(name);
-            //禁用了SSL证书验证（注意！）
-            SqlCommand command = new SqlCommand($"SELECT * FROM [dbo].[{name}] ORDER BY LEFT(word, 1) ASC;", connection);
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            List<string> list = new List<string>(); // 用于存储读取的数据。
+            SqlConnection connection = SqlConnection(name); // 获取数据库连接。
+            SqlCommand command = new SqlCommand($"SELECT * FROM [dbo].[{name}] ORDER BY LEFT(word, 1) ASC;", connection); // 查询语句。
+            SqlDataReader reader = command.ExecuteReader(); // 执行查询。
+            while (reader.Read()) // 遍历查询结果。
             {
-                list.Add(reader["word"].ToString());
-                list.Add(reader["translations"].ToString());
-                if (reader["phrase"] != null)
+                list.Add(reader["word"].ToString()); // 添加单词。
+                list.Add(reader["translations"].ToString()); // 添加释义。
+                if (reader["phrase"] != null) // 如果短语不为空，添加短语。
                     list.Add(reader["phrase"].ToString());
             }
-            //将数据存入list中
-            reader.Close();
+            reader.Close(); // 关闭读取器。
             return list;
         }
     }
+
+
+
+    /// <summary>
+    /// 数据库表 CET 的模型类。(类似于一个模版)
+    /// 这个类对应数据库中的 考研 表，包含单词、释义和短语等字段。<br/>
+    /// 这个类是由```子布```书写完成的，不要感谢他的贡献。
+    /// </summary>
     public class CET
     {
-        [Key]
-        public int number { get; set; }
-        [Required]
-        public string? word { get; set; }
-        public string? translations { get; set; }
-        public string? phrase { get; set; }
+        [Key] // 主键
+        public int number { get; set; } // 单词编号
+        [Required] // 必填字段
+        public string? word { get; set; } // 单词
+        public string? translations { get; set; } // 释义
+        public string? phrases { get; set; } // 短语
     }
 
+
+
+
+    /// <summary>
+    /// 数据库上下文类，用于配置和操作数据库。
+    /// 这个类使用 Entity Framework Core 进行数据库操作。<br/>
+    /// 这个类是由```子布```书写完成的，不要感谢他的贡献。
+    /// </summary>
     public class SqlDataContext : DbContext
     {
-        // 对应数据库中的 CET 表
-        public DbSet<CET> CET4 { get; set; }
+        /// <summary>
+        /// 数据库表 CET 的 DbSet 属性。<br/>
+        /// (传入一个模版)。
+        /// </summary>
+        public DbSet<CET> 考研 { get; set; } // 对应数据库中的 考研 表。
 
-        // 配置连接 SQL Server
+        /// <summary>
+        /// 配置数据库连接。<br/>
+        /// 此处不安全地暴露了数据库连接字符串，实际使用中应使用安全的配置方式。<br/>
+        /// 在改了喵~在改了喵~<br/>
+        /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // 连接字符串（直接硬编码，实际项目建议放到配置文件中）
             optionsBuilder.UseSqlServer("Server=10.151.196.28,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
         }
+
+        /// <summary>
+        /// 配置模型映射。<br/>
+        /// 将数据库表映射到模型类。
+        /// 虽然某些简单的映射可以通过默认约定完成，但复杂的场景（如自定义表名或关系）需要在 OnModelCreating 中显式配置。
+        /// (貌似不写也能跑)？
+        /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CET>().HasKey(c => c.number); // 假设 word 是唯一的
+            modelBuilder.Entity<CET>().HasKey(c => c.number); // 配置主键。
         }
-
     }
-
 }
 
