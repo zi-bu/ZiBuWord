@@ -63,7 +63,7 @@ namespace DAL
         string translation { get; } //释意  
         string phrase { get; } //短语  
 
-        
+
 
         //定义一个单词的索引器  
         string this[int index] { get; }
@@ -220,19 +220,26 @@ namespace DAL
         public string word { get; set; }
         public string translation { get; set; }
         public string phrase { get; set; }
+        public string number { get; set; }
     }
 
     public class SqlDataContext : DbContext
     {
-        // 对应数据库中的 Students 表
+        // 对应数据库中的 CET 表
         public DbSet<CET> CETs { get; set; }
 
         // 配置连接 SQL Server
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // 连接字符串（直接硬编码，实际项目建议放到配置文件中）
-            optionsBuilder.UseSqlServer("Server=10.151.196.28;Database=CET-4顺序;Trusted_Connection=True;User Id=sa;Password=114514;");
+            optionsBuilder.UseSqlServer("Server=10.162.28.183;Database=CET-4顺序;Trusted_Connection=True;User Id=sa;Password=114514;TrustServerCertificate=True;");
+
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CET>().HasKey(c => c.number); // 假设 word 是唯一的
+        }
+
     }
 
 }
