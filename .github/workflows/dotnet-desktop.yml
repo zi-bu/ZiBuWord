@@ -19,11 +19,14 @@ jobs:
     - name: Check .NET version
       run: dotnet --version
     - name: Restore dependencies
-      run: dotnet restore
+      working-directory: 单词背诵程序
+      run: dotnet restore 单词背诵程序.sln
     - name: Build
-      run: dotnet build --no-restore
+      working-directory: 单词背诵程序
+      run: dotnet build 单词背诵程序.sln --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      working-directory: 单词背诵程序
+      run: dotnet test 单词背诵程序.sln --no-build --verbosity normal
 
   deploy:
     needs: build
@@ -35,13 +38,14 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 8.0.0
+        dotnet-version: 8.0.204
     - name: Check .NET version
       run: dotnet --version
     - name: Publish
-      run: dotnet publish -c Release -o publish
+      working-directory: 单词背诵程序
+      run: dotnet publish 单词背诵程序.sln -c Release -o publish
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
       with:
         name: publish
-        path: publish/ 
+        path: 单词背诵程序/publish/ 
