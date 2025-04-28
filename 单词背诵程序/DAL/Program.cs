@@ -52,6 +52,7 @@ namespace DAL
         string translation { get; } //释意  
         string phrase { get; } //短语  
 
+        
 
         //定义一个单词的索引器  
         string this[int index] { get; }
