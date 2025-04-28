@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 //注意这里引用的是Microsoft.Data.SqlClient而不是System.Data.SqlClient(高版本.NET框架已经迁移到Microsoft.Data.SqlClient)
 namespace DAL
 {
@@ -28,10 +29,10 @@ namespace DAL
             #endregion
             using (var db = new SqlDataContext())
             {
-                var students = db.CETs.ToList();
+                var students = db.CET4.ToList();
                 foreach (var s in students)
                 {
-                    Console.WriteLine($"{s.word},{s.phrase},{s.translation}");
+                    Console.WriteLine($"{s.word},{s.phrase},{s.translations}");
                 }
             }
         }
@@ -96,7 +97,7 @@ namespace DAL
 
 
         /// <summary>
-        /// mouse:索引器，0-3对应word、pos、translation、phrase
+        /// mouse:索引器，0-3对应word、pos、translations、phrase
         /// mouse:有需求可改为1-4
         /// </summary>
         /// <param name="index"></param>
@@ -159,7 +160,7 @@ namespace DAL
         /// Server=10.151.196.28,1433;这是在寝室用有线网时的服务器地址。<br/>
         /// Server=10.162.28.183,1433;这是在自习教室用无线网时的服务器地址。
         /// </summary>
-        public static string connectionString = "Server=10.162.28.183,1433; Database=背单词; User Id=sa; Password=114514; TrustServerCertificate=True;";
+        public static string connectionString = "Server=10.162.28.183,1433; Database=背单词; User Id=sa; Password=114514; Encrypt=False;";
 
         /// <summary>
         /// 创建一个SqlConnection对象
@@ -217,23 +218,24 @@ namespace DAL
     }
     public class CET
     {
-        public string word { get; set; }
-        public string translation { get; set; }
-        public string phrase { get; set; }
-        public string number { get; set; }
+        [Key]
+        public int number { get; set; }
+        [Required]
+        public string? word { get; set; }
+        public string? translations { get; set; }
+        public string? phrase { get; set; }
     }
 
     public class SqlDataContext : DbContext
     {
         // 对应数据库中的 CET 表
-        public DbSet<CET> CETs { get; set; }
+        public DbSet<CET> CET4 { get; set; }
 
         // 配置连接 SQL Server
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // 连接字符串（直接硬编码，实际项目建议放到配置文件中）
-            optionsBuilder.UseSqlServer("Server=10.162.28.183;Database=CET-4顺序;Trusted_Connection=True;User Id=sa;Password=114514;TrustServerCertificate=True;");
-
+            optionsBuilder.UseSqlServer("Server=10.151.196.28,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
