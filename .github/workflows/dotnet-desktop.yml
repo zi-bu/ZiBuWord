@@ -45,7 +45,7 @@ jobs:
       working-directory: 单词背诵程序
       run: dotnet publish 单词背诵程序.sln -c Release -o publish
     - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: publish
         path: 单词背诵程序/publish/ 
