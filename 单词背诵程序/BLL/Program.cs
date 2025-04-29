@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using System.Security.Cryptography;
+using DAL;
 
 namespace BLL
 {
@@ -20,12 +21,40 @@ namespace BLL
         /// </summary>
         static void Main(string[] args)
         {
+            Word w1 = new Word();
+            Word w2 = new Word();
+            Word w3 = new Word();
+            Word w4 = new Word();
+            w1.word = "test";
+            w1.pos = "n1.";
+            w1.translation = "测试1";
+            w1.phrase = "测试一下";
+            w2.word = "test";
+            w2.pos = "n2.";
+            w2.translation = "测试2";
+            w2.phrase = "测试一下";
+            w3.word = "test";   
+            w3.pos = "n3.";
+            w3.translation = "测试3";
+            w3.phrase = "测试一下";
+            w4.word = "test";
+            w4.pos = "n4.";
+            w4.translation = "测试4";
+            w4.phrase = "测试一下";
+            List<Word> tW = new List<Word>();
+            tW.Add(w1);
+            tW.Add(w2);
+            tW.Add(w3);
+            tW.Add(w4);
+            
+            SelectionList sl = new SelectionList(tW);
+            sl.ShowTestList();
         }
     }
 
     #endregion
 
 
-    //以下内容待测试
-    
+
+
 }

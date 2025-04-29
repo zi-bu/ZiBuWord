@@ -1,6 +1,6 @@
 ﻿namespace UI
 {
-    partial class Form2
+    partial class HomePage
     {
         /// <summary>
         /// Required designer variable.
@@ -39,7 +39,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(153, 281);
+            button1.Location = new Point(187, 337);
             button1.Margin = new Padding(2);
             button1.Name = "button1";
             button1.Size = new Size(0, 0);
@@ -49,20 +49,20 @@
             // 
             // button2
             // 
-            button2.Location = new Point(174, 103);
-            button2.Margin = new Padding(4, 3, 4, 3);
+            button2.Location = new Point(213, 124);
+            button2.Margin = new Padding(5, 4, 5, 4);
             button2.Name = "button2";
-            button2.Size = new Size(146, 68);
+            button2.Size = new Size(178, 82);
             button2.TabIndex = 1;
             button2.Text = "开始记忆";
             button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            button3.Location = new Point(459, 103);
-            button3.Margin = new Padding(4, 3, 4, 3);
+            button3.Location = new Point(561, 124);
+            button3.Margin = new Padding(5, 4, 5, 4);
             button3.Name = "button3";
-            button3.Size = new Size(146, 68);
+            button3.Size = new Size(178, 82);
             button3.TabIndex = 2;
             button3.Text = "开始复习";
             button3.UseVisualStyleBackColor = true;
@@ -70,20 +70,20 @@
             // 
             // button4
             // 
-            button4.Location = new Point(174, 234);
-            button4.Margin = new Padding(4, 3, 4, 3);
+            button4.Location = new Point(213, 281);
+            button4.Margin = new Padding(5, 4, 5, 4);
             button4.Name = "button4";
-            button4.Size = new Size(146, 68);
+            button4.Size = new Size(178, 82);
             button4.TabIndex = 3;
             button4.Text = "选择词典";
             button4.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            button5.Location = new Point(489, 391);
-            button5.Margin = new Padding(4, 3, 4, 3);
+            button5.Location = new Point(598, 469);
+            button5.Margin = new Padding(5, 4, 5, 4);
             button5.Name = "button5";
-            button5.Size = new Size(86, 29);
+            button5.Size = new Size(105, 35);
             button5.TabIndex = 4;
             button5.Text = "退出背词";
             button5.UseVisualStyleBackColor = true;
@@ -91,29 +91,30 @@
             // 
             // button6
             // 
-            button6.Location = new Point(459, 234);
-            button6.Margin = new Padding(4, 3, 4, 3);
+            button6.Location = new Point(561, 281);
+            button6.Margin = new Padding(5, 4, 5, 4);
             button6.Name = "button6";
-            button6.Size = new Size(146, 68);
+            button6.Size = new Size(178, 82);
             button6.TabIndex = 5;
             button6.Text = "单词收藏";
             button6.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
-            button7.Location = new Point(187, 391);
+            button7.Location = new Point(229, 469);
+            button7.Margin = new Padding(4, 4, 4, 4);
             button7.Name = "button7";
-            button7.Size = new Size(94, 29);
+            button7.Size = new Size(115, 35);
             button7.TabIndex = 6;
             button7.Text = "退出登录";
             button7.UseVisualStyleBackColor = true;
             button7.Click += button7_Click;
             // 
-            // Form2
+            // HomePage
             // 
-            AutoScaleDimensions = new SizeF(9F, 20F);
+            AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(767, 553);
+            ClientSize = new Size(937, 664);
             Controls.Add(button7);
             Controls.Add(button6);
             Controls.Add(button5);
@@ -122,8 +123,8 @@
             Controls.Add(button2);
             Controls.Add(button1);
             Margin = new Padding(2);
-            Name = "Form2";
-            Text = "Form2";
+            Name = "HomePage";
+            Text = "主页";
             Load += Form2_Load;
             ResumeLayout(false);
         }

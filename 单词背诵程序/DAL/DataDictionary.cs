@@ -13,7 +13,7 @@ namespace DAL
     /// 这个类是由```子布```书写完成的，不要感谢他的贡献。
     /// mouse:干得漂亮。
     /// </summary>
-    public class dictionary
+    public class DataDictionary
     {
         [Key] // 主键
         public int number { get; set; } // 单词编号

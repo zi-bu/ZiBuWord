@@ -43,7 +43,11 @@ namespace DAL
         public Word(int id)
         {
             tableid = (formid)id;
-            word = WordMover.GetWords(tableid);
+        }
+
+        public Word()//空构造函数 用于BLL层测试
+        {
+            
         }
 
         /// <summary>
