@@ -32,11 +32,11 @@
             button2 = new Button();
             textBox1 = new TextBox();
             panel1 = new Panel();
-            label1 = new Label();
-            textBox2 = new TextBox();
-            button3 = new Button();
-            label2 = new Label();
             button4 = new Button();
+            label2 = new Label();
+            button3 = new Button();
+            textBox2 = new TextBox();
+            label1 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -83,33 +83,15 @@
             panel1.Size = new Size(551, 342);
             panel1.TabIndex = 4;
             // 
-            // label1
+            // button4
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(253, 62);
-            label1.Name = "label1";
-            label1.Size = new Size(39, 20);
-            label1.TabIndex = 4;
-            label1.Text = "单词";
-            label1.Click += label1_Click;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(101, 156);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(352, 52);
-            textBox2.TabIndex = 5;
-            textBox2.Text = "例句";
-            // 
-            // button3
-            // 
-            button3.Location = new Point(229, 242);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 6;
-            button3.Text = "收藏";
-            button3.UseVisualStyleBackColor = true;
+            button4.Location = new Point(475, 28);
+            button4.Name = "button4";
+            button4.Size = new Size(50, 29);
+            button4.TabIndex = 8;
+            button4.Text = "首页";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // label2
             // 
@@ -121,14 +103,33 @@
             label2.Text = "词库";
             label2.Click += label2_Click;
             // 
-            // button4
+            // button3
             // 
-            button4.Location = new Point(475, 28);
-            button4.Name = "button4";
-            button4.Size = new Size(50, 29);
-            button4.TabIndex = 8;
-            button4.Text = "首页";
-            button4.UseVisualStyleBackColor = true;
+            button3.Location = new Point(229, 242);
+            button3.Name = "button3";
+            button3.Size = new Size(94, 29);
+            button3.TabIndex = 6;
+            button3.Text = "收藏";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(101, 156);
+            textBox2.Multiline = true;
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(352, 52);
+            textBox2.TabIndex = 5;
+            textBox2.Text = "例句";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(253, 62);
+            label1.Name = "label1";
+            label1.Size = new Size(39, 20);
+            label1.TabIndex = 4;
+            label1.Text = "单词";
+            label1.Click += label1_Click;
             // 
             // Form3
             // 
