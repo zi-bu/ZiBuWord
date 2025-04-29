@@ -13,7 +13,7 @@ namespace UI
     /// 若要运行此项目，请右键运行旁边的齿轮图标更换为此项目。
     /// <br/>写什么函数的时候记得用注释写上昵称（方便看不懂的时候去问）
     /// </summary>
-    public partial class Form1 : Form
+    public partial class Login : Form
     {
         // 不要删除
         private int _counter = 0;
@@ -28,7 +28,7 @@ namespace UI
         private int _catY = 0;
         private bool _isEasterEggVisible = false;
 
-        public Form1()
+        public Login()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
@@ -202,7 +202,7 @@ namespace UI
             if(MessageBox.Show("真的要游客登录吗，你所有的数据将不会保存", " 警告！"
                 , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                Form2 f2 = new Form2();//创建一个新的Form2对象
+                HomePage f2 = new HomePage();//创建一个新的Form2对象
                 f2.Show();//显示Form2窗口
                 this.Hide();//隐藏当前窗口
             }

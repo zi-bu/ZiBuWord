@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class Form2 : Form
+    public partial class HomePage : Form
     {
-        public Form2()
+        public HomePage()
         {
             InitializeComponent();
             this.FormClosing += Form2_FormClosing; // 绑定 FormClosing 事件
@@ -59,7 +59,7 @@ namespace UI
             if (MessageBox.Show("要返回登录界面吗", " 警告！"
                 , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                Form1 f1 = new Form1();//创建一个新的Form1对象
+                Login f1 = new Login();//创建一个新的Form1对象
                 f1.Show();//显示Form1窗口
                 this.Hide();//隐藏当前窗口
             }
@@ -72,7 +72,7 @@ namespace UI
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            Form3 f3 = new Form3();//创建一个新的Form3对象
+            Review f3 = new Review();//创建一个新的Form3对象
             f3.Show();//显示Form3窗口
             this.Hide();//隐藏当前窗口
         }

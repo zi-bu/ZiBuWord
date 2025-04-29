@@ -1,6 +1,6 @@
 ﻿namespace UI
 {
-    partial class Form1
+    partial class Login
     {
         /// <summary>
         ///  Required designer variable.
@@ -82,19 +82,20 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += VisitorLogin;
             // 
-            // Form1
+            // Login
             // 
             AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             ClientSize = new Size(738, 961);
             Controls.Add(button3);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(button2);
             Controls.Add(button1);
-            Name = "Form1";
+            Name = "Login";
             Padding = new Padding(16, 14, 16, 14);
-            Text = " ";
+            Text = " 登录";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
