@@ -43,7 +43,6 @@ namespace DAL
         public Word(int id)
         {
             tableid = (formid)id;
-            word = WordMover.GetWords(tableid);
         }
 
         /// <summary>
