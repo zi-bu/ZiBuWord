@@ -14,14 +14,16 @@ namespace DAL
         /// </summary>
         static void Main(string[] args)
         {
-            using(var db = new SqlDataContext())
-            {
-                var datas = db.考研.ToList(); // 从 考研 表中读取所有数据。
-                foreach (var s in datas) // 遍历数据并输出到控制台。
-                {
-                    Console.WriteLine($"{s.word},{s.phrases},{s.translations}");
-                }
-            }
+            //using(var db = new SqlDataContext())
+            //{
+            //    var datas = db.考研.ToList(); // 从 考研 表中读取所有数据。
+            //    foreach (var s in datas) // 遍历数据并输出到控制台。
+            //    {
+            //        Console.WriteLine($"{s.word},{s.phrases},{s.translations}");
+            //    }
+            //}
+            Word word = new Word(1);
+            Console.WriteLine(word[0]);
 
         }
     }
