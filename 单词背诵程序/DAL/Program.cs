@@ -107,6 +107,27 @@ namespace DAL
                         return null; // 如果下标无效，返回 null。
                 }
             }
+            set 
+            {
+                switch (index)
+                {
+                    case 0:
+                        word = value;
+                        break;
+                    case 1:
+                        pos = value;
+                        break;
+                    case 2:
+                        translation = value;
+                        break;
+                    case 3:
+                        phrase = value;
+                        break;
+                    default:
+                        break;
+                }
+            
+            }
         }
     }
     /// <summary>
