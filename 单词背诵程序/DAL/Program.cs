@@ -14,18 +14,7 @@ namespace DAL
         /// </summary>
         static void Main(string[] args)
         {
-            #region "过时的测试代码"
-            // 旧代码示例：通过 OldSqlOperation 读取数据。
-            // List<string> list = new List<string>();
-            // list = OldSqlOperation.ReadSqlData("考研-顺序");
-            // foreach (var item in list)
-            // {
-            //     Console.WriteLine(item);
-            // }
-            #endregion
-
-            // 使用 Entity Framework Core 连接数据库并读取数据。
-            using (var db = new SqlDataContext()) // 创建数据库上下文。
+            using(var db = new SqlDataContext())
             {
                 var datas = db.考研.ToList(); // 从 考研 表中读取所有数据。
                 foreach (var s in datas) // 遍历数据并输出到控制台。
@@ -33,6 +22,7 @@ namespace DAL
                     Console.WriteLine($"{s.word},{s.phrases},{s.translations}");
                 }
             }
+
         }
     }
     /// <summary>
@@ -131,11 +121,58 @@ namespace DAL
         }
     }
     /// <summary>
-    /// 单词搬运工类，计划封装查询单词和获取单词的方法（目前未实现）。
+    /// mouse:单词搬运工类，计划封装查询单词和获取单词的方法（目前未实现）。
     /// </summary>
-    internal class Wordmover
+    public static class Wordmover
     {
-        // 目前此类为空，未来可扩展为单词查询和操作的工具类。
+        static Random rd = new Random();
+        public static string GetWords(formid id)//随机获取一个单词
+        {
+             
+            var db = new SqlDataContext();
+            switch (id)
+            {
+                case formid.CET4:
+                    {
+                        int count = rd.Next(0, db.CET4.Count()-1);
+                        var word = db.CET4.ElementAt(count);
+                        return word.word;
+                    }
+                case formid.CET6:
+                    {
+                        int count = rd.Next(0, db.CET6.Count()-1);
+                        var word = db.CET6.ElementAt(count);
+                        return word.word;
+                    }
+                case formid.初中:
+                    { 
+                        int count = rd.Next(0, db.初中.Count()-1);
+                        var word = db.初中.ElementAt(count);
+                        return word.word;
+                    }
+           
+                case formid.高中:
+                   {
+                        int count = rd.Next(0, db.高中.Count()-1);
+                        var word = db.高中.ElementAt(count);
+                        return word.word;
+                    }
+                case formid.考研:
+                    {
+                        int count = rd.Next(0, db.考研.Count()-1);
+                        var word = db.考研.ElementAt(count);
+                        return word.word;
+                    }
+                case formid.托福:
+                    {
+                        int count = rd.Next(0, db.托福.Count()-1);
+                        var word = db.托福.ElementAt(count);
+                        return word.word;
+                    }
+                default:
+                    return null;
+            }
+        }
     }
 
 
@@ -149,7 +186,7 @@ namespace DAL
 
 
 
-
+    [Obsolete("mouse:旧的类，已被zibu弃用", true)]
     /// <summary>
     /// 使用原生 ADO.NET 的类，用于直接操作数据库。
     /// 适合需要极致性能或兼容旧代码的场景，但已计划弃用。<br/>
@@ -234,6 +271,11 @@ namespace DAL
         /// (传入一个模版)。
         /// </summary>
         public DbSet<CET> 考研 { get; set; } // 对应数据库中的 考研 表。
+        public DbSet<CET> CET6 { get; set; } // 对应数据库中的 CET6 表。
+        public DbSet<CET> 初中 { get; set; } // 对应数据库中的 初中 表。
+        public DbSet<CET> 高中 { get; set; } // 对应数据库中的 高中 表。
+        public DbSet<CET> 托福 { get; set; } // 对应数据库中的 托福 表。
+        public DbSet<CET> CET4 { get; set; } //对应数据库中的 CET4 表。  
 
         /// <summary>
         /// 配置数据库连接。<br/>
