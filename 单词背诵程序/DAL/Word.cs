@@ -46,6 +46,11 @@ namespace DAL
             word = WordMover.GetWords(tableid);
         }
 
+        public Word()//空构造函数 用于BLL层测试
+        {
+            
+        }
+
         /// <summary>
         /// 索引器：通过下标访问单词的不同属性;<br/>
         /// 例如：0 返回 word，1 返回 pos，依此类推;
