@@ -1,5 +1,5 @@
 ﻿namespace BLL;
-
+using DAL;
 public class CollectionOperation
 {
     public static void Shuffle<T>(List<T> list)
