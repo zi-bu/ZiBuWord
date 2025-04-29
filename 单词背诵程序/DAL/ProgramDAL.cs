@@ -19,7 +19,7 @@ namespace DAL
                 var datas = db.考研.ToList(); // 从 考研 表中读取所有数据。
                 foreach (var s in datas) // 遍历数据并输出到控制台。
                 {
-                    Console.WriteLine($"{s.word},{s.phrases},{s.translations}");
+                    Console.WriteLine($"{s.Word},{s.Phrases},{s.Translations}");
                 }
             }
 
