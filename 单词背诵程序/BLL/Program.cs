@@ -25,7 +25,8 @@ namespace BLL
 
     #endregion
 
-
+    
+    
     //以下内容待测试
     public interface IWordList
     {
@@ -58,7 +59,7 @@ namespace BLL
     {
         public int CorrectlyMarked = 0;//规定 正确答案一定放在进入列表的第一位 其余三个为模糊项
         public List<Word> WordList { get; set; }
-        public List<string> TempSelectionList { get; set; }
+        public List<string> LSelectionList { get; set; }
 
         
 
@@ -67,13 +68,14 @@ namespace BLL
         {
             WordList = tempWordList.ToList();
             //临时列表进入
-            TempSelectionList = new List<string>();
+            LSelectionList = new List<string>();
             //实例化选项临时列表
-            TempSelectionList = WordList.Select(w => w.translation).ToList();
+            LSelectionList = WordList.Select(w => w.translation).ToList();
             //选项临时列表数据导入，Linq表达式调取临时对象w的translation属性
             //后续应该要改为 pos属性+translation属性才对
-
-            //洗牌算法待完善 不能直接用List的Shuffle，这对原来的标记不存在记忆性s
+            CollectionOperation.Shuffle(LSelectionList);
+            //后续UI只要通过判断条件 被选择的LSelectionList元素 == 对应单词的translation属性就可以 就可以判断是否正确
+            //此时已经随机排序
         }
         
         public void RemoveWord(int index) //默认的删除实现，不一定会用得上
