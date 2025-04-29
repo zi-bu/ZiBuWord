@@ -1,0 +1,51 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.204
+    - name: Check .NET version
+      run: dotnet --version
+    - name: Restore dependencies
+      working-directory: 单词背诵程序
+      run: dotnet restore 单词背诵程序.sln
+    - name: Build
+      working-directory: 单词背诵程序
+      run: dotnet build 单词背诵程序.sln --no-restore
+    - name: Test
+      working-directory: 单词背诵程序
+      run: dotnet test 单词背诵程序.sln --no-build --verbosity normal
+
+  deploy:
+    needs: build
+    runs-on: windows-latest
+    if: github.ref == 'refs/heads/master'
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.204
+    - name: Check .NET version
+      run: dotnet --version
+    - name: Publish
+      working-directory: 单词背诵程序
+      run: dotnet publish 单词背诵程序.sln -c Release -o publish
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: publish
+        path: 单词背诵程序/publish/ 
