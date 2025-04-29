@@ -53,5 +53,16 @@ namespace UI
         {
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("要返回登录界面吗", " 警告！"
+                , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                Form1 f1 = new Form1();//创建一个新的Form2对象
+                f1.Show();//显示Form2窗口
+                this.Hide();//隐藏当前窗口
+            }
+        }
     }
 }
