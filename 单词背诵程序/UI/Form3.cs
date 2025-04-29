@@ -31,5 +31,12 @@ namespace UI
         {
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form2 f3 = new Form2();//创建一个新的Form2对象
+            f3.Show();//显示Form2窗口
+            this.Hide();//隐藏当前窗口
+        }
     }
 }

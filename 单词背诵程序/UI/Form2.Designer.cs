@@ -40,7 +40,7 @@
             // button1
             // 
             button1.Location = new Point(153, 281);
-            button1.Margin = new Padding(2, 2, 2, 2);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
             button1.Size = new Size(0, 0);
             button1.TabIndex = 0;
@@ -66,6 +66,7 @@
             button3.TabIndex = 2;
             button3.Text = "开始复习";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click_1;
             // 
             // button4
             // 
@@ -106,6 +107,7 @@
             button7.TabIndex = 6;
             button7.Text = "退出登录";
             button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
             // 
             // Form2
             // 
@@ -119,7 +121,7 @@
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "Form2";
             Text = "Form2";
             Load += Form2_Load;
