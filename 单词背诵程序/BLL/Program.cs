@@ -25,8 +25,7 @@ namespace BLL
 
     #endregion
 
-    
-    
+
     //以下内容待测试
     public interface IWordList
     {
@@ -34,11 +33,12 @@ namespace BLL
         /// 实现单词队列的接口范式,抽象了单词列公有的行为
         /// </summary>
         List<Word> WordList { get; set; }
+
         public void RemoveWord(int index); //移除 也许 会改造为移至一个临时队列入库
     }
 
 
-    public class ReactionList : IWordList//背诵列表
+    public class ReactionList : IWordList //背诵列表
     {
         public List<Word> WordList { get; set; }
 
@@ -57,11 +57,10 @@ namespace BLL
 
     public class SelectionList : IWordList
     {
-        public int CorrectlyMarked = 0;//规定 正确答案一定放在进入列表的第一位 其余三个为模糊项
+        public int CorrectlyMarked = 0; //规定 正确答案一定放在进入列表的第一位 其余三个为模糊项
         public List<Word> WordList { get; set; }
         public List<string> LSelectionList { get; set; }
 
-        
 
         //利用键值对，完成对正确选项的标记
         public SelectionList(List<Word> tempWordList) //构选意单元的方法
@@ -77,13 +76,11 @@ namespace BLL
             //后续UI只要通过判断条件 被选择的LSelectionList元素 == 对应单词的translation属性就可以 就可以判断是否正确
             //此时已经随机排序
         }
-        
+
         public void RemoveWord(int index) //默认的删除实现，不一定会用得上
         {
             WordList.RemoveAt(index);
         }
-        
-        
     }
     //以上内容待测试
 }
