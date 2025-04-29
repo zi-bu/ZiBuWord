@@ -16,12 +16,12 @@ namespace DAL
     public class SqlDataContext : DbContext
     {
         //mouse：数据库模板dictionary创建的DbSet集合<br/>
-        public DbSet<dictionary> 考研 { get; set; } // 对应数据库中的 考研 表。
-        public DbSet<dictionary> CET6 { get; set; } // 对应数据库中的 CET6 表。
-        public DbSet<dictionary> 初中 { get; set; } // 对应数据库中的 初中 表。
-        public DbSet<dictionary> 高中 { get; set; } // 对应数据库中的 高中 表。
-        public DbSet<dictionary> 托福 { get; set; } // 对应数据库中的 托福 表。
-        public DbSet<dictionary> CET4 { get; set; } //对应数据库中的 CET4 表。  
+        public DbSet<DataDictionary> 考研 { get; set; } // 对应数据库中的 考研 表。
+        public DbSet<DataDictionary> CET6 { get; set; } // 对应数据库中的 CET6 表。
+        public DbSet<DataDictionary> 初中 { get; set; } // 对应数据库中的 初中 表。
+        public DbSet<DataDictionary> 高中 { get; set; } // 对应数据库中的 高中 表。
+        public DbSet<DataDictionary> 托福 { get; set; } // 对应数据库中的 托福 表。
+        public DbSet<DataDictionary> CET4 { get; set; } //对应数据库中的 CET4 表。  
 
         /// <summary>
         /// 配置数据库连接。<br/>
@@ -41,7 +41,7 @@ namespace DAL
         /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<dictionary>().HasKey(c => c.number); // 配置主键。
+            modelBuilder.Entity<DataDictionary>().HasKey(c => c.number); // 配置主键。
         }
     }
 }

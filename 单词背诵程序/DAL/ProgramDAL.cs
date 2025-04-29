@@ -7,7 +7,7 @@ namespace DAL
     /// <summary>
     /// 主程序类，用于测试数据库连接和数据操作。
     /// </summary>
-    class Program
+    class ProgramDAL
     {
         /// <summary>
         /// 程序入口点，主要用于测试数据库连接和读取数据。
