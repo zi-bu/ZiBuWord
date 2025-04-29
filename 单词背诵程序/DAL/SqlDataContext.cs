@@ -30,7 +30,7 @@ namespace DAL
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=10.151.196.28,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
+            optionsBuilder.UseSqlServer("Server=172.22.178.195,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
         }
 
         /// <summary>
