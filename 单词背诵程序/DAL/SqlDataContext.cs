@@ -16,12 +16,11 @@ namespace DAL
     public class SqlDataContext : DbContext
     {
         //mouse：数据库模板dictionary创建的DbSet集合<br/>
-        public DbSet<DataDictionary> 考研 { get; set; } // 对应数据库中的 考研 表。
+        public DbSet<DataDictionary> CET4 { get; set; } // 对应数据库中的 CET4 表。
         public DbSet<DataDictionary> CET6 { get; set; } // 对应数据库中的 CET6 表。
         public DbSet<DataDictionary> 初中 { get; set; } // 对应数据库中的 初中 表。
         public DbSet<DataDictionary> 高中 { get; set; } // 对应数据库中的 高中 表。
         public DbSet<DataDictionary> 托福 { get; set; } // 对应数据库中的 托福 表。
-        public DbSet<DataDictionary> CET4 { get; set; } //对应数据库中的 CET4 表。  
 
         /// <summary>
         /// 配置数据库连接。<br/>
@@ -30,7 +29,8 @@ namespace DAL
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=10.151.196.28,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
+            optionsBuilder.UseSqlServer("Server=127.0.0.1,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
+            //10.151.196.28在校园网中用有线网时数据库的IP地址。
         }
 
         /// <summary>
@@ -42,6 +42,8 @@ namespace DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DataDictionary>().HasKey(c => c.number); // 配置主键。
+            modelBuilder.Entity<DataDictionary>().ToTable("CET4"); // 映射到 CET4 表。
+            modelBuilder.Entity<DataDictionary>().ToTable("CET6");
         }
     }
 }

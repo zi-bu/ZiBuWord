@@ -8,7 +8,7 @@ namespace DAL
 {
     /// <summary>
     /// 枚举类型，用于表示单词表的编号。<br/>
-    /// 例如：考研 表示四级单词表，CET6 表示六级单词表。
+    /// 例如：CET4 表示四级单词表，CET6 表示六级单词表。
     /// </summary>
     public enum formid
     {
@@ -67,8 +67,8 @@ namespace DAL
                     }
                 case formid.考研:
                     {
-                        int count = rd.Next(0, db.考研.Count() - 1);
-                        var word = db.考研.ElementAt(count);
+                        int count = rd.Next(0, db.CET4.Count() - 1);
+                        var word = db.CET4.ElementAt(count);
                         return word.word;
                     }
                 case formid.托福:
