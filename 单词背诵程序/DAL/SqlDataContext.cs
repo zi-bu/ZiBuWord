@@ -41,7 +41,7 @@ namespace DAL
         /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DataDictionary>().HasKey(c => c.Number); // 配置主键。
+            modelBuilder.Entity<DataDictionary>().HasKey(c => c.number); // 配置主键。
         }
     }
 }

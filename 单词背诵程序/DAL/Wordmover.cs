@@ -44,38 +44,38 @@ namespace DAL
                     {
                         int count = rd.Next(0, db.CET4.Count() - 1);
                         var word = db.CET4.ElementAt(count);
-                        return word.Word;
+                        return word.word;
                     }
                 case formid.CET6:
                     {
                         int count = rd.Next(0, db.CET6.Count() - 1);
                         var word = db.CET6.ElementAt(count);
-                        return word.Word;
+                        return word.word;
                     }
                 case formid.初中:
                     {
                         int count = rd.Next(0, db.初中.Count() - 1);
                         var word = db.初中.ElementAt(count);
-                        return word.Word;
+                        return word.word;
                     }
 
                 case formid.高中:
                     {
                         int count = rd.Next(0, db.高中.Count() - 1);
                         var word = db.高中.ElementAt(count);
-                        return word.Word;
+                        return word.word;
                     }
                 case formid.考研:
                     {
                         int count = rd.Next(0, db.考研.Count() - 1);
                         var word = db.考研.ElementAt(count);
-                        return word.Word;
+                        return word.word;
                     }
                 case formid.托福:
                     {
                         int count = rd.Next(0, db.托福.Count() - 1);
                         var word = db.托福.ElementAt(count);
-                        return word.Word;
+                        return word.word;
                     }
                 default:
                     return null;
