@@ -17,6 +17,20 @@ namespace UI
         {
             InitializeComponent();
             this.FormClosing += Form2_FormClosing; // 绑定 FormClosing 事件
+            InitializeAsync();
+        }
+
+        private async void InitializeAsync()
+        {
+            // 性能优化设置
+            PerformanceService.OptimizeFormPerformance(this);
+
+            // 异步加载数据
+            await PerformanceService.LoadFormAsync(this, () =>
+            {
+                // 在这里添加需要异步加载的初始化代码
+                // 例如：加载用户数据、配置等
+            });
         }
 
         /// <summary>
@@ -30,6 +44,7 @@ namespace UI
         {
             if (MessageService.ShowExitConfirmation())
             {
+                PerformanceService.CleanupFormResources(this);
                 Application.Exit();
             }
         }
@@ -49,6 +64,7 @@ namespace UI
             }
             else
             {
+                PerformanceService.CleanupFormResources(this);
                 System.Environment.Exit(0); // 退出程序
             }
         }
@@ -61,6 +77,7 @@ namespace UI
         {
             if (MessageService.ShowNavigateBackConfirmation())
             {
+                PerformanceService.CleanupFormResources(this);
                 Login loginForm = new Login();
                 NavigationService.NavigateTo(this, loginForm);
             }
@@ -73,6 +90,7 @@ namespace UI
 
         private void button3_Click_1(object sender, EventArgs e)
         {
+            PerformanceService.CleanupFormResources(this);
             Review reviewForm = new Review();
             NavigationService.NavigateTo(this, reviewForm);
         }

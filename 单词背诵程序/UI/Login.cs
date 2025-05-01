@@ -54,6 +54,20 @@ namespace UI
             }
 
             _easterEggService = new EasterEggService(this);
+            InitializeAsync();
+        }
+
+        private async void InitializeAsync()
+        {
+            // 性能优化设置
+            PerformanceService.OptimizeFormPerformance(this);
+
+            // 异步加载数据
+            await PerformanceService.LoadFormAsync(this, () =>
+            {
+                // 在这里添加需要异步加载的初始化代码
+                // 例如：加载配置、验证服务等
+            });
         }
 
         private void OnControlMouseEnter(object sender, EventArgs e)
@@ -201,9 +215,16 @@ namespace UI
         {
             if(MessageService.ShowVisitorLoginConfirmation())
             {
+                PerformanceService.CleanupFormResources(this);
                 HomePage homePage = new HomePage();
                 NavigationService.NavigateTo(this, homePage);
             }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            PerformanceService.CleanupFormResources(this);
         }
     }
 }
