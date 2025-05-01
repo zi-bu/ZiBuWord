@@ -29,8 +29,7 @@ namespace DAL
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=127.0.0.1,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
-            //10.151.196.28在校园网中用有线网时数据库的IP地址。
+            optionsBuilder.UseSqlServer("Server=172.22.178.195,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
         }
 
         /// <summary>
