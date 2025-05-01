@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UI.Services;
 
 namespace UI
 {
@@ -27,7 +28,7 @@ namespace UI
         /// <param name="e"></param>
         private void Exit(object sender, EventArgs e)
         {
-            Form2_FormClosing(sender, new FormClosingEventArgs(CloseReason.UserClosing, false));
+            NavigationService.ExitApplication(this);
         }
 
         /// <summary>
@@ -56,12 +57,11 @@ namespace UI
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("要返回登录界面吗", " 警告！"
+            if (MessageBox.Show("要返回登录界面吗", "警告！"
                 , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                Login f1 = new Login();//创建一个新的Form1对象
-                f1.Show();//显示Form1窗口
-                this.Hide();//隐藏当前窗口
+                Login loginForm = new Login();
+                NavigationService.NavigateTo(this, loginForm);
             }
         }
 
@@ -72,9 +72,8 @@ namespace UI
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            Review f3 = new Review();//创建一个新的Form3对象
-            f3.Show();//显示Form3窗口
-            this.Hide();//隐藏当前窗口
+            Review reviewForm = new Review();
+            NavigationService.NavigateTo(this, reviewForm);
         }
     }
 }

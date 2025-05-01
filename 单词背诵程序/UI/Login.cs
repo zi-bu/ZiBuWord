@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using UI.Services;
 
 namespace UI
 {
@@ -199,12 +200,11 @@ namespace UI
         /// <param name="e"></param>
         private void VisitorLogin(object sender, EventArgs e)
         {
-            if(MessageBox.Show("真的要游客登录吗，你所有的数据将不会保存", " 警告！"
+            if(MessageBox.Show("真的要游客登录吗，你所有的数据将不会保存", "警告！"
                 , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                HomePage f2 = new HomePage();//创建一个新的Form2对象
-                f2.Show();//显示Form2窗口
-                this.Hide();//隐藏当前窗口
+                HomePage homePage = new HomePage();
+                NavigationService.NavigateTo(this, homePage);
             }
         }
     }

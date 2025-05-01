@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UI.Services;
 
 namespace UI
 {
@@ -34,9 +35,8 @@ namespace UI
 
         private void button4_Click(object sender, EventArgs e)
         {
-            HomePage f3 = new HomePage();//创建一个新的Form2对象
-            f3.Show();//显示Form2窗口
-            this.Hide();//隐藏当前窗口
+            HomePage homePage = new HomePage();
+            NavigationService.NavigateTo(this, homePage);
         }
     }
 }
