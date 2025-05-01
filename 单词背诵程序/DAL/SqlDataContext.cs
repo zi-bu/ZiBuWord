@@ -21,9 +21,13 @@ namespace DAL
     {
         private readonly IConfiguration _configuration;
         
-        public SqlDataContext(IConfiguration configuration)
+        public SqlDataContext()
         {
-            _configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("Config/appsettings.json", optional: false, reloadOnChange: true);
+            
+            _configuration = builder.Build();
         }
         
         //mouse：数据库模板dictionary创建的DbSet集合<br/>
@@ -40,7 +44,15 @@ namespace DAL
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
+            if (!optionsBuilder.IsConfigured)
+            {
+                var connectionString = _configuration.GetConnectionString("DefaultConnection");
+                if (string.IsNullOrEmpty(connectionString))
+                {
+                    throw new InvalidOperationException("数据库连接字符串未配置");
+                }
+                optionsBuilder.UseSqlServer(connectionString);
+            }
         }
 
         /// <summary>
