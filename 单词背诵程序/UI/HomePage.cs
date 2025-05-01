@@ -28,7 +28,10 @@ namespace UI
         /// <param name="e"></param>
         private void Exit(object sender, EventArgs e)
         {
-            NavigationService.ExitApplication(this);
+            if (MessageService.ShowExitConfirmation())
+            {
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -40,8 +43,7 @@ namespace UI
         /// <param name="e"></param>
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("真的要退出吗？未保存的进度将会丢失！", "警告！", MessageBoxButtons.YesNo
-                , MessageBoxIcon.Warning) == DialogResult.No)
+            if (!MessageService.ShowExitConfirmation())
             {
                 e.Cancel = true; // 取消关闭事件
             }
@@ -57,8 +59,7 @@ namespace UI
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("要返回登录界面吗", "警告！"
-                , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (MessageService.ShowNavigateBackConfirmation())
             {
                 Login loginForm = new Login();
                 NavigationService.NavigateTo(this, loginForm);
