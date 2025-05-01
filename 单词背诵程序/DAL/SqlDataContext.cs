@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using System.Threading;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 
 namespace DAL
 {
@@ -15,6 +19,13 @@ namespace DAL
     /// </summary>
     public class SqlDataContext : DbContext
     {
+        private readonly IConfiguration _configuration;
+        
+        public SqlDataContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+        
         //mouse：数据库模板dictionary创建的DbSet集合<br/>
         public DbSet<DataDictionary> CET4 { get; set; } // 对应数据库中的 CET4 表。
         public DbSet<DataDictionary> CET6 { get; set; } // 对应数据库中的 CET6 表。
@@ -29,7 +40,7 @@ namespace DAL
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=172.22.178.195,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
         }
 
         /// <summary>
@@ -43,6 +54,79 @@ namespace DAL
             modelBuilder.Entity<DataDictionary>().HasKey(c => c.number); // 配置主键。
             modelBuilder.Entity<DataDictionary>().ToTable("CET4"); // 映射到 CET4 表。
             modelBuilder.Entity<DataDictionary>().ToTable("CET6");
+        }
+
+        // 添加审计字段
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var entries = ChangeTracker.Entries()
+                .Where(e => e.Entity is BaseEntity && 
+                           (e.State == EntityState.Added || e.State == EntityState.Modified));
+                           
+            foreach (var entry in entries)
+            {
+                var entity = (BaseEntity)entry.Entity;
+                
+                if (entry.State == EntityState.Added)
+                {
+                    entity.CreatedAt = DateTime.UtcNow;
+                }
+                
+                entity.UpdatedAt = DateTime.UtcNow;
+            }
+            
+            return base.SaveChangesAsync(cancellationToken);
+        }
+    }
+
+    public interface IRepository<T> where T : class
+    {
+        Task<T> GetByIdAsync(int id);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T> AddAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task DeleteAsync(int id);
+        Task<IEnumerable<T>> GetPagedAsync(int page, int pageSize);
+    }
+
+    public interface IUnitOfWork : IDisposable
+    {
+        IRepository<DataDictionary> WordRepository { get; }
+        Task<int> SaveChangesAsync();
+        Task BeginTransactionAsync();
+        Task CommitAsync();
+        Task RollbackAsync();
+    }
+
+    public class CacheService : ICacheService
+    {
+        private readonly IMemoryCache _cache;
+        private readonly ILogger<CacheService> _logger;
+        
+        public CacheService(IMemoryCache cache, ILogger<CacheService> logger)
+        {
+            _cache = cache;
+            _logger = logger;
+        }
+        
+        public async Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> factory, TimeSpan? expiration = null)
+        {
+            if (_cache.TryGetValue(key, out T value))
+            {
+                return value;
+            }
+            
+            value = await factory();
+            
+            var cacheOptions = new MemoryCacheEntryOptions();
+            if (expiration.HasValue)
+            {
+                cacheOptions.AbsoluteExpirationRelativeToNow = expiration;
+            }
+            
+            _cache.Set(key, value, cacheOptions);
+            
+            return value;
         }
     }
 }
