@@ -1,64 +1,56 @@
-﻿using BLL;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using UI.Services;
 
-namespace UI
+namespace UI.Services
 {
     /// <summary>
-    /// 这是用户界面层，用于与用户进行交互。业务逻辑层和数据访问层都在这里调用。
-    /// （已经引用了数据访问层的命名空间）
-    /// 若要运行此项目，请右键运行旁边的齿轮图标更换为此项目。
-    /// <br/>写什么函数的时候记得用注释写上昵称（方便看不懂的时候去问）
+    /// 彩蛋服务类，用于管理所有彩蛋相关的功能
     /// </summary>
-    public partial class Login : Form
+    public class EasterEggService
     {
-        // 不要删除
+        private readonly Form _form;
         private int _counter = 0;
         private readonly List<string> _hiddenMessages = new List<string> { "喵", "喵喵", "喵喵喵" };
         private bool _isSpecialMode = false;
         private Point _lastClickPoint;
         private DateTime _lastClickTime = DateTime.MinValue;
         private readonly Random _random = new Random();
-        private System.Windows.Forms.Timer _animationTimer;
+        private readonly Timer _animationTimer;
         private bool _isCtrlPressed = false;
         private int _catX = 0;
         private int _catY = 0;
         private bool _isEasterEggVisible = false;
-        private readonly EasterEggService _easterEggService;
 
-        public Login()
+        public EasterEggService(Form form)
         {
-            InitializeComponent();
-            this.DoubleBuffered = true;
-            this.KeyPreview = true;
-            
-            // 不要删除
-            _animationTimer = new System.Windows.Forms.Timer();
+            _form = form;
+            _form.DoubleBuffered = true;
+            _form.KeyPreview = true;
+
+            _animationTimer = new Timer();
             _animationTimer.Interval = 50;
             _animationTimer.Tick += OnTimerTick;
-            
-            // 不要删除
-            this.MouseClick += OnMouseClick;
-            this.KeyDown += OnKeyDown;
-            this.KeyUp += OnKeyUp;
-            this.Paint += OnPaint;
-            
-            // 不要删除
-            foreach (Control control in this.Controls)
+
+            InitializeEventHandlers();
+        }
+
+        private void InitializeEventHandlers()
+        {
+            _form.MouseClick += OnMouseClick;
+            _form.KeyDown += OnKeyDown;
+            _form.KeyUp += OnKeyUp;
+            _form.Paint += OnPaint;
+
+            foreach (Control control in _form.Controls)
             {
                 control.MouseEnter += OnControlMouseEnter;
             }
-
-            _easterEggService = new EasterEggService(this);
         }
 
         private void OnControlMouseEnter(object sender, EventArgs e)
         {
-            // 不要删除
             _counter++;
             if (_counter % 7 == 0 && !_isSpecialMode)
             {
@@ -69,11 +61,9 @@ namespace UI
 
         private void OnMouseClick(object sender, MouseEventArgs e)
         {
-            // 不要删除
             _lastClickPoint = e.Location;
             var now = DateTime.Now;
-            
-            // 不要删除
+
             if ((now - _lastClickTime).TotalMilliseconds < 500)
             {
                 _counter++;
@@ -87,17 +77,14 @@ namespace UI
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            // 不要删除
             if (e.KeyCode == Keys.ControlKey)
             {
                 _isCtrlPressed = true;
             }
-            // 不要删除
             else if (e.KeyCode == Keys.Escape && _isEasterEggVisible)
             {
                 DeactivateEasterEgg();
             }
-            // 不要删除
             else if (_isSpecialMode)
             {
                 _counter++;
@@ -120,14 +107,13 @@ namespace UI
         {
             if (_isEasterEggVisible)
             {
-                // 不要删除
                 _catX += 5;
-                if (_catX > this.ClientSize.Width)
+                if (_catX > _form.ClientSize.Width)
                 {
                     _catX = -100;
-                    _catY = _random.Next(0, this.ClientSize.Height - 100);
+                    _catY = _random.Next(0, _form.ClientSize.Height - 100);
                 }
-                this.Invalidate();
+                _form.Invalidate();
             }
         }
 
@@ -135,7 +121,6 @@ namespace UI
         {
             if (_isEasterEggVisible)
             {
-                // 不要删除
                 using (Font font = new Font("Arial", 12))
                 {
                     e.Graphics.DrawString("(=^･ω･^=)", font, Brushes.Black, _catX, _catY);
@@ -149,14 +134,14 @@ namespace UI
             _catX = _lastClickPoint.X;
             _catY = _lastClickPoint.Y;
             _animationTimer.Start();
-            this.Invalidate();
+            _form.Invalidate();
         }
 
         private void DeactivateEasterEgg()
         {
             _isEasterEggVisible = false;
             _animationTimer.Stop();
-            this.Invalidate();
+            _form.Invalidate();
         }
 
         private void ShowHiddenMessage()
@@ -165,50 +150,9 @@ namespace UI
             MessageBox.Show(message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public void ShowEasterEggMessage()
         {
-
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click_2(object sender, EventArgs e)
-        {
-            _easterEggService.ShowEasterEggMessage();
-        }
-
-        /// <summary>
-        /// 这是游客登录按钮的点击事件处理函数。
-        /// <br/>这里由```子布```编写。
-        /// 之后这段代码可能会被改写成一个函数（放入逻辑层），或者直接删除。
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void VisitorLogin(object sender, EventArgs e)
-        {
-            if(MessageBox.Show("真的要游客登录吗，你所有的数据将不会保存", "警告！"
-                , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                HomePage homePage = new HomePage();
-                NavigationService.NavigateTo(this, homePage);
-            }
+            MessageBox.Show("恭喜你发现了彩蛋，关注子布喵喵喵");
         }
     }
-}
+} 
