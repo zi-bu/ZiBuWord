@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using System.Threading;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using BLL.Models;
 
 namespace DAL
 {
@@ -30,7 +31,11 @@ namespace DAL
             _configuration = builder.Build();
         }
         
-        //mouse：数据库模板dictionary创建的DbSet集合<br/>
+        // 用户相关
+        public DbSet<User> Users { get; set; }
+        public DbSet<LoginAttempt> LoginAttempts { get; set; }
+        
+        // 单词相关
         public DbSet<DataDictionary> CET4 { get; set; } // 对应数据库中的 CET4 表。
         public DbSet<DataDictionary> CET6 { get; set; } // 对应数据库中的 CET6 表。
         public DbSet<DataDictionary> 初中 { get; set; } // 对应数据库中的 初中 表。
@@ -63,8 +68,30 @@ namespace DAL
         /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DataDictionary>().HasKey(c => c.number); // 配置主键。
-            modelBuilder.Entity<DataDictionary>().ToTable("CET4"); // 映射到 CET4 表。
+            base.OnModelCreating(modelBuilder);
+
+            // 配置用户表
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasIndex(e => e.Username).IsUnique();
+                entity.HasIndex(e => e.Email).IsUnique();
+                entity.Property(e => e.Username).IsRequired().HasMaxLength(50);
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.PasswordHash).IsRequired();
+            });
+
+            // 配置登录尝试表
+            modelBuilder.Entity<LoginAttempt>(entity =>
+            {
+                entity.HasOne(e => e.User)
+                    .WithMany(u => u.LoginAttempts)
+                    .HasForeignKey(e => e.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // 配置单词表
+            modelBuilder.Entity<DataDictionary>().HasKey(c => c.number);
+            modelBuilder.Entity<DataDictionary>().ToTable("CET4");
             modelBuilder.Entity<DataDictionary>().ToTable("CET6");
         }
 
