@@ -43,7 +43,7 @@ namespace DAL
                 case formid.CET4:
                     {
                         int count = rd.Next(0, db.CET4.Count() - 1);
-                        var word = db.CET4.ElementAt(count);
+                        var word = db.CET4.ElementAt(count);//跳过count个单词，取第count+1个单词
                         return word.Word;
                     }
                 case formid.CET6:
