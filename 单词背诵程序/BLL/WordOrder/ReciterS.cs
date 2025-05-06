@@ -2,6 +2,7 @@
 
 using IUIBridgeBLL;
 using static BLL.CollectionOperation.ColOperFunc;
+using static IUIBridgeBLL.IBetweenUiAndBll;
 
 namespace BLL.WordOrder;
 
@@ -36,7 +37,6 @@ public class ReciterS:IBetweenUiAndBll
         selectionlisttrans = oringnallist.Select(w => w.translation).ToList();
         selectionlist = (StringListAddition(tempPoS, selectionlisttrans)).ToList();
         //洗牌后的结果 做成词性和翻译的拆分 依次被赋予至字段上
-        
     }
 
     public void ReleaseList()

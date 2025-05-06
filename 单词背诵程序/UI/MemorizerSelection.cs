@@ -23,8 +23,8 @@ public partial class MemorizerSelection : Form
 
     private void button5_Click(object sender, EventArgs e)
     {
-        
-        
+        //生成测试列表
+        List<IWord> testList = new List<IWord>();
         
 
 
