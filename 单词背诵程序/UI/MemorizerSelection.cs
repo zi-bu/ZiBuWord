@@ -24,8 +24,8 @@ public partial class MemorizerSelection : Form
     private void button5_Click(object sender, EventArgs e)
     {
         //生成测试列表
-        
-        
+
+
 
 
 
@@ -33,7 +33,14 @@ public partial class MemorizerSelection : Form
 
     private void button1_Click_1(object sender, EventArgs e)
     {
-        
-        
+
+
+    }
+
+    private void button6_Click(object sender, EventArgs e)
+    {
+        HomePage f3 = new HomePage();//创建一个新的Form2对象
+        f3.Show();//显示Form2窗口
+        this.Hide();//隐藏当前窗口
     }
 }

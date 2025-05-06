@@ -34,27 +34,30 @@ partial class MemorizerSelection
     /// </summary>
     private void InitializeComponent()
     {
-        label1 = new System.Windows.Forms.Label();
-        button1 = new System.Windows.Forms.Button();
-        button2 = new System.Windows.Forms.Button();
-        button3 = new System.Windows.Forms.Button();
-        button4 = new System.Windows.Forms.Button();
-        button5 = new System.Windows.Forms.Button();
+        label1 = new Label();
+        button1 = new Button();
+        button2 = new Button();
+        button3 = new Button();
+        button4 = new Button();
+        button5 = new Button();
+        button6 = new Button();
         SuspendLayout();
         // 
         // label1
         // 
-        label1.Location = new System.Drawing.Point(49, 31);
+        label1.Location = new Point(60, 37);
+        label1.Margin = new Padding(4, 0, 4, 0);
         label1.Name = "label1";
-        label1.Size = new System.Drawing.Size(194, 46);
+        label1.Size = new Size(237, 55);
         label1.TabIndex = 0;
         label1.Text = "label1";
         // 
         // button1
         // 
-        button1.Location = new System.Drawing.Point(36, 98);
+        button1.Location = new Point(44, 118);
+        button1.Margin = new Padding(4, 4, 4, 4);
         button1.Name = "button1";
-        button1.Size = new System.Drawing.Size(346, 70);
+        button1.Size = new Size(423, 84);
         button1.TabIndex = 1;
         button1.Text = "button1";
         button1.UseVisualStyleBackColor = true;
@@ -62,52 +65,70 @@ partial class MemorizerSelection
         // 
         // button2
         // 
-        button2.Location = new System.Drawing.Point(38, 211);
+        button2.Location = new Point(46, 253);
+        button2.Margin = new Padding(4, 4, 4, 4);
         button2.Name = "button2";
-        button2.Size = new System.Drawing.Size(343, 59);
+        button2.Size = new Size(419, 71);
         button2.TabIndex = 2;
         button2.Text = "button2";
         button2.UseVisualStyleBackColor = true;
         // 
         // button3
         // 
-        button3.Location = new System.Drawing.Point(411, 101);
+        button3.Location = new Point(502, 121);
+        button3.Margin = new Padding(4, 4, 4, 4);
         button3.Name = "button3";
-        button3.Size = new System.Drawing.Size(238, 66);
+        button3.Size = new Size(291, 79);
         button3.TabIndex = 3;
         button3.Text = "button3";
         button3.UseVisualStyleBackColor = true;
         // 
         // button4
         // 
-        button4.Location = new System.Drawing.Point(413, 202);
+        button4.Location = new Point(505, 242);
+        button4.Margin = new Padding(4, 4, 4, 4);
         button4.Name = "button4";
-        button4.Size = new System.Drawing.Size(235, 67);
+        button4.Size = new Size(287, 80);
         button4.TabIndex = 4;
         button4.Text = "button4";
         button4.UseVisualStyleBackColor = true;
         // 
         // button5
         // 
-        button5.Location = new System.Drawing.Point(51, 317);
+        button5.Location = new Point(62, 380);
+        button5.Margin = new Padding(4, 4, 4, 4);
         button5.Name = "button5";
-        button5.Size = new System.Drawing.Size(221, 73);
+        button5.Size = new Size(270, 88);
         button5.TabIndex = 5;
         button5.Text = "启用测试";
         button5.UseVisualStyleBackColor = true;
         button5.Click += button5_Click;
         // 
+        // button6
+        // 
+        button6.Location = new Point(867, 32);
+        button6.Margin = new Padding(4);
+        button6.Name = "button6";
+        button6.Size = new Size(61, 35);
+        button6.TabIndex = 9;
+        button6.Text = "首页";
+        button6.UseVisualStyleBackColor = true;
+        button6.Click += button6_Click;
+        // 
         // MemorizerSelection
         // 
-        AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(800, 450);
+        AutoScaleDimensions = new SizeF(11F, 24F);
+        AutoScaleMode = AutoScaleMode.Font;
+        ClientSize = new Size(978, 540);
+        Controls.Add(button6);
         Controls.Add(button5);
         Controls.Add(button4);
         Controls.Add(button3);
         Controls.Add(button2);
         Controls.Add(button1);
         Controls.Add(label1);
+        Margin = new Padding(4, 4, 4, 4);
+        Name = "MemorizerSelection";
         Text = "Memorizer";
         ResumeLayout(false);
     }
@@ -122,4 +143,6 @@ partial class MemorizerSelection
     private System.Windows.Forms.Label label1;
 
     #endregion
+
+    private Button button6;
 }

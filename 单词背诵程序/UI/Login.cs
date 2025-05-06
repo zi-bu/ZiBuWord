@@ -202,8 +202,8 @@ namespace UI
             if(MessageBox.Show("真的要游客登录吗，你所有的数据将不会保存", " 警告！"
                 , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                HomePage f2 = new HomePage();//创建一个新的Form2对象
-                f2.Show();//显示Form2窗口
+                HomePage homePage = new HomePage();//创建一个新的主页窗口对象
+                homePage.Show();//显示主页窗口
                 this.Hide();//隐藏当前窗口
             }
         }

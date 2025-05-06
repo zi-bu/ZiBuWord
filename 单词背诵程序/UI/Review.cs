@@ -34,9 +34,14 @@ namespace UI
 
         private void button4_Click(object sender, EventArgs e)
         {
-            HomePage f3 = new HomePage();//创建一个新的Form2对象
-            f3.Show();//显示Form2窗口
+            HomePage homepage = new HomePage();//创建一个新的主页窗口对象
+            homepage.Show();//显示主页窗口
             this.Hide();//隐藏当前窗口
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
