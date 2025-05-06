@@ -19,9 +19,7 @@ public class ReciterS:IBetweenUiAndBll
     //已打乱单词序列 长度为4 词性+翻译
     //已打乱单词序列 长度为4 翻译
 
-    /*此处的思维模式更像是基于对象的设计
-      考虑需求 无需过度抽象*/
-
+   
     
     public void InitializeList(List<IWord> tempWordList)
     {
