@@ -30,7 +30,8 @@ namespace DAL
         public string pos { get; set; } // 词性
         public string translation { get; set; } // 释义
         public string phrase { get; set; } // 短语
-        public string phraseTranslation { get; set; }
+        public string phraseTranslation { get; set; }//短语释义
+
         private formid tableid; // 单词来源的枚举编号。
 
         /// <summary>
@@ -45,50 +46,6 @@ namespace DAL
         {
             
         }
-
-        /// <summary>
-        /// 索引器：通过下标访问单词的不同属性;<br/>
-        /// 例如：0 返回 word，1 返回 pos，依此类推;
-        /// </summary>
-        public string this[int index]
-        {
-            get
-            {
-                switch (index)
-                {
-                    case 0:
-                        return word;
-                    case 1:
-                        return pos;
-                    case 2:
-                        return translation;
-                    case 3:
-                        return phrase;
-                    default:
-                        return null; // 如果下标无效，返回 null;
-                }
-            }
-            set
-            {
-                switch (index)
-                {
-                    case 0:
-                        word = value;
-                        break;
-                    case 1:
-                        pos = value;
-                        break;
-                    case 2:
-                        translation = value;
-                        break;
-                    case 3:
-                        phrase = value;
-                        break;
-                    default:
-                        break;
-                }
-
-            }
         }
     }
 }

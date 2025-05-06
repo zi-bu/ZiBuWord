@@ -42,8 +42,8 @@ namespace DAL
             {
                 case formid.CET4:
                     {
-                        int count = rd.Next(0, db.CET4.Count() - 1);
-                        var word = db.CET4.ElementAt(count);
+                        int count = rd.Next(0, db.CET4.Count() - 1);//随机生成索引
+                        var word = db.CET4.ElementAt(count);//跳过count个元素，获取第count+1个元素
                         return word.word;
                     }
                 case formid.CET6:
