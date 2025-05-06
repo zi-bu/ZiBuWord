@@ -67,7 +67,7 @@ namespace UI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button3_Click_1(object sender, EventArgs e)
@@ -83,6 +83,32 @@ namespace UI
             memorizerSelection.Show();
             this.Hide();
             throw new System.NotImplementedException();
+        }
+
+        private void 初中ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 更换账号ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("要返回登录界面吗", " 警告！"
+                , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                Login f1 = new Login();//创建一个新的Form1对象
+                f1.Show();//显示Form1窗口
+                this.Hide();//隐藏当前窗口
+            }
+        }
+
+        private void 退出程序ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2_FormClosing(sender, new FormClosingEventArgs(CloseReason.UserClosing, false));
         }
     }
 }
