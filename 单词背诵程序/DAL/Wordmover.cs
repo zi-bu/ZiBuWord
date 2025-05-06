@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DAL
+﻿namespace DAL
 {
     /// <summary>
     /// 枚举类型，用于表示单词表的编号。<br/>
@@ -37,49 +31,52 @@ namespace DAL
         public static string GetWords(formid id)//随机获取一个单词
         {
 
-            var db = new SqlDataContext();
-            switch (id)
+            using (var db = new SqlDataContext())
             {
-                case formid.CET4:
-                    {
-                        int count = rd.Next(0, db.CET4.Count() - 1);//随机生成索引
-                        var word = db.CET4.ElementAt(count);//跳过count个元素，获取第count+1个元素
-                        return word.word;
-                    }
-                case formid.CET6:
-                    {
-                        int count = rd.Next(0, db.CET6.Count() - 1);
-                        var word = db.CET6.ElementAt(count);
-                        return word.word;
-                    }
-                case formid.初中:
-                    {
-                        int count = rd.Next(0, db.初中.Count() - 1);
-                        var word = db.初中.ElementAt(count);
-                        return word.word;
-                    }
+                switch (id)
+                {
+                    case formid.CET4:
+                        {
+                            int count = rd.Next(0, db.CET4.Count() - 1);//随机生成索引
+                            var word = db.CET4.ElementAt(count);//跳过count个元素，获取第count+1个元素
+                            return word.word;
+                        }
+                    case formid.CET6:
+                        {
+                            int count = rd.Next(0, db.CET6.Count() - 1);
+                            var word = db.CET6.ElementAt(count);
+                            return word.word;
+                        }
+                    case formid.初中:
+                        {
+                            int count = rd.Next(0, db.初中.Count() - 1);
+                            var word = db.初中.ElementAt(count);
+                            return word.word;
+                        }
 
-                case formid.高中:
-                    {
-                        int count = rd.Next(0, db.高中.Count() - 1);
-                        var word = db.高中.ElementAt(count);
-                        return word.word;
-                    }
-                case formid.考研:
-                    {
-                        int count = rd.Next(0, db.CET4.Count() - 1);
-                        var word = db.CET4.ElementAt(count);
-                        return word.word;
-                    }
-                case formid.托福:
-                    {
-                        int count = rd.Next(0, db.托福.Count() - 1);
-                        var word = db.托福.ElementAt(count);
-                        return word.word;
-                    }
-                default:
-                    return null;
+                    case formid.高中:
+                        {
+                            int count = rd.Next(0, db.高中.Count() - 1);
+                            var word = db.高中.ElementAt(count);
+                            return word.word;
+                        }
+                    case formid.考研:
+                        {
+                            int count = rd.Next(0, db.CET4.Count() - 1);
+                            var word = db.CET4.ElementAt(count);
+                            return word.word;
+                        }
+                    case formid.托福:
+                        {
+                            int count = rd.Next(0, db.托福.Count() - 1);
+                            var word = db.托福.ElementAt(count);
+                            return word.word;
+                        }
+                    default:
+                        return null;
+                }
             }
         }
     }
 }
+

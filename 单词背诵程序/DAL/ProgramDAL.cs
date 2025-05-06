@@ -1,7 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json;
+﻿using System.Text.Json;
 //注意这里引用的是Microsoft.Data.SqlClient而不是System.Data.SqlClient(高版本.NET框架已经迁移到Microsoft.Data.SqlClient)
 namespace DAL
 {
@@ -12,6 +9,9 @@ namespace DAL
     {
         static void Main(string[] args)
         {
+            //下面是你的代码zibu
+            #if HHH
+            #region
             using (var db = new SqlDataContext())
             {
                 var datas = db.CET4.ToList(); // 从 CET4 表中读取所有数据。
@@ -19,15 +19,23 @@ namespace DAL
                 {
                     try
                     {
-                        // 将 phrases 字段的 JSON 转换为 List<Dictionary<string, object>>
-                        var phrasesList = JsonSerializer.Deserialize<List<Dictionary<string, object>>>(s.phrases);
-
-                        Console.WriteLine($"Word: {s.word}");
-                        foreach (var phrase in phrasesList)
+                        //判断空值，不然报错
+                        if (s.phrases == null)
                         {
-                            foreach (var keyValue in phrase)
+                            Console.WriteLine($"Word: {s.word}");
+                            continue;
+                        }
+                        else
+                        {
+                            var phrasesList = JsonSerializer.Deserialize<List<Dictionary<string, object>>>(s.phrases);//mouse:这段有bug
+
+                            Console.WriteLine($"Word: {s.word}");
+                            foreach (var phrase in phrasesList)//mouse:这段没看懂，这么多循环？输出会重复的吧？
                             {
-                                Console.WriteLine($"{keyValue.Key}: {keyValue.Value}");
+                                foreach (var keyValue in phrase)
+                                {
+                                    Console.WriteLine($"{keyValue.Key}: {keyValue.Value}");
+                                }
                             }
                         }
                     }
@@ -37,6 +45,10 @@ namespace DAL
                     }
                 }
             }
+            #endregion
+            #endif
+            formid testid = formid.CET4;
+            Console.WriteLine(Wordmover.GetWords(testid));
         }
     }
 
