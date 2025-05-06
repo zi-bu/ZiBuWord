@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\GlobalIterface\GlobalIterface.csproj" />
     <ProjectReference Include="..\IBLLBridgeDAL\IBLLBridgeDAL.csproj" />
     <ProjectReference Include="..\IUIBridgeBLL\IUIBridgeBLL.csproj" />
   </ItemGroup>
