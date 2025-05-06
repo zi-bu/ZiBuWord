@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IUIBridgeBLL", "IUIBridgeBL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBLLBridgeDAL", "IBLLBridgeDAL\IBLLBridgeDAL.csproj", "{38180884-D510-4B77-9C54-789E99A0D571}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalIterface", "GlobalIterface\GlobalIterface.csproj", "{CEC9F3F6-D2D3-4551-9F2C-5B6E704F6F75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{38180884-D510-4B77-9C54-789E99A0D571}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38180884-D510-4B77-9C54-789E99A0D571}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38180884-D510-4B77-9C54-789E99A0D571}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEC9F3F6-D2D3-4551-9F2C-5B6E704F6F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEC9F3F6-D2D3-4551-9F2C-5B6E704F6F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEC9F3F6-D2D3-4551-9F2C-5B6E704F6F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEC9F3F6-D2D3-4551-9F2C-5B6E704F6F75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
