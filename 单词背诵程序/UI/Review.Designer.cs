@@ -43,7 +43,7 @@
             // button1
             // 
             button1.Location = new Point(98, 290);
-            button1.Margin = new Padding(4, 4, 4, 4);
+            button1.Margin = new Padding(4);
             button1.Name = "button1";
             button1.Size = new Size(115, 35);
             button1.TabIndex = 0;
@@ -53,7 +53,7 @@
             // button2
             // 
             button2.Location = new Point(474, 290);
-            button2.Margin = new Padding(4, 4, 4, 4);
+            button2.Margin = new Padding(4);
             button2.Name = "button2";
             button2.Size = new Size(115, 35);
             button2.TabIndex = 2;
@@ -63,7 +63,7 @@
             // textBox1
             // 
             textBox1.Location = new Point(123, 125);
-            textBox1.Margin = new Padding(4, 4, 4, 4);
+            textBox1.Margin = new Padding(4);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(429, 40);
@@ -82,15 +82,16 @@
             panel1.Controls.Add(button2);
             panel1.Controls.Add(button1);
             panel1.Location = new Point(136, 55);
-            panel1.Margin = new Padding(4, 4, 4, 4);
+            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
             panel1.Size = new Size(673, 410);
             panel1.TabIndex = 4;
+            panel1.Paint += panel1_Paint;
             // 
             // button4
             // 
             button4.Location = new Point(581, 34);
-            button4.Margin = new Padding(4, 4, 4, 4);
+            button4.Margin = new Padding(4);
             button4.Name = "button4";
             button4.Size = new Size(61, 35);
             button4.TabIndex = 8;
@@ -112,7 +113,7 @@
             // button3
             // 
             button3.Location = new Point(280, 290);
-            button3.Margin = new Padding(4, 4, 4, 4);
+            button3.Margin = new Padding(4);
             button3.Name = "button3";
             button3.Size = new Size(115, 35);
             button3.TabIndex = 6;
@@ -122,7 +123,7 @@
             // textBox2
             // 
             textBox2.Location = new Point(123, 187);
-            textBox2.Margin = new Padding(4, 4, 4, 4);
+            textBox2.Margin = new Padding(4);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(429, 62);
@@ -146,7 +147,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(978, 540);
             Controls.Add(panel1);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "Review";
             Text = "复习";
             panel1.ResumeLayout(false);
