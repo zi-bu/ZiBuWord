@@ -60,6 +60,8 @@ namespace UI
                 , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 Login login = new Login();//创建一个新的登录窗口对象
+                login.StartPosition = FormStartPosition.Manual;//固定窗口位置
+                login.Location = this.Location;//对齐窗口位置
                 login.Show();//显示登录窗口
                 this.Hide();//隐藏当前窗口
             }
@@ -67,12 +69,14 @@ namespace UI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button3_Click_1(object sender, EventArgs e)
         {
             Review review = new Review();//创建一个新的复习窗口对象
+            review.StartPosition = FormStartPosition.Manual;
+            review.Location = this.Location;
             review.Show();//显示复习窗口
             this.Hide();//隐藏当前窗口
         }
@@ -80,9 +84,20 @@ namespace UI
         private void button2_Click(object sender, EventArgs e)
         {
             MemorizerSelection memorizerSelection = new MemorizerSelection();
+            memorizerSelection.StartPosition = FormStartPosition.Manual;
+            memorizerSelection.Location = this.Location;
             memorizerSelection.Show();//显示背诵选择窗口
             this.Hide();
             throw new System.NotImplementedException();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Favorite favorite = new Favorite();
+            favorite.StartPosition = FormStartPosition.Manual;
+            favorite.Location = this.Location;
+            favorite.Show();//显示收藏夹窗口
+            this.Hide();
         }
     }
 }

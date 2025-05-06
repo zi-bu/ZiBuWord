@@ -21,5 +21,14 @@ namespace UI
         {
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            HomePage homePage = new HomePage();
+            homePage.StartPosition = FormStartPosition.Manual;//固定窗口位置
+            homePage.Location = this.Location;//对齐窗口位置
+            homePage.Show();//显示主页面
+            this.Hide();
+        }
     }
 }

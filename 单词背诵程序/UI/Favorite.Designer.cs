@@ -38,6 +38,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = SystemColors.Window;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { 单词原文, 单词释义, 取消收藏 });
             dataGridView1.Location = new Point(12, 12);
@@ -80,11 +81,13 @@
             button4.TabIndex = 9;
             button4.Text = "首页";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // Favorite
             // 
             AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Window;
             ClientSize = new Size(860, 809);
             Controls.Add(button4);
             Controls.Add(dataGridView1);

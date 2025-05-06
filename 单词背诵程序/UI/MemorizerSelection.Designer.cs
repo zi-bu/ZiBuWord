@@ -55,7 +55,7 @@ partial class MemorizerSelection
         // button1
         // 
         button1.Location = new Point(44, 118);
-        button1.Margin = new Padding(4, 4, 4, 4);
+        button1.Margin = new Padding(4);
         button1.Name = "button1";
         button1.Size = new Size(423, 84);
         button1.TabIndex = 1;
@@ -66,7 +66,7 @@ partial class MemorizerSelection
         // button2
         // 
         button2.Location = new Point(46, 253);
-        button2.Margin = new Padding(4, 4, 4, 4);
+        button2.Margin = new Padding(4);
         button2.Name = "button2";
         button2.Size = new Size(419, 71);
         button2.TabIndex = 2;
@@ -76,17 +76,18 @@ partial class MemorizerSelection
         // button3
         // 
         button3.Location = new Point(502, 121);
-        button3.Margin = new Padding(4, 4, 4, 4);
+        button3.Margin = new Padding(4);
         button3.Name = "button3";
         button3.Size = new Size(291, 79);
         button3.TabIndex = 3;
         button3.Text = "button3";
         button3.UseVisualStyleBackColor = true;
+        button3.Click += button3_Click;
         // 
         // button4
         // 
         button4.Location = new Point(505, 242);
-        button4.Margin = new Padding(4, 4, 4, 4);
+        button4.Margin = new Padding(4);
         button4.Name = "button4";
         button4.Size = new Size(287, 80);
         button4.TabIndex = 4;
@@ -96,7 +97,7 @@ partial class MemorizerSelection
         // button5
         // 
         button5.Location = new Point(62, 380);
-        button5.Margin = new Padding(4, 4, 4, 4);
+        button5.Margin = new Padding(4);
         button5.Name = "button5";
         button5.Size = new Size(270, 88);
         button5.TabIndex = 5;
@@ -127,7 +128,7 @@ partial class MemorizerSelection
         Controls.Add(button2);
         Controls.Add(button1);
         Controls.Add(label1);
-        Margin = new Padding(4, 4, 4, 4);
+        Margin = new Padding(4);
         Name = "MemorizerSelection";
         Text = "Memorizer";
         ResumeLayout(false);

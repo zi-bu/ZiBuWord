@@ -34,8 +34,10 @@ namespace UI
 
         private void button4_Click(object sender, EventArgs e)
         {
-            HomePage homepage = new HomePage();//创建一个新的主页窗口对象
-            homepage.Show();//显示主页窗口
+            HomePage homePage = new HomePage();//创建一个新的主页窗口对象
+            homePage.StartPosition = FormStartPosition.Manual;
+            homePage.Location = this.Location;
+            homePage.Show();//显示主页窗口
             this.Hide();//隐藏当前窗口
         }
 

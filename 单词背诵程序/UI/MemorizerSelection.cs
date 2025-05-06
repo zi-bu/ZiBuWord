@@ -39,8 +39,15 @@ public partial class MemorizerSelection : Form
 
     private void button6_Click(object sender, EventArgs e)
     {
-        HomePage f3 = new HomePage();//创建一个新的Form2对象
-        f3.Show();//显示Form2窗口
+        HomePage homePage = new HomePage();//创建一个新的主页对象
+        homePage.StartPosition = FormStartPosition.Manual;
+        homePage.Location = this.Location;
+        homePage.Show();//显示主页窗口
         this.Hide();//隐藏当前窗口
+    }
+
+    private void button3_Click(object sender, EventArgs e)
+    {
+
     }
 }

@@ -203,6 +203,7 @@ namespace UI
                 , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 HomePage homePage = new HomePage();//创建一个新的主页窗口对象
+                homePage.StartPosition = FormStartPosition.Manual;
                 homePage.Show();//显示主页窗口
                 this.Hide();//隐藏当前窗口
             }
