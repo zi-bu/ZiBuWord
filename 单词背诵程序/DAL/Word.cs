@@ -30,8 +30,10 @@ namespace DAL
         public string pos { get; set; } // 词性
         public string translation { get; set; } // 释义
         public string phrase { get; set; } // 短语
-        public string phraseTranslation { get; set; }//短语释义
-
+        
+        public string phraseTranslation { get; set; } // 短语翻译
+        
+      
         private formid tableid; // 单词来源的枚举编号。
 
         /// <summary>
