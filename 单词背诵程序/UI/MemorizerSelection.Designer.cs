@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using BLL;
 using DAL;
-using static BLL.ListClass;
+
 
 namespace UI;
 
