@@ -6,9 +6,9 @@ namespace BLL.WordOrder;
 
 public class ReciterTf : IReciterTf
 {
-    public static int Index { set; get; }
+    internal static int Index { set; get; }
     
-    private static List<IWord> _loopList = new List<IWord>();
+    internal static List<IWord> _loopList = new List<IWord>();
     //用于背诵的循环列表
     private static List<bool> _loopListflag = new List<bool>()
     {
