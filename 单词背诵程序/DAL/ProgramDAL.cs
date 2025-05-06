@@ -14,7 +14,7 @@ namespace DAL
         {
             using (var db = new SqlDataContext())
             {
-                var datas = db.托福.ToList(); // 从 CET4 表中读取所有数据。
+                var datas = db.CET4.ToList(); // 从 CET4 表中读取所有数据。
                 foreach (var s in datas) // 遍历数据并输出到控制台。
                 {
                     try
