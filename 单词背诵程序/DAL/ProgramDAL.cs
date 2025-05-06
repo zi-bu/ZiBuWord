@@ -23,7 +23,7 @@ namespace DAL
                         string fixedJson = s.phrases
                         .Replace("'", "\"") // 替换单引号为双引号
                         .Replace(",}", "}") // 移除多余的逗号
-                        .Replace(",]", "]"); // 移除多余的逗
+                        .Replace(",]", "]"); // 移除多余的逗号
 
                         var options = new JsonSerializerOptions
                         {
