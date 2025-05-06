@@ -76,5 +76,13 @@ namespace UI
             f3.Show();//显示Form3窗口
             this.Hide();//隐藏当前窗口
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MemorizerSelection memorizerSelection = new MemorizerSelection();
+            memorizerSelection.Show();
+            this.Hide();
+            throw new System.NotImplementedException();
+        }
     }
 }
