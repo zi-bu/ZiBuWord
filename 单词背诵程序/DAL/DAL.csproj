@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GlobalIterface\GlobalIterface.csproj" />
     <ProjectReference Include="..\IBLLBridgeDAL\IBLLBridgeDAL.csproj" />
   </ItemGroup>
 
