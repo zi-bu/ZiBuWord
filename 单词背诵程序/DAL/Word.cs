@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IBLLBridgeDAL;
-
 
 namespace DAL
 {
@@ -20,11 +18,18 @@ namespace DAL
     /// </summary>
     public class Word : IWord
     {
-        public string word { get; private set; } // 单词
+        /// <summary>
+        /// 这是临时注销掉最终结果的字段,暂时启用了set访问器，用于测试
+        /// </summary>
+        /*public string word { get; private set; } // 单词
         public string pos { get; private set; } // 词性
         public string translation { get; private set; } // 释义
         public string phrase { get; private set; } // 短语
-
+        */
+        public string word { get; set; } // 单词
+        public string pos { get; set; } // 词性
+        public string translation { get; set; } // 释义
+        public string phrase { get; set; } // 短语
         private formid tableid; // 单词来源的枚举编号。
 
         /// <summary>
