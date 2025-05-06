@@ -41,7 +41,7 @@ namespace UI
             
             // 不要删除
             this.MouseClick += OnMouseClick;
-            this.KeyDown += OnKeyDown;
+            //this.KeyDown += OnKeyDown;
             this.KeyUp += OnKeyUp;
             this.Paint += OnPaint;
             
@@ -81,28 +81,37 @@ namespace UI
             _lastClickTime = now;
         }
 
-        private void OnKeyDown(object sender, KeyEventArgs e)
-        {
-            // 不要删除
-            if (e.KeyCode == Keys.ControlKey)
-            {
-                _isCtrlPressed = true;
-            }
-            // 不要删除
-            else if (e.KeyCode == Keys.Escape && _isEasterEggVisible)
-            {
-                DeactivateEasterEgg();
-            }
-            // 不要删除
-            else if (_isSpecialMode)
-            {
-                _counter++;
-                if (_counter % 5 == 0)
-                {
-                    ShowHiddenMessage();
-                }
-            }
-        }
+
+        /// <summary>
+        /// 我喜欢你！<br/>
+        /// 你拿个杯
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //private void OnKeyDown(object sender, KeyEventArgs e)
+        //{
+        //    // 不要删除
+        //    if (e.KeyCode == Keys.ControlKey)
+        //    {
+        //        _isCtrlPressed = true;
+        //    }
+        //    // 不要删除
+        //    else if (e.KeyCode == Keys.Escape && _isEasterEggVisible)
+        //    {
+        //        DeactivateEasterEgg();
+        //    }
+        //    // 不要删除
+        //    else if (_isSpecialMode)
+        //    {
+        //        _counter++;
+        //        if (_counter % 5 == 0)
+        //        {
+        //            ShowHiddenMessage();
+        //        }
+        //    }
+        //}
+
+
 
         private void OnKeyUp(object sender, KeyEventArgs e)
         {
