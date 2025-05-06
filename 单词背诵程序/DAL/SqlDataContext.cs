@@ -43,7 +43,6 @@ namespace DAL
         {
             modelBuilder.Entity<DataDictionary>().HasKey(c => c.number); // 配置主键。
             modelBuilder.Entity<DataDictionary>().ToTable("CET4"); // 映射到 CET4 表。
-            modelBuilder.Entity<DataDictionary>().ToTable("CET6");
         }
     }
 }
