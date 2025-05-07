@@ -9,8 +9,10 @@ public interface IReciterTf : IReciter
     string GetWordTranslation();
     string GetWordPos();
     string GetWordPhrase();
-
     string GetWordPhraseTranslation();
+    //出于项目三层式架构的要求，这里将不会把IWord设计全局式的接口
+    //这一层中间层将无法使用get 访问器直接访问List<IWord>的泛型列表
+    //所以这里的函数风味比较偏Java和Cpp
 
     //请你使用这个方法 针对一个单词设计一个页面 
     //函数名即为函数的功能
