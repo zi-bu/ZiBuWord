@@ -1,9 +1,6 @@
 ﻿using IBLLBridgeDAL;
 namespace DAL
 {
-
-
-
     /// <summary>
     /// 构造函数：输入formid枚举对应int值,即可获得指定单词表的随机单词;<br/>
     /// 实现 IWord 接口的类，用于封装单词对象;<br/>
@@ -37,10 +34,6 @@ namespace DAL
             word = WordMover.GetWord(tableid);
             translation = WordMover.FindTranslations(word, tableid);
             phrase = WordMover.FindPhrases(word, tableid);
-        }
-        public Word()//空构造函数 用于BLL层测试
-        {
-
         }
     }
 }
