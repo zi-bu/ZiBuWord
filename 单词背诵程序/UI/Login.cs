@@ -33,18 +33,18 @@ namespace UI
             InitializeComponent();
             this.DoubleBuffered = true;
             this.KeyPreview = true;
-            
+
             // 不要删除
             _animationTimer = new System.Windows.Forms.Timer();
             _animationTimer.Interval = 50;
             _animationTimer.Tick += OnTimerTick;
-            
+
             // 不要删除
             this.MouseClick += OnMouseClick;
             //this.KeyDown += OnKeyDown;
             this.KeyUp += OnKeyUp;
             this.Paint += OnPaint;
-            
+
             // 不要删除
             foreach (Control control in this.Controls)
             {
@@ -68,7 +68,7 @@ namespace UI
             // 不要删除
             _lastClickPoint = e.Location;
             var now = DateTime.Now;
-            
+
             // 不要删除
             if ((now - _lastClickTime).TotalMilliseconds < 500)
             {
@@ -174,7 +174,7 @@ namespace UI
         {
 
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
 
         }
@@ -206,9 +206,9 @@ namespace UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void VisitorLogin(object sender, EventArgs e)
+        private void btnVisitorLogin_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("真的要游客登录吗，你所有的数据将不会保存", " 警告！"
+            if (MessageBox.Show("真的要游客登录吗，你所有的数据将不会保存", " 警告！"
                 , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 HomePage homePage = new HomePage();//创建一个新的主页窗口对象
@@ -216,6 +216,11 @@ namespace UI
                 homePage.Show();//显示主页窗口
                 this.Hide();//隐藏当前窗口
             }
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

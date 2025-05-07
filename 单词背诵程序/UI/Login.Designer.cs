@@ -28,59 +28,60 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            button2 = new Button();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            button3 = new Button();
+            btnLogin = new Button();
+            btnRegister = new Button();
+            textPassword = new TextBox();
+            textUserName = new TextBox();
+            btnVisitorLogin = new Button();
             SuspendLayout();
             // 
-            // button1
+            // btnLogin
             // 
-            button1.Location = new Point(158, 592);
-            button1.Name = "button1";
-            button1.Size = new Size(392, 58);
-            button1.TabIndex = 0;
-            button1.Text = "登录";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnLogin.Location = new Point(158, 592);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(392, 58);
+            btnLogin.TabIndex = 0;
+            btnLogin.Text = "登录";
+            btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.Click += btnLogin_Click;
             // 
-            // button2
+            // btnRegister
             // 
-            button2.Location = new Point(158, 657);
-            button2.Margin = new Padding(5, 4, 5, 4);
-            button2.Name = "button2";
-            button2.Size = new Size(392, 58);
-            button2.TabIndex = 1;
-            button2.Text = "注册";
-            button2.UseVisualStyleBackColor = true;
+            btnRegister.Location = new Point(158, 657);
+            btnRegister.Margin = new Padding(5, 4, 5, 4);
+            btnRegister.Name = "btnRegister";
+            btnRegister.Size = new Size(392, 58);
+            btnRegister.TabIndex = 1;
+            btnRegister.Text = "注册";
+            btnRegister.UseVisualStyleBackColor = true;
+            btnRegister.Click += btnRegister_Click;
             // 
-            // textBox1
+            // textPassword
             // 
-            textBox1.Location = new Point(158, 539);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(392, 30);
-            textBox1.TabIndex = 2;
-            textBox1.Text = "密码";
+            textPassword.Location = new Point(158, 539);
+            textPassword.Name = "textPassword";
+            textPassword.Size = new Size(392, 30);
+            textPassword.TabIndex = 2;
+            textPassword.Text = "密码";
             // 
-            // textBox2
+            // textUserName
             // 
-            textBox2.Location = new Point(158, 489);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(392, 30);
-            textBox2.TabIndex = 3;
-            textBox2.Text = "用户名";
+            textUserName.Location = new Point(158, 489);
+            textUserName.Name = "textUserName";
+            textUserName.Size = new Size(392, 30);
+            textUserName.TabIndex = 3;
+            textUserName.Text = "用户名";
             // 
-            // button3
+            // btnVisitorLogin
             // 
-            button3.Location = new Point(158, 792);
-            button3.Margin = new Padding(5, 4, 5, 4);
-            button3.Name = "button3";
-            button3.Size = new Size(392, 55);
-            button3.TabIndex = 4;
-            button3.Text = "游客登录";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += VisitorLogin;
+            btnVisitorLogin.Location = new Point(158, 792);
+            btnVisitorLogin.Margin = new Padding(5, 4, 5, 4);
+            btnVisitorLogin.Name = "btnVisitorLogin";
+            btnVisitorLogin.Size = new Size(392, 55);
+            btnVisitorLogin.TabIndex = 4;
+            btnVisitorLogin.Text = "游客登录";
+            btnVisitorLogin.UseVisualStyleBackColor = true;
+            btnVisitorLogin.Click += btnVisitorLogin_Click;
             // 
             // Login
             // 
@@ -88,11 +89,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new Size(738, 961);
-            Controls.Add(button3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnVisitorLogin);
+            Controls.Add(textUserName);
+            Controls.Add(textPassword);
+            Controls.Add(btnRegister);
+            Controls.Add(btnLogin);
             Name = "Login";
             Padding = new Padding(16, 14, 16, 14);
             Text = " 登录";
@@ -103,11 +104,11 @@
 
         #endregion
 
-        private Button button1;
-        private Button button2;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private Button button3;
+        private Button btnLogin;
+        private Button btnRegister;
+        private TextBox textPassword;
+        private TextBox textUserName;
+        private Button btnVisitorLogin;
         private Label? label1;
         private PictureBox pictureBox1;
     }

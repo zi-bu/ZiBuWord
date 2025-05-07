@@ -37,7 +37,7 @@ public partial class MemorizerSelection : Form
 
     }
 
-    private void button6_Click(object sender, EventArgs e)
+    private void btnReturn_Click(object sender, EventArgs e)
     {
         HomePage homePage = new HomePage();//创建一个新的主页对象
         homePage.StartPosition = FormStartPosition.Manual;

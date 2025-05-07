@@ -32,7 +32,7 @@ namespace UI
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void btnReturn_Click(object sender, EventArgs e)
         {
             HomePage homePage = new HomePage();//创建一个新的主页窗口对象
             homePage.StartPosition = FormStartPosition.Manual;

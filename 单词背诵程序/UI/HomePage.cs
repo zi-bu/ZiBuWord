@@ -54,7 +54,7 @@ namespace UI
 
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void btnLogout_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("要返回登录界面吗", " 警告！"
                 , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -67,12 +67,7 @@ namespace UI
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click_1(object sender, EventArgs e)
+        private void btnStartReview_Click(object sender, EventArgs e)
         {
             Review review = new Review();//创建一个新的复习窗口对象
             review.StartPosition = FormStartPosition.Manual;
@@ -81,7 +76,7 @@ namespace UI
             this.Hide();//隐藏当前窗口
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnStartMemory_Click(object sender, EventArgs e)
         {
             MemorizerSelection memorizerSelection = new MemorizerSelection();
             memorizerSelection.StartPosition = FormStartPosition.Manual;
@@ -91,7 +86,7 @@ namespace UI
             throw new System.NotImplementedException();
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void btnFavorite_Click(object sender, EventArgs e)
         {
             Favorite favorite = new Favorite();
             favorite.StartPosition = FormStartPosition.Manual;

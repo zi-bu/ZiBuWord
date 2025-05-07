@@ -40,7 +40,7 @@ partial class MemorizerSelection
         button3 = new Button();
         button4 = new Button();
         button5 = new Button();
-        button6 = new Button();
+        btnReturn = new Button();
         SuspendLayout();
         // 
         // label1
@@ -57,7 +57,7 @@ partial class MemorizerSelection
         button1.Location = new Point(44, 118);
         button1.Margin = new Padding(4);
         button1.Name = "button1";
-        button1.Size = new Size(423, 84);
+        button1.Size = new Size(317, 84);
         button1.TabIndex = 1;
         button1.Text = "button1";
         button1.UseVisualStyleBackColor = true;
@@ -105,23 +105,23 @@ partial class MemorizerSelection
         button5.UseVisualStyleBackColor = true;
         button5.Click += button5_Click;
         // 
-        // button6
+        // btnReturn
         // 
-        button6.Location = new Point(867, 32);
-        button6.Margin = new Padding(4);
-        button6.Name = "button6";
-        button6.Size = new Size(61, 35);
-        button6.TabIndex = 9;
-        button6.Text = "首页";
-        button6.UseVisualStyleBackColor = true;
-        button6.Click += button6_Click;
+        btnReturn.Location = new Point(867, 32);
+        btnReturn.Margin = new Padding(4);
+        btnReturn.Name = "btnReturn";
+        btnReturn.Size = new Size(61, 35);
+        btnReturn.TabIndex = 9;
+        btnReturn.Text = "首页";
+        btnReturn.UseVisualStyleBackColor = true;
+        btnReturn.Click += btnReturn_Click;
         // 
         // MemorizerSelection
         // 
         AutoScaleDimensions = new SizeF(11F, 24F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(978, 540);
-        Controls.Add(button6);
+        Controls.Add(btnReturn);
         Controls.Add(button5);
         Controls.Add(button4);
         Controls.Add(button3);
@@ -145,5 +145,5 @@ partial class MemorizerSelection
 
     #endregion
 
-    private Button button6;
+    private Button btnReturn;
 }
