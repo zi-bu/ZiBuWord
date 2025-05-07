@@ -13,7 +13,6 @@ namespace BLL.WordOrder;
 public class ReciterS : IReciterS
 {
     private static int _numofloop;
-    private static string? _correctword;
     private static string? _correctwordtrans;
     private static List<string> _selectionlisttrans = new List<string>();
     private static List<string> _selectionlist = new List<string>();
@@ -32,26 +31,21 @@ public class ReciterS : IReciterS
     
     private void InitializeList(List<IWord> tempWordList)
     {
-        
-        _correctword = tempWordList[0].word;
         _correctwordtrans = tempWordList[0].translation;
         //正确答案初始化完成
         
-        List<IWord> oringnallist = new List<IWord>();
-        oringnallist = tempWordList.ToList();
-        ListShuffle(oringnallist);
+        List<IWord> originalList = tempWordList.ToList();
+        ListShuffle(originalList);
         //完成对原始列表的洗牌
         
-        List<string> tempPoS = new List<string>();
-        tempPoS = oringnallist.Select(w => w.pos).ToList();
-        _selectionlisttrans = oringnallist.Select(w => w.translation).ToList();
+        List<string> tempPoS = originalList.Select(w => w.pos).ToList();
+        _selectionlisttrans = originalList.Select(w => w.translation).ToList();
         _selectionlist = (StringListAddition(tempPoS, _selectionlisttrans)).ToList();
         //洗牌后的结果 做成词性和翻译的拆分 依次被赋予至字段上
     }
 
     public void ReleaseList()
     {
-        _correctword = null;
         _correctwordtrans = null;
         _selectionlisttrans.Clear();
         _selectionlist.Clear();
