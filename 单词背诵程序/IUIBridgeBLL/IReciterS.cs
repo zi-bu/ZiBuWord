@@ -2,6 +2,7 @@
 
 public interface IReciterS :IReciter
 {
+    
     List<string> GetList();
     //获取展示列表
     
