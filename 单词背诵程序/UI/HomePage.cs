@@ -19,6 +19,18 @@ namespace UI
         }
 
         /// <summary>
+        /// 显示新窗口并隐藏当前窗口的通用方法
+        /// </summary>
+        /// <param name="newForm">要显示的新窗口</param>
+        private void ShowNewForm(Form newForm)
+        {
+            newForm.StartPosition = FormStartPosition.Manual;
+            newForm.Location = this.Location;
+            newForm.Show();
+            this.Hide();
+        }
+
+        /// <summary>
         /// 这是退出登录按钮的点击事件处理函数。
         /// </br>这段代码是由```子布```编写的。
         /// (可能会被改写成一个函数，或者直接删除)
@@ -59,40 +71,28 @@ namespace UI
             if (MessageBox.Show("要返回登录界面吗", " 警告！"
                 , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                Login login = new Login();//创建一个新的登录窗口对象
-                login.StartPosition = FormStartPosition.Manual;//固定窗口位置
-                login.Location = this.Location;//对齐窗口位置
-                login.Show();//显示登录窗口
-                this.Hide();//隐藏当前窗口
+                Login login = new Login();
+                FormHelper.ShowNewForm(this, login);
             }
         }
 
         private void btnStartReview_Click(object sender, EventArgs e)
         {
-            Review review = new Review();//创建一个新的复习窗口对象
-            review.StartPosition = FormStartPosition.Manual;
-            review.Location = this.Location;
-            review.Show();//显示复习窗口
-            this.Hide();//隐藏当前窗口
+            Review review = new Review();
+            FormHelper.ShowNewForm(this, review);
         }
 
         private void btnStartMemory_Click(object sender, EventArgs e)
         {
             MemorizerSelection memorizerSelection = new MemorizerSelection();
-            memorizerSelection.StartPosition = FormStartPosition.Manual;
-            memorizerSelection.Location = this.Location;
-            memorizerSelection.Show();//显示背诵选择窗口
-            this.Hide();
+            FormHelper.ShowNewForm(this, memorizerSelection);
             throw new System.NotImplementedException();
         }
 
         private void btnFavorite_Click(object sender, EventArgs e)
         {
             Favorite favorite = new Favorite();
-            favorite.StartPosition = FormStartPosition.Manual;
-            favorite.Location = this.Location;
-            favorite.Show();//显示收藏夹窗口
-            this.Hide();
+            FormHelper.ShowNewForm(this, favorite);
         }
     }
 }

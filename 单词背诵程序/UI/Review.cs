@@ -35,10 +35,7 @@ namespace UI
         private void btnReturn_Click(object sender, EventArgs e)
         {
             HomePage homePage = new HomePage();//创建一个新的主页窗口对象
-            homePage.StartPosition = FormStartPosition.Manual;
-            homePage.Location = this.Location;
-            homePage.Show();//显示主页窗口
-            this.Hide();//隐藏当前窗口
+            FormHelper.ShowNewForm(this, homePage);//显示主页窗口
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
