@@ -6,5 +6,6 @@
 public interface IReviewer:IReciter
 {
     void IfInsertToDal();
+    
     //用于将已经复习积累了三次的单词插入到数据库中 未实现 只是做占位符
 }

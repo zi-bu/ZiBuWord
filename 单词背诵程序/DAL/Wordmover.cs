@@ -17,8 +17,10 @@
     /// 本类施工人员：mouse。<br/>
     /// mouse:单词搬运工类，计划封装查询单词和获取单词的方法（目前未完全实现）。<br/>
     /// mouse:新增了一个GetWords方法，用于随机获取一个单词。
+    /// mouse:新增了一个FindTranslations方法，用于查找单词的释义。
+    /// mouse:新增了一个FindPhrases方法，用于查找单词的短语。
     /// </summary>
-    public static class Wordmover
+    public static class WordMover
     {
         static Random rd = new Random();// 随机数生成器实例。
         /// <summary>
@@ -28,7 +30,7 @@
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static string GetWords(formid id)//随机获取一个单词
+        public static string GetWord(formid id)//随机获取一个单词
         {
 
             using (var db = new SqlDataContext())
@@ -71,6 +73,80 @@
                             int count = rd.Next(0, db.托福.Count() - 1);
                             var word = db.托福.ElementAt(count);
                             return word.word;
+                        }
+                    default:
+                        return null;
+                }
+            }
+        }
+
+        public static string FindTranslations(string word, formid id)//在对应表查找单词翻译
+        {
+            using (var db = new SqlDataContext())
+            {
+                switch (id)
+                {
+                    case formid.CET4:
+                        {
+                            return db.CET4.Where(s => s.word == word).First().translations;
+                        }
+                    case formid.CET6:
+                        {
+                            return db.CET6.Where(s => s.word == word).First().translations;
+                        }
+                    case formid.初中:
+                        {
+                            return db.初中.Where(s => s.word == word).First().translations;
+                        }
+
+                    case formid.高中:
+                        {
+                            return db.高中.Where(s => s.word == word).First().translations;
+                        }
+                    case formid.考研:
+                        {
+                            return db.考研.Where(s => s.word == word).First().translations;
+                        }
+                    case formid.托福:
+                        {
+                            return db.托福.Where(s => s.word == word).First().translations;
+                        }
+                    default:
+                        return null;
+                }
+            }
+        }
+
+        public static string FindPhrases(string word, formid id)//在对应表查找单词短语
+        {
+            using (var db = new SqlDataContext())
+            {
+                switch (id)
+                {
+                    case formid.CET4:
+                        {
+                            return db.CET4.Where(s => s.word == word).First().phrases;
+                        }
+                    case formid.CET6:
+                        {
+                            return db.CET6.Where(s => s.word == word).First().phrases;
+                        }
+                    case formid.初中:
+                        {
+                            return db.初中.Where(s => s.word == word).First().phrases;
+                        }
+
+                    case formid.高中:
+                        {
+                            return db.高中.Where(s => s.word == word).First().phrases;
+                        }
+                    case formid.考研:
+                        {
+                            return db.考研.Where(s => s.word == word).First().phrases;
+                        }
+                    case formid.托福:
+                        {
+                            return db.托福.Where(s => s.word == word).First().phrases;
                         }
                     default:
                         return null;

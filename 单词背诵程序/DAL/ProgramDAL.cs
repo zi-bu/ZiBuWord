@@ -47,8 +47,10 @@ namespace DAL
             }
             #endregion
             #endif
-            formid testid = formid.CET4;
-            Console.WriteLine(Wordmover.GetWords(testid));
+            Word word = new Word(1);
+            Console.WriteLine(word.word);
+            Console.WriteLine(word.translation);
+            Console.WriteLine(word.phrase);
         }
     }
 

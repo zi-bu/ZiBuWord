@@ -1,13 +1,7 @@
-﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DAL
+﻿namespace DAL
 {
-    [Obsolete("mouse:旧的类，已被zibu弃用", true)]
+#if HHHH
+        [Obsolete("mouse:旧的类，已被zibu弃用", true)]
     /// <summary>
     /// 使用原生 ADO.NET 的类，用于直接操作数据库。
     /// 适合需要极致性能或兼容旧代码的场景，但已计划弃用。<br/>
@@ -59,4 +53,5 @@ namespace DAL
             return list;
         }
     }
+#endif
 }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IBLLBridgeDAL;
+﻿using IBLLBridgeDAL;
 namespace DAL
 {
-    
+
 
 
     /// <summary>
@@ -30,10 +25,10 @@ namespace DAL
         public string pos { get; set; } // 词性
         public string translation { get; set; } // 释义
         public string phrase { get; set; } // 短语
-        
+
         public string phraseTranslation { get; set; } // 短语翻译
-        
-      
+
+
         private formid tableid; // 单词来源的枚举编号。
 
         /// <summary>
@@ -42,12 +37,14 @@ namespace DAL
         public Word(int id)
         {
             tableid = (formid)id;
+            word = WordMover.GetWord(tableid);
+            translation = WordMover.FindTranslations(word, tableid);
+            phrase = WordMover.FindPhrases(word, tableid);
         }
-
         public Word()//空构造函数 用于BLL层测试
         {
-            
+
         }
-        }
+    }
 }
 

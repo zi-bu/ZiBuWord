@@ -30,10 +30,10 @@ namespace DAL
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Server=127.0.0.1,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
+            optionsBuilder.UseSqlServer("Server=26.184.142.179,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
             //10.151.196.28在校园网中用有线网时数据库的IP地址，使用时取消注释。
-            optionsBuilder.UseSqlServer("Server=localhost\\GOODSQL;Database=wordforms;User Id=sa;Password=114514;Encrypt=False;");
-            //小鼠的测试服务器。(因为是本地连接)
+            //optionsBuilder.UseSqlServer("Server=localhost\\GOODSQL;Database=wordforms;User Id=sa;Password=114514;Encrypt=False;");
+            //小鼠的测试服务器。(因为是本地连接)10.162.21.248
         }
 
         /// <summary>
@@ -45,22 +45,22 @@ namespace DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CET4>().HasKey(c => c.number); // 配置主键。
-            modelBuilder.Entity<CET4>().ToTable("3-CET4-顺序"); // 映射到 CET4 表。
+            modelBuilder.Entity<CET4>().ToTable("CET4"); // 映射到 CET4 表。
 
             modelBuilder.Entity<CET6>().HasKey(c => c.number); 
-            modelBuilder.Entity<CET6>().ToTable("4-CET6-顺序");
+            modelBuilder.Entity<CET6>().ToTable("CET6");
 
             modelBuilder.Entity<初中>().HasKey(c => c.number);
-            modelBuilder.Entity<初中>().ToTable("1-初中-顺序");
+            modelBuilder.Entity<初中>().ToTable("初中");
 
             modelBuilder.Entity<高中>().HasKey(c => c.number);
-            modelBuilder.Entity<高中>().ToTable("2-高中-顺序");
+            modelBuilder.Entity<高中>().ToTable("高中");
 
             modelBuilder.Entity<考研>().HasKey(c => c.number);
-            modelBuilder.Entity<考研>().ToTable("5-考研-顺序");
+            modelBuilder.Entity<考研>().ToTable("考研");
 
             modelBuilder.Entity<托福>().HasKey(c => c.number);
-            modelBuilder.Entity<托福>().ToTable("6-托福-顺序");
+            modelBuilder.Entity<托福>().ToTable("托福");
         }
     }
 }
