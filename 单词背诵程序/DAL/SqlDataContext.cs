@@ -13,7 +13,7 @@ namespace DAL
     /// </summary>
     public class SqlDataContext : DbContext
     {
-        //mouse：数据库模板dictionary创建的DbSet集合<br/>
+        
         public DbSet<CET4> CET4 { get; set; } // 对应数据库中的 CET4 表。
         public DbSet<CET6> CET6 { get; set; } // 对应数据库中的 CET6 表。
         public DbSet<初中> 初中 { get; set; } // 对应数据库中的 初中 表。
@@ -41,23 +41,55 @@ namespace DAL
         /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CET4>().HasKey(c => c.Number); // 配置主键。
-            modelBuilder.Entity<CET4>().ToTable("CET4"); // 映射到 CET4 表。
+            FastCreateModel<CET4, CET4T, CET4P>(modelBuilder, "CET4");// 调用快速映射实体类的方法。
+            FastCreateModel<CET6, CET6T, CET6P>(modelBuilder, "CET6");
+            FastCreateModel<初中, 初中T, 初中P>(modelBuilder, "初中");
+            FastCreateModel<高中, 高中T, 高中P>(modelBuilder, "高中");
+            FastCreateModel<考研, 考研T, 考研P>(modelBuilder, "考研");
+            FastCreateModel<托福, 托福T, 托福P>(modelBuilder, "托福");
+        }
+        /// <summary>
+        ///这是一个一键映射实体类的方法，省去大量的配置代码。<br/>
+        ///需要传入表的名称，如CET4,CET6,初中,高中,考研,托福。<br/>
+        ///本类与实体类和数据库表的关联较大，若实体类基类和表名改变需要在这里修改。<br/>
+        ///mouse:这是我的轮椅haha
+        /// </summary>
+        /// <typeparam name="MainF"></typeparam>
+        /// <typeparam name="TranslationForm"></typeparam>
+        /// <typeparam name="PhraseForm"></typeparam>
+        /// <param name="modelBuilder"></param>
+        private static void FastCreateModel<MainF,TlForm,PForm>(ModelBuilder modelBuilder,string FormName)
+            where MainF : WordForm
+            where TlForm : TranslationForm//限制泛型类必须继承了实体类的基类,
+            where PForm : PhraseForm
+        {
+            modelBuilder.Entity<MainF>(c =>
+            {
+                c.ToTable($"{FormName}_Words");// 映射到数据库表。
+                c.HasKey(f => f.Id);// 配置主键。
+            });
 
-            modelBuilder.Entity<CET6>().HasKey(c => c.Number);
-            modelBuilder.Entity<CET6>().ToTable("CET6");
+            modelBuilder.Entity<TlForm>(c =>
+            {
+                c.ToTable($"{FormName}_Translations");// 映射到数据库表。
+                c.HasKey(f => f.Id);// 配置主键。
 
-            modelBuilder.Entity<初中>().HasKey(c => c.Number);
-            modelBuilder.Entity<初中>().ToTable("初中");
+                c.HasOne(f => f.WordForm)
+                 .WithMany(f => (IEnumerable<TlForm>?)f.Translations)// 定义关系。
+                 .HasForeignKey(f => f.WordId) // 配置外键。
+                 .OnDelete(DeleteBehavior.Cascade); // 级联删除，或许有用？
+            });
 
-            modelBuilder.Entity<高中>().HasKey(c => c.Number);
-            modelBuilder.Entity<高中>().ToTable("高中");
+            modelBuilder.Entity<PForm>(c =>
+            {
+                c.ToTable($"{FormName}_Phrases");
+                c.HasKey(f => f.Id);
 
-            modelBuilder.Entity<考研>().HasKey(c => c.Number);
-            modelBuilder.Entity<考研>().ToTable("考研");
-
-            modelBuilder.Entity<托福>().HasKey(c => c.Number);
-            modelBuilder.Entity<托福>().ToTable("托福");
+                c.HasOne(f => f.WordForm)
+                 .WithMany(f => (IEnumerable<PForm>?)f.Phrases)
+                 .HasForeignKey(f => f.WordId)
+                 .OnDelete(DeleteBehavior.Cascade); 
+            });
         }
     }
     public class UserContext : DbContext
