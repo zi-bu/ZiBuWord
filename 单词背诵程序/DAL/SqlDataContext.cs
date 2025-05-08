@@ -27,9 +27,9 @@ namespace DAL
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Server=26.184.142.179,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
+            optionsBuilder.UseSqlServer("Server=26.184.142.179,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
             //zibu数据库的IP地址，使用时取消注释。
-            optionsBuilder.UseSqlServer("Server=26.99.236.84;Database=wordforms;User Id=sa;Password=114514;Encrypt=False;");
+            //optionsBuilder.UseSqlServer("Server=26.99.236.84;Database=wordforms;User Id=sa;Password=114514;Encrypt=False;");
             //小鼠数据库的IP地址，使用时取消注释。
         }
 
@@ -41,23 +41,39 @@ namespace DAL
         /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CET4>().HasKey(c => c.number); // 配置主键。
+            modelBuilder.Entity<CET4>().HasKey(c => c.Number); // 配置主键。
             modelBuilder.Entity<CET4>().ToTable("CET4"); // 映射到 CET4 表。
 
-            modelBuilder.Entity<CET6>().HasKey(c => c.number); 
+            modelBuilder.Entity<CET6>().HasKey(c => c.Number);
             modelBuilder.Entity<CET6>().ToTable("CET6");
 
-            modelBuilder.Entity<初中>().HasKey(c => c.number);
+            modelBuilder.Entity<初中>().HasKey(c => c.Number);
             modelBuilder.Entity<初中>().ToTable("初中");
 
-            modelBuilder.Entity<高中>().HasKey(c => c.number);
+            modelBuilder.Entity<高中>().HasKey(c => c.Number);
             modelBuilder.Entity<高中>().ToTable("高中");
 
-            modelBuilder.Entity<考研>().HasKey(c => c.number);
+            modelBuilder.Entity<考研>().HasKey(c => c.Number);
             modelBuilder.Entity<考研>().ToTable("考研");
 
-            modelBuilder.Entity<托福>().HasKey(c => c.number);
+            modelBuilder.Entity<托福>().HasKey(c => c.Number);
             modelBuilder.Entity<托福>().ToTable("托福");
+        }
+    }
+    public class UserContext : DbContext
+    {
+        public DbSet<User> Users { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=26.184.142.179,1433;Database=UserData;User Id=sa;Password=114514;Encrypt=False;");
+            //zibu数据库的IP地址，使用时取消注释。
+            //optionsBuilder.UseSqlServer("Server=26.99.236.84;Database=wordforms;User Id=sa;Password=114514;Encrypt=False;");
+            //小鼠数据库的IP地址，使用时取消注释。
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasKey(u => u.UserID); // 配置主键。
+            modelBuilder.Entity<User>().ToTable("Users"); // 映射到 Users 表。
         }
     }
 }

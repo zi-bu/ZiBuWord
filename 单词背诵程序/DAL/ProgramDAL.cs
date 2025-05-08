@@ -51,6 +51,7 @@ namespace DAL
             Console.WriteLine(word.word);
             Console.WriteLine(word.translation);
             Console.WriteLine(word.phrase);
+            User user = new User();
         }
     }
 
@@ -81,4 +82,3 @@ namespace DAL
 
 
 }
-

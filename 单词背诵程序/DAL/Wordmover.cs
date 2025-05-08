@@ -40,38 +40,38 @@
                         {
                             int count = rd.Next(0, db.CET4.Count() - 1);//随机生成索引
                             var word = db.CET4.ElementAt(count);//跳过count个元素，获取第count+1个元素
-                            return word.word;
+                            return word.Word;
                         }
                     case Formid.CET6:
                         {
                             int count = rd.Next(0, db.CET6.Count() - 1);
                             var word = db.CET6.ElementAt(count);
-                            return word.word;
+                            return word.Word;
                         }
                     case Formid.初中:
                         {
                             int count = rd.Next(0, db.初中.Count() - 1);
                             var word = db.初中.ElementAt(count);
-                            return word.word;
+                            return word.Word;
                         }
 
                     case Formid.高中:
                         {
                             int count = rd.Next(0, db.高中.Count() - 1);
                             var word = db.高中.ElementAt(count);
-                            return word.word;
+                            return word.Word;
                         }
                     case Formid.考研:
                         {
                             int count = rd.Next(0, db.CET4.Count() - 1);
                             var word = db.CET4.ElementAt(count);
-                            return word.word;
+                            return word.Word;
                         }
                     case Formid.托福:
                         {
                             int count = rd.Next(0, db.托福.Count() - 1);
                             var word = db.托福.ElementAt(count);
-                            return word.word;
+                            return word.Word;
                         }
                     default:
                         return null;
@@ -87,28 +87,28 @@
                 {
                     case Formid.CET4:
                         {
-                            return db.CET4.Where(s => s.word == word).First().translations;
+                            return db.CET4.Where(s => s.Word == word).First().Translations;
                         }
                     case Formid.CET6:
                         {
-                            return db.CET6.Where(s => s.word == word).First().translations;
+                            return db.CET6.Where(s => s.Word == word).First().Translations;
                         }
                     case Formid.初中:
                         {
-                            return db.初中.Where(s => s.word == word).First().translations;
+                            return db.初中.Where(s => s.Word == word).First().Translations;
                         }
 
                     case Formid.高中:
                         {
-                            return db.高中.Where(s => s.word == word).First().translations;
+                            return db.高中.Where(s => s.Word == word).First().Translations;
                         }
                     case Formid.考研:
                         {
-                            return db.考研.Where(s => s.word == word).First().translations;
+                            return db.考研.Where(s => s.Word == word).First().Translations;
                         }
                     case Formid.托福:
                         {
-                            return db.托福.Where(s => s.word == word).First().translations;
+                            return db.托福.Where(s => s.Word == word).First().Translations;
                         }
                     default:
                         return null;
@@ -124,28 +124,28 @@
                 {
                     case Formid.CET4:
                         {
-                            return db.CET4.Where(s => s.word == word).First().phrases;
+                            return db.CET4.Where(s => s.Word == word).First().Phrases;
                         }
                     case Formid.CET6:
                         {
-                            return db.CET6.Where(s => s.word == word).First().phrases;
+                            return db.CET6.Where(s => s.Word == word).First().Phrases;
                         }
                     case Formid.初中:
                         {
-                            return db.初中.Where(s => s.word == word).First().phrases;
+                            return db.初中.Where(s => s.Word == word).First().Phrases;
                         }
 
                     case Formid.高中:
                         {
-                            return db.高中.Where(s => s.word == word).First().phrases;
+                            return db.高中.Where(s => s.Word == word).First().Phrases;
                         }
                     case Formid.考研:
                         {
-                            return db.考研.Where(s => s.word == word).First().phrases;
+                            return db.考研.Where(s => s.Word == word).First().Phrases;
                         }
                     case Formid.托福:
                         {
-                            return db.托福.Where(s => s.word == word).First().phrases;
+                            return db.托福.Where(s => s.Word == word).First().Phrases;
                         }
                     default:
                         return null;
