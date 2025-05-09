@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace DAL.Context
 {
     /// <summary>
     /// 数据库上下文类，用于配置和操作数据库。<br/>
@@ -90,22 +90,6 @@ namespace DAL
                  .HasForeignKey(f => f.WordId)
                  .OnDelete(DeleteBehavior.Cascade); 
             });
-        }
-    }
-    public class UserContext : DbContext
-    {
-        public DbSet<User> UserData { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=26.184.142.179,1433;Database=UserData;User Id=sa;Password=114514;Encrypt=False;");
-            //zibu数据库的IP地址，使用时取消注释。
-            //optionsBuilder.UseSqlServer("Server=26.99.236.84;Database=wordforms;User Id=sa;Password=114514;Encrypt=False;");
-            //小鼠数据库的IP地址，使用时取消注释。
-        }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>().HasKey(u => u.UserID); // 配置主键。
-            modelBuilder.Entity<User>().ToTable("UserData"); // 映射到 Users 表。
         }
     }
 }

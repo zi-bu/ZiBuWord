@@ -10,7 +10,7 @@
         CET6 = 2,
         初中 = 3,
         高中 = 4,
-        考研 = 5,
+        考研 = 5, 
         托福 = 6,
     }
     /// <summary>
@@ -32,7 +32,7 @@
         public static string? GetWord(Formid id)//随机获取一个单词
         {
 
-            using (var db = new SqlDataContext())
+            using (var db = new Context.SqlDataContext())
             {
                 switch (id)
                 {
@@ -81,34 +81,34 @@
 
         public static string? FindTranslations(string word, Formid id)//在对应表查找单词翻译
         {
-            using (var db = new SqlDataContext())
+            using (var db = new Context.SqlDataContext())
             {
                 switch (id)
                 {
                     case Formid.CET4:
                         {
-                            return db.CET4.Where(s => s.Word == word).First().Translations;
+                            return string.Join(", ", db.CET4.Where(s => s.Word == word).First().Translations.Select(t => t.Translation));
                         }
                     case Formid.CET6:
                         {
-                            return db.CET6.Where(s => s.Word == word).First().Translations;
+                            return string.Join(", ", db.CET6.Where(s => s.Word == word).First().Translations.Select(t => t.Translation));
                         }
                     case Formid.初中:
                         {
-                            return db.初中.Where(s => s.Word == word).First().Translations;
+                            return string.Join(", ", db.初中.Where(s => s.Word == word).First().Translations.Select(t => t.Translation));
                         }
 
                     case Formid.高中:
                         {
-                            return db.高中.Where(s => s.Word == word).First().Translations;
+                            return string.Join(", ", db.高中.Where(s => s.Word == word).First().Translations.Select(t => t.Translation));
                         }
                     case Formid.考研:
                         {
-                            return db.考研.Where(s => s.Word == word).First().Translations;
+                            return string.Join(", ", db.考研.Where(s => s.Word == word).First().Translations.Select(t => t.Translation));
                         }
                     case Formid.托福:
                         {
-                            return db.托福.Where(s => s.Word == word).First().Translations;
+                            return string.Join(", ", db.托福.Where(s => s.Word == word).First().Translations.Select(t => t.Translation));
                         }
                     default:
                         return null;
@@ -118,34 +118,34 @@
 
         public static string? FindPhrases(string word, Formid id)//在对应表查找单词短语
         {
-            using (var db = new SqlDataContext())
+            using (var db = new Context.SqlDataContext())
             {
                 switch (id)
                 {
                     case Formid.CET4:
                         {
-                            return db.CET4.Where(s => s.Word == word).First().Phrases;
+                            return string.Join(", ", db.CET4.Where(s => s.Word == word).First().Phrases.Select(t => t.Phrase));
                         }
                     case Formid.CET6:
                         {
-                            return db.CET6.Where(s => s.Word == word).First().Phrases;
+                            return string.Join(", ", db.CET6.Where(s => s.Word == word).First().Phrases.Select(t => t.Phrase));
                         }
                     case Formid.初中:
                         {
-                            return db.初中.Where(s => s.Word == word).First().Phrases;
+                            return string.Join(", ", db.初中.Where(s => s.Word == word).First().Phrases.Select(t => t.Phrase));
                         }
 
                     case Formid.高中:
                         {
-                            return db.高中.Where(s => s.Word == word).First().Phrases;
+                            return string.Join(", ", db.高中.Where(s => s.Word == word).First().Phrases.Select(t => t.Phrase));
                         }
                     case Formid.考研:
                         {
-                            return db.考研.Where(s => s.Word == word).First().Phrases;
+                            return string.Join(", ", db.考研.Where(s => s.Word == word).First().Phrases.Select(t => t.Phrase));
                         }
                     case Formid.托福:
                         {
-                            return db.托福.Where(s => s.Word == word).First().Phrases;
+                            return string.Join(", ", db.托福.Where(s => s.Word == word).First().Phrases.Select(t => t.Phrase));
                         }
                     default:
                         return null;
