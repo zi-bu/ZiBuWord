@@ -51,34 +51,42 @@ namespace DAL
             Console.WriteLine(word.word);
             Console.WriteLine(word.translation);
             Console.WriteLine(word.phrase);
-            User user = new User();
+            using (var db = new UserContext())
+            {
+                foreach(var s in db.UserData)
+                {
+                    Console.WriteLine($"ID: {s.UserID} {s.Username} {s.UserPassword}");
+                }
+                db.UserData.Add(new User() { Username = "zibu", UserPassword = "114514" });//添加新用户
+                db.SaveChanges();//保存更改
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
