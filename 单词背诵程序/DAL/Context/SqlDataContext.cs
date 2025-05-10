@@ -16,10 +16,10 @@ namespace DAL.Context
         
         public DbSet<CET4> CET4 { get; set; } // 对应数据库中的 CET4 表。
         public DbSet<CET6> CET6 { get; set; } // 对应数据库中的 CET6 表。
-        public DbSet<初中> 初中 { get; set; } // 对应数据库中的 初中 表。
-        public DbSet<高中> 高中 { get; set; } // 对应数据库中的 高中 表。
-        public DbSet<考研> 考研 { get; set; } // 对应数据库中的 四级 表。
-        public DbSet<托福> 托福 { get; set; } // 对应数据库中的 托福 表。
+        public DbSet<MiddleSchool> MiddleSchool { get; set; } // 对应数据库中的 初中 表。
+        public DbSet<HighSchool> Highschool { get; set; } // 对应数据库中的 高中 表。
+        public DbSet<KY> KY { get; set; } // 对应数据库中的 四级 表。
+        public DbSet<TF> TF { get; set; } // 对应数据库中的 托福 表。
 
         /// <summary>
         /// 配置数据库连接。<br/>
@@ -43,10 +43,10 @@ namespace DAL.Context
         {
             FastCreateModel<CET4, CET4T, CET4P>(modelBuilder, "CET4");// 调用快速映射实体类的方法。
             FastCreateModel<CET6, CET6T, CET6P>(modelBuilder, "CET6");
-            FastCreateModel<初中, 初中T, 初中P>(modelBuilder, "初中");
-            FastCreateModel<高中, 高中T, 高中P>(modelBuilder, "高中");
-            FastCreateModel<考研, 考研T, 考研P>(modelBuilder, "考研");
-            FastCreateModel<托福, 托福T, 托福P>(modelBuilder, "托福");
+            FastCreateModel<MiddleSchool, MiddleSchoolT, MiddleSchoolP>(modelBuilder, "MiddleSchool");
+            FastCreateModel<HighSchool, HighSchoolT, HighSchoolP>(modelBuilder, "HighSchool");
+            FastCreateModel<KY, KYT, KYP>(modelBuilder, "KY");
+            FastCreateModel<TF, TFT, TFP>(modelBuilder, "TF");
         }
         /// <summary>
         ///这是一个一键映射实体类的方法，省去大量的配置代码。<br/>
@@ -65,13 +65,13 @@ namespace DAL.Context
         {
             modelBuilder.Entity<MainF>(c =>
             {
-                c.ToTable($"{FormName}_Words");// 映射到数据库表。
+                c.ToTable($"{FormName}Words");// 映射到数据库表。
                 c.HasKey(f => f.Id);// 配置主键。
             });
 
             modelBuilder.Entity<TlForm>(c =>
             {
-                c.ToTable($"{FormName}_Translations");// 映射到数据库表。
+                c.ToTable($"{FormName}Translations");// 映射到数据库表。
                 c.HasKey(f => f.Id);// 配置主键。
 
                 c.HasOne(f => f.WordForm)
@@ -82,7 +82,7 @@ namespace DAL.Context
 
             modelBuilder.Entity<PForm>(c =>
             {
-                c.ToTable($"{FormName}_Phrases");
+                c.ToTable($"{FormName}Phrases");
                 c.HasKey(f => f.Id);
 
                 c.HasOne(f => f.WordForm)

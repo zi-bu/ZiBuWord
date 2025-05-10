@@ -7,21 +7,62 @@ namespace DAL
     /// </summary>
     public class Word : IWord
     {
-        /// <summary>
-        /// 这是临时注销掉最终结果的字段,暂时启用了set访问器，用于测试
-        /// </summary>
-        /*public string word { get; private set; } // 单词
-        public string pos { get; private set; } // 词性
-        public string translation { get; private set; } // 释义
-        public string phrase { get; private set; } // 短语
-        */
-        public string? word { get; set; } // 单词
-        public string? pos { get; set; } // 词性
-        public string? translation { get; set; } // 释义
-        public string? phrase { get; set; } // 短语
+     
+        //单词的各种属性
+        
+        public string word { get; private set; } // 单词
+        public List<string> pos
+        {
+            get
+            {
+                return Pos;
+            } 
+            private set 
+            {
+                Pos = value;
+            }
+        } // 词性
+        public List<string> translation
+        {
+            get
+            {
+                return Translation;
+            }
+            private set
+            {
+                Pos = Translation;
+            }
+        }// 释义
+        public List<string>? phrase
+        {
+            get
+            {
+                return Phrase;
+            }
+            private set
+            {
+                Phrase = value;
+            }
+        }// 短语
+        public List<string>? phraseTranslation
+        {
+            get
+            {
+                return PhraseTranslation;
+            }
+            private set
+            {
+                PhraseTranslation = value;
+            }
+        }// 短语翻译
 
-        public string? phraseTranslation { get; set; } // 短语翻译
 
+
+        //因为属性本质上是方法，而方法不能ref传入，所以为了传值，这里列出了字段；
+        private List<string> Pos = new List<string>();
+        private List<string> Translation = new List<string>();
+        private List<string>? Phrase = new List<string>();
+        private List<string>? PhraseTranslation = new List<string>();
 
         private Formid tableid; // 单词来源的枚举编号。
 
@@ -32,8 +73,8 @@ namespace DAL
         {
             tableid = (Formid)id;
             word = WordMover.GetWord(tableid);
-            translation = WordMover.FindTranslations(word, tableid);
-            phrase = WordMover.FindPhrases(word, tableid);
+            WordMover.FindTranslations(word, tableid,ref Translation,ref Pos);
+            WordMover.FindPhrases(word, tableid, ref Phrase, ref PhraseTranslation);
         }
     }
 }

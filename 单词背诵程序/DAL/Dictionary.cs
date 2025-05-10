@@ -11,9 +11,9 @@ namespace DAL
         [Key] // 主键
         public int Id { get; set; } // 单词编号
         [Required] // 必填字段
-        public string? Word { get; set; } // 单词
+        required public string Word { get; set; } // 单词
 
-        public List<TranslationForm>? Translations { get; set; } // 释义列表
+        required public List<TranslationForm> Translations { get; set; } // 释义列表
         public List<PhraseForm>? Phrases { get; set; } // 短语列表
     }
     /// <summary>
@@ -24,9 +24,9 @@ namespace DAL
     {
         public int Id { get; set; }
 
-        public string? Translation { get; set; }
+        required public string Translation { get; set; }
 
-        public string? TyPe { get; set; }
+        required public string TyPe { get; set; }
 
         public int WordId { get; set; }
         
@@ -60,24 +60,24 @@ namespace DAL
     public class CET6P : PhraseForm { }
 
 
-    public class 初中 : WordForm { }
-    public class 初中T : TranslationForm { }
-    public class 初中P : PhraseForm { }
+    public class HighSchool : WordForm { }
+    public class HighSchoolT : TranslationForm { }
+    public class HighSchoolP : PhraseForm { }
 
 
-    public class 高中 : WordForm { }
-    public class 高中T : TranslationForm { }
-    public class 高中P : PhraseForm { }
+    public class MiddleSchool : WordForm { }
+    public class MiddleSchoolT : TranslationForm { }
+    public class MiddleSchoolP : PhraseForm { }
 
 
-    public class 考研 : WordForm { }
-    public class 考研T : TranslationForm { }
-    public class 考研P : PhraseForm { }
+    public class KY : WordForm { }
+    public class KYT : TranslationForm { }
+    public class KYP : PhraseForm { }
 
 
-    public class 托福 : WordForm { }
-    public class 托福T : TranslationForm { }
-    public class 托福P : PhraseForm { }
+    public class TF : WordForm { }
+    public class TFT : TranslationForm { }
+    public class TFP : PhraseForm { }
 
     /// <summary>
     /// 用户表的模型类。<br/>
