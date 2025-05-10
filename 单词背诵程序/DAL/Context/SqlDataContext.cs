@@ -16,10 +16,10 @@ namespace DAL.Context
         
         public DbSet<CET4> CET4 { get; set; } // 对应数据库中的 CET4 表。
         public DbSet<CET6> CET6 { get; set; } // 对应数据库中的 CET6 表。
-        public DbSet<初中> 初中 { get; set; } // 对应数据库中的 初中 表。
-        public DbSet<高中> 高中 { get; set; } // 对应数据库中的 高中 表。
-        public DbSet<考研> 考研 { get; set; } // 对应数据库中的 四级 表。
-        public DbSet<托福> 托福 { get; set; } // 对应数据库中的 托福 表。
+        public DbSet<MiddleSchool> MiddleSchool { get; set; } // 对应数据库中的 初中 表。
+        public DbSet<HighSchool> Highschool { get; set; } // 对应数据库中的 高中 表。
+        public DbSet<KY> KY { get; set; } // 对应数据库中的 四级 表。
+        public DbSet<TF> TF { get; set; } // 对应数据库中的 托福 表。
 
         /// <summary>
         /// 配置数据库连接。<br/>
@@ -27,7 +27,7 @@ namespace DAL.Context
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=26.184.142.179,1433;Database=背单词;User Id=sa;Password=114514;Encrypt=False;");
+            optionsBuilder.UseSqlServer("Server=26.184.142.179,1433;Database=Word;User Id=sa;Password=114514;Encrypt=False;");
             //zibu数据库的IP地址，使用时取消注释。
             //optionsBuilder.UseSqlServer("Server=26.99.236.84;Database=wordforms;User Id=sa;Password=114514;Encrypt=False;");
             //小鼠数据库的IP地址，使用时取消注释。
@@ -41,18 +41,51 @@ namespace DAL.Context
         /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            FastCreateModel<CET4, CET4T, CET4P>(modelBuilder, "CET4");// 调用快速映射实体类的方法。
-            FastCreateModel<CET6, CET6T, CET6P>(modelBuilder, "CET6");
-            FastCreateModel<初中, 初中T, 初中P>(modelBuilder, "初中");
-            FastCreateModel<高中, 高中T, 高中P>(modelBuilder, "高中");
-            FastCreateModel<考研, 考研T, 考研P>(modelBuilder, "考研");
-            FastCreateModel<托福, 托福T, 托福P>(modelBuilder, "托福");
+            modelBuilder.Entity<WordForm>(c =>
+            {
+                c.HasKey(f => f.Id);// 配置主键。
+            });
+            modelBuilder.Entity<TranslationForm>(c =>
+            {
+                c.HasKey(f => f.Id);// 配置主键。
+                c.HasOne(f => f.WordForm)
+                 .WithMany(f => f.Translations)// 定义关系。
+                 .HasForeignKey(f => f.WordId) // 配置外键。
+                 .OnDelete(DeleteBehavior.Cascade); // 级联删除，或许有用？
+            });
+            modelBuilder.Entity<PhraseForm>(c =>
+            {
+                c.HasKey(f => f.Id);
+                c.HasOne(f => f.WordForm)
+                 .WithMany(f =>f.Phrases)
+                 .HasForeignKey(f => f.WordId)
+                 .OnDelete(DeleteBehavior.Cascade);
+            });
+            modelBuilder.Entity<CET4>().ToTable("CET4Words");
+            modelBuilder.Entity<CET4T>().ToTable("CET4Translations");
+            modelBuilder.Entity<CET4P>().ToTable("CET4Phrases");
+            modelBuilder.Entity<CET6>().ToTable("CET6Words");
+            modelBuilder.Entity<CET6T>().ToTable("CET6Translations");
+            modelBuilder.Entity<CET6P>().ToTable("CET6Phrases");
+            modelBuilder.Entity<MiddleSchool>().ToTable("MiddleSchoolWords");
+            modelBuilder.Entity<MiddleSchoolT>().ToTable("MiddleSchoolTranslations");
+            modelBuilder.Entity<MiddleSchoolP>().ToTable("MiddleSchoolPhrases");
+            modelBuilder.Entity<HighSchool>().ToTable("HighSchoolWords");
+            modelBuilder.Entity<HighSchoolT>().ToTable("HighSchoolTranslations");
+            modelBuilder.Entity<HighSchoolP>().ToTable("HighSchoolPhrases");
+            modelBuilder.Entity<KY>().ToTable("KYWords");
+            modelBuilder.Entity<KYT>().ToTable("KYTranslations");
+            modelBuilder.Entity<KYP>().ToTable("KYPhrases");
+            modelBuilder.Entity<TF>().ToTable("TFWords");
+            modelBuilder.Entity<TFT>().ToTable("TFTranslations");
+            modelBuilder.Entity<TFP>().ToTable("TFPhrases");
         }
+        [Obsolete("该方法废弃了", true)]
         /// <summary>
-        ///这是一个一键映射实体类的方法，省去大量的配置代码。<br/>
-        ///需要传入表的名称，如CET4,CET6,初中,高中,考研,托福。<br/>
+        ///这是一个一键映射实体类的方法<br/>
+        ///需要传入表的名称，如CET4,CET6等<br/>
         ///本类与实体类和数据库表的关联较大，若实体类基类和表名改变需要在这里修改。<br/>
-        ///mouse:这是我的轮椅haha
+        ///由于EF有轮椅机制，所以该方法废弃了
         /// </summary>
         /// <typeparam name="MainF"></typeparam>
         /// <typeparam name="TranslationForm"></typeparam>
@@ -65,13 +98,12 @@ namespace DAL.Context
         {
             modelBuilder.Entity<MainF>(c =>
             {
-                c.ToTable($"{FormName}_Words");// 映射到数据库表。
-                c.HasKey(f => f.Id);// 配置主键。
+                c.ToTable($"{FormName}Words");// 映射到数据库表。
             });
 
             modelBuilder.Entity<TlForm>(c =>
             {
-                c.ToTable($"{FormName}_Translations");// 映射到数据库表。
+                c.ToTable($"{FormName}Translations");// 映射到数据库表。
                 c.HasKey(f => f.Id);// 配置主键。
 
                 c.HasOne(f => f.WordForm)
@@ -82,7 +114,7 @@ namespace DAL.Context
 
             modelBuilder.Entity<PForm>(c =>
             {
-                c.ToTable($"{FormName}_Phrases");
+                c.ToTable($"{FormName}Phrases");
                 c.HasKey(f => f.Id);
 
                 c.HasOne(f => f.WordForm)

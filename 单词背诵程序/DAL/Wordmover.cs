@@ -8,10 +8,10 @@
     {
         CET4 = 1,
         CET6 = 2,
-        初中 = 3,
-        高中 = 4,
-        考研 = 5, 
-        托福 = 6,
+        MiddleSchool = 3,
+        Highschool = 4,
+        KY = 5,
+        TF = 6,
     }
     /// <summary>
     /// 单词搬运工类，计划封装查询单词和获取单词的方法（目前未完全实现）。<br/>
@@ -29,7 +29,7 @@
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static string? GetWord(Formid id)//随机获取一个单词
+        public static string GetWord(Formid id)//随机获取一个单词
         {
 
             using (var db = new Context.SqlDataContext())
@@ -48,107 +48,256 @@
                             var word = db.CET6.ElementAt(count);
                             return word.Word;
                         }
-                    case Formid.初中:
+                    case Formid.MiddleSchool:
                         {
-                            int count = rd.Next(0, db.初中.Count() - 1);
-                            var word = db.初中.ElementAt(count);
+                            int count = rd.Next(0, db.MiddleSchool.Count() - 1);
+                            var word = db.MiddleSchool.ElementAt(count);
                             return word.Word;
                         }
 
-                    case Formid.高中:
+                    case Formid.Highschool:
                         {
-                            int count = rd.Next(0, db.高中.Count() - 1);
-                            var word = db.高中.ElementAt(count);
+                            int count = rd.Next(0, db.Highschool.Count() - 1);
+                            var word = db.Highschool.ElementAt(count);
                             return word.Word;
                         }
-                    case Formid.考研:
+                    case Formid.KY:
                         {
-                            int count = rd.Next(0, db.CET4.Count() - 1);
-                            var word = db.CET4.ElementAt(count);
+                            int count = rd.Next(0, db.KY.Count() - 1);
+                            var word = db.KY.ElementAt(count);
                             return word.Word;
                         }
-                    case Formid.托福:
+                    case Formid.TF:
                         {
-                            int count = rd.Next(0, db.托福.Count() - 1);
-                            var word = db.托福.ElementAt(count);
+                            int count = rd.Next(0, db.TF.Count() - 1);
+                            var word = db.TF.ElementAt(count);
                             return word.Word;
                         }
                     default:
-                        return null;
+                        {
+                            throw new ArgumentException("未知单词来源表");
+                        }
+
                 }
             }
         }
-
-        public static string? FindTranslations(string word, Formid id)//在对应表查找单词翻译
+        /// <summary>
+        /// 在对应表查找单词释义。
+        /// 将释义和词性赋给到两个列表。
+        /// </summary>
+        /// <param name="word"></param>
+        /// <param name="id"></param>
+        /// <param name="translations"></param>
+        /// <param name="pos"></param>
+        public static void FindTranslations(string word, Formid id, ref List<string> translations, ref List<string> pos)
         {
+            //因为翻译和词性没有空值情况，所以不做空处理
             using (var db = new Context.SqlDataContext())
             {
                 switch (id)
                 {
                     case Formid.CET4:
                         {
-                            return string.Join(", ", db.CET4.Where(s => s.Word == word).First().Translations.Select(t => t.Translation));
+                            translations = (List<string>)db.CET4
+                            .Where(s => s.Word == word)
+                            .Select(s =>
+                            s.Translations.Select(t => t.Translation).ToList()
+                            );
+                            pos = (List<string>)db.CET4
+                            .Where(s => s.Word == word)
+                            .Select(s =>
+                            s.Translations.Select(t => t.Translation).ToList()
+                            );
+                            break;
                         }
                     case Formid.CET6:
                         {
-                            return string.Join(", ", db.CET6.Where(s => s.Word == word).First().Translations.Select(t => t.Translation));
+                            translations = (List<string>)db.CET6
+                            .Where(s => s.Word == word)
+                            .Select(s =>
+                            s.Translations.Select(t => t.Translation).ToList()
+                            );
+                            pos = (List<string>)db.CET6
+                            .Where(s => s.Word == word)
+                            .Select(s =>
+                            s.Translations.Select(t => t.Translation).ToList()
+                            );
+                            break;
                         }
-                    case Formid.初中:
+                    case Formid.MiddleSchool:
                         {
-                            return string.Join(", ", db.初中.Where(s => s.Word == word).First().Translations.Select(t => t.Translation));
+                            translations = (List<string>)db.MiddleSchool
+                            .Where(s => s.Word == word)
+                            .Select(s =>
+                            s.Translations.Select(t => t.Translation).ToList()
+                            );
+                            pos = (List<string>)db.MiddleSchool
+                            .Where(s => s.Word == word)
+                            .Select(s =>
+                            s.Translations.Select(t => t.Translation).ToList()
+                            );
+                            break;
                         }
 
-                    case Formid.高中:
+                    case Formid.Highschool:
                         {
-                            return string.Join(", ", db.高中.Where(s => s.Word == word).First().Translations.Select(t => t.Translation));
+                            translations = (List<string>)db.Highschool
+                            .Where(s => s.Word == word)
+                            .Select(s =>
+                            s.Translations.Select(t => t.Translation).ToList()
+                            );
+                            pos = (List<string>)db.Highschool
+                            .Where(s => s.Word == word)
+                            .Select(s =>
+                            s.Translations.Select(t => t.Translation).ToList()
+                            );
+                            break;
                         }
-                    case Formid.考研:
+                    case Formid.KY:
                         {
-                            return string.Join(", ", db.考研.Where(s => s.Word == word).First().Translations.Select(t => t.Translation));
+                            translations = (List<string>)db.KY
+                            .Where(s => s.Word == word)
+                            .Select(s =>
+                            s.Translations.Select(t => t.Translation).ToList()
+                            );
+                            pos = (List<string>)db.KY
+                            .Where(s => s.Word == word)
+                            .Select(s =>
+                            s.Translations.Select(t => t.Translation).ToList()
+                            );
+                            break;
                         }
-                    case Formid.托福:
+                    case Formid.TF:
                         {
-                            return string.Join(", ", db.托福.Where(s => s.Word == word).First().Translations.Select(t => t.Translation));
+                            translations = (List<string>)db.TF
+                            .Where(s => s.Word == word)
+                            .Select(s =>
+                            s.Translations.Select(t => t.Translation).ToList()
+                            );
+                            pos = (List<string>)db.TF
+                            .Where(s => s.Word == word)
+                            .Select(s =>
+                            s.Translations.Select(t => t.Translation).ToList()
+                            );
+                            break;
                         }
                     default:
-                        return null;
+                        {
+                            throw new ArgumentException("未知单词来源表");
+                        }
                 }
             }
         }
 
-        public static string? FindPhrases(string word, Formid id)//在对应表查找单词短语
+        /// <summary>
+        /// 在对应表查找短语。
+        /// 将短语和短语翻译赋给到两个列表。
+        /// </summary>
+        /// <param name="word"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static void FindPhrases(string word, Formid id, ref List<string>? phrases, ref List<string>? phraseTranslations)//在对应表查找单词短语
         {
             using (var db = new Context.SqlDataContext())
             {
+
                 switch (id)
                 {
                     case Formid.CET4:
                         {
-                            return string.Join(", ", db.CET4.Where(s => s.Word == word).First().Phrases.Select(t => t.Phrase));
+                            var PForm = db.CET4//为什么PForm是个双重List？
+                            .Where(s => s.Word == word)
+                            .Select(s => s.Phrases).ToList();
+                            if (PForm == null) { }
+                            else
+                            {
+                                phrases = (List<string>)PForm
+                                    .Select(s => s.Select(t => t.Phrase).ToList());
+                                phraseTranslations = (List<string>)PForm
+                                    .Select(s => s.Select(t => t.Translation).ToList());
+                            }
+                            break;
                         }
                     case Formid.CET6:
                         {
-                            return string.Join(", ", db.CET6.Where(s => s.Word == word).First().Phrases.Select(t => t.Phrase));
+                            var PForm = db.CET6
+                            .Where(s => s.Word == word)
+                            .Select(s => s.Phrases).ToList();
+                            if (PForm == null) { }
+                            else
+                            {
+                                phrases = (List<string>)PForm
+                                    .Select(s => s.Select(t => t.Phrase).ToList());
+                                phraseTranslations = (List<string>)PForm
+                                    .Select(s => s.Select(t => t.Translation).ToList());
+                            }
+                            break;
                         }
-                    case Formid.初中:
+                    case Formid.MiddleSchool:
                         {
-                            return string.Join(", ", db.初中.Where(s => s.Word == word).First().Phrases.Select(t => t.Phrase));
+                            var PForm = db.MiddleSchool
+                            .Where(s => s.Word == word)
+                            .Select(s => s.Phrases).ToList();
+                            if (PForm == null) { }
+                            else
+                            {
+                                phrases = (List<string>)PForm
+                                    .Select(s => s.Select(t => t.Phrase).ToList());
+                                phraseTranslations = (List<string>)PForm
+                                    .Select(s => s.Select(t => t.Translation).ToList());
+                            }
+                            break;
                         }
 
-                    case Formid.高中:
+                    case Formid.Highschool:
                         {
-                            return string.Join(", ", db.高中.Where(s => s.Word == word).First().Phrases.Select(t => t.Phrase));
+                            var PForm = db.Highschool
+                             .Where(s => s.Word == word)
+                             .Select(s => s.Phrases).ToList();
+                            if (PForm == null) { }
+                            else
+                            {
+                                phrases = (List<string>)PForm
+                                    .Select(s => s.Select(t => t.Phrase).ToList());
+                                phraseTranslations = (List<string>)PForm
+                                    .Select(s => s.Select(t => t.Translation).ToList());
+                            }
+                            break;
                         }
-                    case Formid.考研:
+                    case Formid.KY:
                         {
-                            return string.Join(", ", db.考研.Where(s => s.Word == word).First().Phrases.Select(t => t.Phrase));
+                            var PForm = db.KY
+                            .Where(s => s.Word == word)
+                            .Select(s => s.Phrases).ToList();
+                            if (PForm == null) { }
+                            else
+                            {
+                                phrases = (List<string>)PForm
+                                    .Select(s => s.Select(t => t.Phrase).ToList());
+                                phraseTranslations = (List<string>)PForm
+                                    .Select(s => s.Select(t => t.Translation).ToList());
+                            }
+                            break;
                         }
-                    case Formid.托福:
+                    case Formid.TF:
                         {
-                            return string.Join(", ", db.托福.Where(s => s.Word == word).First().Phrases.Select(t => t.Phrase));
+                            var PForm = db.TF
+                            .Where(s => s.Word == word)
+                            .Select(s => s.Phrases).ToList();
+                            if (PForm == null) { }
+                            else
+                            {
+                                phrases = (List<string>)PForm
+                                    .Select(s => s.Select(t => t.Phrase).ToList());
+                                phraseTranslations = (List<string>)PForm
+                                    .Select(s => s.Select(t => t.Translation).ToList());
+                            }
+                            break;
                         }
                     default:
-                        return null;
+                        {
+                            throw new ArgumentException("未知单词来源表");
+                        }
                 }
             }
         }
