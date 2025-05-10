@@ -62,9 +62,9 @@ namespace DAL
             {
                 foreach(var s in db.UserData)
                 {
-                    Console.WriteLine($"ID: {s.UserID} {s.Username} {s.UserPassword}");
+                    Console.WriteLine($"ID: {s.UserID} {s.UserName} {s.UserPassword}");
                 }
-                db.UserData.Add(new User() { Username = "zibu", UserPassword = "114514" });//添加新用户
+                db.UserData.Add(new User() { UserName = "zibu", UserPassword = "114514" });//添加新用户
                 db.SaveChanges();//保存更改
             }
         }

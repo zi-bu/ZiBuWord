@@ -91,7 +91,7 @@ namespace DAL
         [Key] // 主键
         public int UserID { get; set; } // 用户编号
         [Required] // 必填字段
-        public string? Username { get; set; } // 用户名
+        public string? UserName { get; set; } // 用户名
         public string? UserPassword { get; set; } // 密码
     }
 }
