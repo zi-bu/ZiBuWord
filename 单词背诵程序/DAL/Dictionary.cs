@@ -6,11 +6,9 @@ namespace DAL
     /// 数据库表的实体类主表的基类。(一个模版的模板)
     /// 这个类对应数据库中的Words的结构，包含单词，释义和短语的集合。<br/>
     /// </summary>
-    public class WordForm
+    public abstract class WordForm
     {
-        [Key] // 主键
         public int Id { get; set; } // 单词编号
-        [Required] // 必填字段
         required public string Word { get; set; } // 单词
 
         required public List<TranslationForm> Translations { get; set; } // 释义列表
@@ -20,7 +18,7 @@ namespace DAL
     /// 数据库表的实体类翻译表的基类。
     /// 这个类对应数据库中的Translations的结构，包含单词翻译，对应翻译的词性。<br/>
     /// </summary>
-    public class TranslationForm
+    public abstract class TranslationForm
     {
         public int Id { get; set; }
 
@@ -37,7 +35,7 @@ namespace DAL
     /// 数据库表的实体类短语表的基类。
     /// 这个类对应数据库中的Phrase的结构，包含短语，短语翻译。<br/>
     /// </summary>
-    public class PhraseForm
+    public abstract class PhraseForm
     {
         public int Id { get; set; }
 
