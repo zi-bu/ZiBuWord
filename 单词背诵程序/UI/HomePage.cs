@@ -107,7 +107,6 @@ namespace UI
         {
             MemorizerSelection memorizerSelection = new MemorizerSelection();
             FormHelper.ShowNewForm(this, memorizerSelection);
-            throw new System.NotImplementedException();
         }
 
         private void btnFavorite_Click(object sender, EventArgs e)
