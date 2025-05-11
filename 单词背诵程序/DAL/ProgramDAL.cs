@@ -17,12 +17,12 @@ namespace DAL
     {
         static void Main(string[] args)
         {
-            //Word word = new Word(1);
-            //Console.WriteLine(word.word);
-            //Console.WriteLine(word.translation);
-            //Console.WriteLine(word.phrase);
-            UserData.Login("test", "114514");
-            UserData.Register("test", "114514");
+            Word word = new Word(1);
+            Console.WriteLine(word.word);
+            Console.WriteLine(word.translation);
+            Console.WriteLine(word.phrase);
+            //UserData.Login("test", "114514");
+            //UserData.Register("test", "114514");
         }
 
 
