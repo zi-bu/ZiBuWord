@@ -9,6 +9,8 @@ public partial class MemorizerSelection : Form
     public MemorizerSelection()
     {
         InitializeComponent();
+        this.FormClosing += FormHelper.CloseForm;// 绑定 FormClosing 事件
+
     }
 
     private void button1_Click(object sender, EventArgs e)
@@ -47,6 +49,11 @@ public partial class MemorizerSelection : Form
     }
 
     private void button3_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void MemorizerSelection_Load(object sender, EventArgs e)
     {
 
     }

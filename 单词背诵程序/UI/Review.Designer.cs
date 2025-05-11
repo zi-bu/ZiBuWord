@@ -138,6 +138,7 @@
             Margin = new Padding(4);
             Name = "Review";
             Text = "复习";
+            Load += Review_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);

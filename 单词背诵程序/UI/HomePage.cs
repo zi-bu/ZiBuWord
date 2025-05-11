@@ -12,22 +12,63 @@ namespace UI
 {
     public partial class HomePage : Form
     {
+        // 词典列表
+        private Dictionary<string, string> dictionaries = new Dictionary<string, string>()
+        {
+            {"四级词汇", "CET4"},
+            {"六级词汇", "CET6"},
+            {"初中词汇", "MiddleSchool" },
+            {"高中词汇", "HighSchool" },
+            {"考研词汇", "KY"},
+            {"托福词汇", "TF"},
+        };
+
         public HomePage()
         {
             InitializeComponent();
-            this.FormClosing += Form2_FormClosing; // 绑定 FormClosing 事件
+            this.FormClosing += FormHelper.CloseForm; // 绑定 FormClosing 事件
+
+            // 初始化ComboBox
+            InitializeDictionaryComboBox();
         }
 
         /// <summary>
-        /// 显示新窗口并隐藏当前窗口的通用方法
+        /// 初始化词典选择ComboBox
+        /// mingfeng
         /// </summary>
-        /// <param name="newForm">要显示的新窗口</param>
-        private void ShowNewForm(Form newForm)
+        private void InitializeDictionaryComboBox()
         {
-            newForm.StartPosition = FormStartPosition.Manual;
-            newForm.Location = this.Location;
-            newForm.Show();
-            this.Hide();
+            comboBoxSelectDict.DropDownStyle = ComboBoxStyle.DropDownList; // 设置为下拉列表，不可编辑
+            comboBoxSelectDict.Items.Clear();
+
+            // 添加词典名称到ComboBox
+            foreach (var dict in dictionaries.Keys)
+            {
+                comboBoxSelectDict.Items.Add(dict);
+            }
+
+            // 默认选择第一个词典
+            if (comboBoxSelectDict.Items.Count > 0)
+            {
+                comboBoxSelectDict.SelectedIndex = 0;
+            }
+        }
+
+        /// <summary>
+        /// 获取当前选中的词典代码
+        /// mingfeng
+        /// </summary>
+        public string SelectedDictionaryCode
+        {
+            get
+            {
+                if (comboBoxSelectDict.SelectedItem != null &&
+                    dictionaries.TryGetValue(comboBoxSelectDict.SelectedItem.ToString(), out string code))
+                {
+                    return code;
+                }
+                return "CET4"; // 默认返回四级词汇
+            }
         }
 
         /// <summary>
@@ -39,27 +80,7 @@ namespace UI
         /// <param name="e"></param>
         private void Exit(object sender, EventArgs e)
         {
-            Form2_FormClosing(sender, new FormClosingEventArgs(CloseReason.UserClosing, false));
-        }
-
-        /// <summary>
-        /// 这是关闭窗口的事件处理函数。
-        /// </br>这段代码是由```子布```编写的。
-        /// （可能会被改写成一个函数，或者直接删除）
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (MessageBox.Show("真的要退出吗？未保存的进度将会丢失！", "警告！", MessageBoxButtons.YesNo
-                , MessageBoxIcon.Warning) == DialogResult.No)
-            {
-                e.Cancel = true; // 取消关闭事件
-            }
-            else
-            {
-                System.Environment.Exit(0); // 退出程序
-            }
+            FormHelper.CloseForm(sender, new FormClosingEventArgs(CloseReason.UserClosing, false));
         }
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -86,13 +107,17 @@ namespace UI
         {
             MemorizerSelection memorizerSelection = new MemorizerSelection();
             FormHelper.ShowNewForm(this, memorizerSelection);
-            throw new System.NotImplementedException();
         }
 
         private void btnFavorite_Click(object sender, EventArgs e)
         {
             Favorite favorite = new Favorite();
             FormHelper.ShowNewForm(this, favorite);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
