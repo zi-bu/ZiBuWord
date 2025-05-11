@@ -26,7 +26,7 @@ namespace UI
         public HomePage()
         {
             InitializeComponent();
-            this.FormClosing += FormHelper.Form2_FormClosing; // 绑定 FormClosing 事件
+            this.FormClosing += FormHelper.CloseForm; // 绑定 FormClosing 事件
 
             // 初始化ComboBox
             InitializeDictionaryComboBox();
@@ -80,7 +80,7 @@ namespace UI
         /// <param name="e"></param>
         private void Exit(object sender, EventArgs e)
         {
-            FormHelper.Form2_FormClosing(sender, new FormClosingEventArgs(CloseReason.UserClosing, false));
+            FormHelper.CloseForm(sender, new FormClosingEventArgs(CloseReason.UserClosing, false));
         }
         private void Form2_Load(object sender, EventArgs e)
         {

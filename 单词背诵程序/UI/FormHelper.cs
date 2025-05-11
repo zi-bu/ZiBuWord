@@ -29,7 +29,7 @@ namespace UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public static void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        public static void CloseForm(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("真的要退出吗？未保存的进度将会丢失！", "警告！", MessageBoxButtons.YesNo
                 , MessageBoxIcon.Warning) == DialogResult.No)

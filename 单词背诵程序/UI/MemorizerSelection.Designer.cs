@@ -132,6 +132,7 @@ partial class MemorizerSelection
         Margin = new Padding(4);
         Name = "MemorizerSelection";
         Text = "Memorizer";
+        Load += MemorizerSelection_Load;
         ResumeLayout(false);
     }
 

@@ -15,6 +15,8 @@ namespace UI
         public Review()
         {
             InitializeComponent();
+            this.FormClosing += FormHelper.CloseForm;// 绑定 FormClosing 事件
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -39,6 +41,11 @@ namespace UI
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Review_Load(object sender, EventArgs e)
         {
 
         }
