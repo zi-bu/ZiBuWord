@@ -13,7 +13,7 @@ namespace DAL.Context
     /// </summary>
     public class SqlDataContext : DbContext
     {
-        
+
         public DbSet<CET4> CET4 { get; set; } // 对应数据库中的 CET4 表。
         public DbSet<CET6> CET6 { get; set; } // 对应数据库中的 CET6 表。
         public DbSet<MiddleSchool> MiddleSchool { get; set; } // 对应数据库中的 初中 表。
@@ -57,7 +57,7 @@ namespace DAL.Context
             {
                 c.HasKey(f => f.Id);
                 c.HasOne(f => f.WordForm)
-                 .WithMany(f =>f.Phrases)
+                 .WithMany(f => f.Phrases)
                  .HasForeignKey(f => f.WordId)
                  .OnDelete(DeleteBehavior.Cascade);
             });
@@ -91,7 +91,7 @@ namespace DAL.Context
         /// <typeparam name="TranslationForm"></typeparam>
         /// <typeparam name="PhraseForm"></typeparam>
         /// <param name="modelBuilder"></param>
-        private static void FastCreateModel<MainF,TlForm,PForm>(ModelBuilder modelBuilder,string FormName)
+        private static void FastCreateModel<MainF, TlForm, PForm>(ModelBuilder modelBuilder, string FormName)
             where MainF : WordForm
             where TlForm : TranslationForm//限制泛型类必须继承了实体类的基类,
             where PForm : PhraseForm
@@ -120,7 +120,7 @@ namespace DAL.Context
                 c.HasOne(f => f.WordForm)
                  .WithMany(f => (IEnumerable<PForm>?)f.Phrases)
                  .HasForeignKey(f => f.WordId)
-                 .OnDelete(DeleteBehavior.Cascade); 
+                 .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }
