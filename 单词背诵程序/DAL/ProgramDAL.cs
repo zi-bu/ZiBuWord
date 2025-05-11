@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System;
 using System.ComponentModel.DataAnnotations;
+using DAL.ReturnFunction;
 //注意这里引用的是Microsoft.Data.SqlClient而不是System.Data.SqlClient(高版本.NET框架已经迁移到Microsoft.Data.SqlClient)
 namespace DAL
 {
@@ -16,57 +17,12 @@ namespace DAL
     {
         static void Main(string[] args)
         {
-            //下面是你的代码zibu
-            #if HHH
-            #region
-            using (var db = new SqlDataContext())
-            {
-                var datas = db.CET4.ToList(); // 从 CET4 表中读取所有数据。
-                foreach (var s in datas) // 遍历数据并输出到控制台。
-                {
-                    try
-                    {
-                        //判断空值，不然报错
-                        if (s.phrases == null)
-                        {
-                            Console.WriteLine($"Word: {s.word}");
-                            continue;
-                        }
-                        else
-                        {
-                            var phrasesList = JsonSerializer.Deserialize<List<Dictionary<string, object>>>(s.phrases);//mouse:这段有bug
-
-                            Console.WriteLine($"Word: {s.word}");
-                            foreach (var phrase in phrasesList)//mouse:这段没看懂，这么多循环？输出会重复的吧？
-                            {
-                                foreach (var keyValue in phrase)
-                                {
-                                    Console.WriteLine($"{keyValue.Key}: {keyValue.Value}");
-                                }
-                            }
-                        }
-                    }
-                    catch (JsonException ex)
-                    {
-                        Console.WriteLine($"JSON 解析失败: {ex.Message}");
-                    }
-                }
-            }
-            #endregion
-            #endif
-            Word word = new Word(1);
-            Console.WriteLine(word.word);
-            Console.WriteLine(word.translation);
-            Console.WriteLine(word.phrase);
-            using (var db = new Context.UserContext())
-            {
-                foreach(var s in db.UserData)
-                {
-                    Console.WriteLine($"ID: {s.UserID} {s.UserName} {s.UserPassword}");
-                }
-                db.UserData.Add(new User() { UserName = "zibu", UserPassword = "114514" });//添加新用户
-                db.SaveChanges();//保存更改
-            }
+            //Word word = new Word(1);
+            //Console.WriteLine(word.word);
+            //Console.WriteLine(word.translation);
+            //Console.WriteLine(word.phrase);
+            UserData.Login("test", "114514");
+            UserData.Register("test", "114514");
         }
 
 
