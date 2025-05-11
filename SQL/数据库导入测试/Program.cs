@@ -1,8 +1,8 @@
-ï»¿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace æ•°æ®åº“å¯¼å…¥æµ‹è¯•
+namespace Êı¾İ¿âµ¼Èë²âÊÔ
 {
     internal class Program
     {
@@ -10,83 +10,90 @@ namespace æ•°æ®åº“å¯¼å…¥æµ‹è¯•
         {
             try
             {
-                // è·å–JSONæ–‡ä»¶å¤¹è·¯å¾„
-                string folderPath = "D:/æ‚/ä½œä¸š/c#å°ç»„é¡¹ç›®/english-vocabulary-master/json";
-                Console.WriteLine($"æ­£åœ¨ä»æ–‡ä»¶å¤¹å¯¼å…¥JSON: {folderPath}");
+                // »ñÈ¡JSONÎÄ¼ş¼ĞÂ·¾¶
+                string folderPath = "D:/ÔÓ/×÷Òµ/c#Ğ¡×éÏîÄ¿/english-vocabulary-master/json";
+                Console.WriteLine($"ÕıÔÚ´ÓÎÄ¼ş¼Ğµ¼ÈëJSON: {folderPath}");
 
-                // è·å–æ‰€æœ‰JSONæ–‡ä»¶
+                // »ñÈ¡ËùÓĞJSONÎÄ¼ş
                 var jsonFiles = Directory.GetFiles(folderPath, "*.json");
-                Console.WriteLine($"æ‰¾åˆ° {jsonFiles.Length} ä¸ªJSONæ–‡ä»¶");
+                Console.WriteLine($"ÕÒµ½ {jsonFiles.Length} ¸öJSONÎÄ¼ş");
 
                 if (jsonFiles.Length == 0)
                 {
-                    Console.WriteLine("æœªæ‰¾åˆ°JSONæ–‡ä»¶");
+                    Console.WriteLine("Î´ÕÒµ½JSONÎÄ¼ş");
                     return;
                 }
 
-                // é…ç½®æ•°æ®åº“è¿æ¥
-                string connectionString = "Server=127.0.0.1;Database=word;User Id=sa;Password=114514;Encrypt=False;";
+                // ÅäÖÃÊı¾İ¿âÁ¬½Ó
+                string connectionString = "Server=127.0.0.1;Database=word1;User Id=sa;Password=114514;Encrypt=False;";
 
-                // å¤„ç†æ¯ä¸ªJSONæ–‡ä»¶
+                // ´¦ÀíÃ¿¸öJSONÎÄ¼ş
                 foreach (var jsonFile in jsonFiles)
                 {
-                    // ä»æ–‡ä»¶åè·å–è¡¨å
+                    // ´ÓÎÄ¼şÃû»ñÈ¡±íÃû
                     string fileName = Path.GetFileNameWithoutExtension(jsonFile);
                     string tableName = SanitizeTableName(fileName);
 
-                    Console.WriteLine($"\nå¼€å§‹å¤„ç†æ–‡ä»¶: {Path.GetFileName(jsonFile)}");
-                    Console.WriteLine($"å¯¹åº”çš„è¡¨å: {tableName}");
+                    Console.WriteLine($"\n¿ªÊ¼´¦ÀíÎÄ¼ş: {Path.GetFileName(jsonFile)}");
+                    Console.WriteLine($"¶ÔÓ¦µÄ±íÃû: {tableName}");
 
-                    // è¯»å–å¹¶å¯¼å…¥JSONæ–‡ä»¶åˆ°æ–°è¡¨
+                    // ¶ÁÈ¡²¢µ¼ÈëJSONÎÄ¼şµ½ĞÂ±í
                     await ImportJsonFileToNewTable(jsonFile, tableName, connectionString);
+                    
+                    // Ìí¼ÓËæ»úĞòºÅµ½µ¥´Ê±í
+                    await AddRandomOrderToTable(tableName, connectionString);
                 }
 
-                Console.WriteLine("\næ‰€æœ‰æ–‡ä»¶å¤„ç†å®Œæˆ!");
+                Console.WriteLine("\nËùÓĞÎÄ¼ş´¦ÀíÍê³É!");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"ç¨‹åºå‘ç”Ÿé”™è¯¯: {ex.Message}");
+                Console.WriteLine($"³ÌĞò·¢Éú´íÎó: {ex.Message}");
                 Console.WriteLine(ex.StackTrace);
             }
 
-            Console.WriteLine("\næŒ‰ä»»æ„é”®é€€å‡º...");
+            Console.WriteLine("\n°´ÈÎÒâ¼üÍË³ö...");
             Console.ReadKey();
         }
 
-        // ä¸ºè¡¨åæ¸…ç†ä¸åˆæ³•å­—ç¬¦
+        // Îª±íÃûÇåÀí²»ºÏ·¨×Ö·û
         private static string SanitizeTableName(string name)
         {
-            // ç§»é™¤ä¸åˆæ³•å­—ç¬¦ï¼Œä»…ä¿ç•™å­—æ¯ã€æ•°å­—å’Œä¸‹åˆ’çº¿
+            // ÒÆ³ı²»ºÏ·¨×Ö·û£¬½ö±£Áô×ÖÄ¸¡¢Êı×ÖºÍÏÂ»®Ïß
             string sanitized = new string(name.Select(c => char.IsLetterOrDigit(c) || c == '_' ? c : '_').ToArray());
 
-            // ç¡®ä¿ä¸ä»¥æ•°å­—å¼€å¤´
+            // È·±£²»ÒÔÊı×Ö¿ªÍ·
             if (char.IsDigit(sanitized[0]))
                 sanitized = "Table_" + sanitized;
 
             return sanitized;
         }
 
-        // å¯¼å…¥JSONæ–‡ä»¶åˆ°æ–°è¡¨
+        // µ¼ÈëJSONÎÄ¼şµ½ĞÂ±í
         private static async Task ImportJsonFileToNewTable(string jsonFilePath, string tableName, string connectionString)
         {
             try
             {
-                // 1. è¯»å–å¹¶ååºåˆ—åŒ– JSON
+                // 1. ¶ÁÈ¡²¢·´ĞòÁĞ»¯ JSON
                 string json = await File.ReadAllTextAsync(jsonFilePath);
                 var jsonWords = JsonSerializer.Deserialize<List<JsonWord>>(json);
 
                 if (jsonWords == null || jsonWords.Count == 0)
                 {
-                    Console.WriteLine("  JSON æ–‡ä»¶ä¸ºç©ºæˆ–æ ¼å¼ä¸æ­£ç¡®");
+                    Console.WriteLine("  JSON ÎÄ¼şÎª¿Õ»ò¸ñÊ½²»ÕıÈ·");
                     return;
                 }
+                
+                // ¶Ôµ¥´ÊÁĞ±í½øĞĞÂÒĞò´¦Àí
+                Random random = new Random();
+                jsonWords = jsonWords.OrderBy(x => random.Next()).ToList();
+                
+                Console.WriteLine($"  ³É¹¦¶ÁÈ¡²¢ÂÒĞò´¦Àí {jsonWords.Count} ¸öµ¥´ÊÌõÄ¿");
 
-                Console.WriteLine($"  æˆåŠŸè¯»å– {jsonWords.Count} ä¸ªå•è¯æ¡ç›®");
-
-                // 2. åˆ›å»ºæ•°æ®åº“è¡¨ç»“æ„
+                // 2. ´´½¨Êı¾İ¿â±í½á¹¹
                 await CreateTablesIfNotExist(tableName, connectionString);
 
-                // 3. è¿æ¥æ•°æ®åº“å¹¶å¯¼å…¥æ•°æ®
+                // 3. Á¬½ÓÊı¾İ¿â²¢µ¼ÈëÊı¾İ
                 using (var connection = new SqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
@@ -94,23 +101,23 @@ namespace æ•°æ®åº“å¯¼å…¥æµ‹è¯•
                     {
                         try
                         {
-                            // æ’å…¥å•è¯
+                            // ²åÈëµ¥´Ê
                             foreach (var word in jsonWords)
                             {
-                                // æ’å…¥å•è¯ä¸»è¡¨
+                                // ²åÈëµ¥´ÊÖ÷±í
                                 int wordId = await InsertWordAndGetId(connection, transaction, tableName, word.Word);
 
-                                // æ’å…¥ç¿»è¯‘
+                                // ²åÈë·­Òë
                                 if (word.Translations?.Count > 0)
                                 {
                                     foreach (var translation in word.Translations)
                                     {
                                         await InsertTranslation(connection, transaction, tableName, wordId,
-                                            translation.Translation, string.IsNullOrEmpty(translation.Type) ? "æœªçŸ¥" : translation.Type);
+                                            translation.Translation, string.IsNullOrEmpty(translation.Type) ? "Î´Öª" : translation.Type);
                                     }
                                 }
 
-                                // æ’å…¥çŸ­è¯­
+                                // ²åÈë¶ÌÓï
                                 if (word.Phrases?.Count > 0)
                                 {
                                     foreach (var phrase in word.Phrases)
@@ -122,15 +129,15 @@ namespace æ•°æ®åº“å¯¼å…¥æµ‹è¯•
                             }
 
                             transaction.Commit();
-                            Console.WriteLine($"  æ•°æ®æˆåŠŸå¯¼å…¥åˆ°è¡¨ {tableName}ï¼");
+                            Console.WriteLine($"  Êı¾İ³É¹¦µ¼Èëµ½±í {tableName}£¡");
                         }
                         catch (Exception ex)
                         {
                             transaction.Rollback();
-                            Console.WriteLine($"  æ•°æ®å¯¼å…¥å¤±è´¥: {ex.Message}");
+                            Console.WriteLine($"  Êı¾İµ¼ÈëÊ§°Ü: {ex.Message}");
                             if (ex.InnerException != null)
                             {
-                                Console.WriteLine($"  å†…éƒ¨å¼‚å¸¸: {ex.InnerException.Message}");
+                                Console.WriteLine($"  ÄÚ²¿Òì³£: {ex.InnerException.Message}");
                             }
                         }
                     }
@@ -138,24 +145,25 @@ namespace æ•°æ®åº“å¯¼å…¥æµ‹è¯•
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"  å¤„ç†æ–‡ä»¶æ—¶å‡ºé”™: {ex.Message}");
+                Console.WriteLine($"  ´¦ÀíÎÄ¼şÊ±³ö´í: {ex.Message}");
             }
         }
 
-        // åˆ›å»ºè¡¨ç»“æ„
+        // ´´½¨±í½á¹¹
         private static async Task CreateTablesIfNotExist(string tableName, string connectionString)
         {
             using (var connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
 
-                // æ£€æŸ¥è¡¨æ˜¯å¦å­˜åœ¨
+                // ¼ì²é±íÊÇ·ñ´æÔÚ
                 string checkTableSql = @"
                         IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = @WordTableName)
                         BEGIN
                             CREATE TABLE [dbo].[" + tableName + @"_Words] (
                                 [Id] INT IDENTITY(1,1) PRIMARY KEY,
-                                [Word] NVARCHAR(255) NOT NULL
+                                [Word] NVARCHAR(255) NOT NULL,
+                                [RandomOrder] INT NULL
                             );
                             
                             CREATE TABLE [dbo].[" + tableName + @"_Translations] (
@@ -175,18 +183,84 @@ namespace æ•°æ®åº“å¯¼å…¥æµ‹è¯•
                                 CONSTRAINT [FK_" + tableName + @"_Phrases_Words] FOREIGN KEY ([WordId]) 
                                 REFERENCES [dbo].[" + tableName + @"_Words] ([Id]) ON DELETE CASCADE
                             );
+                        END
+                        ELSE
+                        BEGIN
+                            -- ¼ì²éÊÇ·ñ´æÔÚRandomOrderÁĞ£¬Èç¹û²»´æÔÚÔòÌí¼Ó
+                            IF NOT EXISTS (SELECT * FROM sys.columns 
+                                           WHERE object_id = OBJECT_ID('[dbo].[" + tableName + @"_Words]') 
+                                           AND name = 'RandomOrder')
+                            BEGIN
+                                ALTER TABLE [dbo].[" + tableName + @"_Words] ADD [RandomOrder] INT NULL;
+                            END
                         END";
 
                 using (var command = new SqlCommand(checkTableSql, connection))
                 {
                     command.Parameters.AddWithValue("@WordTableName", tableName + "_Words");
                     await command.ExecuteNonQueryAsync();
-                    Console.WriteLine($"  å·²ç¡®ä¿è¡¨ {tableName}_Wordsã€{tableName}_Translations å’Œ {tableName}_Phrases å­˜åœ¨");
+                    Console.WriteLine($"  ÒÑÈ·±£±í {tableName}_Words¡¢{tableName}_Translations ºÍ {tableName}_Phrases ´æÔÚ");
                 }
             }
         }
 
-        // æ’å…¥å•è¯å¹¶è¿”å›ID
+        // Îªµ¥´Ê±íÌí¼ÓËæ»úĞòºÅ
+        private static async Task AddRandomOrderToTable(string tableName, string connectionString)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+                    
+                    // ¼ÆËã±íÖĞµÄ×Ü¼ÇÂ¼Êı
+                    string countSql = $"SELECT COUNT(*) FROM [dbo].[{tableName}_Words]";
+                    int totalCount = 0;
+                    
+                    using (var countCommand = new SqlCommand(countSql, connection))
+                    {
+                        totalCount = Convert.ToInt32(await countCommand.ExecuteScalarAsync());
+                    }
+                    
+                    if (totalCount == 0)
+                    {
+                        Console.WriteLine($"  ±í {tableName}_Words ÖĞÃ»ÓĞ¼ÇÂ¼£¬Ìø¹ıËæ»úĞòºÅÉú³É");
+                        return;
+                    }
+                    
+                    Console.WriteLine($"  ¿ªÊ¼Îª {tableName}_Words ±íÖĞµÄ {totalCount} ¸ö¼ÇÂ¼Éú³ÉËæ»úĞòºÅ");
+
+                    // SQL Server·½·¨£ºÊ¹ÓÃROW_NUMBERºÍNEWID()À´Éú³ÉËæ»úĞòºÅ
+                    string updateSql = $@"
+                        WITH RandomCTE AS (
+                            SELECT 
+                                Id, 
+                                ROW_NUMBER() OVER (ORDER BY NEWID()) AS RandomOrder
+                            FROM [dbo].[{tableName}_Words]
+                        )
+                        UPDATE w
+                        SET w.RandomOrder = r.RandomOrder
+                        FROM [dbo].[{tableName}_Words] w
+                        INNER JOIN RandomCTE r ON w.Id = r.Id";
+                    
+                    using (var command = new SqlCommand(updateSql, connection))
+                    {
+                        int rowsAffected = await command.ExecuteNonQueryAsync();
+                        Console.WriteLine($"  ÒÑ³É¹¦Îª {rowsAffected} ¸ö¼ÇÂ¼Éú³ÉËæ»úĞòºÅ");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"  Éú³ÉËæ»úĞòºÅÊ±³ö´í: {ex.Message}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"  ÄÚ²¿Òì³£: {ex.InnerException.Message}");
+                }
+            }
+        }
+
+        // ²åÈëµ¥´Ê²¢·µ»ØID
         private static async Task<int> InsertWordAndGetId(SqlConnection connection, SqlTransaction transaction, string tableName, string word)
         {
             string insertSql = $"INSERT INTO [dbo].[{tableName}_Words] ([Word]) VALUES (@Word); SELECT SCOPE_IDENTITY();";
@@ -199,7 +273,7 @@ namespace æ•°æ®åº“å¯¼å…¥æµ‹è¯•
             }
         }
 
-        // æ’å…¥ç¿»è¯‘
+        // ²åÈë·­Òë
         private static async Task InsertTranslation(SqlConnection connection, SqlTransaction transaction,
                                                  string tableName, int wordId, string translation, string type)
         {
@@ -214,7 +288,7 @@ namespace æ•°æ®åº“å¯¼å…¥æµ‹è¯•
             }
         }
 
-        // æ’å…¥çŸ­è¯­
+        // ²åÈë¶ÌÓï
         private static async Task InsertPhrase(SqlConnection connection, SqlTransaction transaction,
                                             string tableName, int wordId, string phrase, string translation)
         {
@@ -229,7 +303,7 @@ namespace æ•°æ®åº“å¯¼å…¥æµ‹è¯•
             }
         }
 
-        // JSONååºåˆ—åŒ–ç”¨çš„ä¸´æ—¶ç±»
+        // JSON·´ĞòÁĞ»¯ÓÃµÄÁÙÊ±Àà
         public class JsonWord
         {
             [JsonPropertyName("word")]
@@ -248,7 +322,7 @@ namespace æ•°æ®åº“å¯¼å…¥æµ‹è¯•
             public required string Translation { get; set; }
 
             [JsonPropertyName("type")]
-            public string Type { get; set; } = "æœªçŸ¥";  // ç§»é™¤ requiredï¼Œè®¾ç½®é»˜è®¤å€¼
+            public string Type { get; set; } = "Î´Öª";  // ÒÆ³ı required£¬ÉèÖÃÄ¬ÈÏÖµ
         }
 
         public class JsonPhrase
@@ -261,4 +335,3 @@ namespace æ•°æ®åº“å¯¼å…¥æµ‹è¯•
         }
     }
 }
-
