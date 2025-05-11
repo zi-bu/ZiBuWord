@@ -19,7 +19,7 @@ namespace DAL.ReturnFunction
         /// 检测用户名是否已经存在<br/>
         /// 如果存在返回true<br/>
         /// 如果不存在返回false<br/>
-        /// 报错时返回false<br/>
+        /// 报错时返回false冰抛出异常<br/>
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>

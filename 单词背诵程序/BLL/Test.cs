@@ -23,7 +23,8 @@ namespace BLL
         /// </summary>
         static void Main(string[] args)
         {
-            
+            UserData userData = new UserData();
+            userData.UserLogin("testUser", "testPassword");
         }
     }
 
