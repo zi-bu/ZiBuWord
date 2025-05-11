@@ -32,6 +32,7 @@
             btnStartReview = new Button();
             btnExit = new Button();
             btnLogout = new Button();
+            comboBox1 = new ComboBox();
             SuspendLayout();
             // 
             // btnStartMemory
@@ -78,11 +79,21 @@
             btnLogout.UseVisualStyleBackColor = true;
             btnLogout.Click += btnLogout_Click;
             // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(507, 346);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(144, 32);
+            comboBox1.TabIndex = 7;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
             // HomePage
             // 
             AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1145, 797);
+            Controls.Add(comboBox1);
             Controls.Add(btnLogout);
             Controls.Add(btnExit);
             Controls.Add(btnStartReview);
@@ -99,5 +110,6 @@
         private Button btnStartReview;
         private Button btnExit;
         private Button btnLogout;
+        private ComboBox comboBox1;
     }
 }
