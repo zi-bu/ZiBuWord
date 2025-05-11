@@ -80,12 +80,12 @@ namespace DAL.Context
             modelBuilder.Entity<TFT>().ToTable("TFTranslations");
             modelBuilder.Entity<TFP>().ToTable("TFPhrases");
         }
-        [Obsolete("该方法废弃了", true)]
         /// <summary>
         ///这是一个一键映射实体类的方法<br/>
         ///需要传入表的名称，如CET4,CET6等<br/>
         ///本类与实体类和数据库表的关联较大，若实体类基类和表名改变需要在这里修改。<br/>
-        ///由于EF有轮椅机制，所以该方法废弃了
+        ///由于EF有轮椅机制，所以该方法废弃了<br/>
+        ///没废弃，EF轮椅机制不行事
         /// </summary>
         /// <typeparam name="MainF"></typeparam>
         /// <typeparam name="TranslationForm"></typeparam>
