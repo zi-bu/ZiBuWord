@@ -2,10 +2,27 @@
 
 public interface IUserRegisterService//用户注册服务接口
 {
-    void CreateUser(string username, string password);//创建一个新用户
-    bool InspectUser(string username);//检测一个用户是否存在
+    /// <summary>
+    /// 创建一个新用户
+    /// </summary>
+    /// <param name="username"></param>
+    /// <param name="password"></param>
+    void CreateUser(string username, string password);
+    
+    /// <summary>
+    /// 检查用户名是否已经存在
+    /// </summary>
+    /// <param name="username"></param>
+    /// <returns></returns>
+    bool InspectUser(string username);
 }
-public interface IUserLoginService//用户注册服务接口
+public interface IUserLoginService//用户登录服务接口
 {
-    bool CheckUserPassword(string username,string password);//检测一个用户密码是否正确
+    /// <summary>
+    /// 检测一个用户密码是否正确
+    /// </summary>
+    /// <param name="username"></param>
+    /// <param name="password"></param>
+    /// <returns></returns>
+    bool CheckUserPassword(string username,string password);
 }

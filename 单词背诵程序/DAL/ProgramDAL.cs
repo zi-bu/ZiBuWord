@@ -21,8 +21,11 @@ namespace DAL
             //Console.WriteLine(word.word);
             //Console.WriteLine(word.translation);
             //Console.WriteLine(word.phrase);
-            UserData.Login("test", "114514");
-            UserData.Register("test", "114514");
+            UserDataJudgment userDataJudgment = new UserDataJudgment();
+            string username = "testuser";
+            string password = "testpassword";
+            userDataJudgment.CreateUser(username, password);
+            Console.WriteLine("User created successfully.");
         }
 
 
