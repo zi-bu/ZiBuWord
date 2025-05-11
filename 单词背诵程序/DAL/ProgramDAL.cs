@@ -1,4 +1,11 @@
 ﻿using System.Text.Json;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System;
+using System.ComponentModel.DataAnnotations;
 //注意这里引用的是Microsoft.Data.SqlClient而不是System.Data.SqlClient(高版本.NET框架已经迁移到Microsoft.Data.SqlClient)
 namespace DAL
 {
@@ -51,34 +58,42 @@ namespace DAL
             Console.WriteLine(word.word);
             Console.WriteLine(word.translation);
             Console.WriteLine(word.phrase);
+            using (var db = new Context.UserContext())
+            {
+                foreach(var s in db.UserData)
+                {
+                    Console.WriteLine($"ID: {s.UserID} {s.UserName} {s.UserPassword}");
+                }
+                db.UserData.Add(new User() { UserName = "zibu", UserPassword = "114514" });//添加新用户
+                db.SaveChanges();//保存更改
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
