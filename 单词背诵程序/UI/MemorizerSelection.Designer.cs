@@ -45,19 +45,20 @@ partial class MemorizerSelection
         // 
         // label1
         // 
+        label1.Font = new Font("Microsoft YaHei UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 134);
         label1.Location = new Point(60, 37);
         label1.Margin = new Padding(4, 0, 4, 0);
         label1.Name = "label1";
-        label1.Size = new Size(237, 55);
+        label1.Size = new Size(240, 60);
         label1.TabIndex = 0;
         label1.Text = "label1";
         // 
         // button1
         // 
-        button1.Location = new Point(44, 118);
+        button1.Location = new Point(44, 142);
         button1.Margin = new Padding(4);
         button1.Name = "button1";
-        button1.Size = new Size(317, 84);
+        button1.Size = new Size(320, 80);
         button1.TabIndex = 1;
         button1.Text = "button1";
         button1.UseVisualStyleBackColor = true;
@@ -65,20 +66,20 @@ partial class MemorizerSelection
         // 
         // button2
         // 
-        button2.Location = new Point(46, 253);
+        button2.Location = new Point(44, 260);
         button2.Margin = new Padding(4);
         button2.Name = "button2";
-        button2.Size = new Size(419, 71);
+        button2.Size = new Size(320, 80);
         button2.TabIndex = 2;
         button2.Text = "button2";
         button2.UseVisualStyleBackColor = true;
         // 
         // button3
         // 
-        button3.Location = new Point(502, 121);
+        button3.Location = new Point(436, 142);
         button3.Margin = new Padding(4);
         button3.Name = "button3";
-        button3.Size = new Size(291, 79);
+        button3.Size = new Size(320, 80);
         button3.TabIndex = 3;
         button3.Text = "button3";
         button3.UseVisualStyleBackColor = true;
@@ -86,17 +87,17 @@ partial class MemorizerSelection
         // 
         // button4
         // 
-        button4.Location = new Point(505, 242);
+        button4.Location = new Point(436, 260);
         button4.Margin = new Padding(4);
         button4.Name = "button4";
-        button4.Size = new Size(287, 80);
+        button4.Size = new Size(320, 80);
         button4.TabIndex = 4;
         button4.Text = "button4";
         button4.UseVisualStyleBackColor = true;
         // 
         // button5
         // 
-        button5.Location = new Point(62, 380);
+        button5.Location = new Point(44, 402);
         button5.Margin = new Padding(4);
         button5.Name = "button5";
         button5.Size = new Size(270, 88);
@@ -107,7 +108,7 @@ partial class MemorizerSelection
         // 
         // btnReturn
         // 
-        btnReturn.Location = new Point(867, 32);
+        btnReturn.Location = new Point(860, 13);
         btnReturn.Margin = new Padding(4);
         btnReturn.Name = "btnReturn";
         btnReturn.Size = new Size(61, 35);
@@ -120,7 +121,7 @@ partial class MemorizerSelection
         // 
         AutoScaleDimensions = new SizeF(11F, 24F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(978, 540);
+        ClientSize = new Size(934, 540);
         Controls.Add(btnReturn);
         Controls.Add(button5);
         Controls.Add(button4);
