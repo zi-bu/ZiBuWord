@@ -12,10 +12,63 @@ namespace UI
 {
     public partial class HomePage : Form
     {
+        // 词典列表
+        private Dictionary<string, string> dictionaries = new Dictionary<string, string>()
+        {
+            {"四级词汇", "CET4"},
+            {"六级词汇", "CET6"},
+            {"初中词汇", "MiddleSchool" },
+            {"高中词汇", "HighSchool" },
+            {"考研词汇", "KY"},
+            {"托福词汇", "TF"},
+        };
+
         public HomePage()
         {
             InitializeComponent();
             this.FormClosing += FormHelper.Form2_FormClosing; // 绑定 FormClosing 事件
+
+            // 初始化ComboBox
+            InitializeDictionaryComboBox();
+        }
+
+        /// <summary>
+        /// 初始化词典选择ComboBox
+        /// mingfeng
+        /// </summary>
+        private void InitializeDictionaryComboBox()
+        {
+            comboBoxSelectDict.DropDownStyle = ComboBoxStyle.DropDownList; // 设置为下拉列表，不可编辑
+            comboBoxSelectDict.Items.Clear();
+
+            // 添加词典名称到ComboBox
+            foreach (var dict in dictionaries.Keys)
+            {
+                comboBoxSelectDict.Items.Add(dict);
+            }
+
+            // 默认选择第一个词典
+            if (comboBoxSelectDict.Items.Count > 0)
+            {
+                comboBoxSelectDict.SelectedIndex = 0;
+            }
+        }
+
+        /// <summary>
+        /// 获取当前选中的词典代码
+        /// mingfeng
+        /// </summary>
+        public string SelectedDictionaryCode
+        {
+            get
+            {
+                if (comboBoxSelectDict.SelectedItem != null &&
+                    dictionaries.TryGetValue(comboBoxSelectDict.SelectedItem.ToString(), out string code))
+                {
+                    return code;
+                }
+                return "CET4"; // 默认返回四级词汇
+            }
         }
 
         /// <summary>
