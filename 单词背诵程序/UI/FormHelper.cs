@@ -23,22 +23,29 @@ namespace UI
         }
 
         /// <summary>
-        /// 这是关闭窗口的事件处理函数。
-        /// </br>这段代码是由```子布```编写的。
-        /// （可能会被改写成一个函数，或者直接删除）
+        /// 处理窗体关闭事件，显示确认对话框并决定是否退出程序
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">事件源对象</param>
+        /// <param name="e">包含事件数据的FormClosingEventArgs</param>
         public static void CloseForm(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("真的要退出吗？未保存的进度将会丢失！", "警告！", MessageBoxButtons.YesNo
-                , MessageBoxIcon.Warning) == DialogResult.No)
+            // 检查关闭原因，避免重复提示（如用户点击标题栏关闭按钮或Alt+F4）
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                e.Cancel = true; // 取消关闭事件
-            }
-            else
-            {
-                System.Environment.Exit(0); // 退出程序
+                DialogResult result = MessageBox.Show(
+                    "真的要退出吗？未保存的进度将会丢失！",
+                    "警告！",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                e.Cancel = (result == DialogResult.No);
+
+                // 只在用户明确选择"是"时才退出
+                if (!e.Cancel)
+                {
+                    Application.Exit();  // 统一退出整个应用
+                }
             }
         }
     }
