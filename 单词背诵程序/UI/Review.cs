@@ -15,6 +15,8 @@ namespace UI
         public Review()
         {
             InitializeComponent();
+            this.FormClosing += FormHelper.CloseForm;// 绑定 FormClosing 事件
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -34,11 +36,16 @@ namespace UI
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            HomePage homePage = new HomePage();//创建一个新的主页窗口对象
-            FormHelper.ShowNewForm(this, homePage);//显示主页窗口
+            HomePage homePage = new HomePage();
+            FormHelper.ShowNewForm(this, homePage);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Review_Load(object sender, EventArgs e)
         {
 
         }

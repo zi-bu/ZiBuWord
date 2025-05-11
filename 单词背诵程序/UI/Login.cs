@@ -31,6 +31,7 @@ namespace UI
         public Login()
         {
             InitializeComponent();
+            this.FormClosing += FormHelper.CloseForm;// 绑定 FormClosing 事件
             this.DoubleBuffered = true;
             this.KeyPreview = true;
 
