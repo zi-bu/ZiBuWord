@@ -10,7 +10,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
     <ProjectReference Include="..\IBLLBridgeDAL\IBLLBridgeDAL.csproj" />
-    <ProjectReference Include="..\IUIBridgeBLL\IUIBridgeBLL.csproj" />
   </ItemGroup>
 
 </Project>
