@@ -86,4 +86,10 @@ public partial class HomePage : Form
         var favorite = new Favorite();
         FormHelper.ShowNewForm(this, favorite);
     }
+
+    private void btnStartMemory_Click(object sender, EventArgs e)
+    {
+        var memory = new UiSelectionOrder();
+        FormHelper.ShowNewForm(this, memory);
+    }
 }

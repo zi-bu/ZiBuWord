@@ -2,9 +2,7 @@
 
 public interface IWordManagement
 {
-    IWord GetRandomWordForReciter(); //获取随机单词 这个时候会做到过滤抽取
-    IWord GetWord(string word); //获取精确单词对象
-    List<string> GetWordTrans(string word); //获取单词翻译列表
+    IWord GetRandomWordForReciter(); //获取随机单词
+    void RemoveWordFromeLearningList(string word);//将该单词从学习列表中删除
     void AddWordToReview(IWord word); //添加单词到复习列表 这个时候
-    void RemoveWordFromReview(IWord word); //从复习列表中删除单词
 }
