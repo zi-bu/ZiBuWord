@@ -46,7 +46,7 @@ public class UserData
     /// <returns></returns>
     public int UserRegister(string username, string password)
     {
-        var patternPassword = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
+        var patternPassword = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$";//bug！！！！！！！！！！！！！汉字可以匹配成功！！！！！！@！！！！！！！！！！！！！！！！~！！！！
         //必须包含大小写字母和数字的组合，可以使用特殊字符，长度在8-20之间
         var patternUsername = @"^[a-zA-Z][a-zA-Z0-9_]{4,10}$";
         //用户名必须以字母开头，长度在5-11之间，只能包含字母、数字和下划线
