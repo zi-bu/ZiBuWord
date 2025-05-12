@@ -46,12 +46,13 @@ partial class MemorizerSelection
         // label1
         // 
         label1.Font = new Font("Microsoft YaHei UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        label1.Location = new Point(60, 37);
+        label1.Location = new Point(44, 33);
         label1.Margin = new Padding(4, 0, 4, 0);
         label1.Name = "label1";
         label1.Size = new Size(240, 60);
         label1.TabIndex = 0;
         label1.Text = "label1";
+        label1.Click += label1_Click;
         // 
         // button1
         // 
