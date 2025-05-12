@@ -1,5 +1,4 @@
-﻿using DAL;
-using IBLLBridgeDAL;
+﻿using IBLLBridgeDAL;
 using IBLLBridgeDAL.WordOperation;
 
 namespace BLL;
@@ -12,20 +11,20 @@ public class SelectionOrder(IWord w1)
     /// <summary>
     /// 对将接口注入于选择器
     /// </summary>
-    public static IWordManagement 接口实现占位 { get; private set; } 
+    public static IWordManagement 接口实现占位 { get;  } 
     /// <summary>
     /// 被设为正确答案的单词对象
     /// </summary>
-    public IWord AccurateWord { get; private set; } = w1; //正确的
+    public IWord AccurateWord { get; } = w1; //正确的
 
     /// <summary>
     /// 被作为选项的列表
     /// </summary>
     public List<IWord> Selection { get; private set; } =
-        ShuffleList<IWord>
+        ShuffleList
         (Enumerable
             .Range(0,3)
-            .Select(_=> 接口实现占位.GetRandomWord())
+            .Select(_=> 接口实现占位.GetRandomWordForReciter())
             .Append(w1)
             .ToList()
         );
