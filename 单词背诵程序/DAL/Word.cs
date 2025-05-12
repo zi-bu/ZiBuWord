@@ -30,7 +30,7 @@ namespace DAL
             }
             private set
             {
-                Pos = Translations;
+                translations = Translations;
             }
         }// 释义
         public List<string>? phrases
