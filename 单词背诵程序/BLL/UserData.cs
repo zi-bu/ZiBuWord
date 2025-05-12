@@ -13,7 +13,7 @@ namespace BLL
     ///  </summary>
     public class UserData
     {
-        DAL.ReturnFunction.UserDataJudgment userDataJudgment = new DAL.ReturnFunction.UserDataJudgment();
+        readonly DAL.ReturnFunction.UserDataJudgment _userDataJudgment = new DAL.ReturnFunction.UserDataJudgment();
 
         /// <summary>
         /// 这是登录函数<br/>
@@ -25,7 +25,7 @@ namespace BLL
         /// <returns></returns>
         public int UserLogin(string username, string password)
         {
-            if (userDataJudgment.CheckUserPassword(username, password))
+            if (_userDataJudgment.CheckUserPassword(username, password))
             {
                 Console.WriteLine("登录成功");
                 return 1;//登录成功
@@ -52,16 +52,16 @@ namespace BLL
         /// <returns></returns>
         public int UserRegister(string username, string password)
         {
-            string PatternPassword = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
+            string patternPassword = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
             //必须包含大小写字母和数字的组合，可以使用特殊字符，长度在8-20之间
-            string PatternUsername = @"^[a-zA-Z][a-zA-Z0-9_]{4,10}$";
+            string patternUsername = @"^[a-zA-Z][a-zA-Z0-9_]{4,10}$";
             //用户名必须以字母开头，长度在5-11之间，只能包含字母、数字和下划线
             //可以去这个网站在线验证正则表达式"https://www.jyshare.com/front-end/854/"
             try
             {
-                if (userDataJudgment.InspectUser(username) == false && Regex.IsMatch(password,PatternPassword) && Regex.IsMatch(username,PatternUsername))
+                if (_userDataJudgment.InspectUser(username) == false && Regex.IsMatch(password,patternPassword) && Regex.IsMatch(username,patternUsername))
                 {
-                    userDataJudgment.CreateUser(username, password);
+                    _userDataJudgment.CreateUser(username, password);
                     Console.WriteLine("注册成功");
                     return 1;//注册成功
                 }

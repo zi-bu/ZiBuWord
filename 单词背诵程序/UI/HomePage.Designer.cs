@@ -44,7 +44,6 @@
             btnStartMemory.TabIndex = 1;
             btnStartMemory.Text = "开始记忆";
             btnStartMemory.UseVisualStyleBackColor = true;
-            btnStartMemory.Click += btnStartMemory_Click;
             // 
             // btnStartReview
             // 
@@ -86,7 +85,7 @@
             comboBoxSelectDict.Name = "comboBoxSelectDict";
             comboBoxSelectDict.Size = new Size(144, 32);
             comboBoxSelectDict.TabIndex = 7;
-            comboBoxSelectDict.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            
             // 
             // HomePage
             // 
@@ -101,7 +100,7 @@
             Margin = new Padding(2);
             Name = "HomePage";
             Text = "主页";
-            Load += Form2_Load;
+            
             ResumeLayout(false);
         }
 
