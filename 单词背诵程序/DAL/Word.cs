@@ -22,37 +22,37 @@ namespace DAL
                 Pos = value;
             }
         } // 词性
-        public List<string> translation
+        public List<string> translations
         {
             get
             {
-                return Translation;
+                return Translations;
             }
             private set
             {
-                Pos = Translation;
+                Pos = Translations;
             }
         }// 释义
-        public List<string>? phrase
+        public List<string>? phrases
         {
             get
             {
-                return Phrase;
+                return Phrases;
             }
             private set
             {
-                Phrase = value;
+                Phrases = value;
             }
         }// 短语
-        public List<string>? phraseTranslation
+        public List<string>? phraseTranslations
         {
             get
             {
-                return PhraseTranslation;
+                return PhraseTranslations;
             }
             private set
             {
-                PhraseTranslation = value;
+                PhraseTranslations = value;
             }
         }// 短语翻译
 
@@ -60,9 +60,9 @@ namespace DAL
 
         //因为属性本质上是方法，而方法不能ref传入，所以为了传值，这里列出了字段；
         private List<string> Pos = new List<string>();
-        private List<string> Translation = new List<string>();
-        private List<string>? Phrase = new List<string>();
-        private List<string>? PhraseTranslation = new List<string>();
+        private List<string> Translations = new List<string>();
+        private List<string>? Phrases = new List<string>();
+        private List<string>? PhraseTranslations = new List<string>();
 
         private Formid tableid; // 单词来源的枚举编号。
 
@@ -73,8 +73,8 @@ namespace DAL
         {
             tableid = (Formid)id;
             word = WordMover.GetWord(tableid);
-            WordMover.FindTranslations(word, tableid,ref Translation,ref Pos);
-            WordMover.FindPhrases(word, tableid, ref Phrase, ref PhraseTranslation);
+            WordMover.FindTranslations(word, tableid,ref Translations,ref Pos);
+            WordMover.FindPhrases(word, tableid, ref Phrases, ref PhraseTranslations);
         }
     }
 }

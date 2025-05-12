@@ -19,8 +19,16 @@ namespace DAL
         {
             Word word = new Word(1);
             Console.WriteLine(word.word);
-            Console.WriteLine(word.translation);
-            Console.WriteLine(word.phrase);
+            Console.WriteLine("翻译:");
+            for (int i=0;i<word.pos.Count ;i++ )
+            {
+                Console.WriteLine(word.pos[i]+". " + word.translations[i]);
+            }
+            Console.WriteLine("短语:");
+            for (int i = 0; i < word.phrases.Count; i++)
+            {
+                Console.WriteLine(word.phrases[i] + " : " + word.phraseTranslations[i]);
+            }
             //UserDataJudgment userDataJudgment = new UserDataJudgment();
             //string username = "testuser";
             //string password = "testpassword";
