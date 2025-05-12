@@ -1,4 +1,5 @@
-﻿using IBLLBridgeDAL;
+﻿using DAL;
+using IBLLBridgeDAL;
 using IBLLBridgeDAL.WordOperation;
 
 namespace BLL;
@@ -11,15 +12,23 @@ public class SelectionOrder(IWord w1)
     /// <summary>
     /// 对将接口注入于选择器
     /// </summary>
-    public IWordManagement 接口实现占位 { get; private set; } 
+    public static IWordManagement 接口实现占位 { get; private set; } 
     /// <summary>
     /// 被设为正确答案的单词对象
     /// </summary>
     public IWord AccurateWord { get; private set; } = w1; //正确的
+
     /// <summary>
     /// 被作为选项的列表
     /// </summary>
-    public List<IWord> Selection { get; private set; } = ShuffleList<IWord>([w1,GRW(),GRW(),GRW()]);
+    public List<IWord> Selection { get; private set; } =
+        ShuffleList<IWord>
+        (Enumerable
+            .Range(0,3)
+            .Select(_=> 接口实现占位.GetRandomWord())
+            .Append(w1)
+            .ToList()
+        );
     //打乱传入元素作为将被显示的对象的对象
     /// <summary>
     /// 用于打乱列表的洗牌算法,可以移出用于任何类型的列表
@@ -45,6 +54,4 @@ public class SelectionOrder(IWord w1)
     {
         接口实现占位.AddWordToReview(AccurateWord);
     }
-    private static Func<IWord> GRW => 接口实现占位.GetRandomWord();
-
 }
