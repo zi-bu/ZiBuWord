@@ -6,7 +6,7 @@ namespace BLL;
 /// <summary>
 ///     单词选择器，实例化传入四个单词对象
 /// </summary>
-public class SelectionOrder(IWord w1)
+public class SelectionClass(IWord w1)
 {
     /// <summary>
     ///     对将接口注入于选择器

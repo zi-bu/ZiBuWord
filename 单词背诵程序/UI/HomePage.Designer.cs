@@ -55,7 +55,6 @@
             btnStartReview.TabIndex = 2;
             btnStartReview.Text = "开始复习";
             btnStartReview.UseVisualStyleBackColor = true;
-            btnStartReview.Click += btnStartReview_Click;
             // 
             // btnExit
             // 

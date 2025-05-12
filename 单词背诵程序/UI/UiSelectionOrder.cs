@@ -4,11 +4,11 @@ namespace UI;
 
 public partial class UiSelectionOrder : Form
 {
-    private SelectionOrder _selectionOrder;
+    private SelectionClass _selectionClass;
 
     public UiSelectionOrder()
     {
-        _selectionOrder = new SelectionOrder(RiciteOrder.WordList[RiciteOrder.Index]);
+        _selectionClass = new SelectionClass(RiciteOrder.WordList[RiciteOrder.Index]);
         //选择器内容首次初始化
         InitializeComponent();
     }
@@ -16,17 +16,17 @@ public partial class UiSelectionOrder : Form
     // 函数封装的区域
     private void RenderThePage() //渲染页面的函数 封装为函数便于后面调用
     {
-        Question.Text = _selectionOrder.AccurateWord.word;
+        Question.Text = _selectionClass.AccurateWord.word;
         //对正确答案对应的单词进行初始化
         Button[] choices = [Choice1, Choice2, Choice3, Choice4];
         for (var i = 0; i < choices.Length; i++)
-            choices[i].Text = $@"{_selectionOrder.Selection[i].pos},{_selectionOrder.Selection[i].translations}";
+            choices[i].Text = $@"{_selectionClass.Selection[i].pos},{_selectionClass.Selection[i].translations}";
         //利用循环对按钮初始化
     }
 
     private void ReRenderThePage() //完成一次选择后对单词进行重新刷新
     {
-        _selectionOrder = new SelectionOrder(RiciteOrder.WordList[RiciteOrder.Index]);
+        _selectionClass = new SelectionClass(RiciteOrder.WordList[RiciteOrder.Index]);
         RenderThePage();
     }
 
@@ -38,16 +38,16 @@ public partial class UiSelectionOrder : Form
     //按钮的判断逻辑
     private void ButtonJudge(int sequence)
     {
-        if (_selectionOrder.AccurateWord == _selectionOrder.Selection[sequence])
+        if (_selectionClass.AccurateWord == _selectionClass.Selection[sequence])
         {
             //选对了的情况
             MessageBox.Show(@"选对了，真棒！");
             RiciteOrder.Index++; //趋势递增
             if (!(RiciteOrder.Index < RiciteOrder.WordList.Count)) //序列索引回拨
                 RiciteOrder.Index = 0;
-            _selectionOrder.AddWordToReViewList(); //将当前的单词加入到复习列表
+            _selectionClass.AddWordToReViewList(); //将当前的单词加入到复习列表
             RiciteOrder.WordList.RemoveAt(RiciteOrder.Index); //将当前序列的内容移出列表
-            _selectionOrder.DeleteWordFromLearningList();//将当前的单词移出学习列表
+            _selectionClass.DeleteWordFromLearningList();//将当前的单词移出学习列表
             if (RiciteOrder.WordList.Count == 0) //检验是否完成当前队列的背诵
             {
                 MessageBox.Show(@"背诵队列完成,即将关闭该界面");

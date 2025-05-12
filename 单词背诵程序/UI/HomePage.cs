@@ -74,13 +74,6 @@ public partial class HomePage : Form
         var login = new Login();
         FormHelper.ShowNewForm(this, login);
     }
-
-    private void btnStartReview_Click(object sender, EventArgs e)
-    {
-        var review = new Review();
-        FormHelper.ShowNewForm(this, review);
-    }
-
     private void btnFavorite_Click(object sender, EventArgs e)
     {
         var favorite = new Favorite();

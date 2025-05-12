@@ -21,6 +21,9 @@
         <Compile Update="UiSelectionOrder.cs">
             <SubType>Form</SubType>
         </Compile>
+        <Compile Update="Reviewer.cs">
+          <SubType>Form</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
