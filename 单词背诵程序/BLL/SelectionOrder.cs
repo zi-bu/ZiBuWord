@@ -52,6 +52,11 @@ public class SelectionOrder(IWord w1)
     /// <summary>
     ///     用于将单词加入到复习列表
     /// </summary>
+    
+    public void DeleteWordFromLearningList()
+    {
+        接口实现占位.RemoveWordFromeLearningList(AccurateWord.word);
+    }
     public void AddWordToReViewList()
     {
         接口实现占位.AddWordToReview(AccurateWord);

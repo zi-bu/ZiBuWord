@@ -6,8 +6,3 @@ public interface IWordManagement
     void RemoveWordFromeLearningList(string word);//将该单词从学习列表中删除
     void AddWordToReview(IWord word); //添加单词到复习列表 这个时候
 }
-public interface IReviewListManagement
-{
-    IWord GetRandomWordForReview();//随机获取复习列表中的单词
-    void RemoveWordFromReview(IWord word); //从复习列表中删除单词
-}
