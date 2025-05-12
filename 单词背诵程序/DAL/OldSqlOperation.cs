@@ -1,5 +1,4 @@
-﻿namespace DAL
-{
+﻿namespace DAL;
 #if HHHH
         [Obsolete("mouse:旧的类，已被zibu弃用", true)]
     /// <summary>
@@ -13,7 +12,8 @@
         /// 数据库连接字符串。
         /// 注意：不同网络环境下使用不同的服务器地址。
         /// </summary>
-        public static string connectionString = "Server=10.162.28.183,1433; Database=背单词; User Id=sa; Password=114514; Encrypt=False;";
+        public static string connectionString =
+ "Server=10.162.28.183,1433; Database=背单词; User Id=sa; Password=114514; Encrypt=False;";
 
         /// <summary>
         /// 创建并打开一个 SqlConnection 对象。
@@ -40,7 +40,8 @@
         {
             List<string> list = new List<string>(); // 用于存储读取的数据。
             SqlConnection connection = SqlConnection(name); // 获取数据库连接。
-            SqlCommand command = new SqlCommand($"SELECT * FROM [dbo].[{name}] ORDER BY LEFT(word, 1) ASC;", connection); // 查询语句。
+            SqlCommand command =
+ new SqlCommand($"SELECT * FROM [dbo].[{name}] ORDER BY LEFT(word, 1) ASC;", connection); // 查询语句。
             SqlDataReader reader = command.ExecuteReader(); // 执行查询。
             while (reader.Read()) // 遍历查询结果。
             {
@@ -54,4 +55,3 @@
         }
     }
 #endif
-}
