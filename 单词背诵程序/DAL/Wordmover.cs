@@ -98,87 +98,69 @@
                 {
                     case Formid.CET4:
                         {
-                            translations = (List<string>)db.CET4
-                            .Where(s => s.Word == word)
-                            .Select(s =>
-                            s.Translations.Select(t => t.Translation).ToList()
-                            );
-                            pos = (List<string>)db.CET4
-                            .Where(s => s.Word == word)
-                            .Select(s =>
-                            s.Translations.Select(t => t.Translation).ToList()
-                            );
+                            var TureForm = db.CET4.FirstOrDefault(s => s.Word == word);
+                            if (TureForm == null) { }
+                            else
+                            {
+                                translations = TureForm.Translations.Select(t => t.Translation).ToList();
+                                pos = TureForm.Translations.Select(t => t.TyPe).ToList();
+                            }
                             break;
                         }
                     case Formid.CET6:
                         {
-                            translations = (List<string>)db.CET6
-                            .Where(s => s.Word == word)
-                            .Select(s =>
-                            s.Translations.Select(t => t.Translation).ToList()
-                            );
-                            pos = (List<string>)db.CET6
-                            .Where(s => s.Word == word)
-                            .Select(s =>
-                            s.Translations.Select(t => t.Translation).ToList()
-                            );
+                            var TureForm = db.CET6.FirstOrDefault(s => s.Word == word);
+                            if (TureForm == null) { }
+                            else
+                            {
+                                translations = TureForm.Translations.Select(t => t.Translation).ToList();
+                                pos = TureForm.Translations.Select(t => t.TyPe).ToList();
+                            }
                             break;
                         }
                     case Formid.MiddleSchool:
                         {
-                            translations = (List<string>)db.MiddleSchool
-                            .Where(s => s.Word == word)
-                            .Select(s =>
-                            s.Translations.Select(t => t.Translation).ToList()
-                            );
-                            pos = (List<string>)db.MiddleSchool
-                            .Where(s => s.Word == word)
-                            .Select(s =>
-                            s.Translations.Select(t => t.Translation).ToList()
-                            );
+                            var TureForm = db.MiddleSchool.FirstOrDefault(s => s.Word == word);
+                            if (TureForm == null) { }
+                            else
+                            {
+                                translations = TureForm.Translations.Select(t => t.Translation).ToList();
+                                pos = TureForm.Translations.Select(t => t.TyPe).ToList();
+                            }
                             break;
                         }
 
                     case Formid.Highschool:
                         {
-                            translations = (List<string>)db.Highschool
-                            .Where(s => s.Word == word)
-                            .Select(s =>
-                            s.Translations.Select(t => t.Translation).ToList()
-                            );
-                            pos = (List<string>)db.Highschool
-                            .Where(s => s.Word == word)
-                            .Select(s =>
-                            s.Translations.Select(t => t.Translation).ToList()
-                            );
+                            var TureForm = db.Highschool.FirstOrDefault(s => s.Word == word);
+                            if (TureForm == null) { }
+                            else
+                            {
+                                translations = TureForm.Translations.Select(t => t.Translation).ToList();
+                                pos = TureForm.Translations.Select(t => t.TyPe).ToList();
+                            }
                             break;
                         }
                     case Formid.KY:
                         {
-                            translations = (List<string>)db.KY
-                            .Where(s => s.Word == word)
-                            .Select(s =>
-                            s.Translations.Select(t => t.Translation).ToList()
-                            );
-                            pos = (List<string>)db.KY
-                            .Where(s => s.Word == word)
-                            .Select(s =>
-                            s.Translations.Select(t => t.Translation).ToList()
-                            );
+                            var TureForm = db.KY.FirstOrDefault(s => s.Word == word);
+                            if (TureForm == null) { }
+                            else
+                            {
+                                translations = TureForm.Translations.Select(t => t.Translation).ToList();
+                                pos = TureForm.Translations.Select(t => t.TyPe).ToList();
+                            }
                             break;
                         }
                     case Formid.TF:
                         {
-                            translations = (List<string>)db.TF
-                            .Where(s => s.Word == word)
-                            .Select(s =>
-                            s.Translations.Select(t => t.Translation).ToList()
-                            );
-                            pos = (List<string>)db.TF
-                            .Where(s => s.Word == word)
-                            .Select(s =>
-                            s.Translations.Select(t => t.Translation).ToList()
-                            );
+                            var TureForm = db.TF.FirstOrDefault(s => s.Word == word);
+                            if (TureForm == null) { }
+                            else
+                            {
+                                translations = TureForm.Translations.Select(t => t.Translation).ToList();
+                                pos = TureForm.Translations.Select(t => t.TyPe).ToList();
+                            }
                             break;
                         }
                     default:
@@ -205,92 +187,74 @@
                 {
                     case Formid.CET4:
                         {
-                            var PForm = db.CET4//为什么PForm是个双重List？
-                            .Where(s => s.Word == word)
-                            .Select(s => s.Phrases).ToList();
-                            if (PForm == null) { }
+                            var TureForm = db.CET4.FirstOrDefault(s => s.Word == word);
+                            if (TureForm == null) { return; }
+                            else if (TureForm?.Phrases == null) { return; }//数据库表存在没有短语的情况。
                             else
                             {
-                                phrases = (List<string>)PForm
-                                    .Select(s => s.Select(t => t.Phrase).ToList());
-                                phraseTranslations = (List<string>)PForm
-                                    .Select(s => s.Select(t => t.Translation).ToList());
+                                phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
+                                phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
                             }
                             break;
                         }
                     case Formid.CET6:
                         {
-                            var PForm = db.CET6
-                            .Where(s => s.Word == word)
-                            .Select(s => s.Phrases).ToList();
-                            if (PForm == null) { }
+                            var TureForm = db.CET6.FirstOrDefault(s => s.Word == word);
+                            if (TureForm == null) { return; }
+                            else if (TureForm?.Phrases == null) { return; }
                             else
                             {
-                                phrases = (List<string>)PForm
-                                    .Select(s => s.Select(t => t.Phrase).ToList());
-                                phraseTranslations = (List<string>)PForm
-                                    .Select(s => s.Select(t => t.Translation).ToList());
+                                phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
+                                phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
                             }
                             break;
                         }
                     case Formid.MiddleSchool:
                         {
-                            var PForm = db.MiddleSchool
-                            .Where(s => s.Word == word)
-                            .Select(s => s.Phrases).ToList();
-                            if (PForm == null) { }
+                            var TureForm = db.MiddleSchool.FirstOrDefault(s => s.Word == word);
+                            if (TureForm == null) { return; }
+                            else if (TureForm?.Phrases == null) { return; }
                             else
                             {
-                                phrases = (List<string>)PForm
-                                    .Select(s => s.Select(t => t.Phrase).ToList());
-                                phraseTranslations = (List<string>)PForm
-                                    .Select(s => s.Select(t => t.Translation).ToList());
+                                phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
+                                phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
                             }
                             break;
                         }
 
                     case Formid.Highschool:
                         {
-                            var PForm = db.Highschool
-                             .Where(s => s.Word == word)
-                             .Select(s => s.Phrases).ToList();
-                            if (PForm == null) { }
+                            var TureForm = db.Highschool.FirstOrDefault(s => s.Word == word);
+                            if (TureForm == null) { return; }
+                            else if (TureForm?.Phrases == null) { return; }
                             else
                             {
-                                phrases = (List<string>)PForm
-                                    .Select(s => s.Select(t => t.Phrase).ToList());
-                                phraseTranslations = (List<string>)PForm
-                                    .Select(s => s.Select(t => t.Translation).ToList());
+                                phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
+                                phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
                             }
                             break;
                         }
                     case Formid.KY:
                         {
-                            var PForm = db.KY
-                            .Where(s => s.Word == word)
-                            .Select(s => s.Phrases).ToList();
-                            if (PForm == null) { }
+                            var TureForm = db.KY.FirstOrDefault(s => s.Word == word);
+                            if (TureForm == null) { return; }
+                            else if (TureForm?.Phrases == null) { return; }
                             else
                             {
-                                phrases = (List<string>)PForm
-                                    .Select(s => s.Select(t => t.Phrase).ToList());
-                                phraseTranslations = (List<string>)PForm
-                                    .Select(s => s.Select(t => t.Translation).ToList());
+                                phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
+                                phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
                             }
                             break;
                         }
                     case Formid.TF:
                         {
-                            var PForm = db.TF
-                            .Where(s => s.Word == word)
-                            .Select(s => s.Phrases).ToList();
-                            if (PForm == null) { }
+                            var TureForm = db.TF.FirstOrDefault(s => s.Word == word);
+                            if (TureForm == null) { return; }
+                            else if (TureForm?.Phrases == null) { return; }
                             else
                             {
-                                phrases = (List<string>)PForm
-                                    .Select(s => s.Select(t => t.Phrase).ToList());
-                                phraseTranslations = (List<string>)PForm
-                                    .Select(s => s.Select(t => t.Translation).ToList());
+                                phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
+                                phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
                             }
                             break;
                         }

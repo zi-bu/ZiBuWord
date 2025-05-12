@@ -17,15 +17,15 @@ namespace DAL
     {
         static void Main(string[] args)
         {
-            //Word word = new Word(1);
-            //Console.WriteLine(word.word);
-            //Console.WriteLine(word.translation);
-            //Console.WriteLine(word.phrase);
-            UserDataJudgment userDataJudgment = new UserDataJudgment();
-            string username = "testuser";
-            string password = "testpassword";
-            userDataJudgment.CreateUser(username, password);
-            Console.WriteLine("User created successfully.");
+            Word word = new Word(1);
+            Console.WriteLine(word.word);
+            Console.WriteLine(word.translation);
+            Console.WriteLine(word.phrase);
+            //UserDataJudgment userDataJudgment = new UserDataJudgment();
+            //string username = "testuser";
+            //string password = "testpassword";
+            //userDataJudgment.CreateUser(username, password);
+            //Console.WriteLine("User created successfully.");
         }
 
 

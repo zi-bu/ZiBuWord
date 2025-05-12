@@ -78,7 +78,6 @@ namespace DAL.Context
                 c.HasOne(f => f.WordForm)
                  .WithMany(f => (IEnumerable<TlForm>?)f.Translations)// 定义关系。
                  .HasForeignKey(f => f.WordId) // 配置外键。
-       
                  .OnDelete(DeleteBehavior.Cascade); // 级联删除，或许有用？
             });
 

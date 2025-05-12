@@ -39,9 +39,9 @@ namespace DAL
     {
         public int Id { get; set; }
 
-        public string? Phrase { get; set; }
+        required public string Phrase { get; set; }
 
-        public string? Translation { get; set; }
+        required public string Translation { get; set; }
 
         public int WordId { get; set; }
         required public M WordForm { get; set; }
