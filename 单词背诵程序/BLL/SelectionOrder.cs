@@ -1,13 +1,32 @@
 ﻿using IBLLBridgeDAL;
+using IBLLBridgeDAL.WordOperation;
 
 namespace BLL;
 
-public class SelectionOrder(IWord w1,IWord w2, IWord w3, IWord w4)
+/// <summary>
+/// 单词选择器，实例化传入四个单词对象
+/// </summary>
+public class SelectionOrder(IWord w1)
 {
+    /// <summary>
+    /// 对将接口注入于选择器
+    /// </summary>
+    public IWordManagement 接口实现占位 { get; private set; } 
+    /// <summary>
+    /// 被设为正确答案的单词对象
+    /// </summary>
     public IWord AccurateWord { get; private set; } = w1; //正确的
-    public List<IWord> Selection { get; private set; } = ShuffleList<IWord>([w1, w2, w3, w4]);
+    /// <summary>
+    /// 被作为选项的列表
+    /// </summary>
+    public List<IWord> Selection { get; private set; } = ShuffleList<IWord>([w1,GRW(),GRW(),GRW()]);
     //打乱传入元素作为将被显示的对象的对象
-
+    /// <summary>
+    /// 用于打乱列表的洗牌算法,可以移出用于任何类型的列表
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="inputList"></param>
+    /// <returns></returns>
     private static List<T> ShuffleList<T>(List<T> inputList)//洗牌算法
     {
         var random = new Random();
@@ -18,6 +37,14 @@ public class SelectionOrder(IWord w1,IWord w2, IWord w3, IWord w4)
         }
         return inputList;
     }
+    /// <summary>
+    /// 用于将单词加入到复习列表
+    /// </summary>
     
-    
+    public void AddWordToReViewList()
+    {
+        接口实现占位.AddWordToReview(AccurateWord);
+    }
+    private static Func<IWord> GRW => 接口实现占位.GetRandomWord();
+
 }
