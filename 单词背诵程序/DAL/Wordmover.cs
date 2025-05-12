@@ -1,4 +1,6 @@
-﻿namespace DAL
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace DAL
 {
     /// <summary>
     /// 枚举类型，用于表示单词表的编号。<br/>
@@ -98,7 +100,7 @@
                 {
                     case Formid.CET4:
                         {
-                            var TureForm = db.CET4.FirstOrDefault(s => s.Word == word);
+                            var TureForm = db.CET4.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
                             if (TureForm == null) { }
                             else
                             {
@@ -109,7 +111,7 @@
                         }
                     case Formid.CET6:
                         {
-                            var TureForm = db.CET6.FirstOrDefault(s => s.Word == word);
+                            var TureForm = db.CET6.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
                             if (TureForm == null) { }
                             else
                             {
@@ -120,7 +122,7 @@
                         }
                     case Formid.MiddleSchool:
                         {
-                            var TureForm = db.MiddleSchool.FirstOrDefault(s => s.Word == word);
+                            var TureForm = db.MiddleSchool.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
                             if (TureForm == null) { }
                             else
                             {
@@ -132,7 +134,7 @@
 
                     case Formid.Highschool:
                         {
-                            var TureForm = db.Highschool.FirstOrDefault(s => s.Word == word);
+                            var TureForm = db.Highschool.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
                             if (TureForm == null) { }
                             else
                             {
@@ -143,7 +145,7 @@
                         }
                     case Formid.KY:
                         {
-                            var TureForm = db.KY.FirstOrDefault(s => s.Word == word);
+                            var TureForm = db.KY.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
                             if (TureForm == null) { }
                             else
                             {
@@ -154,7 +156,7 @@
                         }
                     case Formid.TF:
                         {
-                            var TureForm = db.TF.FirstOrDefault(s => s.Word == word);
+                            var TureForm = db.TF.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
                             if (TureForm == null) { }
                             else
                             {
@@ -187,7 +189,7 @@
                 {
                     case Formid.CET4:
                         {
-                            var TureForm = db.CET4.FirstOrDefault(s => s.Word == word);
+                            var TureForm = db.CET4.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
                             if (TureForm == null) { return; }
                             else if (TureForm?.Phrases == null) { return; }//数据库表存在没有短语的情况。
                             else
@@ -199,7 +201,7 @@
                         }
                     case Formid.CET6:
                         {
-                            var TureForm = db.CET6.FirstOrDefault(s => s.Word == word);
+                            var TureForm = db.CET6.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
                             if (TureForm == null) { return; }
                             else if (TureForm?.Phrases == null) { return; }
                             else
@@ -211,7 +213,7 @@
                         }
                     case Formid.MiddleSchool:
                         {
-                            var TureForm = db.MiddleSchool.FirstOrDefault(s => s.Word == word);
+                            var TureForm = db.MiddleSchool.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
                             if (TureForm == null) { return; }
                             else if (TureForm?.Phrases == null) { return; }
                             else
@@ -224,7 +226,7 @@
 
                     case Formid.Highschool:
                         {
-                            var TureForm = db.Highschool.FirstOrDefault(s => s.Word == word);
+                            var TureForm = db.Highschool.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
                             if (TureForm == null) { return; }
                             else if (TureForm?.Phrases == null) { return; }
                             else
@@ -236,7 +238,7 @@
                         }
                     case Formid.KY:
                         {
-                            var TureForm = db.KY.FirstOrDefault(s => s.Word == word);
+                            var TureForm = db.KY.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
                             if (TureForm == null) { return; }
                             else if (TureForm?.Phrases == null) { return; }
                             else
@@ -248,7 +250,7 @@
                         }
                     case Formid.TF:
                         {
-                            var TureForm = db.TF.FirstOrDefault(s => s.Word == word);
+                            var TureForm = db.TF.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
                             if (TureForm == null) { return; }
                             else if (TureForm?.Phrases == null) { return; }
                             else
