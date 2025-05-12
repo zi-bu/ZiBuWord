@@ -28,29 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnStartMemory = new Button();
-            btnStartReview = new Button();
-            btnExit = new Button();
-            btnLogout = new Button();
-            comboBoxSelectDict = new ComboBox();
+            btnStartMemory = new System.Windows.Forms.Button();
+            btnStartReview = new System.Windows.Forms.Button();
+            btnExit = new System.Windows.Forms.Button();
+            btnLogout = new System.Windows.Forms.Button();
+            comboBoxSelectDict = new System.Windows.Forms.ComboBox();
             SuspendLayout();
             // 
             // btnStartMemory
             // 
-            btnStartMemory.Location = new Point(260, 182);
-            btnStartMemory.Margin = new Padding(6, 5, 6, 5);
+            btnStartMemory.Location = new System.Drawing.Point(260, 182);
+            btnStartMemory.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             btnStartMemory.Name = "btnStartMemory";
-            btnStartMemory.Size = new Size(218, 98);
+            btnStartMemory.Size = new System.Drawing.Size(218, 98);
             btnStartMemory.TabIndex = 1;
             btnStartMemory.Text = "开始记忆";
             btnStartMemory.UseVisualStyleBackColor = true;
+            btnStartMemory.Click += btnStartMemory_Click;
             // 
             // btnStartReview
             // 
-            btnStartReview.Location = new Point(685, 182);
-            btnStartReview.Margin = new Padding(6, 5, 6, 5);
+            btnStartReview.Location = new System.Drawing.Point(685, 182);
+            btnStartReview.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             btnStartReview.Name = "btnStartReview";
-            btnStartReview.Size = new Size(218, 98);
+            btnStartReview.Size = new System.Drawing.Size(218, 98);
             btnStartReview.TabIndex = 2;
             btnStartReview.Text = "开始复习";
             btnStartReview.UseVisualStyleBackColor = true;
@@ -58,10 +59,10 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(731, 563);
-            btnExit.Margin = new Padding(6, 5, 6, 5);
+            btnExit.Location = new System.Drawing.Point(731, 563);
+            btnExit.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             btnExit.Name = "btnExit";
-            btnExit.Size = new Size(128, 42);
+            btnExit.Size = new System.Drawing.Size(128, 42);
             btnExit.TabIndex = 4;
             btnExit.Text = "退出背词";
             btnExit.UseVisualStyleBackColor = true;
@@ -69,10 +70,10 @@
             // 
             // btnLogout
             // 
-            btnLogout.Location = new Point(280, 563);
-            btnLogout.Margin = new Padding(5);
+            btnLogout.Location = new System.Drawing.Point(280, 563);
+            btnLogout.Margin = new System.Windows.Forms.Padding(5);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(141, 42);
+            btnLogout.Size = new System.Drawing.Size(141, 42);
             btnLogout.TabIndex = 6;
             btnLogout.Text = "退出登录";
             btnLogout.UseVisualStyleBackColor = true;
@@ -81,26 +82,23 @@
             // comboBoxSelectDict
             // 
             comboBoxSelectDict.FormattingEnabled = true;
-            comboBoxSelectDict.Location = new Point(503, 345);
+            comboBoxSelectDict.Location = new System.Drawing.Point(503, 345);
             comboBoxSelectDict.Name = "comboBoxSelectDict";
-            comboBoxSelectDict.Size = new Size(144, 32);
+            comboBoxSelectDict.Size = new System.Drawing.Size(144, 32);
             comboBoxSelectDict.TabIndex = 7;
-            
             // 
             // HomePage
             // 
-            AutoScaleDimensions = new SizeF(11F, 24F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1145, 797);
+            AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1145, 797);
             Controls.Add(comboBoxSelectDict);
             Controls.Add(btnLogout);
             Controls.Add(btnExit);
             Controls.Add(btnStartReview);
             Controls.Add(btnStartMemory);
-            Margin = new Padding(2);
-            Name = "HomePage";
+            Margin = new System.Windows.Forms.Padding(2);
             Text = "主页";
-            
             ResumeLayout(false);
         }
 

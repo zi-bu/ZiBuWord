@@ -49,7 +49,7 @@ public partial class UiSelectionOrder : Form
             Order.WordList.RemoveAt(Order.Index); //将当前序列的内容移出列表
             if (Order.WordList.Count == 0) //检验是否完成当前队列的背诵
             {
-                MessageBox.Show(@"背诵队列完成");
+                MessageBox.Show(@"背诵队列完成,即将关闭该界面");
                 Order.Index = 0; //回拨索引
                 Order.CreateOrRefreshNewWordList(); //创建新的列表
                 Close(); //关闭当前窗口
