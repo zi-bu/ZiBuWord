@@ -32,13 +32,13 @@ public static class WordMover
     ///     返回值：一个随机单词的字符串。<br />
     ///     功能：随机获取一个单词，来源于指定单词来源表。
     /// </summary>
-    /// <param name="id"></param>
+    /// <param name="formid"></param>
     /// <returns></returns>
-    public static string GetWord(Formid id) //随机获取一个单词
+    public static string GetWord(Formid formid) //随机获取一个单词
     {
         using (var db = new SqlDataContext())
         {
-            switch (id)
+            switch (formid)
             {
                 case Formid.CET4:
                 {
@@ -84,7 +84,74 @@ public static class WordMover
             }
         }
     }
+    public static string GetWord(Formid formid, int id) //获得精确id的单词
+    {
+        using (var db = new SqlDataContext())
+        {
+            switch (formid)
+            {
+                case Formid.CET4:
+                    {
+                        var word = db.CET4.FirstOrDefault(s => s.Id == id)?.Word;
+                        if (word == null)
+                        {
+                            throw new ArgumentException("ID不存在");
+                        }
+                        return word;
+                    }
+                case Formid.CET6:
+                    {
+                        var word = db.CET6.FirstOrDefault(s => s.Id == id)?.Word;
+                        if (word == null)
+                        {
+                            throw new ArgumentException("ID不存在");
+                        }
+                        return word;
+                    }
+                case Formid.MiddleSchool:
+                    {
+                        var word = db.MiddleSchool.FirstOrDefault(s => s.Id == id)?.Word;
+                        if (word == null)
+                        {
+                            throw new ArgumentException("ID不存在");
+                        }
+                        return word;
+                    }
 
+                case Formid.Highschool:
+                    {
+                        var word = db.Highschool.FirstOrDefault(s => s.Id == id)?.Word;
+                        if (word == null)
+                        {
+                            throw new ArgumentException("ID不存在");
+                        }
+                        return word;
+                    }
+                case Formid.KY:
+                    {
+                        var word = db.KY.FirstOrDefault(s => s.Id == id)?.Word;
+                        if (word == null)
+                        {
+                            throw new ArgumentException("ID不存在");
+                        }
+                        return word;
+                    }
+                case Formid.TF:
+                    {
+                        var word = db.TF.FirstOrDefault(s => s.Id == id)?.Word;
+                        if (word == null)
+                        {
+                            throw new ArgumentException("ID不存在");
+                        }
+                        return word;
+                    }
+                default:
+                    {
+                        throw new ArgumentException("未知单词来源表");
+                    }
+            }
+        }
+    }
     /// <summary>
     ///     在对应表查找单词释义。
     ///     将释义和词性赋给到两个列表。
@@ -194,14 +261,13 @@ public static class WordMover
     }
 
     /// <summary>
-    ///     在对应表查找短语。
-    ///     将短语和短语翻译赋给到两个列表。
+    /// 在对应表查找短语。
+    /// 将短语和短语翻译赋给到两个列表。
     /// </summary>
     /// <param name="word"></param>
     /// <param name="id"></param>
     /// <returns></returns>
-    public static void FindPhrases(string word, Formid id, ref List<string>? phrases,
-        ref List<string>? phraseTranslations) //在对应表查找单词短语
+    public static void FindPhrases(string word, Formid id, ref List<string>? phrases,ref List<string>? phraseTranslations) //在对应表查找单词短语
     {
         using (var db = new SqlDataContext())
         {
@@ -316,5 +382,50 @@ public static class WordMover
                 }
             }
         }
+    }
+    /// <summary>
+    /// 获取某单词在对应表里的ID
+    /// </summary>
+    /// <param name="word"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    public static int GetWordId(string word, Formid id)
+    {
+        using (var db = new SqlDataContext())
+        {
+            switch (id)
+            {
+                case Formid.CET4:
+                    {
+                        return db.CET4.First(s => s.Word == word).Id;
+                    }
+                case Formid.CET6:
+                    {
+                        return db.CET6.First(s => s.Word == word).Id;
+                    }
+                case Formid.MiddleSchool:
+                    {
+                        return db.MiddleSchool.First(s => s.Word == word).Id;
+                    }
+                case Formid.Highschool:
+                    {
+                        return db.Highschool.First(s => s.Word == word).Id;
+                    }
+                case Formid.KY:
+                    {
+                        return db.KY.First(s => s.Word == word).Id;
+                    }
+                case Formid.TF:
+                    {
+                        return db.TF.First(s => s.Word == word).Id;
+                    }
+                default:
+                    {
+                        throw new ArgumentException("未知单词来源表");
+                    }
+            }
+                
+        }   
     }
 }

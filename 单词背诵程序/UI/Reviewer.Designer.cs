@@ -71,7 +71,7 @@ partial class Reviewer
         AutoScaleDimensions = new SizeF(11F, 24F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = SystemColors.Control;
-        ClientSize = new Size(800, 450);
+        ClientSize = new Size(802, 494);
         Controls.Add(btnNo);
         Controls.Add(btnYes);
         Controls.Add(Question);
