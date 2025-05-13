@@ -46,8 +46,8 @@ public class UserData
     /// <returns></returns>
     public int UserRegister(string username, string password)
     {
-        var patternPassword = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$";//bug！！！！！！！！！！！！！汉字可以匹配成功！！！！！！@！！！！！！！！！！！！！！！！~！！！！
-        //必须包含大小写字母和数字的组合，可以使用特殊字符，长度在8-20之间
+        var patternPassword = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':""\\|,.<>\/?]{8,20}$";
+        //密码必须包含大小写字母和数字的组合，可以使用特殊字符，不能包含汉字和其他非ASCII字符，长度在8-20之间
         var patternUsername = @"^[a-zA-Z][a-zA-Z0-9_]{4,10}$";
         //用户名必须以字母开头，长度在5-11之间，只能包含字母、数字和下划线
         //可以去这个网站在线验证正则表达式"https://www.jyshare.com/front-end/854/"
@@ -60,8 +60,7 @@ public class UserData
                 Console.WriteLine("注册成功");
                 return 1; //注册成功
             }
-
-            Console.WriteLine("用户名已存在");
+            Console.WriteLine("注册失败");
             return 0; //注册失败
         }
         catch (Exception e)

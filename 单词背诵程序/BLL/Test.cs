@@ -19,7 +19,8 @@ internal class TestArea
     private static void Main(string[] args)
     {
         var userData = new UserData();
-        userData.UserLogin("testUser", "testPassword");
+        userData.UserLogin("原神启动！", "testPassword");
+        userData.UserRegister("zi_bu", "Yy114514原神");
     }
 }
 
