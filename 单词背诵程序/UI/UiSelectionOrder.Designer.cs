@@ -56,7 +56,7 @@ partial class UiSelectionOrder
         Choice1.TabIndex = 1;
         Choice1.Text = "button1";
         Choice1.UseVisualStyleBackColor = true;
-        Choice1.Click += Choice1_Click_1;
+        Choice1.Click += Choice1_Click;
         // 
         // Choice2
         // 
@@ -66,6 +66,7 @@ partial class UiSelectionOrder
         Choice2.TabIndex = 2;
         Choice2.Text = "button2";
         Choice2.UseVisualStyleBackColor = true;
+        Choice2.Click += Choice2_Click;
         // 
         // Choice3
         // 
@@ -75,6 +76,7 @@ partial class UiSelectionOrder
         Choice3.TabIndex = 3;
         Choice3.Text = "button3";
         Choice3.UseVisualStyleBackColor = true;
+        Choice3.Click += Choice3_Click;
         // 
         // Choice4
         // 
@@ -84,6 +86,7 @@ partial class UiSelectionOrder
         Choice4.TabIndex = 4;
         Choice4.Text = "button4";
         Choice4.UseVisualStyleBackColor = true;
+        Choice4.Click += Choice4_Click;
         // 
         // UiSelectionOrder
         // 

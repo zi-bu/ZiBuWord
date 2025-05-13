@@ -97,7 +97,6 @@
             Name = "Login";
             Padding = new Padding(16, 14, 16, 14);
             Text = " 登录";
-            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }

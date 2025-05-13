@@ -76,7 +76,7 @@ public partial class UiSelectionOrder : Form
         ButtonJudge(0);
     }
 
-    private void Choice2_Click_1(object sender, EventArgs e)
+    private void Choice2_Click(object sender, EventArgs e)
     {
         ButtonJudge(1);
     }
@@ -89,10 +89,5 @@ public partial class UiSelectionOrder : Form
     private void Choice4_Click(object sender, EventArgs e)
     {
         ButtonJudge(3);
-    }
-
-    private void Choice1_Click_1(object sender, EventArgs e)
-    {
-
     }
 }

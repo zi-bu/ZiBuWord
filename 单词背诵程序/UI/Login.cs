@@ -156,10 +156,6 @@ public partial class Login : Form
         MessageBox.Show(message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
-    private void Form1_Load(object sender, EventArgs e)
-    {
-    }
-
     private void btnLogin_Click(object sender, EventArgs e)
     {
     }

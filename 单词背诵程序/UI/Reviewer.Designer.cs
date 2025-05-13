@@ -78,7 +78,6 @@ partial class Reviewer
         Location = new Point(22, 22);
         Name = "Reviewer";
         Text = "Reviewer";
-        Load += Reviewer_Load;
         ResumeLayout(false);
     }
 
