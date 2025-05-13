@@ -6,5 +6,9 @@ public partial class Reviewer : Form
     {
         InitializeComponent();
     }
-    
+
+    private void Reviewer_Load(object sender, EventArgs e)
+    {
+
+    }
 }

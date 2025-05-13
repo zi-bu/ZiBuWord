@@ -31,67 +31,71 @@ partial class UiSelectionOrder
     /// </summary>
     private void InitializeComponent()
     {
-        Question = new System.Windows.Forms.Label();
-        Choice1 = new System.Windows.Forms.Button();
-        Choice2 = new System.Windows.Forms.Button();
-        Choice3 = new System.Windows.Forms.Button();
-        Choice4 = new System.Windows.Forms.Button();
+        Question = new Label();
+        Choice1 = new Button();
+        Choice2 = new Button();
+        Choice3 = new Button();
+        Choice4 = new Button();
         SuspendLayout();
         // 
         // Question
         // 
-        Question.Location = new System.Drawing.Point(49, 46);
+        Question.Font = new Font("Microsoft YaHei UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 134);
+        Question.Location = new Point(237, 47);
         Question.Name = "Question";
-        Question.Size = new System.Drawing.Size(357, 77);
+        Question.Size = new Size(320, 80);
         Question.TabIndex = 0;
         Question.Text = "label1";
+        Question.TextAlign = ContentAlignment.MiddleCenter;
         // 
         // Choice1
         // 
-        Choice1.Location = new System.Drawing.Point(49, 166);
+        Choice1.Location = new Point(63, 165);
         Choice1.Name = "Choice1";
-        Choice1.Size = new System.Drawing.Size(285, 108);
+        Choice1.Size = new Size(300, 100);
         Choice1.TabIndex = 1;
         Choice1.Text = "button1";
         Choice1.UseVisualStyleBackColor = true;
+        Choice1.Click += Choice1_Click_1;
         // 
         // Choice2
         // 
-        Choice2.Location = new System.Drawing.Point(487, 174);
+        Choice2.Location = new Point(430, 165);
         Choice2.Name = "Choice2";
-        Choice2.Size = new System.Drawing.Size(270, 99);
+        Choice2.Size = new Size(300, 100);
         Choice2.TabIndex = 2;
         Choice2.Text = "button2";
         Choice2.UseVisualStyleBackColor = true;
         // 
         // Choice3
         // 
-        Choice3.Location = new System.Drawing.Point(58, 319);
+        Choice3.Location = new Point(63, 308);
         Choice3.Name = "Choice3";
-        Choice3.Size = new System.Drawing.Size(276, 98);
+        Choice3.Size = new Size(300, 100);
         Choice3.TabIndex = 3;
         Choice3.Text = "button3";
         Choice3.UseVisualStyleBackColor = true;
         // 
         // Choice4
         // 
-        Choice4.Location = new System.Drawing.Point(487, 325);
+        Choice4.Location = new Point(430, 308);
         Choice4.Name = "Choice4";
-        Choice4.Size = new System.Drawing.Size(270, 92);
+        Choice4.Size = new Size(300, 100);
         Choice4.TabIndex = 4;
         Choice4.Text = "button4";
         Choice4.UseVisualStyleBackColor = true;
         // 
         // UiSelectionOrder
         // 
-        AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
-        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(800, 450);
+        AutoScaleDimensions = new SizeF(11F, 24F);
+        AutoScaleMode = AutoScaleMode.Font;
+        ClientSize = new Size(800, 467);
         Controls.Add(Choice4);
         Controls.Add(Choice3);
         Controls.Add(Choice2);
         Controls.Add(Choice1);
         Controls.Add(Question);
+        Name = "UiSelectionOrder";
         Text = "UiSelectionOrder";
         Load += SelectionOrder_Load;
         ResumeLayout(false);

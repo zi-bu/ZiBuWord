@@ -90,4 +90,9 @@ public partial class UiSelectionOrder : Form
     {
         ButtonJudge(3);
     }
+
+    private void Choice1_Click_1(object sender, EventArgs e)
+    {
+
+    }
 }
