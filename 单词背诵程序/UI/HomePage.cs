@@ -85,4 +85,10 @@ public partial class HomePage : Form
         var memory = new UiSelectionOrder();
         FormHelper.ShowNewForm(this, memory);
     }
+
+    private void btnStartReview_Click(object sender, EventArgs e)
+    {
+        var review = new Reviewer();
+        FormHelper.ShowNewForm(this, review);
+    }
 }

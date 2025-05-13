@@ -55,6 +55,7 @@
             btnStartReview.TabIndex = 2;
             btnStartReview.Text = "开始复习";
             btnStartReview.UseVisualStyleBackColor = true;
+            btnStartReview.Click += btnStartReview_Click;
             // 
             // btnExit
             // 
@@ -103,7 +104,7 @@
 
         #endregion
         private System.Windows.Forms.Button btnStartMemory;
-        private Button btnStartReview;
+        private System.Windows.Forms.Button btnStartReview;
         private Button btnExit;
         private Button btnLogout;
         private ComboBox comboBoxSelectDict;

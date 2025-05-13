@@ -23,4 +23,23 @@ public class ReviewOrder
             .Select(_ => 接口实现占位.GetRandomWordForReview())
             .ToList();
     }
+    
+    public static void ResetIndex()//索引回拨判别
+    {
+        Index++; //趋势递增
+        if (!(Index < WordList.Count)) //序列索引回拨
+            Index = 0;
+    }
+    
+    public static bool CheckOutWordList()//检验是否完成当前队列的背诵
+    {
+        if (WordList.Count == 0) //检验是否完成当前队列的背诵
+        {
+            Index = 0; //回拨索引
+            CreateOrRefreshNewWordList(); //创建新的列表
+            return true;
+        }
+
+        return false;
+    }
 }
