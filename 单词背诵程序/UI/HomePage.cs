@@ -1,6 +1,8 @@
-﻿namespace UI;
+﻿using MaterialSkin.Controls;
+using MaterialSkin;
+namespace UI;
 
-public partial class HomePage : Form
+public partial class HomePage : MaterialForm
 {
     // 词典列表
     private readonly Dictionary<string, string> dictionaries = new()
@@ -74,6 +76,7 @@ public partial class HomePage : Form
         var login = new Login();
         FormHelper.ShowNewForm(this, login);
     }
+
     private void btnFavorite_Click(object sender, EventArgs e)
     {
         var favorite = new Favorite();

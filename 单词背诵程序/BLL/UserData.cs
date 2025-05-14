@@ -60,6 +60,7 @@ public class UserData
                 Console.WriteLine("注册成功");
                 return 1; //注册成功
             }
+
             Console.WriteLine("注册失败");
             return 0; //注册失败
         }

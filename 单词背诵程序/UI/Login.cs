@@ -1,4 +1,5 @@
-﻿using Timer = System.Windows.Forms.Timer;
+﻿using MaterialSkin.Controls;
+using Timer = System.Windows.Forms.Timer;
 
 namespace UI;
 
@@ -8,11 +9,11 @@ namespace UI;
 ///     若要运行此项目，请右键运行旁边的齿轮图标更换为此项目。
 ///     <br />写什么函数的时候记得用注释写上昵称（方便看不懂的时候去问）
 /// </summary>
-public partial class Login : Form
+public partial class Login : MaterialForm
 {
+    private readonly Timer _animationTimer;
     private readonly List<string> _hiddenMessages = new() { "喵", "喵喵", "喵喵喵" };
     private readonly Random _random = new();
-    private readonly Timer _animationTimer;
     private int _catX;
 
     private int _catY;
