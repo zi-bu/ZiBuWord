@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace DAL
 {
-    internal class WordManagement: IWordManagement
+    public class WordManagement: IWordManagement
     {
         public IWord GetRandomWordForReciter()
         {

@@ -1,4 +1,5 @@
-﻿using IBLLBridgeDAL;
+﻿using DAL;
+using IBLLBridgeDAL;
 using IBLLBridgeDAL.WordOperation;
 
 namespace BLL;
@@ -11,7 +12,7 @@ public class SelectionClass(IWord w1)
     /// <summary>
     ///     对将接口注入于选择器
     /// </summary>
-    public static IWordManagement 接口实现占位 { get; }
+    public static IWordManagement WordManagement { get; } = new WordManagement();
 
     /// <summary>
     ///     被设为正确答案的单词对象
@@ -25,7 +26,7 @@ public class SelectionClass(IWord w1)
         ShuffleList
         (Enumerable
             .Range(0, 3)
-            .Select(_ => 接口实现占位.GetRandomWordForReciter())
+            .Select(_ => WordManagement.GetRandomWordForReciter())
             .Append(w1)
             .ToList()
         );
@@ -55,10 +56,10 @@ public class SelectionClass(IWord w1)
     
     public void DeleteWordFromLearningList()
     {
-        接口实现占位.RemoveWordFromeLearningList(AccurateWord.word);
+        WordManagement.RemoveWordFromeLearningList(AccurateWord.word);
     }
     public void AddWordToReViewList()
     {
-        接口实现占位.AddWordToReview(AccurateWord);
+        WordManagement.AddWordToReview(AccurateWord);
     }
 }

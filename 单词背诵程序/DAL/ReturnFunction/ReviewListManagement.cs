@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using IBLLBridgeDAL;
 namespace DAL.ReturnFunction
 {
-    internal class ReviewListManagement: IReviewListManagement
+    public class ReviewListManagement: IReviewListManagement
     {
         public IWord GetRandomWordForReview()
         {
