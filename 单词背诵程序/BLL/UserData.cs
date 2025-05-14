@@ -6,6 +6,8 @@ namespace BLL;
 /// <summary>
 ///     这是有关用户数据的类，里面分别包含注册登录两个函数<br />
 ///     这个类由***子布***编写<br />
+///     我怀疑有人直接用IDE的重构功能把我写的代码改了<br />
+///     坏了，吃语法糖吃死了<br />
 /// </summary>
 public class UserData
 {
