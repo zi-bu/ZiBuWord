@@ -20,7 +20,7 @@ namespace DAL
         public IWord GetRandomWordForReciter()
         {
             Random rd = new Random();
-            return new Word(rd.Next(0,7)) as IWord;
+            return new Word(rd.Next(1,6)) as IWord;
         }
         /// <summary>
         /// 移除学习列表中的单词（事实上不需要）
