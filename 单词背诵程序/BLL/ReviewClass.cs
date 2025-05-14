@@ -20,7 +20,7 @@ public class ReviewClass(IWord w1)
         return
             "上一个单词的信息有:\n" +
             $"{Word.word}" +
-            $"{HandleOtherInfo(Word.pos)}." +
+            $".{HandleOtherInfo(Word.pos)}" +
             $"{HandleOtherInfo(Word.translations)}" +
             $"{HandleOtherInfo(Word.phrases)}" +
             $"{HandleOtherInfo(Word.phraseTranslations)}";

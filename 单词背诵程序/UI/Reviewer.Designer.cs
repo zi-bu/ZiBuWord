@@ -50,7 +50,7 @@ partial class Reviewer
         // ButtonYes
         // 
         ButtonYes.Font = new System.Drawing.Font("Microsoft YaHei UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)134));
-        ButtonYes.Location = new System.Drawing.Point(99, 555);
+        ButtonYes.Location = new System.Drawing.Point(99, 906);
         ButtonYes.Name = "ButtonYes";
         ButtonYes.Size = new System.Drawing.Size(240, 120);
         ButtonYes.TabIndex = 2;
@@ -61,7 +61,7 @@ partial class Reviewer
         // ButtonNo
         // 
         ButtonNo.Font = new System.Drawing.Font("Microsoft YaHei UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)134));
-        ButtonNo.Location = new System.Drawing.Point(447, 555);
+        ButtonNo.Location = new System.Drawing.Point(447, 906);
         ButtonNo.Name = "ButtonNo";
         ButtonNo.Size = new System.Drawing.Size(240, 120);
         ButtonNo.TabIndex = 3;
@@ -74,7 +74,7 @@ partial class Reviewer
         Context.Location = new System.Drawing.Point(99, 232);
         Context.Multiline = true;
         Context.Name = "Context";
-        Context.Size = new System.Drawing.Size(588, 288);
+        Context.Size = new System.Drawing.Size(588, 625);
         Context.TabIndex = 4;
         // 
         // Reviewer
@@ -82,7 +82,7 @@ partial class Reviewer
         AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         BackColor = System.Drawing.SystemColors.Control;
-        ClientSize = new System.Drawing.Size(800, 786);
+        ClientSize = new System.Drawing.Size(800, 1164);
         Controls.Add(Context);
         Controls.Add(ButtonNo);
         Controls.Add(ButtonYes);
