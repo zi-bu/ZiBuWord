@@ -108,17 +108,16 @@ public class KYP : PhraseForm<KY>
 {
 }
 
-public class TF : WordForm<TFT, TFP>
-{
-}
+public class TF : WordForm<TFT, TFP>{}
 
-public class TFT : TranslationForm<TF>
-{
-}
+public class TFT : TranslationForm<TF>{}
 
-public class TFP : PhraseForm<TF>
-{
-}
+public class TFP : PhraseForm<TF>{ }
+
+
+public class SAT : WordForm<SATT, SATP> { }
+public class SATT : TranslationForm<SAT> { }
+public class SATP : PhraseForm<SAT> { }
 
 /// <summary>
 ///     用户表的模型类。<br />
