@@ -28,14 +28,19 @@ namespace DAL
             //Console.WriteLine("User created successfully.");
 
             WordManagement wordManager = new WordManagement();
-
             IWord word = wordManager.GetRandomWordForReciter();
+
+
             Console.WriteLine(word.word);
+
+
             Console.WriteLine("翻译:");
             for (int i = 0; i < word.pos.Count; i++)
             {
                 Console.WriteLine(word.pos[i] + ". " + word.translations[i]);
             }
+
+
             Console.WriteLine("短语:");
             for (int i = 0; i < word.phrases.Count; i++)
             {

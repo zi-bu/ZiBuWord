@@ -20,7 +20,7 @@ namespace DAL.ReturnFunction
         public IWord GetRandomWordForReview()
         {
             Random random = new Random();
-            return new Word(random.Next(1,6)) as IWord;
+            return new Word(random.Next(1,7)) as IWord;
         }
         /// <summary>
         /// 添加单词到复习列表<br/>

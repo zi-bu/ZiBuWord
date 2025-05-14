@@ -15,6 +15,7 @@ public class SqlDataContext : DbContext
     public DbSet<KY> KY { get; set; } // 对应数据库中的 四级 表。
     public DbSet<TF> TF { get; set; } // 对应数据库中的 托福 表。
 
+    public DbSet<SAT> SAT { get; set; } // 对应数据库中的 SAT 表。
     /// <summary>
     ///     配置数据库连接。<br />
     ///     此处不安全地暴露了数据库连接字符串，实际使用中应使用安全的配置方式。<br />
@@ -42,6 +43,7 @@ public class SqlDataContext : DbContext
         FastCreateModel<HighSchool, HighSchoolT, HighSchoolP>(modelBuilder, "HighSchool");
         FastCreateModel<KY, KYT, KYP>(modelBuilder, "KY");
         FastCreateModel<TF, TFT, TFP>(modelBuilder, "TF");
+        FastCreateModel<SAT, SATT, SATP>(modelBuilder, "SAT");
     }
 
     /// <summary>

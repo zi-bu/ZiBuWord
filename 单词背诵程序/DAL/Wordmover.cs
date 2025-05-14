@@ -14,7 +14,8 @@ public enum Formid
     MiddleSchool = 3,
     Highschool = 4,
     KY = 5,
-    TF = 6
+    TF = 6,
+    SAT = 7
 }
 
 /// <summary>
@@ -75,6 +76,12 @@ public static class WordMover
                 {
                     var count = rd.Next(0, db.TF.Count() - 1);
                     var word = db.TF.ElementAt(count);
+                    return word.Word;
+                }
+                case Formid.SAT:
+                {
+                    var count = rd.Next(0, db.SAT.Count() - 1);
+                    var word = db.SAT.ElementAt(count);
                     return word.Word;
                 }
                 default:
@@ -139,6 +146,15 @@ public static class WordMover
                 case Formid.TF:
                     {
                         var word = db.TF.FirstOrDefault(s => s.Id == id)?.Word;
+                        if (word == null)
+                        {
+                            throw new ArgumentException("ID不存在");
+                        }
+                        return word;
+                    }
+                case Formid.SAT:
+                    {
+                        var word = db.SAT.FirstOrDefault(s => s.Id == id)?.Word;
                         if (word == null)
                         {
                             throw new ArgumentException("ID不存在");
@@ -241,6 +257,20 @@ public static class WordMover
                 case Formid.TF:
                 {
                     var TureForm = db.TF.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
+                    if (TureForm == null)
+                    {
+                    }
+                    else
+                    {
+                        translations = TureForm.Translations.Select(t => t.Translation).ToList();
+                        pos = TureForm.Translations.Select(t => t.TyPe).ToList();
+                    }
+
+                    break;
+                }
+                case Formid.SAT:
+                {
+                    var TureForm = db.SAT.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
                     if (TureForm == null)
                     {
                     }
@@ -376,6 +406,23 @@ public static class WordMover
 
                     break;
                 }
+                case Formid.SAT:
+                {
+                    var TureForm = db.SAT.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
+                    if (TureForm == null)
+                    {
+                    }
+                    else if (TureForm?.Phrases == null)
+                    {
+                    }
+                    else
+                    {
+                        phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
+                        phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
+                    }
+
+                    break;
+                }
                 default:
                 {
                     throw new ArgumentException("未知单词来源表");
@@ -419,6 +466,10 @@ public static class WordMover
                 case Formid.TF:
                     {
                         return db.TF.First(s => s.Word == word).Id;
+                    }
+                case Formid.SAT:
+                    {
+                        return db.SAT.First(s => s.Word == word).Id;
                     }
                 default:
                     {
