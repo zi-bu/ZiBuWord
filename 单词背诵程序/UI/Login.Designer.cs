@@ -108,7 +108,5 @@
         private TextBox textPassword;
         private TextBox textUserName;
         private Button btnVisitorLogin;
-        private Label? label1;
-        private PictureBox pictureBox1;
     }
 }
