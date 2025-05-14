@@ -20,7 +20,7 @@ public partial class UiSelectionOrder : Form
         //对正确答案对应的单词进行初始化
         Button[] choices = [Choice1, Choice2, Choice3, Choice4];
         for (var i = 0; i < choices.Length; i++)
-            choices[i].Text = $@"{_selectionClass.Selection[i].pos},{_selectionClass.Selection[i].translations}";
+            choices[i].Text = $@"{_selectionClass.Selection[i].pos[0]},{_selectionClass.Selection[i].translations[0]}";
         //利用循环对按钮初始化
     }
 

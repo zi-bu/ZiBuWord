@@ -17,15 +17,25 @@ public class ReviewClass(IWord w1)
     
     public string OutPutWordInfo()//输出单词其他信息
     {
-        return 
-            "上一个单词的信息" +
-            typeof(IWord)//获取类型元数据(用于获取单词的属性)
-            .GetProperties()//获取反射类型中的所有的属性，得到一个PropertyInfo数组
-            .Select(p => //在这个数组中遍历每一个属性
-                p.GetValue(Word)?//获取属性的值         <-对象在这里被输入
-                    .ToString() ?? string.Empty)//转换成字符串
-            .Aggregate((a, b) => a + Environment.NewLine + b);//将字符串合并
+        return
+            "上一个单词的信息有:\n" +
+            $"{Word.word}" +
+            $"{HandleOtherInfo(Word.pos)}." +
+            $"{HandleOtherInfo(Word.translations)}" +
+            $"{HandleOtherInfo(Word.phrases)}" +
+            $"{HandleOtherInfo(Word.phraseTranslations)}";
     }
-    
-    
+
+    private string HandleOtherInfo(List<string>? info)
+    {
+        if (info == null || info.Count == 0)
+            return string.Empty;
+
+        var sb = new System.Text.StringBuilder();
+        foreach (var str in info)
+        {
+            sb.AppendLine(str);
+        }
+        return sb.ToString();
+    }
 }
