@@ -26,6 +26,14 @@ public partial class UiSelectionOrder : Form
 
     private void ReRenderThePage() //完成一次选择后对单词进行重新刷新
     {
+        if (RiciterOrder.WordList.Count == 0)
+        {
+            MessageBox.Show(@"单词列表为空，无法刷新页面");
+            Close();
+            return;
+        }
+        if (RiciterOrder.Index >= RiciterOrder.WordList.Count)
+            RiciterOrder.Index = 0;
         _selectionClass = new SelectionClass(RiciterOrder.WordList[RiciterOrder.Index]);
         RenderThePage();
     }

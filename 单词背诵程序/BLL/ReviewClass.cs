@@ -11,12 +11,15 @@ public class ReviewClass(IWord w1)
 
     public void RemoveWordReviewList()
     {
+        ReviewOrder.WordList.RemoveAt(ReviewOrder.Index);
         ReviewListManagement.RemoveWordFromReview(Word);
     }
     
     public string OutPutWordInfo()//输出单词其他信息
     {
-        return typeof(IWord)//获取类型元数据(用于获取单词的属性)
+        return 
+            "上一个单词的信息" +
+            typeof(IWord)//获取类型元数据(用于获取单词的属性)
             .GetProperties()//获取反射类型中的所有的属性，得到一个PropertyInfo数组
             .Select(p => //在这个数组中遍历每一个属性
                 p.GetValue(Word)?//获取属性的值         <-对象在这里被输入

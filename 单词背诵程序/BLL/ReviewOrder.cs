@@ -33,12 +33,9 @@ public static class ReviewOrder
     
     public static bool CheckOutWordList()//检验是否完成当前队列的背诵
     {
-        if (WordList.Count == 0) //检验是否完成当前队列的背诵
-        {
-            Index = 0; //回拨索引
-            CreateOrRefreshNewWordList(); //创建新的列表
-            return true;
-        }
-        return false;
+        if (WordList.Count != 0) return false; //检验是否完成当前队列的背诵
+        Index = 0; //回拨索引
+        CreateOrRefreshNewWordList(); //创建新的列表
+        return true;
     }
 }
