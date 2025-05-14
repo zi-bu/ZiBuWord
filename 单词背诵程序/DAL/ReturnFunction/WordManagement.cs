@@ -11,7 +11,7 @@ namespace DAL
     /// 实现IWordManagement接口<br/>
     /// 本类用于管理单词
     /// </summary>
-    internal class WordManagement: IWordManagement
+    public class WordManagement: IWordManagement
     {
         /// <summary>
         /// 获取随机单词的IWord实例

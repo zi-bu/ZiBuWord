@@ -11,7 +11,7 @@ namespace DAL.ReturnFunction
     /// 实现IReviewListManagement接口<br/>
     /// 本类用于管理复习单词<br/>
     /// </summary>
-    internal class ReviewListManagement: IReviewListManagement
+    public class ReviewListManagement: IReviewListManagement
     {
         /// <summary>
         /// 获取随机单词进行复习<br/>

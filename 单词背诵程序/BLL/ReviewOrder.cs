@@ -3,16 +3,16 @@ using IBLLBridgeDAL.WordOperation;
 
 namespace BLL;
 
-public class ReviewOrder
+public static class ReviewOrder
 {
     public static int Index = 0;
 
     //导入一个随机的单词列表
-    public static IReviewListManagement 接口实现占位 { get; } //实现接口注入
+    private static IReviewListManagement ReviewListManagement { get; } = new DAL.ReturnFunction.ReviewListManagement();
 
     public static List<IWord> WordList { get; private set; } = Enumerable
         .Range(0, 10)
-        .Select(_ => 接口实现占位.GetRandomWordForReview())
+        .Select(_ => ReviewListManagement.GetRandomWordForReview())
         .ToList();
 
     //创建一个单词列表的认识标记
@@ -20,7 +20,7 @@ public class ReviewOrder
     {
         WordList = Enumerable
             .Range(0, 10)
-            .Select(_ => 接口实现占位.GetRandomWordForReview())
+            .Select(_ => ReviewListManagement.GetRandomWordForReview())
             .ToList();
     }
     
@@ -39,7 +39,6 @@ public class ReviewOrder
             CreateOrRefreshNewWordList(); //创建新的列表
             return true;
         }
-
         return false;
     }
 }

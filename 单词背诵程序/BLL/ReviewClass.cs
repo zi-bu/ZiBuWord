@@ -1,16 +1,17 @@
-﻿using IBLLBridgeDAL;
+﻿using DAL.ReturnFunction;
+using IBLLBridgeDAL;
 using IBLLBridgeDAL.WordOperation;
 
 namespace BLL;
 
 public class ReviewClass(IWord w1)
 {
-    public static IReviewListManagement 接口实现占位 { get; }//接口注入
+    private static IReviewListManagement ReviewListManagement { get; } = new ReviewListManagement();//接口注入
     public IWord Word { get; } = w1;//用于背诵的单词对象导入
 
     public void RemoveWordReviewList()
     {
-        接口实现占位.RemoveWordFromReview(Word);
+        ReviewListManagement.RemoveWordFromReview(Word);
     }
     
     public string OutPutWordInfo()//输出单词其他信息
