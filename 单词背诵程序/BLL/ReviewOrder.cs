@@ -36,6 +36,7 @@ public static class ReviewOrder
     {
         if (WordList.Count != 0) return false; //检验是否完成当前队列的背诵
         Index = 0; //回拨索引
+        Console.WriteLine("队列已经完成了");
         CreateOrRefreshNewWordList(); //创建新的列表
         return true;
     }

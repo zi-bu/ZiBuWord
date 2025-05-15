@@ -9,7 +9,7 @@ namespace DAL
 {
     public class DictionarySelect:IDictionarySelect
     {
-        public static Formid userDictionarySelect;
+        public static Formid userDictionarySelect = Formid.CET4;
         public bool SelectDictionary(string word)
         {
            return Enum.TryParse(word, out userDictionarySelect);
