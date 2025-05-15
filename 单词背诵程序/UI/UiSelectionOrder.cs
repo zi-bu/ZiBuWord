@@ -1,8 +1,9 @@
 ﻿using BLL;
+using MaterialSkin.Controls;
 
 namespace UI;
 
-public partial class UiSelectionOrder : Form
+public partial class UiSelectionOrder : MaterialForm
 {
     private SelectionClass _selectionClass;
 
@@ -32,6 +33,7 @@ public partial class UiSelectionOrder : Form
             Close();
             return;
         }
+
         if (RiciterOrder.Index >= RiciterOrder.WordList.Count)
             RiciterOrder.Index = 0;
         _selectionClass = new SelectionClass(RiciterOrder.WordList[RiciterOrder.Index]);
@@ -55,7 +57,7 @@ public partial class UiSelectionOrder : Form
                 RiciterOrder.Index = 0;
             _selectionClass.AddWordToReViewList(); //将当前的单词加入到复习列表
             RiciterOrder.WordList.RemoveAt(RiciterOrder.Index); //将当前序列的内容移出列表
-            _selectionClass.DeleteWordFromLearningList();//将当前的单词移出学习列表
+            _selectionClass.DeleteWordFromLearningList(); //将当前的单词移出学习列表
             if (RiciterOrder.WordList.Count == 0) //检验是否完成当前队列的背诵
             {
                 MessageBox.Show(@"背诵队列完成,即将关闭该界面");

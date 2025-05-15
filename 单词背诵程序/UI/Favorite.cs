@@ -1,6 +1,8 @@
-﻿namespace UI;
+﻿using MaterialSkin.Controls;
 
-public partial class Favorite : Form
+namespace UI;
+
+public partial class Favorite : MaterialForm
 {
     public Favorite()
     {

@@ -1,14 +1,15 @@
-﻿using IBLLBridgeDAL;
+﻿using DAL.ReturnFunction;
+using IBLLBridgeDAL;
 using IBLLBridgeDAL.WordOperation;
 
 namespace BLL;
 
 public static class ReviewOrder
 {
-    public static int Index = 0;
+    public static int Index;
 
     //导入一个随机的单词列表
-    private static IReviewListManagement ReviewListManagement { get; } = new DAL.ReturnFunction.ReviewListManagement();
+    private static IReviewListManagement ReviewListManagement { get; } = new ReviewListManagement();
 
     public static List<IWord> WordList { get; private set; } = Enumerable
         .Range(0, 10)
@@ -23,15 +24,15 @@ public static class ReviewOrder
             .Select(_ => ReviewListManagement.GetRandomWordForReview())
             .ToList();
     }
-    
-    public static void ResetIndex()//索引回拨判别
+
+    public static void ResetIndex() //索引回拨判别
     {
         Index++; //趋势递增
         if (!(Index < WordList.Count)) //序列索引回拨
             Index = 0;
     }
-    
-    public static bool CheckOutWordList()//检验是否完成当前队列的背诵
+
+    public static bool CheckOutWordList() //检验是否完成当前队列的背诵
     {
         if (WordList.Count != 0) return false; //检验是否完成当前队列的背诵
         Index = 0; //回拨索引

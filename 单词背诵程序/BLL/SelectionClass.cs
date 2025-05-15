@@ -53,11 +53,11 @@ public class SelectionClass(IWord w1)
     /// <summary>
     ///     用于将单词加入到复习列表
     /// </summary>
-    
     public void DeleteWordFromLearningList()
     {
         WordManagement.RemoveWordFromeLearningList(AccurateWord.word);
     }
+
     public void AddWordToReViewList()
     {
         WordManagement.AddWordToReview(AccurateWord);

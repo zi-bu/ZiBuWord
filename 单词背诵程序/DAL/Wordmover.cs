@@ -14,8 +14,7 @@ public enum Formid
     MiddleSchool = 3,
     Highschool = 4,
     KY = 5,
-    TF = 6,
-    SAT = 7
+    TF = 6
 }
 
 /// <summary>
@@ -78,11 +77,56 @@ public static class WordMover
                     var word = db.TF.ElementAt(count);
                     return word.Word;
                 }
-                case Formid.SAT:
+                default:
                 {
-                    var count = rd.Next(0, db.SAT.Count() - 1);
-                    var word = db.SAT.ElementAt(count);
-                    return word.Word;
+                    throw new ArgumentException("未知单词来源表");
+                }
+            }
+        }
+    }
+
+    public static string GetWord(Formid formid, int id) //获得精确id的单词
+    {
+        using (var db = new SqlDataContext())
+        {
+            switch (formid)
+            {
+                case Formid.CET4:
+                {
+                    var word = db.CET4.FirstOrDefault(s => s.Id == id)?.Word;
+                    if (word == null) throw new ArgumentException("ID不存在");
+                    return word;
+                }
+                case Formid.CET6:
+                {
+                    var word = db.CET6.FirstOrDefault(s => s.Id == id)?.Word;
+                    if (word == null) throw new ArgumentException("ID不存在");
+                    return word;
+                }
+                case Formid.MiddleSchool:
+                {
+                    var word = db.MiddleSchool.FirstOrDefault(s => s.Id == id)?.Word;
+                    if (word == null) throw new ArgumentException("ID不存在");
+                    return word;
+                }
+
+                case Formid.Highschool:
+                {
+                    var word = db.Highschool.FirstOrDefault(s => s.Id == id)?.Word;
+                    if (word == null) throw new ArgumentException("ID不存在");
+                    return word;
+                }
+                case Formid.KY:
+                {
+                    var word = db.KY.FirstOrDefault(s => s.Id == id)?.Word;
+                    if (word == null) throw new ArgumentException("ID不存在");
+                    return word;
+                }
+                case Formid.TF:
+                {
+                    var word = db.TF.FirstOrDefault(s => s.Id == id)?.Word;
+                    if (word == null) throw new ArgumentException("ID不存在");
+                    return word;
                 }
                 default:
                 {
@@ -91,83 +135,7 @@ public static class WordMover
             }
         }
     }
-    public static string GetWord(Formid formid, int id) //获得精确id的单词
-    {
-        using (var db = new SqlDataContext())
-        {
-            switch (formid)
-            {
-                case Formid.CET4:
-                    {
-                        var word = db.CET4.FirstOrDefault(s => s.Id == id)?.Word;
-                        if (word == null)
-                        {
-                            throw new ArgumentException("ID不存在");
-                        }
-                        return word;
-                    }
-                case Formid.CET6:
-                    {
-                        var word = db.CET6.FirstOrDefault(s => s.Id == id)?.Word;
-                        if (word == null)
-                        {
-                            throw new ArgumentException("ID不存在");
-                        }
-                        return word;
-                    }
-                case Formid.MiddleSchool:
-                    {
-                        var word = db.MiddleSchool.FirstOrDefault(s => s.Id == id)?.Word;
-                        if (word == null)
-                        {
-                            throw new ArgumentException("ID不存在");
-                        }
-                        return word;
-                    }
 
-                case Formid.Highschool:
-                    {
-                        var word = db.Highschool.FirstOrDefault(s => s.Id == id)?.Word;
-                        if (word == null)
-                        {
-                            throw new ArgumentException("ID不存在");
-                        }
-                        return word;
-                    }
-                case Formid.KY:
-                    {
-                        var word = db.KY.FirstOrDefault(s => s.Id == id)?.Word;
-                        if (word == null)
-                        {
-                            throw new ArgumentException("ID不存在");
-                        }
-                        return word;
-                    }
-                case Formid.TF:
-                    {
-                        var word = db.TF.FirstOrDefault(s => s.Id == id)?.Word;
-                        if (word == null)
-                        {
-                            throw new ArgumentException("ID不存在");
-                        }
-                        return word;
-                    }
-                case Formid.SAT:
-                    {
-                        var word = db.SAT.FirstOrDefault(s => s.Id == id)?.Word;
-                        if (word == null)
-                        {
-                            throw new ArgumentException("ID不存在");
-                        }
-                        return word;
-                    }
-                default:
-                    {
-                        throw new ArgumentException("未知单词来源表");
-                    }
-            }
-        }
-    }
     /// <summary>
     ///     在对应表查找单词释义。
     ///     将释义和词性赋给到两个列表。
@@ -268,20 +236,6 @@ public static class WordMover
 
                     break;
                 }
-                case Formid.SAT:
-                {
-                    var TureForm = db.SAT.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
-                    {
-                    }
-                    else
-                    {
-                        translations = TureForm.Translations.Select(t => t.Translation).ToList();
-                        pos = TureForm.Translations.Select(t => t.TyPe).ToList();
-                    }
-
-                    break;
-                }
                 default:
                 {
                     throw new ArgumentException("未知单词来源表");
@@ -291,13 +245,14 @@ public static class WordMover
     }
 
     /// <summary>
-    /// 在对应表查找短语。
-    /// 将短语和短语翻译赋给到两个列表。
+    ///     在对应表查找短语。
+    ///     将短语和短语翻译赋给到两个列表。
     /// </summary>
     /// <param name="word"></param>
     /// <param name="id"></param>
     /// <returns></returns>
-    public static void FindPhrases(string word, Formid id, ref List<string>? phrases,ref List<string>? phraseTranslations) //在对应表查找单词短语
+    public static void FindPhrases(string word, Formid id, ref List<string>? phrases,
+        ref List<string>? phraseTranslations) //在对应表查找单词短语
     {
         using (var db = new SqlDataContext())
         {
@@ -406,23 +361,6 @@ public static class WordMover
 
                     break;
                 }
-                case Formid.SAT:
-                {
-                    var TureForm = db.SAT.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
-                    {
-                    }
-                    else if (TureForm?.Phrases == null)
-                    {
-                    }
-                    else
-                    {
-                        phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
-                        phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
-                    }
-
-                    break;
-                }
                 default:
                 {
                     throw new ArgumentException("未知单词来源表");
@@ -430,8 +368,9 @@ public static class WordMover
             }
         }
     }
+
     /// <summary>
-    /// 获取某单词在对应表里的ID
+    ///     获取某单词在对应表里的ID
     /// </summary>
     /// <param name="word"></param>
     /// <param name="id"></param>
@@ -444,39 +383,34 @@ public static class WordMover
             switch (id)
             {
                 case Formid.CET4:
-                    {
-                        return db.CET4.First(s => s.Word == word).Id;
-                    }
+                {
+                    return db.CET4.First(s => s.Word == word).Id;
+                }
                 case Formid.CET6:
-                    {
-                        return db.CET6.First(s => s.Word == word).Id;
-                    }
+                {
+                    return db.CET6.First(s => s.Word == word).Id;
+                }
                 case Formid.MiddleSchool:
-                    {
-                        return db.MiddleSchool.First(s => s.Word == word).Id;
-                    }
+                {
+                    return db.MiddleSchool.First(s => s.Word == word).Id;
+                }
                 case Formid.Highschool:
-                    {
-                        return db.Highschool.First(s => s.Word == word).Id;
-                    }
+                {
+                    return db.Highschool.First(s => s.Word == word).Id;
+                }
                 case Formid.KY:
-                    {
-                        return db.KY.First(s => s.Word == word).Id;
-                    }
+                {
+                    return db.KY.First(s => s.Word == word).Id;
+                }
                 case Formid.TF:
-                    {
-                        return db.TF.First(s => s.Word == word).Id;
-                    }
-                case Formid.SAT:
-                    {
-                        return db.SAT.First(s => s.Word == word).Id;
-                    }
+                {
+                    return db.TF.First(s => s.Word == word).Id;
+                }
                 default:
-                    {
-                        throw new ArgumentException("未知单词来源表");
-                    }
+                {
+                    throw new ArgumentException("未知单词来源表");
+                }
             }
-                
-        }   
+        }
     }
 }
