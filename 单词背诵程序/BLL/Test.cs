@@ -1,4 +1,5 @@
 ﻿namespace BLL;
+using BLL.HandleUserInput;
 
 /// <summary>
 ///     这是业务逻辑层，用于处理业务逻辑，与数据访问层进行交互。
@@ -18,7 +19,7 @@ internal class TestArea
     /// </summary>
     private static void Main(string[] args)
     {
-        var userData = new UserData();
+        var userData = new HandleUserInput.UserData();
         userData.UserLogin("原神启动！", "testPassword");
         userData.UserRegister("zi_bu", "Yy114514原神");
     }

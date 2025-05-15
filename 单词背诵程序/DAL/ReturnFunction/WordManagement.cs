@@ -15,8 +15,7 @@ public class WordManagement : IWordManagement
     /// <returns></returns>
     public IWord GetRandomWordForReciter()
     {
-        var rd = new Random();
-        return new Word(rd.Next(1, 6));
+        return new Word(DictionarySelect.userDictionarySelect);
     }
 
     /// <summary>
