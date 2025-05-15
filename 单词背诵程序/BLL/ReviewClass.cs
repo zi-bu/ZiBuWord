@@ -1,4 +1,4 @@
-﻿using System.Text;
+﻿
 using DAL.ReturnFunction;
 using IBLLBridgeDAL;
 using IBLLBridgeDAL.WordOperation;
@@ -12,8 +12,11 @@ public class ReviewClass(IWord w1)
 
     public void RemoveWordReviewList()
     {
-        ReviewOrder.WordList.RemoveAt(ReviewOrder.Index);
-        ReviewListManagement.RemoveWordFromReview(Word);
+        if (ReviewOrder.Index >= 0 && ReviewOrder.Index < ReviewOrder.WordList.Count)
+        {
+            ReviewOrder.WordList.RemoveAt(ReviewOrder.Index);
+            ReviewListManagement.RemoveWordFromReview(Word);
+        }
     }
 
     public string OutPutWordInfo() //输出单词其他信息
@@ -32,7 +35,7 @@ public class ReviewClass(IWord w1)
         if (Word.phrases != null)
             for (var i = 0; i < Word.phrases.Count; i++)
             {
-                information += Word.phrases[i] + " " + Word.phraseTranslations[i] + "\n";
+                information += Word.phrases[i] + " " + Word.phraseTranslations?[i] + "\n";
             }
 
         if (information!=null)
