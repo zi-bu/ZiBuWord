@@ -21,22 +21,34 @@ function toggleInfo() {
 </script>
 
 <template>
-  <div id="reviewer">
-    <h1>{{word}}</h1>
-    <div id="infoContainer">
+  <div id="reviewer" class="card">
+    <h1 class="card-title">{{word}}</h1>
+    <div id="infoContainer" class="card">
       <pre v-if="showInfo" id="info">{{info}}</pre>
     </div>
     <div>
-      <button @click="toggleInfo" v-if="showButton">认识</button>
-      <button @click="toggleInfo" v-if="showButton">不认识</button>
-      <button @click="toggleInfo" v-if="!showButton">下一个</button>
+      <button id="define-btn" @click="toggleInfo" v-if="showButton" type="button" class="btn btn-light">认识</button>
+      <button id="define-btn" @click="toggleInfo" v-if="showButton" type="button" class="btn btn-light">不认识</button>
+      <button id="next-btn" @click="toggleInfo" v-if="!showButton" type="button" class="btn btn-primary">下一个</button>
     </div>
   </div>
 </template>
 
 <style scoped>
+#define-btn{
+  height:  60px;
+  width: 225px;
+  margin-bottom: 20px;
+}
+#next-btn{
+  height:  60px;
+  width: 450px;
+  margin-bottom: 20px;
+}
 #reviewer {
-  background-color: #e1e1e1;
+  background-color: #eaeaea;
+  background-image: url("https://img.picui.cn/free/2025/05/15/6825e30d94b60.jpg");
+
   height: 800px;
   width: 600px;
   color: black;
@@ -47,15 +59,23 @@ function toggleInfo() {
 }
 
 #reviewer h1 {
-  bottom: 20px;
+  margin-top: 150px;
+  color: white;
+  font-weight: bold;
+  text-shadow:
+      -2px -2px 0 #000,
+      2px -2px 0 #000,
+      -2px  2px 0 #000,
+      2px  2px 0 #000;
 }
 #infoContainer{
   background-color: rgba(255, 255, 255, 0.64);
-  height: 500px;
+  height: 450px;
   width: 450px;
+  margin-top:100px ;
 }
 #infoContainer pre{
   margin-left: 10px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 </style>
