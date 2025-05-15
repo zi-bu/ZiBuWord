@@ -11,7 +11,7 @@ namespace UI;
 /// </summary>
 public partial class Login : MaterialForm
 {
-    BLL.UserData userData = new();
+    BLL.HandleUserInput.UserData userData = new();
     /// <summary>
     ///     这是游客登录按钮的点击事件处理函数。
     ///     <br />这里由```子布```编写。
