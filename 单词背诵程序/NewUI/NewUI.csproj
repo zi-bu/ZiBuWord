@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NetDimension.NanUI" Version="1.1.109.3" />
+    <PackageReference Include="NetDimension.NanUI.Runtime" Version="109.0.5414.1" />
+    <PackageReference Include="Vanara.PInvoke.Shared" Version="4.1.3" />
+  </ItemGroup>
+
+</Project>
