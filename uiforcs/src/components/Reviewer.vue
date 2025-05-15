@@ -6,6 +6,7 @@ const word = ref('');
 const info = ref('');
 const showInfo = ref(false);
 const showButton = ref(true);
+const listCount = ref(1);
 
 async function fetchWord() {
   const response = await fetch('http://localhost:5200/api/ReviewWord');
@@ -16,7 +17,17 @@ async function fetchWord() {
   showButton.value = true;
 }
 
-onMounted(fetchWord);
+async function fetchWordListCount() {
+  const response = await fetch('http://localhost:5200/api/ReviewWord/wordListCount');
+  const data = await response.json();
+  listCount.value = data.wordListCount;
+}
+
+onMounted(() => {
+  fetchWord();
+  fetchWordListCount();
+});
+
 function toggleInfo() {
   showInfo.value = !showInfo.value;
   showButton.value = !showButton.value;
@@ -36,6 +47,8 @@ function chooseYes(){
         // 处理返回数据
         console.log(data);
       });
+  fetchWordListCount();
+  showCondition();
 }
 function chooseNo(){
   toggleInfo();
@@ -51,51 +64,60 @@ function chooseNo(){
         // 处理返回数据
         console.log(data);
       });
+  fetchWordListCount();
+  showCondition();
 }
 function Next() {
   toggleInfo();
   fetchWord();
+  fetchWordListCount();
 }
 </script>
 
 <template>
   <div id="reviewer" class="card">
-    <h1 class="card-title">{{word}}</h1>
-    <div id="infoContainer" class="card">
-      <transition name="fade">
-      <pre v-if="showInfo" id="info">{{info}}</pre>
-      </transition>
-    </div>
-    <div>
-      <button
-          id="define-btn"
-          @click="chooseYes"
-          v-if="showButton"
-          type="button"
-          class="btn btn-light">
-        认识
-      </button>
-
-
-      <button
-          id="define-btn"
-          @click="toggleInfo"
-          v-if="showButton"
-          type="button"
-          class="btn btn-light">
-        不认识
-      </button>
-
-
-      <button id="next-btn"
+    <transition name="fade">
+      <div id="reviewerInside" v-show="listCount !== 0">
+        <h1 class="card-title">{{word}}</h1>
+        <div id="infoContainer" class="card">
+          <transition name="fade">
+            <pre v-if="showInfo" id="info">{{info}}</pre>
+          </transition>
+        </div>
+        <div>
+          <button
+              id="define-btn"
+              @click="chooseYes"
+              v-if="showButton"
+              type="button"
+              class="btn btn-light">
+            认识
+          </button>
+          <button
+              id="define-btn"
+              @click="chooseNo"
+              v-if="showButton"
+              type="button"
+              class="btn btn-light">
+            不认识
+          </button>
+          <button
+              id="next-btn"
               @click="Next"
               v-if="!showButton"
               type="button"
               class="btn btn-light">
-        下一个
-      </button>
-
+            下一个
+          </button>
+        </div>
+      </div>
+    </transition>
+    <transition name="fade">
+    <div>
+    <p v-show="listCount === 0">本队列单词复习完毕</p>
+    <button v-show="listCount === 0" @click="Next" >开始新的背诵队列</button>
     </div>
+    </transition>
   </div>
 </template>
 
@@ -113,10 +135,11 @@ function Next() {
   box-shadow: none;     /* 去除阴影 */
   outline: none;        /* 去除点击后的外边框 */
 }
-#YES-btn:hover,
-#next-btn:hover {
+
+#YES-btn:hover,#next-btn:hover {
   background-color: #4caf50; /* 绿色 */
   color: white;
+  /*noinspection CssInvalidPropertyValue*/
   transition: background-color 0.2;
 }
 #next-btn{
@@ -133,6 +156,15 @@ function Next() {
   background-size: cover;
   background-position: center;
   background-color: rgba(234, 234, 234, 0.7);
+  height: 800px;
+  width: 600px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#reviewerInside{
   height: 800px;
   width: 600px;
   color: black;
@@ -164,13 +196,17 @@ function Next() {
   margin-left: 10px;
   margin-top: 5px;
 }
+
+#info{
+  font-size: 18px;
+}
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.25s;
+  transition: opacity 0.5s;
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
 }
-#info{
-  font-size: 18px;
+.fade-enter-to, .fade-leave-from {
+  opacity: 1;
 }
 </style>
