@@ -18,9 +18,7 @@ public class ReviewClass(IWord w1)
 
     public string OutPutWordInfo() //输出单词其他信息
     {
-        return
-            "上一个单词的信息有:\n" +
-            $"{Word.word} + {HandleOtherInfo()}";
+        return $"{HandleOtherInfo()}";
     }
 
     private string HandleOtherInfo()
@@ -28,7 +26,7 @@ public class ReviewClass(IWord w1)
         string? information = null;
         for (var i = 0; i < Word.pos.Count; i++)
         {
-            information += Word.pos[i] +" " + Word.translations[i]+"\n";
+            information += "." + Word.pos[i] +" " + Word.translations[i]+"\n";
         }
 
         if (Word.phrases != null)
