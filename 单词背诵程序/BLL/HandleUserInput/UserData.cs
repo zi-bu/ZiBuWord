@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using DAL.ReturnFunction;
 
-namespace BLL;
+namespace BLL.HandleUserInput;
 
 /// <summary>
 ///     这是有关用户数据的类，里面分别包含注册登录两个函数<br />
