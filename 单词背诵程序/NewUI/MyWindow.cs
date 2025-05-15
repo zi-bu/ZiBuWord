@@ -5,7 +5,7 @@ class MyWindow : Formium
 {
     public MyWindow()
     {
-        Url = "https://cn.bing.com/?mkt=zh-cn";
+        Url = "https://www.bilibili.com/";
     }
 
     protected override FormStyle ConfigureWindowStyle(WindowStyleBuilder builder)
@@ -14,7 +14,8 @@ class MyWindow : Formium
 
         var style = builder.UseSystemForm();
 
-        style.TitleBar = false;
+        style.TitleBar = true;
+
 
         style.DefaultAppTitle = "My first WinFomrim app";
 
