@@ -12,11 +12,11 @@ public class ReviewClass(IWord w1)
 
     public void RemoveWordReviewList()
     {
-        if (ReviewOrder.Index >= 0 && ReviewOrder.Index < ReviewOrder.WordList.Count)
-        {
+        
+        
             ReviewOrder.WordList.RemoveAt(ReviewOrder.Index);
             ReviewListManagement.RemoveWordFromReview(Word);
-        }
+        
     }
 
     public string OutPutWordInfo() //输出单词其他信息
