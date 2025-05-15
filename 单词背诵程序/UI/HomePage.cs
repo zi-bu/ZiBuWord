@@ -1,5 +1,6 @@
 ﻿using MaterialSkin.Controls;
 using MaterialSkin;
+using BLL.HandleUserInput;
 namespace UI;
 
 public partial class HomePage : MaterialForm
@@ -93,5 +94,19 @@ public partial class HomePage : MaterialForm
     {
         var review = new Reviewer();
         FormHelper.ShowNewForm(this, review);
+    }
+
+    private void HomePage_Load(object sender, EventArgs e)
+    {
+
+    }
+    /// <summary>
+    /// 当用户在下拉框选择词典时，触发事件传输数据到下层
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void comboBoxSelectDict_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        DictionaryData.DeliverDictionarySelect(SelectedDictionaryCode);
     }
 }

@@ -28,6 +28,13 @@ public class Word : IWord
         WordMover.FindTranslations(word, tableid, ref Translations, ref Pos);
         WordMover.FindPhrases(word, tableid, ref Phrases, ref PhraseTranslations);
     }
+    public Word(Formid id)
+    {
+        tableid = id;
+        word = WordMover.GetWord(tableid);
+        WordMover.FindTranslations(word, tableid, ref Translations, ref Pos);
+        WordMover.FindPhrases(word, tableid, ref Phrases, ref PhraseTranslations);
+    }
 
     //单词的各种属性
 
