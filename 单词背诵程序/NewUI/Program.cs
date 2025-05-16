@@ -1,4 +1,5 @@
 using NetDimension.NanUI;
+using NetDimension.NanUI.WebResource;
 
 class Program
 {
@@ -9,7 +10,14 @@ class Program
 
         builder.UseNanUIApp<MyApp>();
 
-        var app = builder.Build();
+        var app = builder.UseEmbeddedFileResource(new EmbeddedFileResourceOptions
+        {
+            Scheme = "http",
+            DomainName = "embedded.app.local",
+            ResourceAssembly = typeof(Program).Assembly,
+            EmbeddedResourceDirectoryName = "build",
+        })
+        .Build();
 
         app.Run();
     }

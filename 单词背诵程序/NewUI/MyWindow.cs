@@ -5,7 +5,7 @@ class MyWindow : Formium
 {
     public MyWindow()
     {
-        Url = "https://www.bilibili.com/";
+        Url = "http://embedded.app.local";
     }
 
     protected override FormStyle ConfigureWindowStyle(WindowStyleBuilder builder)
