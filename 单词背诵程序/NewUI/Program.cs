@@ -15,7 +15,7 @@ class Program
             Scheme = "http",
             DomainName = "embedded.app.local",
             ResourceAssembly = typeof(Program).Assembly,
-            EmbeddedResourceDirectoryName = "build",
+            EmbeddedResourceDirectoryName = "dist",
         })
         .Build();
 

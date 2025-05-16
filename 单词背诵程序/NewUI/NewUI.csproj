@@ -9,17 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="build\assets\index-Cy_omxnR.css" />
-    <None Remove="build\assets\index-y7-vA_tr.js" />
-    <None Remove="build\favicon.ico" />
-    <None Remove="build\index.html" />
+    <None Remove="dist\assets\index-C7JpsO5V.js" />
+    <None Remove="dist\assets\index-VqhbdosG.css" />
+    <None Remove="dist\favicon.ico" />
+    <None Remove="dist\index.html" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="build\assets\index-Cy_omxnR.css" />
-    <EmbeddedResource Include="build\assets\index-y7-vA_tr.js" />
-    <EmbeddedResource Include="build\favicon.ico" />
-    <EmbeddedResource Include="build\index.html" />
+    <EmbeddedResource Include="dist\assets\index-C7JpsO5V.js" />
+    <EmbeddedResource Include="dist\assets\index-VqhbdosG.css" />
+    <EmbeddedResource Include="dist\favicon.ico" />
+    <EmbeddedResource Include="dist\index.html" />
   </ItemGroup>
 
   <ItemGroup>
