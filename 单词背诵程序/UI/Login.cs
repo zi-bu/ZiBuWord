@@ -65,4 +65,10 @@ public partial class Login : MaterialForm
             FormHelper.ShowNewForm(this, homePage); //显示新窗口
         }
     }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+        var 测试 = new 测试(); //创建一个新的主页窗口对象
+        FormHelper.ShowNewForm(this, 测试); //显示新窗口
+    }
 }
