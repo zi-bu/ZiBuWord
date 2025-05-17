@@ -82,9 +82,25 @@ public class UserDataJudgment : IUserRegisterService, IUserLoginService
             {
                 try
                 {
-                    db.UserData.Add(new User { UserName = username, UserPassword = password });
+                    var user = new User
+                    {
+                        UserName = username,
+                        UserPassword = password,
+                        UserWord = new UserWord
+                        {
+                            MiddleSchool = 1,
+                            HighSchool = 1,
+                            KY = 1,
+                            SAT = 1,
+                            TF = 1,
+                            CET4 = 1,
+                            CET6 = 1,
+                        }
+                    };
+                    db.UserData.Add(user);
                     //添加新的用户数据
                     db.SaveChanges(); //保存更改
+
                 }
                 catch (Exception ex)
                 {
