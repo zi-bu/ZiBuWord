@@ -109,4 +109,11 @@ public partial class HomePage : MaterialForm
     {
         DictionaryData.DeliverDictionarySelect(SelectedDictionaryCode);
     }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+        SearchWord searchWord = new SearchWord();
+        searchWord.Show(); // 显示搜索单词窗口
+        Hide(); // 隐藏当前窗口
+    }
 }
