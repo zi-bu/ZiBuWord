@@ -115,7 +115,10 @@ function Next() {
     <transition name="fade">
     <div>
     <p v-show="listCount === 0">本队列单词复习完毕</p>
-    <button v-show="listCount === 0" @click="Next" >开始新的背诵队列</button>
+      
+      
+    <button id="define-btn" v-show="listCount === 0" @click="Next" class="btn btn-light">开始新的背诵队列</button>
+    <button id="define-btn" v-show="listCount === 0" @click="" class="btn btn-light">返回主页面</button>
     </div>
     </transition>
   </div>
