@@ -5,6 +5,9 @@ namespace DAL.Context;
 public class UserContext : DbContext
 {
     public DbSet<User> UserData { get; set; }
+    // 对应数据库中的 UserData 表。
+    public DbSet<UserWord> UserWord { get; set; } 
+    // 对应数据库中的 UserData 表。
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -19,5 +22,7 @@ public class UserContext : DbContext
     {
         modelBuilder.Entity<User>().HasKey(u => u.UserID); // 配置主键。
         modelBuilder.Entity<User>().ToTable("UserData"); // 映射到 Users 表。
+        modelBuilder.Entity<UserWord>().ToTable("UserWord"); // 映射到 UserWord 表。
+        modelBuilder.Entity<UserWord>().HasKey(uw => uw.ID); // 配置主键。
     }
 }

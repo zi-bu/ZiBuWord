@@ -135,3 +135,27 @@ public class User
 
     public string? UserPassword { get; set; } // 密码
 }
+public class UserWord
+{
+    public int ID { get; set; }
+    public int UserID { get; set; }
+    public int MiddleSchool { get; set; }
+    public int HighSchool { get; set; }
+    public int CET4 { get; set; }
+    public int CET6 { get; set; }
+    public int KY { get; set; }
+    public int TF { get; set; }
+    public int SAT { get; set; }
+}
+/// <summary>
+///     用户收藏的单词表的模型类。<br />
+///     这个类对应数据库中的用户收藏的单词表的结构，包含用户编号、单词和词典类型等字段。<br />
+///     这个类用于存储用户收藏的单词信息。<br />
+/// </summary>
+public class FavoriteWord
+{
+    public int Id { get; set; }
+    public int UserId { get; set; }
+    public int WordId { get; set; } // 单词编号
+    public string DictionaryType { get; set; } = null!;// 词典类型
+}
