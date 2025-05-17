@@ -12,7 +12,7 @@ public enum Formid
     CET4 = 1,
     CET6 = 2,
     MiddleSchool = 3,
-    Highschool = 4,
+    HighSchool = 4,
     KY = 5,
     TF = 6
 }
@@ -59,10 +59,10 @@ public static class WordMover
                     return word.Word;
                 }
 
-                case Formid.Highschool:
+                case Formid.HighSchool:
                 {
-                    var count = rd.Next(0, db.Highschool.Count() - 1);
-                    var word = db.Highschool.ElementAt(count);
+                    var count = rd.Next(0, db.HighSchool.Count() - 1);
+                    var word = db.HighSchool.ElementAt(count);
                     return word.Word;
                 }
                 case Formid.KY:
@@ -110,9 +110,9 @@ public static class WordMover
                     return word;
                 }
 
-                case Formid.Highschool:
+                case Formid.HighSchool:
                 {
-                    var word = db.Highschool.FirstOrDefault(s => s.Id == id)?.Word;
+                    var word = db.HighSchool.FirstOrDefault(s => s.Id == id)?.Word;
                     if (word == null) throw new ArgumentException("ID不存在");
                     return word;
                 }
@@ -194,9 +194,9 @@ public static class WordMover
                     break;
                 }
 
-                case Formid.Highschool:
+                case Formid.HighSchool:
                 {
-                    var TureForm = db.Highschool.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
+                    var TureForm = db.HighSchool.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
                     if (TureForm == null)
                     {
                     }
@@ -310,9 +310,9 @@ public static class WordMover
                     break;
                 }
 
-                case Formid.Highschool:
+                case Formid.HighSchool:
                 {
-                    var TureForm = db.Highschool.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
+                    var TureForm = db.HighSchool.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
                     if (TureForm == null)
                     {
                     }
@@ -394,9 +394,9 @@ public static class WordMover
                 {
                     return db.MiddleSchool.First(s => s.Word == word).Id;
                 }
-                case Formid.Highschool:
+                case Formid.HighSchool:
                 {
-                    return db.Highschool.First(s => s.Word == word).Id;
+                    return db.HighSchool.First(s => s.Word == word).Id;
                 }
                 case Formid.KY:
                 {
