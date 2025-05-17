@@ -16,6 +16,7 @@ public class SqlDataContext : DbContext
     public DbSet<TF> TF { get; set; } // 对应数据库中的 托福 表。
 
     public DbSet<SAT> SAT { get; set; } // 对应数据库中的 SAT 表。
+    public DbSet<FavoriteWord> FavoriteWords { get; set; } // 用户收藏表
     /// <summary>
     ///     配置数据库连接。<br />
     ///     此处不安全地暴露了数据库连接字符串，实际使用中应使用安全的配置方式。<br />
@@ -43,6 +44,9 @@ public class SqlDataContext : DbContext
         FastCreateModel<KY, KYT, KYP>(modelBuilder, "KY");
         FastCreateModel<TF, TFT, TFP>(modelBuilder, "TF");
         FastCreateModel<SAT, SATT, SATP>(modelBuilder, "SAT");
+
+        // 映射 FavoriteWord 实体类到数据库表 FavoriteWords
+        modelBuilder.Entity<FavoriteWord>().ToTable("FavoriteWords");
     }
 
     /// <summary>
