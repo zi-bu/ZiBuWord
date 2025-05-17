@@ -32,99 +32,103 @@ partial class Reviewer
     /// </summary>
     private void InitializeComponent()
     {
-        Question = new System.Windows.Forms.Label();
-        ButtonYes = new MaterialSkin.Controls.MaterialButton();
-        ButtonNo = new MaterialSkin.Controls.MaterialButton();
-        Context = new System.Windows.Forms.TextBox();
+        Question = new Label();
+        ButtonYes = new MaterialButton();
+        ButtonNo = new MaterialButton();
+        Context = new TextBox();
         SuspendLayout();
         // 
         // Question
         // 
-        Question.BackColor = System.Drawing.Color.Transparent;
-        Question.Font = new System.Drawing.Font("Microsoft YaHei UI", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)134));
-        Question.Location = new System.Drawing.Point(251, 169);
+        Question.BackColor = Color.Transparent;
+        Question.Font = new Font("Microsoft YaHei UI", 30F, FontStyle.Regular, GraphicsUnit.Point, 134);
+        Question.Location = new Point(205, 141);
+        Question.Margin = new Padding(2, 0, 2, 0);
         Question.Name = "Question";
-        Question.Size = new System.Drawing.Size(266, 88);
+        Question.Size = new Size(218, 73);
         Question.TabIndex = 1;
         Question.Text = "label1";
-        Question.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        Question.TextAlign = ContentAlignment.MiddleCenter;
         // 
         // ButtonYes
         // 
-        ButtonYes.AccentTextColor = System.Drawing.Color.FromArgb(((int)((byte)255)), ((int)((byte)64)), ((int)((byte)129)));
-        ButtonYes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-        ButtonYes.CharacterCasing = MaterialSkin.Controls.MaterialButton.CharacterCasingEnum.Normal;
-        ButtonYes.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+        ButtonYes.AccentTextColor = Color.FromArgb(255, 64, 129);
+        ButtonYes.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        ButtonYes.CharacterCasing = MaterialButton.CharacterCasingEnum.Normal;
+        ButtonYes.Density = MaterialButton.MaterialButtonDensity.Default;
         ButtonYes.Depth = 0;
-        ButtonYes.FlatStyle = System.Windows.Forms.FlatStyle.System;
-        ButtonYes.Font = new System.Drawing.Font("Microsoft YaHei UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)134));
+        ButtonYes.FlatStyle = FlatStyle.System;
+        ButtonYes.Font = new Font("Microsoft YaHei UI", 20F, FontStyle.Regular, GraphicsUnit.Point, 134);
         ButtonYes.HighEmphasis = true;
         ButtonYes.Icon = null;
-        ButtonYes.Location = new System.Drawing.Point(99, 930);
-        ButtonYes.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-        ButtonYes.MaximumSize = new System.Drawing.Size(250, 100);
-        ButtonYes.MinimumSize = new System.Drawing.Size(250, 100);
+        ButtonYes.Location = new Point(81, 775);
+        ButtonYes.Margin = new Padding(3, 5, 3, 5);
+        ButtonYes.MaximumSize = new Size(205, 83);
+        ButtonYes.MinimumSize = new Size(205, 83);
         ButtonYes.MouseState = MaterialSkin.MouseState.HOVER;
         ButtonYes.Name = "ButtonYes";
-        ButtonYes.NoAccentTextColor = System.Drawing.Color.Empty;
-        ButtonYes.Size = new System.Drawing.Size(250, 100);
+        ButtonYes.NoAccentTextColor = Color.Empty;
+        ButtonYes.Size = new Size(205, 83);
         ButtonYes.TabIndex = 2;
         ButtonYes.Text = "认识";
-        ButtonYes.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+        ButtonYes.Type = MaterialButton.MaterialButtonType.Contained;
         ButtonYes.UseAccentColor = false;
         ButtonYes.UseVisualStyleBackColor = true;
         ButtonYes.Click += ButtonYes_Click;
         // 
         // ButtonNo
         // 
-        ButtonNo.AccentTextColor = System.Drawing.Color.FromArgb(((int)((byte)255)), ((int)((byte)64)), ((int)((byte)129)));
-        ButtonNo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-        ButtonNo.CharacterCasing = MaterialSkin.Controls.MaterialButton.CharacterCasingEnum.Normal;
-        ButtonNo.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+        ButtonNo.AccentTextColor = Color.FromArgb(255, 64, 129);
+        ButtonNo.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        ButtonNo.CharacterCasing = MaterialButton.CharacterCasingEnum.Normal;
+        ButtonNo.Density = MaterialButton.MaterialButtonDensity.Default;
         ButtonNo.Depth = 0;
-        ButtonNo.FlatStyle = System.Windows.Forms.FlatStyle.System;
-        ButtonNo.Font = new System.Drawing.Font("Microsoft YaHei UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)134));
+        ButtonNo.FlatStyle = FlatStyle.System;
+        ButtonNo.Font = new Font("Microsoft YaHei UI", 20F, FontStyle.Regular, GraphicsUnit.Point, 134);
         ButtonNo.HighEmphasis = true;
         ButtonNo.Icon = null;
-        ButtonNo.Location = new System.Drawing.Point(437, 930);
-        ButtonNo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-        ButtonNo.MinimumSize = new System.Drawing.Size(250, 100);
+        ButtonNo.Location = new Point(358, 775);
+        ButtonNo.Margin = new Padding(3, 5, 3, 5);
+        ButtonNo.MinimumSize = new Size(205, 83);
         ButtonNo.MouseState = MaterialSkin.MouseState.HOVER;
         ButtonNo.Name = "ButtonNo";
-        ButtonNo.NoAccentTextColor = System.Drawing.Color.Empty;
-        ButtonNo.Size = new System.Drawing.Size(250, 100);
+        ButtonNo.NoAccentTextColor = Color.Empty;
+        ButtonNo.Size = new Size(205, 83);
         ButtonNo.TabIndex = 3;
         ButtonNo.Text = "不认识";
-        ButtonNo.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+        ButtonNo.Type = MaterialButton.MaterialButtonType.Contained;
         ButtonNo.UseAccentColor = false;
         ButtonNo.UseVisualStyleBackColor = true;
         ButtonNo.Click += ButtonNo_Click;
         // 
         // Context
         // 
-        Context.BackColor = System.Drawing.Color.White;
-        Context.BorderStyle = System.Windows.Forms.BorderStyle.None;
-        Context.Cursor = System.Windows.Forms.Cursors.Arrow;
-        Context.Font = new System.Drawing.Font("Microsoft YaHei UI", 15F);
-        Context.Location = new System.Drawing.Point(99, 301);
+        Context.BackColor = Color.White;
+        Context.BorderStyle = BorderStyle.None;
+        Context.Font = new Font("Microsoft YaHei UI", 15F);
+        Context.Location = new Point(81, 251);
+        Context.Margin = new Padding(2, 2, 2, 2);
         Context.Multiline = true;
         Context.Name = "Context";
-        Context.Size = new System.Drawing.Size(588, 558);
+        Context.Size = new Size(481, 465);
         Context.TabIndex = 4;
+        Context.TextChanged += Context_TextChanged;
         // 
         // Reviewer
         // 
-        AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
-        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        BackColor = System.Drawing.SystemColors.Control;
-        ClientSize = new System.Drawing.Size(800, 1164);
+        AutoScaleDimensions = new SizeF(9F, 20F);
+        AutoScaleMode = AutoScaleMode.Font;
+        BackColor = SystemColors.Control;
+        ClientSize = new Size(655, 918);
         Controls.Add(Context);
         Controls.Add(ButtonNo);
         Controls.Add(ButtonYes);
         Controls.Add(Question);
-        FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_64;
-        Location = new System.Drawing.Point(22, 22);
-        Padding = new System.Windows.Forms.Padding(3, 88, 3, 3);
+        FormStyle = FormStyles.ActionBar_64;
+        Location = new Point(22, 22);
+        Margin = new Padding(2, 2, 2, 2);
+        Name = "Reviewer";
+        Padding = new Padding(2, 73, 2, 2);
         Text = "Reviewer";
         ResumeLayout(false);
         PerformLayout();

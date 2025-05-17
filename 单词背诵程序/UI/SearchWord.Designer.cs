@@ -52,6 +52,7 @@
             button1.TabIndex = 0;
             button1.Text = "确认搜索";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // 中文搜索
             // 
@@ -79,6 +80,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(125, 27);
             textBox1.TabIndex = 2;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // panel2
             // 
@@ -98,6 +100,7 @@
             button2.TabIndex = 2;
             button2.Text = "确认搜索";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // textBox2
             // 
@@ -105,6 +108,7 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(125, 27);
             textBox2.TabIndex = 1;
+            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // label2
             // 
@@ -154,6 +158,7 @@
             Controls.Add(panel1);
             Name = "SearchWord";
             Text = "SearchWord";
+            Load += SearchWord_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
