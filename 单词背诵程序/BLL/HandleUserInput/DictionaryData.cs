@@ -9,7 +9,7 @@ namespace BLL.HandleUserInput
 {
     public static class DictionaryData
     {
-        static IDictionarySelect dictionary = new DictionarySelect();
+        static IDictionarySelect dictionary = new UserDataNow();
 
         public static bool DeliverDictionarySelect(string word)
         {

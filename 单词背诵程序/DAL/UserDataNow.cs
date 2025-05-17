@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class DictionarySelect:IDictionarySelect
+    public class UserDataNow:IDictionarySelect
     {
-        public static Formid userDictionarySelect;
+        internal static Formid userDictionarySelect;
+
+        internal static string NowUser;
         public bool SelectDictionary(string word)
         {
            return Enum.TryParse(word, out userDictionarySelect);

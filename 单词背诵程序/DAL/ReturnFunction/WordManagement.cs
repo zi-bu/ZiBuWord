@@ -15,7 +15,7 @@ public class WordManagement : IWordManagement
     /// <returns></returns>
     public IWord GetRandomWordForReciter()
     {
-        return new Word(DictionarySelect.userDictionarySelect);
+        return new Word(UserDataNow.userDictionarySelect);
     }
 
     /// <summary>
@@ -33,5 +33,13 @@ public class WordManagement : IWordManagement
     public void AddWordToReview(IWord word)
     {
         //未实现
+    }
+
+    public List<IWord> GetAllWords()
+    {
+        // 这里应从数据库获取所有单词（现在写的是伪方法）
+        List<IWord> words = new List<IWord>();
+        
+        return words;
     }
 }
