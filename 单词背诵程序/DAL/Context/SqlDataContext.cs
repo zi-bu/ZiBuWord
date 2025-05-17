@@ -22,9 +22,9 @@ public class SqlDataContext : DbContext
     /// </summary>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        //optionsBuilder.UseSqlServer("Server=26.184.142.179,1433;Database=RandomWord;User Id=sa;Password=114514;Encrypt=False;");
+        optionsBuilder.UseSqlServer("Server=26.184.142.179,1433;Database=RandomWord;User Id=sa;Password=114514;Encrypt=False;");
         //zibu数据库的IP地址，使用时取消注释。
-        optionsBuilder.UseSqlServer("Server=26.99.236.84\\GOODSQL,1433;Database=RandomWord;User Id=sa;Password=114514;Encrypt=False;");
+        //optionsBuilder.UseSqlServer("Server=26.99.236.84\\GOODSQL,1433;Database=RandomWord;User Id=sa;Password=114514;Encrypt=False;");
         //小鼠数据库的IP地址，使用时取消注释。
     }
 
