@@ -11,7 +11,7 @@ public class SqlDataContext : DbContext
     public DbSet<CET4> CET4 { get; set; } // 对应数据库中的 CET4 表。
     public DbSet<CET6> CET6 { get; set; } // 对应数据库中的 CET6 表。
     public DbSet<MiddleSchool> MiddleSchool { get; set; } // 对应数据库中的 初中 表。
-    public DbSet<HighSchool> Highschool { get; set; } // 对应数据库中的 高中 表。
+    public DbSet<HighSchool> HighSchool { get; set; } // 对应数据库中的 高中 表。
     public DbSet<KY> KY { get; set; } // 对应数据库中的 四级 表。
     public DbSet<TF> TF { get; set; } // 对应数据库中的 托福 表。
 
@@ -25,7 +25,7 @@ public class SqlDataContext : DbContext
     {
         //optionsBuilder.UseSqlServer("Server=26.184.142.179,1433;Database=RandomWord;User Id=sa;Password=114514;Encrypt=False;");
         //zibu数据库的IP地址，使用时取消注释。
-        optionsBuilder.UseSqlServer("Server=26.99.236.84\\GOODSQL;Database=RandomWord;User Id=sa;Password=114514;Encrypt=False;");
+        optionsBuilder.UseSqlServer("Server=26.99.236.84\\GOODSQL,1433;Database=RandomWord;User Id=sa;Password=114514;Encrypt=False;");
         //小鼠数据库的IP地址，使用时取消注释。
     }
 
