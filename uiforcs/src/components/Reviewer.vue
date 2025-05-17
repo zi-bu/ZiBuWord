@@ -75,53 +75,69 @@ function Next() {
 </script>
 
 <template>
-  <div id="reviewer" class="card">
-    <transition name="fade">
-      <div id="reviewerInside" v-show="listCount !== 0">
-        <h1 class="card-title">{{word}}</h1>
-        <div id="infoContainer" class="card">
-          <transition name="fade">
-            <pre v-if="showInfo" id="info">{{info}}</pre>
-          </transition>
+  <div class="background">
+    <div id="reviewer" class="card">
+      <transition name="fade">
+        <div v-show="listCount !== 0" id="reviewerInside">
+          <h1 class="card-title">{{word}}</h1>
+          <div id="infoContainer" class="card">
+            <transition name="fade">
+              <pre v-if="showInfo" id="info">{{info}}</pre>
+            </transition>
+          </div>
+          <div>
+            <button
+                v-if="showButton"
+                id="define-btn"
+                class="btn btn-light"
+                type="button"
+                @click="chooseYes">
+              认识
+            </button>
+            <button
+                v-if="showButton"
+                id="define-btn"
+                class="btn btn-light"
+                type="button"
+                @click="chooseNo">
+              不认识
+            </button>
+            <button
+                v-if="!showButton"
+                id="next-btn"
+                class="btn btn-light"
+                type="button"
+                @click="Next">
+              下一个
+            </button>
+          </div>
         </div>
+      </transition>
+      <transition name="fade">
+        <div v-show="listCount === 0" id="overcard" class="card">
+          <p>本队列单词复习完毕</p>
+        </div>
+      </transition>
+      <transition name="fade">
         <div>
-          <button
-              id="define-btn"
-              @click="chooseYes"
-              v-if="showButton"
-              type="button"
-              class="btn btn-light">
-            认识
-          </button>
-          <button
-              id="define-btn"
-              @click="chooseNo"
-              v-if="showButton"
-              type="button"
-              class="btn btn-light">
-            不认识
-          </button>
-          <button
-              id="next-btn"
-              @click="Next"
-              v-if="!showButton"
-              type="button"
-              class="btn btn-light">
-            下一个
-          </button>
+          <button v-show="listCount === 0" id="define-btn" class="btn btn-light" @click="Next">开始新的背诵队列</button>
+          <button v-show="listCount === 0" id="define-btn" class="btn btn-light" @click="">返回主页面</button>
         </div>
-      </div>
-    </transition>
-    <transition name="fade">
-    <div>
-    <p v-show="listCount === 0">本队列单词复习完毕</p>
-    <button v-show="listCount === 0" @click="Next" >开始新的背诵队列</button>
+      </transition>
     </div>
-    </transition>
   </div>
 </template>
 
 <style scoped>
+.background{
+  background-image: url('/img/background/7.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 800px;
+  width: 600px;
+}
+
 #define-btn{
   height:  60px;
   width: 225px;
@@ -150,12 +166,6 @@ function Next() {
   font-weight: bold;
 }
 #reviewer {
-  background-color: #eaeaea;
-  background-image: url("https://img.picui.cn/free/2025/05/15/6825fa0213f67.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-color: rgba(234, 234, 234, 0.7);
   height: 800px;
   width: 600px;
   color: black;
@@ -196,6 +206,23 @@ function Next() {
   margin-left: 10px;
   margin-top: 5px;
 }
+
+#overcard{
+  height: 60px;
+  width: 450px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.64);
+}
+#overcard p{
+  margin-left: 10px;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
 
 #info{
   font-size: 18px;

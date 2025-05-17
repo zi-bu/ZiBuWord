@@ -29,7 +29,7 @@ public class ReviewClass(IWord w1)
         string? information = null;
         for (var i = 0; i < Word.pos.Count; i++)
         {
-            information += "." + Word.pos[i] +" " + Word.translations[i]+"\n";
+            information += Word.pos[i] + ". " + Word.translations[i]+"\n";
         }
 
         if (Word.phrases != null)
