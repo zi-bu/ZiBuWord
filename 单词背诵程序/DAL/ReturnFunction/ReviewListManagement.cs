@@ -15,7 +15,7 @@ public class ReviewListManagement : IReviewListManagement
     /// <returns></returns>
     public IWord GetRandomWordForReview()
     {
-        return new Word(DictionarySelect.userDictionarySelect);
+        return new Word(UserDataNow.userDictionarySelect);
     }
 
     /// <summary>

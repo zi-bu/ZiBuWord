@@ -15,7 +15,7 @@ public class WordManagement : IWordManagement
     /// <returns></returns>
     public IWord GetRandomWordForReciter()
     {
-        return new Word(DictionarySelect.userDictionarySelect);
+        return new Word(UserDataNow.userDictionarySelect);
     }
 
     /// <summary>
