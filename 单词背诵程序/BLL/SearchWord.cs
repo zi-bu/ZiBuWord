@@ -7,34 +7,27 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
+    using DAL;
     using IBLLBridgeDAL;
     using IBLLBridgeDAL.WordOperation;
 
-    
-        public class SearchWordEnglish
-        {
-        private readonly IWordManagement _wordManagement;
 
-        public SearchWordEnglish(IWordManagement wordManagement)
-        {
-            _wordManagement = wordManagement;
-        }
-
+    public class SearchWordEnglish
+    {
         /// <summary>
-        /// 粗查找：返回所有包含输入字符串的单词
+        /// 查询指定表，先精确查找，找不到再模糊查找
         /// </summary>
-        public List<IWord> FuzzySearch(string input)
+        public List<string> FuzzySearch(string input, Formid formid)
         {
             if (string.IsNullOrWhiteSpace(input))
-                return new List<IWord>();
-            //防止无效输入
+                return new List<string>();
 
-            var allWords = _wordManagement.GetAllWords();
-            return allWords
-                .Where(w => w.word.Contains(input, StringComparison.OrdinalIgnoreCase))
-                .ToList();
+            var exact = WordMover.FindExactWord(input, formid);
+            if (!string.IsNullOrEmpty(exact))
+                return new List<string> { exact };
+
+            return WordMover.FindFuzzyWords(input, formid);
         }
+    }
 
     }
-    
-}

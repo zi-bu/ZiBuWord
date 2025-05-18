@@ -35,11 +35,4 @@ public class WordManagement : IWordManagement
         //未实现
     }
 
-    public List<IWord> GetAllWords()
-    {
-        // 这里应从数据库获取所有单词（现在写的是伪方法）
-        List<IWord> words = new List<IWord>();
-        
-        return words;
-    }
 }

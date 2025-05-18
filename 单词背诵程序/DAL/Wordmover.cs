@@ -413,4 +413,43 @@ public static class WordMover
             }
         }
     }
+    public static string? FindExactWord(string input, Formid formid)
+    {
+        using (var db = new SqlDataContext())
+        {
+            switch (formid)
+            {
+                case Formid.CET4:
+                    return db.CET4.FirstOrDefault(w => w.Word.ToLower() == input.ToLower())?.Word;
+                case Formid.CET6:
+                    return db.CET6.FirstOrDefault(w => w.Word.ToLower() == input.ToLower())?.Word;
+                // 其他表同理...
+                default:
+                    throw new ArgumentException("未知单词来源表");
+            }
+        }
+    }
+
+    public static List<string> FindFuzzyWords(string input, Formid formid)
+    {
+        using (var db = new SqlDataContext())
+        {
+            switch (formid)
+            {
+                case Formid.CET4:
+                    return db.CET4
+                        .Where(w => EF.Functions.Like(w.Word, $"%{input}%"))
+                        .Select(w => w.Word)
+                        .ToList();
+                case Formid.CET6:
+                    return db.CET6
+                        .Where(w => EF.Functions.Like(w.Word, $"%{input}%"))
+                        .Select(w => w.Word)
+                        .ToList();
+                // 其他表同理...
+                default:
+                    throw new ArgumentException("未知单词来源表");
+            }
+        }
+    }
 }

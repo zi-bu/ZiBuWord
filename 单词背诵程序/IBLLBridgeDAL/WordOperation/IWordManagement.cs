@@ -6,5 +6,5 @@ public interface IWordManagement
     void RemoveWordFromeLearningList(string word); //将该单词从学习列表中删除
     void AddWordToReview(IWord word); //添加单词到复习列表 这个时候
 
-    List<IWord> GetAllWords(); // 新增：获取所有单词
+    
 }

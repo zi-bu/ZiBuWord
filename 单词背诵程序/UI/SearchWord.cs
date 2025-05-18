@@ -53,10 +53,13 @@ namespace UI
 
         public void button1_Click(object sender, EventArgs e)
         {
-            var searcher = new SearchWordEnglish(new WordManagement());
-            var result = searcher.FuzzySearch(textBox1.Text.Trim());
+            
+            var searcher = new SearchWordEnglish();
+            // 这里以CET4为例，实际可根据用户选择传递Formid
+            var result = searcher.FuzzySearch(textBox1.Text.Trim(), Formid.CET4);
             listBox1.Items.Clear();
-            listBox1.Items.AddRange(result.Select(w => w.word).ToArray());
+            listBox1.Items.AddRange(result.ToArray());
+        
         }
 
         private void button2_Click(object sender, EventArgs e)
