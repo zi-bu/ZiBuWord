@@ -1,12 +1,34 @@
 ﻿
 <script setup>
-import {onMounted, ref} from "vue";
+import {onMounted, ref, computed} from "vue";
+import { useMouse } from "@vueuse/core";
 
+const { x, y } = useMouse();
+const containerRef = ref(null)
+
+const maskPosition = computed(() => `${relativeX.value}px ${relativeY.value}px`);
 const word = ref('');
 const info = ref('');
 const showInfo = ref(false);
 const showButton = ref(true);
 const listCount = ref(1);
+const { relativeX, relativeY } = useContainerMouse()
+
+function useContainerMouse() {
+  const { x, y } = useMouse()
+  
+  const relativeX = computed(() => {
+    const rect = containerRef.value?.getBoundingClientRect()
+    return rect ? x.value - rect.left : 0
+  })
+  
+  const relativeY = computed(() => {
+    const rect = containerRef.value?.getBoundingClientRect()
+    return rect ? y.value - rect.top : 0
+  })
+
+  return { relativeX, relativeY }
+}
 
 async function fetchWord() {
   const response = await fetch('http://localhost:5200/api/ReviewWord');
@@ -15,7 +37,9 @@ async function fetchWord() {
   info.value = data.infoOfReview;
   showInfo.value = false;
   showButton.value = true;
+
 }
+
 
 async function fetchWordListCount() {
   const response = await fetch('http://localhost:5200/api/ReviewWord/wordListCount');
@@ -75,15 +99,19 @@ function Next() {
 </script>
 
 <template>
-  <div class="background">
-    <div id="reviewer" class="card">
-      <transition name="fade">
+    <p>鼠标坐标: {{ x }}, {{ y }}</p>
+    <p>maskPosition: {{ maskPosition }}</p>
+    <div ref="containerRef" id="reviewer" class="card">
+      <span id="dot"></span>
+      <div class="background-clear"></div>
+      <div class="background"></div>
+
         <div v-show="listCount !== 0" id="reviewerInside">
           <h1 class="card-title">{{word}}</h1>
           <div id="infoContainer" class="card">
-            <transition name="fade">
+            
               <pre v-if="showInfo" id="info">{{info}}</pre>
-            </transition>
+            
           </div>
           <div>
             <button
@@ -112,30 +140,35 @@ function Next() {
             </button>
           </div>
         </div>
-      </transition>
-      <transition name="fade">
+      
+      
         <div v-show="listCount === 0" id="overcard" class="card">
           <p>本队列单词复习完毕</p>
+          
         </div>
-      </transition>
-      <transition name="fade">
         <div>
-          <button v-show="listCount === 0" id="define-btn" class="btn btn-light" @click="Next">开始新的背诵队列</button>
-          <button v-show="listCount === 0" id="define-btn" class="btn btn-light" @click="">返回主页面</button>
+          <button>按钮</button>
         </div>
-      </transition>
+      
+        
+        
+        
+      
+
     </div>
-  </div>
+
 </template>
 
 <style scoped>
-.background{
-  background-image: url('/img/background/7.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 800px;
-  width: 600px;
+
+#dot{
+  position: absolute;
+  top : v-bind(mouseY)px;
+  left: v-bind(mouseX)px;
+  background: url('img/background/7.jpg') center/cover no-repeat;
+  filter: blur(0px);
+  z-index: 0;
+
 }
 
 #define-btn{
@@ -173,8 +206,37 @@ function Next() {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 0;
+}
+.background {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('img/background/7.jpg') center/cover no-repeat;
+  filter: blur(8px);
+  z-index: -2;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.background-clear {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('img/background/7.jpg') center/cover no-repeat;
+  filter: blur(0px);
+  z-index: -1;
+  mask-image: radial-gradient(circle at 0px 0px, white 20%, black 20%);
+  mask-repeat: no-repeat;
+  mask-mode: luminance;
+  mask-size: 100%;
+  mask-position: v-bind(maskPosition);
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-mask-clip: stroke-box;
+  mask-clip: stroke-box;
+  -webkit-mask-origin: border-box;
+  mask-origin: border-box;
 }
 #reviewerInside{
+  position: relative;
+  z-index: 1;
   height: 800px;
   width: 600px;
   color: black;
@@ -226,14 +288,5 @@ function Next() {
 
 #info{
   font-size: 18px;
-}
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-}
-.fade-enter-to, .fade-leave-from {
-  opacity: 1;
 }
 </style>
