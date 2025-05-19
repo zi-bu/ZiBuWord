@@ -1,6 +1,8 @@
 ﻿using DAL.Context;
 using IBLLBridgeDAL.UserManagement;
 
+
+
 namespace DAL.ReturnFunction;
 
 /// <summary>
@@ -26,7 +28,7 @@ public class UserDataJudgment : IUserRegisterService, IUserLoginService
         {
             try
             {
-                var user = db.UserData.FirstOrDefault(u => u.UserName == username && u.UserPassword == password);
+                var user = db.UserData.FirstOrDefault(u => u.UserName == username && VerifyPassword(password, u.UserPassword));
                 //使用LINQ查询数据库中的用户数据（第一次匹配）
                 if (user != null) return true;
 
@@ -110,4 +112,5 @@ public class UserDataJudgment : IUserRegisterService, IUserLoginService
         else
             throw new Exception("用户名已存在");
     }
+
 }
