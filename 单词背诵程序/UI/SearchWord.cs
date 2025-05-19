@@ -55,8 +55,7 @@ namespace UI
         {
             
             var searcher = new SearchWordEnglish();
-            // 这里以CET4为例，实际可根据用户选择传递Formid
-            var result = searcher.FuzzySearch(textBox1.Text.Trim(), Formid.CET4);
+            var result = searcher.FuzzySearch(textBox1.Text.Trim());
             listBox1.Items.Clear();
             listBox1.Items.AddRange(result.ToArray());
         
