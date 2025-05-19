@@ -17,11 +17,33 @@ public static class RiciterOrder
         .ToList();
 
     //创建一个单词列表的认识标记
+    public static void RemoveWordFromRiciterList()
+    {
+        WordList.RemoveAt(Index); //从单词列表中删除单词
+    }
+    //从单词列表中删除单词
     public static void CreateOrRefreshNewWordList()
     {
         WordList = Enumerable
             .Range(0, 10)
             .Select(_ => WordManagement.GetRandomWordForReciter())
             .ToList();
+    }
+    public static void CheckBoundary()//检查边界
+    {
+        Console.WriteLine("现在的索引是" + Index);
+        Console.WriteLine("现在的单词列表长度是" + WordList.Count);
+        if (!(Index < WordList.Count)) //序列索引回拨
+            Index = 0;
+    }
+    public static bool CheckEmpty()//检查是否为空
+    {
+        if (WordList.Count == 0)
+        {
+            Console.WriteLine("单词列表为空");
+            Index = 0;
+            return true;
+        }
+        return false;
     }
 }

@@ -6,7 +6,7 @@ import { useMouse } from "@vueuse/core";
 const { x, y } = useMouse();
 const containerRef = ref(null)
 
-const maskPosition = computed(() => `${relativeX.value}px ${relativeY.value}px`);
+const maskPosition = computed(() => `${relativeX.value-300}px ${relativeY.value-400}px`);
 const word = ref('');
 const info = ref('');
 const showInfo = ref(false);
@@ -99,8 +99,7 @@ function Next() {
 </script>
 
 <template>
-    <p>鼠标坐标: {{ x }}, {{ y }}</p>
-    <p>maskPosition: {{ maskPosition }}</p>
+ 
     <div ref="containerRef" id="reviewer" class="card">
       <span id="dot"></span>
       <div class="background-clear"></div>
@@ -147,7 +146,8 @@ function Next() {
           
         </div>
         <div>
-          <button>按钮</button>
+          <button @click="Next" v-show="listCount === 0" class="btn btn-light zindex-2" id="YES-btn" >开始下一个队列</button>
+          <button v-show="listCount === 0" class="btn btn-light zindex-2" id="YES-btn" >返回主页面</button>
         </div>
       
         
@@ -212,7 +212,7 @@ function Next() {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   background: url('img/background/7.jpg') center/cover no-repeat;
-  filter: blur(8px);
+  filter: blur(4px);
   z-index: -2;
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -223,7 +223,7 @@ function Next() {
   background: url('img/background/7.jpg') center/cover no-repeat;
   filter: blur(0px);
   z-index: -1;
-  mask-image: radial-gradient(circle at 0px 0px, white 20%, black 20%);
+  mask-image: radial-gradient(circle at center, white 40%, black 70%);
   mask-repeat: no-repeat;
   mask-mode: luminance;
   mask-size: 100%;
@@ -288,5 +288,9 @@ function Next() {
 
 #info{
   font-size: 18px;
+}
+
+.zindex-2 {
+  z-index: 2;
 }
 </style>

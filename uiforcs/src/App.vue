@@ -1,10 +1,12 @@
 <script setup>
 import Reviewer from "@/components/Reviewer.vue";
+import Background from "./components/Background.vue";
+import Riciter from "./components/Riciter.vue";
 </script>
 
 <template>
     <div id="app-root">
-    <Reviewer />
+    <Riciter />
     </div>
 </template>
 
@@ -17,7 +19,6 @@ import Reviewer from "@/components/Reviewer.vue";
   align-items: center;
   justify-content: center;
   /* 可选：让页面背景和内容区分开 */
-  background: #f0f0f0;
 }
 body, html {
   width: 100%;
