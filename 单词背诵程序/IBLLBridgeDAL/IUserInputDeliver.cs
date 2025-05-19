@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace IBLLBridgeDAL
 {
-    public interface IDictionarySelect
+    public interface IUserInputDeliver
     {
-         bool SelectDictionary(string word);
+         void SelectDictionary(string word);
+         void RememberUser(string? user);
     }
 }
