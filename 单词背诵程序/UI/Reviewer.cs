@@ -54,4 +54,9 @@ public partial class Reviewer : MaterialForm
     {
         HandleButtonClick(false);
     }
+
+    private void Context_TextChanged(object sender, EventArgs e)
+    {
+
+    }
 }

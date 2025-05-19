@@ -5,6 +5,11 @@ namespace DAL.Context;
 public class UserContext : DbContext
 {
     public DbSet<User> UserData { get; set; }
+    // 对应数据库中的 UserData 表。
+    public DbSet<UserWord> UserWord { get; set; }
+    // 对应数据库中的 UserData 表。
+    public DbSet<FavoriteWord> FavoriteWords { get; set; }
+    // 对应数据库中的 UserFavoriteWords 表。
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -19,5 +24,18 @@ public class UserContext : DbContext
     {
         modelBuilder.Entity<User>().HasKey(u => u.UserID); // 配置主键。
         modelBuilder.Entity<User>().ToTable("UserData"); // 映射到 Users 表。
+        modelBuilder.Entity<UserWord>().ToTable("UserWord"); // 映射到 UserWord 表。
+        modelBuilder.Entity<UserWord>().HasKey(w => w.ID); // 配置主键。
+        modelBuilder.Entity<User>()
+            .HasOne(u => u.UserWord)
+            .WithOne(w => w.User)
+            .HasForeignKey<UserWord>(w => w.UserID);
+
+        modelBuilder.Entity<FavoriteWord>().HasKey(f => f.Id); // 配置主键。
+        modelBuilder.Entity<FavoriteWord>().ToTable("FavoriteWords"); // 映射到 FavoriteWords 表。
+        modelBuilder.Entity<FavoriteWord>()
+            .HasOne<User>()
+            .WithMany()
+            .HasForeignKey(f => f.UserId);
     }
 }
