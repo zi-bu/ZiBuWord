@@ -22,7 +22,7 @@ namespace BLL
         {
             _dal.AddFavorite(userId, wordId, dictType);
         }
-
+        
         /// <summary>
         /// 移除收藏
         /// </summary>
@@ -38,5 +38,52 @@ namespace BLL
         {
             return _dal.GetFavorites(userId);
         }
+        public List<FavoriteWordDetail> GetFavoriteDetails(int userId)
+        {
+            var favorites = _dal.GetFavorites(userId);
+            var result = new List<FavoriteWordDetail>();
+            using var db = new DAL.Context.SqlDataContext();
+            foreach (var fav in favorites)
+            {
+                string word = "";
+                string translation = "";
+                switch (fav.DictionaryType)
+                {
+                    case "CET4":
+                        var cet4 = db.CET4.FirstOrDefault(w => w.Id == fav.WordId);
+                        if (cet4 != null)
+                        {
+                            word = cet4.Word;
+                            translation = string.Join("; ", cet4.Translations.Select(t => t.Translation));
+                        }
+                        break;
+                    case "CET6":
+                        var cet6 = db.CET6.FirstOrDefault(w => w.Id == fav.WordId);
+                        if (cet6 != null)
+                        {
+                            word = cet6.Word;
+                            translation = string.Join("; ", cet6.Translations.Select(t => t.Translation));
+                        }
+                        break;
+                }
+                result.Add(new FavoriteWordDetail
+                {
+                    Id = fav.Id,
+                    DictionaryType = fav.DictionaryType,
+                    WordId = fav.WordId,
+                    Word = word,
+                    Translation = translation
+                });
+            }
+            return result;
+        }
+    }
+    public class FavoriteWordDetail
+    {
+        public int Id { get; set; }
+        public string? DictionaryType { get; set; }
+        public int WordId { get; set; }
+        public string? Word { get; set; }
+        public string? Translation { get; set; }
     }
 }
