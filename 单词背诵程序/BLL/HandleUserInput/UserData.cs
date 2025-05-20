@@ -14,6 +14,25 @@ public class UserData
     private readonly UserDataJudgment _userDataJudgment = new();
 
     /// <summary>
+    /// 这是一个函数，会对密码进行哈希处理<br />
+    /// 返回一个哈希处理过的密码<br />
+    /// </summary>
+    private string HashPassword(string password)
+    {
+        return BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt(12));
+        ///使用BCrypt.Net库进行密码哈希处理
+    }
+
+    /// <summary>
+    /// 这是一个函数，会对哈希处理过的密码进行验证<br />
+    /// 返回一个bool值来表示密码是否匹配<br />
+    /// </summary>
+    private bool VerifyPassword(string plainPassword, string hashedPassword)
+    {
+        return BCrypt.Net.BCrypt.Verify(plainPassword, hashedPassword);
+    }
+
+    /// <summary>
     ///     这是登录函数<br />
     ///     如果用户名和密码正确则返回1<br />
     ///     如果用户名不存在或者密码错误则返回0<br />
@@ -23,7 +42,8 @@ public class UserData
     /// <returns></returns>
     public int UserLogin(string username, string password)
     {
-        if (_userDataJudgment.CheckUserPassword(username, password))
+        
+        if (VerifyPassword(password,_userDataJudgment.ReturnUserPassword(username)))
         {
             Console.WriteLine("登录成功");
             return 1; //登录成功
@@ -58,7 +78,7 @@ public class UserData
             if (_userDataJudgment.InspectUser(username) == false && Regex.IsMatch(password, patternPassword) &&
                 Regex.IsMatch(username, patternUsername))
             {
-                _userDataJudgment.CreateUser(username, password);
+                _userDataJudgment.CreateUser(username,HashPassword(password));
                 Console.WriteLine("注册成功");
                 return 1; //注册成功
             }

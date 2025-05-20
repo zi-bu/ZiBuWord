@@ -20,10 +20,10 @@ public interface IUserRegisterService //用户注册服务接口
 public interface IUserLoginService //用户登录服务接口
 {
     /// <summary>
-    ///     检测一个用户密码是否正确
+    ///  传入一个用户名，返回一个该用户的密码
     /// </summary>
     /// <param name="username"></param>
     /// <param name="password"></param>
     /// <returns></returns>
-    bool CheckUserPassword(string username, string password);
+    string ReturnUserPassword(string username);
 }

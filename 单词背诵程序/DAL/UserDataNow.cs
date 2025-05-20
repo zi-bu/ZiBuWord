@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-        public class UserDataNow : IDictionarySelect
+    public class UserDataNow : IDictionarySelect
+    {
+
+        public static Formid userDictionarySelect = Formid.CET4;
+
+
+        internal static string NowUser;
+
+        public bool SelectDictionary(string word)
         {
-
-                public static Formid userDictionarySelect = Formid.CET4;
-
-
-                internal static string NowUser;
-
-                public bool SelectDictionary(string word)
-                {
-                        return Enum.TryParse(word, out userDictionarySelect);
-                }
+            return Enum.TryParse(word, out userDictionarySelect);
         }
+    }
 }
