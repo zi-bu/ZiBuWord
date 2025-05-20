@@ -42,15 +42,25 @@ public class UserData
     /// <returns></returns>
     public int UserLogin(string username, string password)
     {
-        
-        if (VerifyPassword(password,_userDataJudgment.ReturnUserPassword(username)))
+        try
         {
-            Console.WriteLine("登录成功");
-            return 1; //登录成功
+            if (_userDataJudgment.InspectUser(username) == true)
+            {
+                //如果用户名不存在则返回0
+                if (VerifyPassword(password, _userDataJudgment.ReturnUserPassword(username)))
+                {
+                    Console.WriteLine("登录成功");
+                    return 1; //登录成功
+                }
+            }
+            Console.WriteLine("密码错误");
+            return 0; //密码错误
         }
-
-        Console.WriteLine("登录失败");
-        return 0; //登录失败(用户名不存在或密码错误)
+        catch (Exception e)
+        {
+            Console.WriteLine("登录失败: " + e.Message);
+            return -1; //登录失败（引发异常)
+        }
     }
 
     /// <summary>
@@ -58,8 +68,6 @@ public class UserData
     ///     如果用户名和密码都匹配正则表达式、数据库中没有重名则返回1<br />
     ///     如果用户名已存在或者密码不匹配正则表达式则返回0<br />
     ///     抛出异常则返回-1<br />
-    ///     密码正则表达式<br />
-    ///     <code>"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$"</code>
     ///     用户名正则表达式<br />
     ///     <code>"^[a-zA-Z][a-zA-Z0-9_]{4,10}$"</code>
     /// </summary>
@@ -78,7 +86,7 @@ public class UserData
             if (_userDataJudgment.InspectUser(username) == false && Regex.IsMatch(password, patternPassword) &&
                 Regex.IsMatch(username, patternUsername))
             {
-                _userDataJudgment.CreateUser(username,HashPassword(password));
+                _userDataJudgment.CreateUser(username, HashPassword(password));
                 Console.WriteLine("注册成功");
                 return 1; //注册成功
             }
