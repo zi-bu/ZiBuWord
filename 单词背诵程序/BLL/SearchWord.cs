@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+namespace BLL
+{
     using DAL;
     using IBLLBridgeDAL;
     using IBLLBridgeDAL.WordOperation;
-namespace BLL
-{
 
 
     public class SearchWordEnglish
@@ -19,29 +20,25 @@ namespace BLL
         /// <summary>
         /// 在所有表中查找，优先精确匹配，否则合并所有表的模糊匹配
         /// </summary>
-        public List<string> FuzzySearch(string input)
-        {
-            if (string.IsNullOrWhiteSpace(input))
-                return new List<string>();
+            private readonly IWordQuery _wordQuery;
 
-            // 先遍历所有表做精确查找
-            foreach (Formid formid in Enum.GetValues(typeof(Formid)))
+            public SearchWordEnglish(IWordQuery wordQuery)
             {
-                var exact = WordMover.FindExactWord(input, formid);
-                if (!string.IsNullOrEmpty(exact))
-                    return new List<string> { exact };
+                _wordQuery = wordQuery;
             }
 
-            // 没有精确匹配，合并所有表的模糊查找结果
-            var result = new List<string>();
-            foreach (Formid formid in Enum.GetValues(typeof(Formid)))
+            public List<IWord> FuzzySearch(string input)
             {
-                var fuzzy = WordMover.FindFuzzyWords(input, formid);
-                result.AddRange(fuzzy);
-            }
+                if (string.IsNullOrWhiteSpace(input))
+                    return new List<IWord>();
 
-            // 去重
-            return result.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+                var exact = _wordQuery.FindExactWord(input);
+                if (exact != null)
+                    return new List<IWord> { exact };
+
+                return _wordQuery.FindFuzzyWords(input);
+            }
+            
         }
     }
-    }
+    

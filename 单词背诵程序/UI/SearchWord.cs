@@ -53,12 +53,11 @@ namespace UI
 
         public void button1_Click(object sender, EventArgs e)
         {
-            
-            var searcher = new SearchWordEnglish();
+
+            var searcher = new SearchWordEnglish(new WordQueryDAL());
             var result = searcher.FuzzySearch(textBox1.Text.Trim());
             listBox1.Items.Clear();
-            listBox1.Items.AddRange(result.ToArray());
-        
+            listBox1.Items.AddRange(result.Select(w => w.word).ToArray());
         }
 
         private void button2_Click(object sender, EventArgs e)
