@@ -43,7 +43,7 @@ public class UserData
     public int UserLogin(string username, string password)
     {
         
-        if (_userDataJudgment.CheckUserPassword(username, HashPassword(password)))
+        if (VerifyPassword(password,_userDataJudgment.ReturnUserPassword(username)))
         {
             Console.WriteLine("登录成功");
             return 1; //登录成功
