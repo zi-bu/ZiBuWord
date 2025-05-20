@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace BLL
-{
     using DAL;
     using IBLLBridgeDAL;
     using IBLLBridgeDAL.WordOperation;
+namespace BLL
+{
 
 
     public class SearchWordEnglish
