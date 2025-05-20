@@ -1,7 +1,8 @@
 using BLL;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddControllers();
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -74,7 +75,7 @@ app.MapGet("/api/RiciterWord/selection",
     () =>
     {
         var accurateWord = Selection.AccurateWord.word; //正确的单词
-        var selection = Selection.Selection.Select(word => word.pos[0] + word.translations[0]).ToList(); //选项
+        var selection = Selection.Selection;
         var result =
             new
             {
@@ -85,31 +86,41 @@ app.MapGet("/api/RiciterWord/selection",
         return Results.Ok(result);
     }
 );
-//提供按钮的事件
-app.MapPost("/api/RiciterWord/EventYes",//选择认识时发生的事件
-    () =>
-    {
 
-        RiciterOrder.RemoveWordFromRiciterList(); //从单词列表中删除单词
-        RiciterOrder.CheckBoundary(); //下标回拨检验
-        if (RiciterOrder.CheckEmpty()) //检查是否为空
+//提供按钮的事件
+app.MapPost("/api/RiciterWord/Event",//选择认识时发生的事件
+    async ([FromBody] AnswerRequest request) =>
+    {//获取请求体
+        Console.WriteLine($"接收到结果: {request.Result}");
+        if (request.Result)
         {
-            RiciterOrder.CreateOrRefreshNewWordList(); //创建新的单词列表
+            RiciterOrder.RemoveWordFromRiciterList(); //从单词列表中删除单词
+            RiciterOrder.CheckBoundary(); //下标回拨检验
+            if (RiciterOrder.CheckEmpty()) //检查是否为空
+            {
+                RiciterOrder.CreateOrRefreshNewWordList(); //创建新的单词列表
+            }
+            RiciterOrder.Index++; //下标前进
+            return Results.Ok("操作成功,按钮Yes逻辑被执行");
         }
-        RiciterOrder.Index++; //下标前进
-        return Results.Ok("操作成功,按钮Yes逻辑被执行");
+        else
+        {
+            RiciterOrder.CheckBoundary(); //下标回拨检验
+            RiciterOrder.Index++; //下标前进
+            return Results.Ok("操作成功,按钮No逻辑被执行");
+        }
     }
 );
-app.MapPost("/api/RiciterWord/EventNo",//选择认识时发生的事件
-    () =>
-    {
-        RiciterOrder.CheckBoundary(); //下标回拨检验
-        RiciterOrder.Index++; //下标前进
-        return Results.Ok("操作成功,按钮No逻辑被执行");
-    }
-);
+
 
 /// <summary>
 /// 保持后端持续开放
 /// </summary>
+
 app.Run();
+
+public class AnswerRequest
+{
+    public bool Result { get; set; }
+}
+

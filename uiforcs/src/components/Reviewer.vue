@@ -146,8 +146,8 @@ function Next() {
           
         </div>
         <div>
-          <button @click="Next" v-show="listCount === 0" class="btn btn-light zindex-2" id="YES-btn" >开始下一个队列</button>
-          <button v-show="listCount === 0" class="btn btn-light zindex-2" id="YES-btn" >返回主页面</button>
+          <button @click="Next" v-show="listCount === 0" class="btn btn-light zindex-2 Overbtn1" id="define-btn" >开始下一个队列</button>
+          <button v-show="listCount === 0" class="btn btn-light zindex-2 Overbtn2" id="define-btn" >返回主页面</button>
         </div>
       
         
@@ -177,6 +177,12 @@ function Next() {
   margin-bottom: 50px;
   margin-top: 20px;
   font-weight: bold;
+  background: rgba(255, 255, 255, 0.778);
+}
+#define-btn:hover{
+  background: rgba(235, 148, 213, 0.778);
+  text-shadow: #b0e5d7bc 0px 0px 8px;
+  color: rgb(255, 255, 255);
 }
 #define-btn,
 #next-btn {
@@ -186,8 +192,9 @@ function Next() {
 }
 
 #YES-btn:hover,#next-btn:hover {
-  background-color: #4caf50; /* 绿色 */
-  color: white;
+  background-color: #39bc3de1; /* 绿色 */
+  color: rgb(255, 255, 255);
+  text-shadow: pink 0px 0px 8px;
   /*noinspection CssInvalidPropertyValue*/
   transition: background-color 0.2;
 }
@@ -197,15 +204,20 @@ function Next() {
   margin-bottom: 50px;
   margin-top: 20px;
   font-weight: bold;
+  background: rgba(255, 255, 255, 0.778);
 }
 #reviewer {
+  margin: 0 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
   height: 800px;
   width: 600px;
   color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+  
   z-index: 0;
 }
 .background {
@@ -251,11 +263,7 @@ function Next() {
   color: white;
   font-weight: bold;
   font-size: 48px;
-  text-shadow:
-      -2px -2px 0 #000,
-      2px -2px 0 #000,
-      -2px  2px 0 #000,
-      2px  2px 0 #000;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 1);
 }
 #infoContainer{
   background-color: rgba(255, 255, 255, 0.64);
@@ -277,6 +285,9 @@ function Next() {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.64);
 }
 #overcard p{
@@ -285,7 +296,20 @@ function Next() {
   font-weight: bold;
 }
 
-
+.Overbtn1{
+  position: absolute;
+  display: block;
+  top: 70%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+}
+.Overbtn2{
+  position: absolute;
+  display: block;
+  top: 70%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+}
 #info{
   font-size: 18px;
 }
