@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { defineEmits, ref, onMounted, computed } from 'vue'
+import { defineEmits, ref, computed } from 'vue'
+import Background from './Background - Main.vue'
 import { useMouse } from '@vueuse/core'
 const emit = defineEmits(['panelClick'])
 const isExpanding = ref(false) // 控制扩展动画
@@ -72,6 +73,8 @@ function handlePanelClick(idx: number) {
         transition: 'transform 0.3s cubic-bezier(.4,2.3,.3,1)',
         transform: `translate(${offsetX}px, ${offsetY}px)`
     }">
+
+
         <div v-for="(panel, idx) in panels" :key="panel.title" class="panel" :class="{
             active: idx === activeIndex,
             'blurred': idx !== activeIndex,
@@ -120,6 +123,18 @@ function handlePanelClick(idx: number) {
     /* 确保无外边距 */
     padding: 0;
     /* 确保无内边距 */
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    /* 半透明高光边框 */
+    box-shadow:
+        0 4px 24px 0 rgba(0, 0, 0, 0.10),
+        /* 外部柔和阴影 */
+        inset 0 1px 12px 0 rgba(255, 255, 255, 0.25),
+        /* 内部高光 */
+        inset 0 -2px 8px 0 rgba(0, 0, 0, 0.10);
+    /* 内部底部阴影 */
+    backdrop-filter: blur(2px);
+    /* 玻璃模糊质感 */
+    background-clip: padding-box;
 }
 
 .panel::after {
@@ -132,43 +147,70 @@ function handlePanelClick(idx: number) {
     background-position: center;
     background-repeat: no-repeat;
     z-index: 0;
-    filter: blur(4px);
+    filter: blur(2px);
     transition: filter 0.5s;
     pointer-events: none;
+    border-radius: 30px;
+    box-shadow:
+        0 0 0 2px rgba(245, 181, 255, 0.3) inset,
+        0 1.5px 8px 0 rgba(255, 255, 255, 0.10) inset;
+}
+
+.panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    /* 叠加一条明显的斜横条高光 */
+    background:
+        linear-gradient(45deg,
+            rgba(199, 131, 225, 0) 30%,
+            rgba(241, 154, 154, 0.28) 36%,
+            rgba(255, 255, 255, 0.0) 42%);
+    mix-blend-mode: lighten;
+    border-radius: inherit;
 }
 
 /* 激活面板样式（清晰） */
 .panel.active {
     flex: 5;
     filter: blur(0);
+    border-radius: 30px;
 }
 
 .panel.active::after {
     filter: blur(0);
+    border-radius: 30px;
 }
 
 /* 非激活面板始终模糊 */
 
 .panel.blurred::after {
-    filter: blur(4px);
+    filter: blur(2px);
+    border-radius: 30px;
 }
 
 .panel.expand-anim::after {
-    filter: blur(4px);
+    filter: blur(2px);
+    border-radius: 30px;
 }
 
 /* 激活面板切换页面前的模糊动画 */
 .panel.active-blur {
-    filter: blur(4px) !important;
+    filter: blur(2px) !important;
     transition: filter 0.5s;
+    border-radius: 30px;
 }
 
 .panel.blurred::after {
-    filter: blur(4px);
+    filter: blur(2px);
+    border-radius: 30px;
 }
 
 .panel.expand-anim::after {
-    filter: blur(4px);
+    filter: blur(2px);
+    border-radius: 30px;
 }
 
 /* 标题样式 */
@@ -182,6 +224,7 @@ function handlePanelClick(idx: number) {
     opacity: 0;
     transition: opacity 0.3s ease-in 0.4s;
     writing-mode: horizontal-tb;
+    border-radius: 30px;
     /* 默认横排 */
     text-shadow:
         0 0 8px rgba(0, 0, 0, 1),
@@ -221,7 +264,7 @@ function handlePanelClick(idx: number) {
     left: 0;
     width: 600px;
     height: 800px;
-    border-radius: 0;
+    border-radius: 30px;
     flex: none !important;
     z-index: 999;
     transition: all 0.6s cubic-bezier(.4, 2.3, .3, 1);

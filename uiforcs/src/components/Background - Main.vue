@@ -53,7 +53,7 @@ function useContainerMouse() {
   right: 0;
   bottom: 0;
   background: url('img/background/bg-Main.jpg') center/cover no-repeat;
-  filter: blur(8px);
+  filter: blur(10px);
   z-index: -3;
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -65,7 +65,7 @@ function useContainerMouse() {
   right: 0;
   bottom: 0;
   background: url('img/background/bg-Main.jpg') center/cover no-repeat;
-  filter: blur(0px);
+  filter: blur(4px);
   z-index: -2;
   mask-image: radial-gradient(circle at center, white 20%, black 75%);
   mask-repeat: no-repeat;

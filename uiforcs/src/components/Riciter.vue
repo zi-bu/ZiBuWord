@@ -106,7 +106,7 @@ onMounted(() => {
 }
 
 .main-panel {
-  margin: 0 auto;
+  margin: 0 0;
   position: absolute;
   bottom: 0;
   left: 0;

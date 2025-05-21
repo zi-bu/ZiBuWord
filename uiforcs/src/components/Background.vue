@@ -66,7 +66,7 @@ function useContainerMouse() {
   filter: blur(1px);
   z-index: -3;
   background-color: rgba(0, 0, 0, 0.4);
-  background-size: 105% 105%;
+  background-size: 100% 100%;
 }
 
 
@@ -89,6 +89,6 @@ function useContainerMouse() {
   mask-clip: stroke-box;
   -webkit-mask-origin: border-box;
   mask-origin: border-box;
-  background-size: 105% 105%;
+  background-size: 100% 100%;
 }
 </style>
