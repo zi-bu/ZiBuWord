@@ -13,31 +13,28 @@ namespace DAL.ReturnFunction;
 public class UserDataJudgment : IUserRegisterService, IUserLoginService
 {
     /// <summary>
-    ///     判断密码是否正确函数。<br />
-    ///     需要传入用户名和密码<br />
-    ///     此函数会检查用户名和密码是否正确<br />
-    ///     返回值为true说明密码正确<br />
-    ///     返回值为false说明密码错误<br />
+    ///     这个函数会通过用户名来返回hash密码<br />
     /// </summary>
     /// <param name="username"></param>
-    /// <param name="password"></param>
     /// <returns></returns>
-    public bool CheckUserPassword(string username, string password)
+    public string ReturnUserPassword(string username)
     {
         using (var db = new UserContext())
         {
             try
             {
-                var user = db.UserData.FirstOrDefault(u => u.UserName == username && VerifyPassword(password, u.UserPassword));
-                //使用LINQ查询数据库中的用户数据（第一次匹配）
-                if (user != null) return true;
-
-                return false;
+                //使用LINQ查询数据库中的用户数据(第一次匹配)
+                var user = db.UserData.FirstOrDefault(u => u.UserName == username);
+                if (user != null)
+                {
+                    return user.UserPassword; // 返回用户密码
+                }
+                return "用户不存在";
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
-                return false;
+                return "Error";
             }
         }
     }
