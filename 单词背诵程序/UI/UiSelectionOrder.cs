@@ -100,4 +100,11 @@ public partial class UiSelectionOrder : MaterialForm
     {
         ButtonJudge(3);
     }
+
+    private void GoHome_Click(object sender, EventArgs e)
+    {
+        HomePage homePage = new HomePage(); //创建一个新的主页窗口对象
+        FormHelper.ShowNewForm(this, homePage); //显示新窗口
+        Close(); //关闭当前窗口
+    }
 }
