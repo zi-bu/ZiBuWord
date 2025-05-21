@@ -34,10 +34,6 @@ namespace BLL
         /// <summary>
         /// 获取用户所有收藏
         /// </summary>
-        public List<FavoriteWord> GetFavorites(int userId)
-        {
-            return _dal.GetFavorites(userId);
-        }
         public List<FavoriteWordDetail> GetFavoriteDetails(int userId)
         {
             var favorites = _dal.GetFavorites(userId);
@@ -47,6 +43,8 @@ namespace BLL
             {
                 string word = "";
                 string translation = "";
+
+                // 1. 先查出单词原文
                 switch (fav.DictionaryType)
                 {
                     case "CET4":
@@ -54,7 +52,6 @@ namespace BLL
                         if (cet4 != null)
                         {
                             word = cet4.Word;
-                            translation = string.Join("; ", cet4.Translations.Select(t => t.Translation));
                         }
                         break;
                     case "CET6":
@@ -62,17 +59,74 @@ namespace BLL
                         if (cet6 != null)
                         {
                             word = cet6.Word;
-                            translation = string.Join("; ", cet6.Translations.Select(t => t.Translation));
+                        }
+                        break;
+                    case "HighSchool":
+                        var hs = db.HighSchool.FirstOrDefault(w => w.Id == fav.WordId);
+                        if (hs != null)
+                        {
+                            word = hs.Word;
+                        }
+                        break;
+                    case "MiddleSchool":
+                        var ms = db.MiddleSchool.FirstOrDefault(w => w.Id == fav.WordId);
+                        if (ms != null)
+                        {
+                            word = ms.Word;
+                        }
+                        break;
+                    case "KY":
+                        var ky = db.KY.FirstOrDefault(w => w.Id == fav.WordId);
+                        if (ky != null)
+                        {
+                            word = ky.Word;
+                        }
+                        break;
+                    case "TF":
+                        var tf = db.TF.FirstOrDefault(w => w.Id == fav.WordId);
+                        if (tf != null)
+                        {
+                            word = tf.Word;
+                        }
+                        break;
+                    case "SAT":
+                        var sat = db.SAT.FirstOrDefault(w => w.Id == fav.WordId);
+                        if (sat != null)
+                        {
+                            word = sat.Word;
                         }
                         break;
                 }
+
+                // 2. 获取 Formid
+                Formid formid = fav.DictionaryType switch
+                {
+                    "CET4" => Formid.CET4,
+                    "CET6" => Formid.CET6,
+                    "HighSchool" => Formid.HighSchool,
+                    "MiddleSchool" => Formid.MiddleSchool,
+                    "KY" => Formid.KY,
+                    "TF" => Formid.TF,
+                    _ => throw new Exception("未知词典类型")
+                };
+
+                // 3. 用 Word 类查释义和词性
+                string pos = "";
+                if (!string.IsNullOrEmpty(word))
+                {
+                    var wordObj = new DAL.Word(word, formid);
+                    var pairs = wordObj.translations.Zip(wordObj.pos, (tran, p) => $"{p}. {tran}");
+                    translation = string.Join("; ", pairs);
+                }
+
                 result.Add(new FavoriteWordDetail
                 {
                     Id = fav.Id,
                     DictionaryType = fav.DictionaryType,
                     WordId = fav.WordId,
                     Word = word,
-                    Translation = translation
+                    Translation = translation,
+                    Pos = pos
                 });
             }
             return result;
@@ -85,5 +139,6 @@ namespace BLL
         public int WordId { get; set; }
         public string? Word { get; set; }
         public string? Translation { get; set; }
+        public string? Pos { get; set; } 
     }
 }
