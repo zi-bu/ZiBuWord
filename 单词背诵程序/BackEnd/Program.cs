@@ -69,48 +69,74 @@ app.MapPost("/api/ReviewWord/EventNo",//选择不认识时发生的事件
     });
 
 //实例化背诵选项
-var Selection = new SelectionClass(RiciterOrder.WordList[RiciterOrder.Index]);
+
 //提供显示内容的api
 app.MapGet("/api/RiciterWord/selection",
     () =>
     {
-        var accurateWord = Selection.AccurateWord.word; //正确的单词
-        var selection = Selection.Selection;
-        var result =
-            new
+        bool finished = RiciterOrder.WordList.Count == 0;
+        if (finished)
+        {
+            var result = new
+            {
+                finished = true
+            };
+            return Results.Ok(result);
+        }
+        else
+        {
+            var Selection = new SelectionClass(RiciterOrder.WordList[RiciterOrder.Index]);
+            var accurateWord = Selection.AccurateWord.word;
+            var selection = Selection.Selection;
+            var result = new
             {
                 accurateWord,
-                selection
+                selection,
+                finished = false
             };
-        Console.WriteLine(accurateWord + "的信息已经成功送达至前端");
-        return Results.Ok(result);
+            Console.WriteLine(accurateWord + "的信息已经成功送达至前端");
+            return Results.Ok(result);
+        }
     }
 );
 
 //提供按钮的事件
-app.MapPost("/api/RiciterWord/Event",//选择认识时发生的事件
-    async ([FromBody] AnswerRequest request) =>
-    {//获取请求体
+app.MapPost("/api/RiciterWord/Event",
+    ([FromBody] AnswerRequest request) =>
+    {
         Console.WriteLine($"接收到结果: {request.Result}");
         if (request.Result)
         {
-            RiciterOrder.RemoveWordFromRiciterList(); //从单词列表中删除单词
-            RiciterOrder.CheckBoundary(); //下标回拨检验
-            if (RiciterOrder.CheckEmpty()) //检查是否为空
+            RiciterOrder.RemoveWordFromRiciterList();
+            if (RiciterOrder.CheckEmpty())
             {
-                RiciterOrder.CreateOrRefreshNewWordList(); //创建新的单词列表
+                // 不要立刻生成新列表！
+                RiciterOrder.Index = 0;
             }
-            RiciterOrder.Index++; //下标前进
+            else if (RiciterOrder.Index >= RiciterOrder.WordList.Count)
+            {
+                RiciterOrder.Index = 0;
+            }
             return Results.Ok("操作成功,按钮Yes逻辑被执行");
         }
         else
         {
-            RiciterOrder.CheckBoundary(); //下标回拨检验
-            RiciterOrder.Index++; //下标前进
+            RiciterOrder.Index++;
+            Console.WriteLine("现在的索引是" + RiciterOrder.Index);
+            if (RiciterOrder.Index >= RiciterOrder.WordList.Count)
+            {
+                RiciterOrder.Index = 0;
+            }
             return Results.Ok("操作成功,按钮No逻辑被执行");
         }
     }
 );
+app.MapPost("/api/RiciterWord/NewList", () =>
+{
+    RiciterOrder.CreateOrRefreshNewWordList();
+    RiciterOrder.Index = 0;
+    return Results.Ok("新队列已生成");
+});
 
 
 /// <summary>

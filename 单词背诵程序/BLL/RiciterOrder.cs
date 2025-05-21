@@ -19,7 +19,8 @@ public static class RiciterOrder
     //创建一个单词列表的认识标记
     public static void RemoveWordFromRiciterList()
     {
-        WordList.RemoveAt(Index); //从单词列表中删除单词
+        Console.WriteLine("即将删除单词" + WordList[Index].word + "的信息,索引为" + Index);
+        WordList.RemoveAt(Index);
     }
     //从单词列表中删除单词
     public static void CreateOrRefreshNewWordList()
