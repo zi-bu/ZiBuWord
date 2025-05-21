@@ -40,5 +40,24 @@ namespace BLL
             }
             
         }
+    public class SearchWordChinese
+    {
+        private readonly IWordQuery _wordQuery;
+        public SearchWordChinese(IWordQuery wordQuery)
+        {
+            _wordQuery = wordQuery;
+        }
+        public List<IWord> FuzzySearchChinese(string chinese)
+        {
+            if (string.IsNullOrWhiteSpace(chinese))
+                return new List<IWord>();
+
+            var exact = _wordQuery.FindExactWordByChinese(chinese);
+            if (exact != null)
+                return new List<IWord> { exact };
+
+            return _wordQuery.FindFuzzyWordsByChinese(chinese);
+        }
+    }
     }
     

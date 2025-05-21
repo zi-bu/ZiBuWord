@@ -7,5 +7,8 @@ namespace IBLLBridgeDAL
     {
         IWord? FindExactWord(string input);
         List<IWord> FindFuzzyWords(string input);
+
+        IWord? FindExactWordByChinese(string chinese);
+        List<IWord> FindFuzzyWordsByChinese(string chinese);
     }
 }

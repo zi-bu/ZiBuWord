@@ -37,7 +37,10 @@
             textBox2 = new TextBox();
             label2 = new Label();
             panel3 = new Panel();
-            listBox1 = new ListBox();
+            listView1 = new ListView();
+            单词 = new ColumnHeader();
+            词性 = new ColumnHeader();
+            释义 = new ColumnHeader();
             button3 = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -61,7 +64,8 @@
             中文搜索.Name = "中文搜索";
             中文搜索.Size = new Size(69, 20);
             中文搜索.TabIndex = 1;
-            中文搜索.Text = "中文搜索";
+            中文搜索.Text = "英文搜索";
+            中文搜索.Click += 中文搜索_Click;
             // 
             // panel1
             // 
@@ -70,7 +74,7 @@
             panel1.Controls.Add(button1);
             panel1.Location = new Point(42, 20);
             panel1.Name = "panel1";
-            panel1.Size = new Size(274, 125);
+            panel1.Size = new Size(281, 125);
             panel1.TabIndex = 2;
             panel1.Paint += panel1_Paint;
             // 
@@ -117,29 +121,30 @@
             label2.Name = "label2";
             label2.Size = new Size(69, 20);
             label2.TabIndex = 0;
-            label2.Text = "英文搜索";
+            label2.Text = "中文搜索";
             // 
             // panel3
             // 
-            panel3.Controls.Add(listBox1);
+            panel3.Controls.Add(listView1);
             panel3.Location = new Point(42, 165);
             panel3.Name = "panel3";
-            panel3.Size = new Size(645, 165);
+            panel3.Size = new Size(656, 177);
             panel3.TabIndex = 4;
             panel3.Paint += panel3_Paint;
             // 
-            // listBox1
+            // listView1
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(53, 30);
-            listBox1.MultiColumn = true;
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(550, 104);
-            listBox1.TabIndex = 0;
+            listView1.Columns.AddRange(new ColumnHeader[] { 单词, 词性, 释义 });
+            listView1.Location = new Point(17, 21);
+            listView1.Name = "listView1";
+            listView1.Size = new Size(612, 142);
+            listView1.TabIndex = 1;
+            listView1.UseCompatibleStateImageBehavior = false;
+            listView1.View = View.Details;
             // 
             // button3
             // 
-            button3.Location = new Point(605, 336);
+            button3.Location = new Point(605, 348);
             button3.Name = "button3";
             button3.Size = new Size(82, 29);
             button3.TabIndex = 5;
@@ -178,7 +183,10 @@
         private TextBox textBox2;
         private Label label2;
         private Panel panel3;
-        private ListBox listBox1;
         private Button button3;
+        private ListView listView1;
+        private ColumnHeader 单词;
+        private ColumnHeader 词性;
+        private ColumnHeader 释义;
     }
 }
