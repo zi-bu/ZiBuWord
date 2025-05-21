@@ -17,8 +17,6 @@ public partial class Login : MaterialForm
     ///     <br />这里由```子布```编写。
     ///     之后这段代码可能会被改写成一个函数（放入逻辑层），或者直接删除。
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
     public Login()
     {
         InitializeComponent();
@@ -63,8 +61,11 @@ public partial class Login : MaterialForm
         else if (result == 1)
         {
             BLL.HandleUserInput.UserInputDeliver.RememberUser(textUserName.Text);//将用户名到静态变量中，用于linq查询定位用户
+            MessageBox.Show("登录成功", "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
             var homePage = new HomePage(); //创建一个新的主页窗口对象
             FormHelper.ShowNewForm(this, homePage); //显示新窗口
         }
     }
+
+
 }
