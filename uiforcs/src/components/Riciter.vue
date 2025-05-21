@@ -63,6 +63,7 @@ onMounted(() => {
   fetchContent();
 })
 </script>
+
 <template>
   <div id="Box">
     <Background />
@@ -97,6 +98,11 @@ onMounted(() => {
   width: 600px;
   height: 800px;
   margin: 0;
+  border-radius: 32px;
+  /* 圆角 */
+  overflow: hidden;
+  /* 防止内容溢出圆角外 */
+
 }
 
 .main-panel {
