@@ -24,7 +24,7 @@ public class UserContext : DbContext
     {
         modelBuilder.Entity<User>().HasKey(u => u.UserID); // 配置主键。
         modelBuilder.Entity<User>().ToTable("UserData"); // 映射到 Users 表。
-        modelBuilder.Entity<UserWord>().ToTable("UserWord"); // 映射到 UserWord 表。
+        modelBuilder.Entity<UserWord>().ToTable("ReciteUserWord"); // 映射到 UserWord 表。
         modelBuilder.Entity<UserWord>().HasKey(w => w.ID); // 配置主键。
         modelBuilder.Entity<User>()
             .HasOne(u => u.UserWord)
