@@ -36,6 +36,7 @@ partial class UiSelectionOrder
         Choice2 = new Button();
         Choice3 = new Button();
         Choice4 = new Button();
+        button1 = new Button();
         SuspendLayout();
         // 
         // Question
@@ -88,11 +89,22 @@ partial class UiSelectionOrder
         Choice4.UseVisualStyleBackColor = true;
         Choice4.Click += Choice4_Click;
         // 
+        // button1
+        // 
+        button1.Location = new Point(615, 103);
+        button1.Name = "button1";
+        button1.Size = new Size(124, 43);
+        button1.TabIndex = 5;
+        button1.Text = "返回主页";
+        button1.UseVisualStyleBackColor = true;
+        button1.Click += GoHome_Click;
+        // 
         // UiSelectionOrder
         // 
         AutoScaleDimensions = new SizeF(11F, 24F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(800, 467);
+        Controls.Add(button1);
         Controls.Add(Choice4);
         Controls.Add(Choice3);
         Controls.Add(Choice2);
@@ -112,4 +124,6 @@ partial class UiSelectionOrder
     private System.Windows.Forms.Button Choice1;
 
     #endregion
+
+    private Button button1;
 }
