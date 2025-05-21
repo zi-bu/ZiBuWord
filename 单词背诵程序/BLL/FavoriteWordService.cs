@@ -28,6 +28,9 @@ namespace BLL
         /// </summary>
         public void RemoveFavorite(int userId, int wordId, string dictType)
         {
+            if (string.IsNullOrEmpty(dictType))
+                throw new ArgumentNullException(nameof(dictType), "词典类型不能为空");
+
             _dal.RemoveFavorite(userId, wordId, dictType);
         }
 
