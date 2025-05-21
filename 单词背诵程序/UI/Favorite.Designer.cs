@@ -28,49 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
-            单词原文 = new DataGridViewTextBoxColumn();
-            单词释义 = new DataGridViewTextBoxColumn();
-            取消收藏 = new DataGridViewButtonColumn();
             button4 = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            dataGridViewFavorites = new DataGridView();
+            colWord = new DataGridViewTextBoxColumn();
+            colTranslation = new DataGridViewTextBoxColumn();
+            colDict = new DataGridViewTextBoxColumn();
+            colRemove = new DataGridViewButtonColumn();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewFavorites).BeginInit();
             SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.BackgroundColor = SystemColors.Window;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { 单词原文, 单词释义, 取消收藏 });
-            dataGridView1.Location = new Point(12, 12);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(767, 744);
-            dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // 单词原文
-            // 
-            单词原文.HeaderText = "单词原文";
-            单词原文.MinimumWidth = 8;
-            单词原文.Name = "单词原文";
-            单词原文.ReadOnly = true;
-            单词原文.Width = 150;
-            // 
-            // 单词释义
-            // 
-            单词释义.HeaderText = "单词释义";
-            单词释义.MinimumWidth = 8;
-            单词释义.Name = "单词释义";
-            单词释义.ReadOnly = true;
-            单词释义.Width = 300;
-            // 
-            // 取消收藏
-            // 
-            取消收藏.HeaderText = "操作";
-            取消收藏.MinimumWidth = 8;
-            取消收藏.Name = "取消收藏";
-            取消收藏.Text = "";
-            取消收藏.Width = 150;
             // 
             // button4
             // 
@@ -83,25 +48,71 @@
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 
+            // dataGridViewFavorites
+            // 
+            dataGridViewFavorites.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewFavorites.Columns.AddRange(new DataGridViewColumn[] { colWord, colTranslation, colDict, colRemove });
+            dataGridViewFavorites.Location = new Point(6, 67);
+            dataGridViewFavorites.Name = "dataGridViewFavorites";
+            dataGridViewFavorites.RowHeadersWidth = 62;
+            dataGridViewFavorites.Size = new Size(736, 569);
+            dataGridViewFavorites.TabIndex = 10;
+            // 
+            // colWord
+            // 
+            colWord.DataPropertyName = "Word";
+            colWord.HeaderText = "单词";
+            colWord.MinimumWidth = 8;
+            colWord.Name = "colWord";
+            colWord.ReadOnly = true;
+            colWord.Width = 150;
+            // 
+            // colTranslation
+            // 
+            colTranslation.DataPropertyName = "Translation";
+            colTranslation.HeaderText = "释义";
+            colTranslation.MinimumWidth = 8;
+            colTranslation.Name = "colTranslation";
+            colTranslation.ReadOnly = true;
+            colTranslation.Width = 150;
+            // 
+            // colDict
+            // 
+            colDict.DataPropertyName = "DictionaryType";
+            colDict.HeaderText = "词典类型";
+            colDict.MinimumWidth = 8;
+            colDict.Name = "colDict";
+            colDict.ReadOnly = true;
+            colDict.Width = 150;
+            // 
+            // colRemove
+            // 
+            colRemove.HeaderText = "移除";
+            colRemove.MinimumWidth = 8;
+            colRemove.Name = "colRemove";
+            colRemove.UseColumnTextForButtonValue = true;
+            colRemove.Width = 150;
+            // 
             // Favorite
             // 
             AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(860, 809);
+            Controls.Add(dataGridViewFavorites);
             Controls.Add(button4);
-            Controls.Add(dataGridView1);
             Name = "Favorite";
             Text = "Favorite";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewFavorites).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn 单词原文;
-        private DataGridViewTextBoxColumn 单词释义;
-        private DataGridViewButtonColumn 取消收藏;
         private Button button4;
+        private DataGridView dataGridViewFavorites;
+        private DataGridViewTextBoxColumn colWord;
+        private DataGridViewTextBoxColumn colTranslation;
+        private DataGridViewTextBoxColumn colDict;
+        private DataGridViewButtonColumn colRemove;
     }
 }

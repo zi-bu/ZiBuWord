@@ -423,7 +423,14 @@ public static class WordMover
                     return db.CET4.FirstOrDefault(w => w.Word.ToLower() == input.ToLower())?.Word;
                 case Formid.CET6:
                     return db.CET6.FirstOrDefault(w => w.Word.ToLower() == input.ToLower())?.Word;
-                // 其他表同理...
+                case Formid.MiddleSchool:
+                    return db.MiddleSchool.FirstOrDefault(w => w.Word.ToLower() == input.ToLower())?.Word;
+                case Formid.HighSchool:
+                    return db.HighSchool.FirstOrDefault(w => w.Word.ToLower() == input.ToLower())?.Word;
+                case Formid.KY:
+                    return db.KY.FirstOrDefault(w => w.Word.ToLower() == input.ToLower())?.Word;
+                case Formid.TF:
+                    return db.TF.FirstOrDefault(w => w.Word.ToLower() == input.ToLower())?.Word;
                 default:
                     throw new ArgumentException("未知单词来源表");
             }
@@ -446,7 +453,26 @@ public static class WordMover
                         .Where(w => EF.Functions.Like(w.Word, $"%{input}%"))
                         .Select(w => w.Word)
                         .ToList();
-                // 其他表同理...
+                case Formid.MiddleSchool:
+                    return db.MiddleSchool
+                        .Where(w => EF.Functions.Like(w.Word, $"%{input}%"))
+                        .Select(w => w.Word)
+                        .ToList();
+                case Formid.HighSchool:
+                    return db.HighSchool
+                        .Where(w => EF.Functions.Like(w.Word, $"%{input}%"))
+                        .Select(w => w.Word)
+                        .ToList();
+                case Formid.KY:
+                    return db.KY
+                        .Where(w => EF.Functions.Like(w.Word, $"%{input}%"))
+                        .Select(w => w.Word)
+                        .ToList();
+                case Formid.TF:
+                    return db.TF
+                        .Where(w => EF.Functions.Like(w.Word, $"%{input}%"))
+                        .Select(w => w.Word)
+                        .ToList();
                 default:
                     throw new ArgumentException("未知单词来源表");
             }

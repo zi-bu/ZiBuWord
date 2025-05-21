@@ -14,6 +14,25 @@ public class UserData
     private readonly UserDataJudgment _userDataJudgment = new();
 
     /// <summary>
+    /// 这是一个函数，会对密码进行哈希处理<br />
+    /// 返回一个哈希处理过的密码<br />
+    /// </summary>
+    private string HashPassword(string password)
+    {
+        return BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt(12));
+        ///使用BCrypt.Net库进行密码哈希处理
+    }
+
+    /// <summary>
+    /// 这是一个函数，会对哈希处理过的密码进行验证<br />
+    /// 返回一个bool值来表示密码是否匹配<br />
+    /// </summary>
+    private bool VerifyPassword(string plainPassword, string hashedPassword)
+    {
+        return BCrypt.Net.BCrypt.Verify(plainPassword, hashedPassword);
+    }
+
+    /// <summary>
     ///     这是登录函数<br />
     ///     如果用户名和密码正确则返回1<br />
     ///     如果用户名不存在或者密码错误则返回0<br />
@@ -23,23 +42,44 @@ public class UserData
     /// <returns></returns>
     public int UserLogin(string username, string password)
     {
-        if (_userDataJudgment.CheckUserPassword(username, password))
+        try
         {
-            Console.WriteLine("登录成功");
-            return 1; //登录成功
+            // 首先检查用户是否存在
+            if (_userDataJudgment.InspectUser(username))
+            {
+                // 用户存在，验证密码
+                string hashedPassword = _userDataJudgment.ReturnUserPassword(username);
+                if (VerifyPassword(password, hashedPassword))
+                {
+                    Console.WriteLine("登录成功");
+                    return 1; // 登录成功
+                }
+                else
+                {
+                    // 为安全起见，不应该明确指出密码错误
+                    Console.WriteLine("用户名或密码错误");
+                    return 0; // 登录失败（密码错误）
+                }
+            }
+            else
+            {
+                // 为安全起见，不应该明确指出用户不存在
+                Console.WriteLine("用户名或密码错误");
+                return 0; // 登录失败（用户不存在）
+            }
         }
-
-        Console.WriteLine("登录失败");
-        return 0; //登录失败(用户名不存在或密码错误)
+        catch (Exception e)
+        {
+            Console.WriteLine("登录失败: " + e.Message);
+            return -1; // 登录失败（引发异常）
+        }
     }
 
     /// <summary>
     ///     这是注册函数<br />
     ///     如果用户名和密码都匹配正则表达式、数据库中没有重名则返回1<br />
-    ///     如果用户名已存在或者密码不匹配正则表达式则返回0<br />
+    ///     如果用户名已存在则返回10<br/>若密码不匹配正则表达式则返回11<br />
     ///     抛出异常则返回-1<br />
-    ///     密码正则表达式<br />
-    ///     <code>"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$"</code>
     ///     用户名正则表达式<br />
     ///     <code>"^[a-zA-Z][a-zA-Z0-9_]{4,10}$"</code>
     /// </summary>
@@ -51,20 +91,31 @@ public class UserData
         var patternPassword = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':""\\|,.<>\/?]{8,20}$";
         //密码必须包含大小写字母和数字的组合，可以使用特殊字符，不能包含汉字和其他非ASCII字符，长度在8-20之间
         var patternUsername = @"^[a-zA-Z][a-zA-Z0-9_]{4,10}$";
-        //用户名必须以字母开头，长度在5-11之间，只能包含字母、数字和下划线
+        //用户名长度在5-11之间，只能包含字母、数字和下划线
         //可以去这个网站在线验证正则表达式"https://www.jyshare.com/front-end/854/"
         try
         {
-            if (_userDataJudgment.InspectUser(username) == false && Regex.IsMatch(password, patternPassword) &&
-                Regex.IsMatch(username, patternUsername))
+            if (_userDataJudgment.InspectUser(username) == false)
+            //用户名不存在
             {
-                _userDataJudgment.CreateUser(username, password);
-                Console.WriteLine("注册成功");
-                return 1; //注册成功
+                if (Regex.IsMatch(username, patternUsername) && Regex.IsMatch(password, patternPassword))
+                //用户名和密码都匹配正则表达式
+                {
+                    _userDataJudgment.CreateUser(username, HashPassword(password));
+                    Console.WriteLine("注册成功");
+                    return 1; //注册成功
+                }
+                else
+                {
+                    Console.WriteLine("用户名或密码格式不正确");
+                    return 11; //注册失败（用户名或密码格式不正确）
+                }
             }
-
-            Console.WriteLine("注册失败");
-            return 0; //注册失败
+            else
+            {
+                Console.WriteLine("用户名已存在");
+                return 10; //注册失败（用户名已存在）
+            }
         }
         catch (Exception e)
         {

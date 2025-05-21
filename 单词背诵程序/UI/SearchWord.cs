@@ -17,6 +17,13 @@ namespace UI
         public SearchWord()
         {
             InitializeComponent();
+            listView1.View = View.Details;
+            listView1.Columns.Clear();
+            listView1.Columns.Add("单词", 120);
+            listView1.Columns.Add("词性", 80);
+            listView1.Columns.Add("释义", 500);
+            listView1.FullRowSelect = true;
+            listView1.GridLines = true;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -43,7 +50,7 @@ namespace UI
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -53,21 +60,39 @@ namespace UI
 
         public void button1_Click(object sender, EventArgs e)
         {
-            
-            var searcher = new SearchWordEnglish();
-            // 这里以CET4为例，实际可根据用户选择传递Formid
-            var result = searcher.FuzzySearch(textBox1.Text.Trim(), Formid.CET4);
-            listBox1.Items.Clear();
-            listBox1.Items.AddRange(result.ToArray());
-        
+
+            var searcher = new SearchWordEnglish(new WordQueryDAL());
+            var result = searcher.FuzzySearch(textBox1.Text.Trim());
+            listView1.Items.Clear();
+            foreach (var w in result)
+            {
+                var item = new ListViewItem(w.word);
+                item.SubItems.Add(string.Join("/", w.pos));
+                item.SubItems.Add(string.Join("；", w.translations));
+                listView1.Items.Add(item);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string text2 = textBox2.Text;//还没写完
+            var searcher = new SearchWordChinese(new WordQueryDAL());
+            var result = searcher.FuzzySearchChinese(textBox1.Text.Trim());
+            listView1.Items.Clear();
+            foreach (var w in result)
+            {
+                var item = new ListViewItem(w.word);
+                item.SubItems.Add(string.Join("/", w.pos));
+                item.SubItems.Add(string.Join("；", w.translations));
+                listView1.Items.Add(item);
+            }
         }
 
         private void SearchWord_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 中文搜索_Click(object sender, EventArgs e)
         {
 
         }

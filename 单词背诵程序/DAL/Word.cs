@@ -37,6 +37,14 @@ public class Word : IWord
     }
 
     //单词的各种属性
+    public Word(string word, Formid formid)
+    {
+        this.word = word;
+        tableid = formid;
+        WordMover.FindTranslations(word, formid, ref Translations, ref Pos);
+        WordMover.FindPhrases(word, formid, ref Phrases, ref PhraseTranslations);
+    }
+    //专门用于模糊查询的构造函数
 
     public string word { get; } // 单词
 
