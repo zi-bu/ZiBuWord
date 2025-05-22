@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL;
 using DAL.ReturnFunction;
+using IBLLBridgeDAL;
 
 namespace BLL
 {
@@ -54,6 +55,30 @@ namespace BLL
                     Word = word,
                     Translation = translation
                 });
+            }
+            return result;
+        }
+
+        public List<IWord> GetFavoriteWords(int userId)
+        {
+            var favorites = _dal.GetFavorites(userId);
+            var result = new List<IWord>();
+            foreach (var fav in favorites)
+            {
+                Formid formid = fav.DictionaryType switch
+                {
+                    "CET4" => Formid.CET4,
+                    "CET6" => Formid.CET6,
+                    "HighSchool" => Formid.HighSchool,
+                    "MiddleSchool" => Formid.MiddleSchool,
+                    "KY" => Formid.KY,
+                    "TF" => Formid.TF,
+                    _ => throw new Exception("未知词典类型")
+                };
+                string word = WordMover.GetWord(formid, fav.WordId);
+
+                var wordObj = new DAL.Word(word, formid);
+                result.Add(wordObj);
             }
             return result;
         }
