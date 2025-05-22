@@ -420,7 +420,7 @@ public static class WordMover
             }
         }
     }
-    public static string? FindExactWord(string input, Formid formid)
+    public static string? FindExactWordByEnglish(string input, Formid formid)
     {
         using (var db = new SqlDataContext())
         {
@@ -444,7 +444,7 @@ public static class WordMover
         }
     }
 
-    public static List<string> FindFuzzyWords(string input, Formid formid)
+    public static List<string> FindFuzzyWordsByEnglish(string input, Formid formid)
     {
         using (var db = new SqlDataContext())
         {
