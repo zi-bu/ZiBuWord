@@ -27,11 +27,6 @@ namespace BLL
             _wordQuery = wordQuery;
         }
 
-
-            public SearchWordEnglish(IWordQuery wordQuery)
-            {
-                _wordQuery = wordQuery;
-            }
         /// <summary>
         //调用_wordQuery接口的FindExactWord方法查找单词
         //如果找到，返回该单词的列表，否则调用FindFuzzyWords方法查找模糊匹配的单词列表

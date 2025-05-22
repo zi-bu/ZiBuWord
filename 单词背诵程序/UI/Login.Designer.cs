@@ -39,7 +39,7 @@
             // btnLogin
             // 
             btnLogin.Location = new Point(101, 419);
-            btnLogin.Margin = new Padding(2, 2, 2, 2);
+            btnLogin.Margin = new Padding(2);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(249, 41);
             btnLogin.TabIndex = 0;
@@ -60,7 +60,7 @@
             // textPassword
             // 
             textPassword.Location = new Point(101, 382);
-            textPassword.Margin = new Padding(2, 2, 2, 2);
+            textPassword.Margin = new Padding(2);
             textPassword.Name = "textPassword";
             textPassword.Size = new Size(251, 23);
             textPassword.TabIndex = 2;
@@ -69,7 +69,7 @@
             // textUserName
             // 
             textUserName.Location = new Point(101, 346);
-            textUserName.Margin = new Padding(2, 2, 2, 2);
+            textUserName.Margin = new Padding(2);
             textUserName.Name = "textUserName";
             textUserName.Size = new Size(251, 23);
             textUserName.TabIndex = 3;
@@ -107,9 +107,9 @@
             Controls.Add(textPassword);
             Controls.Add(btnRegister);
             Controls.Add(btnLogin);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "Login";
-            Padding = new Padding(10, 10, 10, 10);
+            Padding = new Padding(10);
             Text = " 登录";
             ResumeLayout(false);
             PerformLayout();
