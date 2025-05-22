@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Runtime.Intrinsics.X86;
 
 namespace DAL.Context;
 
@@ -13,8 +14,11 @@ public class UserContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(
-            "Server=26.184.142.179,1433;Database=UserData;User Id=sa;Password=114514;Encrypt=False;");
+        if (!optionsBuilder.IsConfigured)
+        {
+            // 使用ConnectionStringProvider获取连接字符串
+            optionsBuilder.UseSqlServer("Server = 26.184.142.179, 1433; Database = UserData; User Id = User1; Password = A@114514; Encrypt = False;");
+        }
         //zibu数据库的IP地址，使用时取消注释。
         //optionsBuilder.UseSqlServer("Server=26.99.236.84;Database=wordforms;User Id=sa;Password=114514;Encrypt=False;");
         //小鼠数据库的IP地址，使用时取消注释。
