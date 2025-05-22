@@ -17,9 +17,9 @@ const currentPageComponent = computed(() => {
 </script>
 
 <template>
-  <p class="watermark">图片源于画师@mutugi,仅用于展示</p>
+  <p class="watermark">图片源于画师pinterest,仅用于展示,非商业用途</p>
   <div id="app-root">
-    <transition name="fade-page" mode="out-in">
+    <transition name="scale-page" mode="out-in">
       <component :is="currentPageComponent" @panelClick="switchPage" :key="currentPage" />
     </transition>
   </div>
@@ -27,14 +27,38 @@ const currentPageComponent = computed(() => {
 
 
 <style>
-.fade-page-enter-active,
-.fade-page-leave-active {
-  transition: opacity 0.5s;
+.scale-page-enter-active,
+.scale-page-leave-active {
+  transition:
+    opacity 0.35s cubic-bezier(.4, 2.3, .3, 1),
+    transform 0.35s cubic-bezier(.4, 2.3, .3, 1);
+  will-change: opacity, transform;
 }
 
-.fade-page-enter-from,
-.fade-page-leave-to {
+
+
+.scale-page-enter-from {
   opacity: 0;
+  transform: scale(0.85)
+    /* 新页面从小到大 */
+  ;
+}
+
+.scale-page-enter-to {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scale-page-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scale-page-leave-to {
+  opacity: 0;
+  transform: scale(0.32)
+    /* 旧页面缩小消失 */
+  ;
 }
 
 .watermark {
@@ -47,6 +71,7 @@ const currentPageComponent = computed(() => {
   pointer-events: none;
   z-index: 9999;
   user-select: none;
+  border-radius: 30px;
 }
 
 #app-root {

@@ -1,7 +1,15 @@
 ﻿<script setup>
+
+import { defineEmits } from 'vue'
 import { onMounted, ref, computed } from "vue";
 import { useMouse } from "@vueuse/core";
+import { Back } from '@element-plus/icons-vue'
 
+const emit = defineEmits(['panelClick'])
+
+function goBack() {
+  emit('panelClick', 'Mainpage')
+}
 
 const centerX = 300 // 容器宽度一半
 const centerY = 400 // 容器高度一半
@@ -106,58 +114,75 @@ function Next() {
 </script>
 
 <template>
+  <div class="Container">
+    <div ref="containerRef" id="reviewer" class="card" :style="{
+      backgroundSize: '110% 110%',
+      backgroundPosition: 'center',
+      transition: 'transform 0.3s cubic-bezier(.4,2.3,.3,1)',
+      transform: `translate(${offsetX}px, ${offsetY}px)`
+    }">
 
-  <div ref="containerRef" id="reviewer" class="card" :style="{
-    backgroundSize: '110% 110%',
-    backgroundPosition: 'center',
-    transition: 'transform 0.3s cubic-bezier(.4,2.3,.3,1)',
-    transform: `translate(${offsetX}px, ${offsetY}px)`
-  }">
+      <div class="background-clear"></div>
+      <div class="background"></div>
 
-    <div class="background-clear"></div>
-    <div class="background"></div>
+      <div class="back-btn-pos">
+        <el-button circle size="large" @click="goBack">
+          <el-icon>
+            <Back />
+          </el-icon>
+        </el-button>
+      </div>
+      <div v-show="listCount !== 0" id="reviewerInside">
+        <h1 class="card-title">{{ word }}</h1>
+        <div id="infoContainer" class="card">
 
-    <div v-show="listCount !== 0" id="reviewerInside">
-      <h1 class="card-title">{{ word }}</h1>
-      <div id="infoContainer" class="card">
+          <pre v-if="showInfo" id="info">{{ info }}</pre>
 
-        <pre v-if="showInfo" id="info">{{ info }}</pre>
+        </div>
+        <div>
+          <button v-if="showButton" id="define-btn" class="btn btn-light" type="button" @click="chooseYes">
+            认识
+          </button>
+          <button v-if="showButton" id="define-btn" class="btn btn-light" type="button" @click="chooseNo">
+            不认识
+          </button>
+          <button v-if="!showButton" id="next-btn" class="btn btn-light" type="button" @click="Next">
+            下一个
+          </button>
+        </div>
+      </div>
+
+
+      <div v-show="listCount === 0" id="overcard" class="card">
+        <p>本队列单词复习完毕</p>
 
       </div>
       <div>
-        <button v-if="showButton" id="define-btn" class="btn btn-light" type="button" @click="chooseYes">
-          认识
-        </button>
-        <button v-if="showButton" id="define-btn" class="btn btn-light" type="button" @click="chooseNo">
-          不认识
-        </button>
-        <button v-if="!showButton" id="next-btn" class="btn btn-light" type="button" @click="Next">
-          下一个
-        </button>
+        <button @click="Next" v-show="listCount === 0" class="btn btn-light zindex-2 Overbtn1"
+          id="define-btn">开始下一个队列</button>
+
       </div>
+
+
+
+
+
+
     </div>
-
-
-    <div v-show="listCount === 0" id="overcard" class="card">
-      <p>本队列单词复习完毕</p>
-
-    </div>
-    <div>
-      <button @click="Next" v-show="listCount === 0" class="btn btn-light zindex-2 Overbtn1"
-        id="define-btn">开始下一个队列</button>
-      <button v-show="listCount === 0" class="btn btn-light zindex-2 Overbtn2" id="define-btn">返回主页面</button>
-    </div>
-
-
-
-
-
-
   </div>
-
 </template>
 
 <style scoped>
+.back-btn-pos {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  /* 只定位外层div，不影响el-button动画 */
+  z-index: 10;
+}
+
+
+
 #dot {
   position: absolute;
   top: v-bind(mouseY)px;
@@ -210,6 +235,23 @@ function Next() {
   margin-top: 20px;
   font-weight: bold;
   background: rgba(255, 255, 255, 0.778);
+}
+
+.Container {
+  #reviewer {
+    margin: 0 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 800px;
+    width: 600px;
+    color: black;
+
+
+    z-index: 0;
+  }
 }
 
 #reviewer {
@@ -316,8 +358,8 @@ function Next() {
 .Overbtn1 {
   position: absolute;
   display: block;
-  top: 70%;
-  left: 70%;
+  top: 60%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 

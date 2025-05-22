@@ -1,7 +1,13 @@
 <script setup>
 import Background from './Background.vue';
 import { onMounted, ref } from 'vue';
+import { Back } from '@element-plus/icons-vue'
 
+const emit = defineEmits(['panelClick'])
+
+function goBack() {
+  emit('panelClick', 'Mainpage')
+}
 const accurateWord = ref('');
 const selection = ref([]);
 const selectionWord = ref([]);
@@ -67,6 +73,14 @@ onMounted(() => {
 <template>
   <div id="Box">
     <Background />
+    <div class="back-btn-pos">
+      <el-button circle size="large" @click="goBack">
+        <el-icon>
+          <Back />
+        </el-icon>
+      </el-button>
+    </div>
+
     <div v-if="!isFinished" class="main-panel">
       <div id="Content">
         <h1 id="Word">{{ accurateWord }}</h1>
@@ -88,6 +102,14 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.back-btn-pos {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  /* 只定位外层div，不影响el-button动画 */
+  z-index: 10;
+}
+
 #Box {
   margin: 0 auto;
   position: absolute;
@@ -212,7 +234,7 @@ onMounted(() => {
   font-size: 20px;
   margin: 10px 0;
   background: #ffffffab;
-  color: #946ea4;
+  color: #946ea4ad;
   font-weight: bold;
   border: none;
   border-radius: 8px;
@@ -222,11 +244,7 @@ onMounted(() => {
 .finish-panel button:hover {
   background: #9377fce8;
   color: #fff;
-  text-shadow:
-    0 0 8px #12a8ff,
-    0 0 16px #12a8ff,
-    0 0 24px #12a8ff,
-    0 0 32px #12a8ff;
+
   font-weight: bold;
 }
 </style>

@@ -34,6 +34,7 @@ const panels = ref([
     { title: 'ReviewTime', bg: "/img/background/bg-Review.jpg" },
     { title: 'FindUrWords', bg: "/img/background/bg-Select.jpg" },
     { title: 'UrFavorite', bg: "/img/background/bg-Favorites.jpg" },
+    { title: 'Profile', bg: "/img/background/bg-Profile.jpg" },
 ])
 
 const activeIndex = ref<number>(0) // 当前激活面板
@@ -165,9 +166,9 @@ function handlePanelClick(idx: number) {
     /* 叠加一条明显的斜横条高光 */
     background:
         linear-gradient(45deg,
-            rgba(199, 131, 225, 0) 30%,
-            rgba(241, 154, 154, 0.28) 36%,
-            rgba(255, 255, 255, 0.0) 42%);
+            rgba(199, 131, 225, 0) 34%,
+            rgba(255, 197, 197, 0.15) 36%,
+            rgba(255, 255, 255, 0.0) 40%);
     mix-blend-mode: lighten;
     border-radius: inherit;
 }

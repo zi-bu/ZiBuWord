@@ -63,7 +63,7 @@ function useContainerMouse() {
   right: 0;
   bottom: 0;
   background: url('img/background/2.jpg') center/cover no-repeat;
-  filter: blur(1px);
+  filter: blur(4px);
   z-index: -3;
   background-color: rgba(0, 0, 0, 0.4);
   background-size: 100% 100%;

@@ -9,7 +9,7 @@ namespace DAL
 {
     public class UserDataNow : IUserInputDeliver
     {
-        internal static Formid userDictionarySelect;
+        internal static Formid userDictionarySelect = Formid.CET4;
 
         internal static string? NowUser;
         /// <summary>
