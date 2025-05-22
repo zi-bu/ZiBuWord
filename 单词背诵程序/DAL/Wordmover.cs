@@ -478,4 +478,75 @@ public static class WordMover
             }
         }
     }
+    public static string? FindExactWordByChinese(string chinese, Formid formid)
+    {
+        using (var db = new SqlDataContext())
+        {
+            switch (formid)
+            {
+                case Formid.CET4:
+                    return db.CET4.Include(f => f.Translations)
+                        .FirstOrDefault(w => w.Translations.Any(t => t.Translation == chinese))?.Word;
+                case Formid.CET6:
+                    return db.CET6.Include(f => f.Translations)
+                        .FirstOrDefault(w => w.Translations.Any(t => t.Translation == chinese))?.Word;
+                case Formid.MiddleSchool:
+                    return db.MiddleSchool.Include(f => f.Translations)
+                        .FirstOrDefault(w => w.Translations.Any(t => t.Translation == chinese))?.Word;
+                case Formid.HighSchool:
+                    return db.HighSchool.Include(f => f.Translations)
+                        .FirstOrDefault(w => w.Translations.Any(t => t.Translation == chinese))?.Word;
+                case Formid.KY:
+                    return db.KY.Include(f => f.Translations)
+                        .FirstOrDefault(w => w.Translations.Any(t => t.Translation == chinese))?.Word;
+                case Formid.TF:
+                    return db.TF.Include(f => f.Translations)
+                        .FirstOrDefault(w => w.Translations.Any(t => t.Translation == chinese))?.Word;
+                default:
+                    throw new ArgumentException("未知单词来源表");
+            }
+        }
+    }
+
+    public static List<string> FindFuzzyWordsByChinese(string chinese, Formid formid)
+    {
+        using (var db = new SqlDataContext())
+        {
+            switch (formid)
+            {
+                case Formid.CET4:
+                    return db.CET4.Include(f => f.Translations)
+                        .Where(w => w.Translations.Any(t => EF.Functions.Like(t.Translation, $"%{chinese}%")))
+                        .Select(w => w.Word)
+                        .ToList();
+                case Formid.CET6:
+                    return db.CET6.Include(f => f.Translations)
+                        .Where(w => w.Translations.Any(t => EF.Functions.Like(t.Translation, $"%{chinese}%")))
+                        .Select(w => w.Word)
+                        .ToList();
+                case Formid.MiddleSchool:
+                    return db.MiddleSchool.Include(f => f.Translations)
+                        .Where(w => w.Translations.Any(t => EF.Functions.Like(t.Translation, $"%{chinese}%")))
+                        .Select(w => w.Word)
+                        .ToList();
+                case Formid.HighSchool:
+                    return db.HighSchool.Include(f => f.Translations)
+                        .Where(w => w.Translations.Any(t => EF.Functions.Like(t.Translation, $"%{chinese}%")))
+                        .Select(w => w.Word)
+                        .ToList();
+                case Formid.KY:
+                    return db.KY.Include(f => f.Translations)
+                        .Where(w => w.Translations.Any(t => EF.Functions.Like(t.Translation, $"%{chinese}%")))
+                        .Select(w => w.Word)
+                        .ToList();
+                case Formid.TF:
+                    return db.TF.Include(f => f.Translations)
+                        .Where(w => w.Translations.Any(t => EF.Functions.Like(t.Translation, $"%{chinese}%")))
+                        .Select(w => w.Word)
+                        .ToList();
+                default:
+                    throw new ArgumentException("未知单词来源表");
+            }
+        }
+    }
 }

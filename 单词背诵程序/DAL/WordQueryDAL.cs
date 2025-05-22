@@ -43,7 +43,7 @@ namespace DAL
         {
             foreach (Formid formid in Enum.GetValues(typeof(Formid)))
             {
-                var result = WordMover.FindExactWord(chinese, formid);
+                var result = WordMover.FindExactWordByChinese(chinese, formid);
                 if (!string.IsNullOrEmpty(result))
                 {
 
@@ -58,7 +58,7 @@ namespace DAL
             var list = new List<IWord>();
             foreach (Formid formid in Enum.GetValues(typeof(Formid)))
             {
-                var results = WordMover.FindFuzzyWords(chinese, formid); // 查所有单词
+                var results = WordMover.FindFuzzyWordsByChinese(chinese, formid); // 查所有单词
                 foreach (var word in results)
                 {
                     var w = new Word(word, formid);
