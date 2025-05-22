@@ -34,8 +34,8 @@ public class UserContext : DbContext
         modelBuilder.Entity<FavoriteWord>().HasKey(f => f.Id); // 配置主键。
         modelBuilder.Entity<FavoriteWord>().ToTable("FavoriteWords"); // 映射到 FavoriteWords 表。
         modelBuilder.Entity<FavoriteWord>()
-            .HasOne<User>()
-            .WithMany()
-            .HasForeignKey(f => f.UserId);
+            .HasOne<User>() // 每个收藏的单词都对应一个用户
+            .WithMany() // 一个用户可以有多个收藏的单词
+            .HasForeignKey(f => f.UserId); // 配置外键关联用户Id
     }
 }

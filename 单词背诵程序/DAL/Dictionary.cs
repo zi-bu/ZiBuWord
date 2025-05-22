@@ -162,13 +162,13 @@ public class UserWord
 
 /// <summary>
 ///     用户收藏的单词表的模型类。<br />
-///     这个类对应数据库中的用户收藏的单词表的结构，包含用户编号、单词和词典类型等字段。<br />
+///     这个类对应数据库中的用户收藏的单词表的结构，包含用户Id、单词Id和词典类型等字段。<br />
 ///     这个类用于存储用户收藏的单词信息。<br />
 /// </summary>
 public class FavoriteWord
 {
     public int Id { get; set; }
-    public int UserId { get; set; }
-    public int WordId { get; set; } // 单词编号
-    public string DictionaryType { get; set; } = null!;// 词典类型
+    public int UserId { get; set; } // 用户Id
+    public int WordId { get; set; } // 单词Id
+    public string DictionaryType { get; set; } = null!; // 词典类型
 }

@@ -39,46 +39,25 @@ namespace BLL
         /// <summary>
         /// 获取用户所有收藏
         /// </summary>
+        /// <param name="userId">用户ID</param>
         public List<FavoriteWordDetail> GetFavoriteDetails(int userId)
         {
-            var favorites = _dal.GetFavorites(userId);
-            var result = new List<FavoriteWordDetail>();
-            foreach (var fav in favorites)
+            var favorites = _dal.GetFavorites(userId); // 获取用户的收藏列表
+            var result = new List<FavoriteWordDetail>(); // 创建一个新的列表来存储结果
+            foreach (var fav in favorites) // 遍历每个收藏
             {
+                // 获取单词原文、词性和释义
                 var (word, posList, translationsList) = _detailDal.GetWordDetail(fav.DictionaryType, fav.WordId);
+                // 把词性和释义拼接成字符串
                 var translation = string.Join("; ", translationsList.Zip(posList, (tran, p) => $"{p}. {tran}"));
-                result.Add(new FavoriteWordDetail
+                result.Add(new FavoriteWordDetail // 创建一个新的 FavoriteWordDetail 对象
                 {
-                    Id = fav.Id,
-                    DictionaryType = fav.DictionaryType,
-                    WordId = fav.WordId,
-                    Word = word,
-                    Translation = translation
+                    Id = fav.Id, // 收藏ID
+                    DictionaryType = fav.DictionaryType, // 词典类型
+                    WordId = fav.WordId, // 单词ID
+                    Word = word, // 单词原文
+                    Translation = translation // 词性+释义
                 });
-            }
-            return result;
-        }
-
-        public List<IWord> GetFavoriteWords(int userId)
-        {
-            var favorites = _dal.GetFavorites(userId);
-            var result = new List<IWord>();
-            foreach (var fav in favorites)
-            {
-                Formid formid = fav.DictionaryType switch
-                {
-                    "CET4" => Formid.CET4,
-                    "CET6" => Formid.CET6,
-                    "HighSchool" => Formid.HighSchool,
-                    "MiddleSchool" => Formid.MiddleSchool,
-                    "KY" => Formid.KY,
-                    "TF" => Formid.TF,
-                    _ => throw new Exception("未知词典类型")
-                };
-                string word = WordMover.GetWord(formid, fav.WordId);
-
-                var wordObj = new DAL.Word(word, formid);
-                result.Add(wordObj);
             }
             return result;
         }
@@ -91,6 +70,5 @@ namespace BLL
         public int WordId { get; set; }
         public string? Word { get; set; }
         public string? Translation { get; set; }
-        public string? Pos { get; set; }
     }
 }
