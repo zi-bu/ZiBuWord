@@ -9,12 +9,11 @@ namespace DAL
         //根据英文查找单词
         public IWord? FindExactWord(string input)
         {
-            foreach (Formid formid in Enum.GetValues(typeof(Formid)))
+            foreach (Formid formid in Enum.GetValues(typeof(Formid)))   //遍历所有的单词表
             {
-                var result = WordMover.FindExactWord(input, formid);
-                if (!string.IsNullOrEmpty(result))
+                var result = WordMover.FindExactWord(input, formid); //查找精确匹配的单词
+                if (!string.IsNullOrEmpty(result)) //如果找到，返回该单词
                 {
-                    
                     return new Word(result, formid); 
                 }
             }
@@ -34,6 +33,7 @@ namespace DAL
             }
             
             return list.GroupBy(w => w.word).Select(g => g.First()).ToList();
+            //由于不同单词表可能有相同的单词，这里用 GroupBy 按单词内容分组，只取每组的第一个，实现去重
         }
 
 
