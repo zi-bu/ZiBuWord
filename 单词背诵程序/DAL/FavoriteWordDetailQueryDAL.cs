@@ -8,17 +8,23 @@ namespace DAL
     public class FavoriteWordDetailQueryDAL
     {
         /// <summary>
-        /// 根据词典类型和单词ID获取单词原文、词性、释义
+        /// 根据 词典类型和单词ID 获取 单词原文、词性、释义
         /// </summary>
+        /// <param name="dictType">词典类型</param>
+        /// <param name="wordId">单词ID</param>
+        /// <returns>返回一个元组，包含单词原文、词性、释义</returns>
         public (string Word, List<string> Pos, List<string> Translations) GetWordDetail(string dictType, int wordId)
         {
             using var db = new SqlDataContext();
+            // 根据词典类型和单词ID查询 单词原文、词性和释义
             switch (dictType)
             {
                 case "CET4":
+                    // 查询CET4表中传入的单词ID
                     var cet4 = db.CET4.FirstOrDefault(w => w.Id == wordId);
                     if (cet4 != null)
                     {
+                        // 获取到单词原文、词性和释义
                         var translations = cet4.Translations.Select(t => t.Translation).ToList();
                         var pos = cet4.Translations.Select(t => t.TyPe).ToList();
                         return (cet4.Word, pos, translations);
@@ -79,6 +85,7 @@ namespace DAL
                     }
                     break;
             }
+            // 如果没有找到对应的单词，返回空字符串和空列表
             return ("", new List<string>(), new List<string>());
         }
     }
