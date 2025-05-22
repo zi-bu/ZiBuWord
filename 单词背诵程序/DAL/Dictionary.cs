@@ -137,7 +137,7 @@ public class User
     public string? UserPassword { get; set; } // 密码
     
     // 添加导航属性
-    public virtual UserWord? UserWord { get; set; }
+    public  virtual UserWord? UserWord { get; set; }
 }
 public class UserWord
 {

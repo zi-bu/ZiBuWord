@@ -41,7 +41,7 @@ public partial class Login : MaterialForm
         else if (result == 1)
         {
             MessageBox.Show("注册成功", "注册成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            BLL.HandleUserInput.UserInputDeliver.RememberUser(textUserName.Text);//将用户名到静态变量中，用于linq查询定位用户
+            BLL.HandleUserInput.UserStateDeliver.RememberUser(textUserName.Text);//将用户名到静态变量中，用于linq查询定位用户
             var homePage = new HomePage(); //创建一个新的主页窗口对象
             FormHelper.ShowNewForm(this, homePage); //显示新窗口
         }
@@ -60,7 +60,7 @@ public partial class Login : MaterialForm
         }
         else if (result == 1)
         {
-            BLL.HandleUserInput.UserInputDeliver.RememberUser(textUserName.Text);//将用户名到静态变量中，用于linq查询定位用户
+            BLL.HandleUserInput.UserStateDeliver.RememberUser(textUserName.Text);//将用户名到静态变量中，用于linq查询定位用户
             MessageBox.Show("登录成功", "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
             var homePage = new HomePage(); //创建一个新的主页窗口对象
             FormHelper.ShowNewForm(this, homePage); //显示新窗口
