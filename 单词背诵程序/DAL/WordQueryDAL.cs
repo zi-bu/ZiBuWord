@@ -7,26 +7,25 @@ namespace DAL
     {
         //实现查询接口
         //根据英文查找单词
-        public IWord? FindExactWord(string input)
+        public IWord? FindExactWordByEnglish(string input)
         {
-            foreach (Formid formid in Enum.GetValues(typeof(Formid)))
+            foreach (Formid formid in Enum.GetValues(typeof(Formid)))   //遍历所有的单词表
             {
-                var result = WordMover.FindExactWord(input, formid);
-                if (!string.IsNullOrEmpty(result))
+                var result = WordMover.FindExactWordByEnglish(input, formid); //查找精确匹配的单词
+                if (!string.IsNullOrEmpty(result)) //如果找到，返回该单词
                 {
-                    
                     return new Word(result, formid); 
                 }
             }
             return null;
         }
 
-        public List<IWord> FindFuzzyWords(string input)
+        public List<IWord> FindFuzzyWordsByEnglish(string input)
         {
             var list = new List<IWord>();
             foreach (Formid formid in Enum.GetValues(typeof(Formid)))
             {
-                var results = WordMover.FindFuzzyWords(input, formid);
+                var results = WordMover.FindFuzzyWordsByEnglish(input, formid);
                 foreach (var word in results)
                 {
                     list.Add(new Word(word, formid)); 
@@ -34,6 +33,7 @@ namespace DAL
             }
             
             return list.GroupBy(w => w.word).Select(g => g.First()).ToList();
+            //由于不同单词表可能有相同的单词，这里用 GroupBy 按单词内容分组，只取每组的第一个，实现去重
         }
 
 
@@ -43,7 +43,7 @@ namespace DAL
         {
             foreach (Formid formid in Enum.GetValues(typeof(Formid)))
             {
-                var result = WordMover.FindExactWord(chinese, formid);
+                var result = WordMover.FindExactWordByChinese(chinese, formid);
                 if (!string.IsNullOrEmpty(result))
                 {
 
@@ -58,7 +58,7 @@ namespace DAL
             var list = new List<IWord>();
             foreach (Formid formid in Enum.GetValues(typeof(Formid)))
             {
-                var results = WordMover.FindFuzzyWords(chinese, formid); // 查所有单词
+                var results = WordMover.FindFuzzyWordsByChinese(chinese, formid); // 查所有单词
                 foreach (var word in results)
                 {
                     var w = new Word(word, formid);

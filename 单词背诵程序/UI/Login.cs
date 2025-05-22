@@ -58,7 +58,7 @@ public partial class Login : MaterialForm
             else if (result == 1)
             {
                 MessageBox.Show("注册成功", "注册成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                BLL.HandleUserInput.UserInputDeliver.RememberUser(textUserName.Text);
+                BLL.HandleUserInput.UserStateDeliver.RememberUser(textUserName.Text);
                 var homePage = new HomePage();
                 FormHelper.ShowNewForm(this, homePage);
             }
@@ -90,7 +90,7 @@ public partial class Login : MaterialForm
             }
             else if (result == 1)
             {
-                BLL.HandleUserInput.UserInputDeliver.RememberUser(textUserName.Text);
+                BLL.HandleUserInput.UserStateDeliver.RememberUser(textUserName.Text);
                 // 直接进入主页，无需显示成功消息
                 var homePage = new HomePage();
                 FormHelper.ShowNewForm(this, homePage);

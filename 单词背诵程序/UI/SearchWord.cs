@@ -16,6 +16,8 @@ namespace UI
     {
         public SearchWord()
         {
+            
+            //给listView1添加列标题
             InitializeComponent();
             listView1.View = View.Details;
             listView1.Columns.Clear();
@@ -23,7 +25,10 @@ namespace UI
             listView1.Columns.Add("词性", 80);
             listView1.Columns.Add("释义", 500);
             listView1.FullRowSelect = true;
+            //让 ListView 控件在“详细信息”视图（View.Details）下，点击某一行的任意列时，整行都被选中并高亮显示。
             listView1.GridLines = true;
+            //让 ListView 控件在显示内容时，显示网格线。
+            
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -62,7 +67,7 @@ namespace UI
         {
 
             var searcher = new SearchWordEnglish(new WordQueryDAL());
-            var result = searcher.FuzzySearch(textBox1.Text.Trim());
+            var result = searcher.SearchEnglish(textBox1.Text.Trim());
             listView1.Items.Clear();
             foreach (var w in result)
             {
@@ -76,7 +81,7 @@ namespace UI
         private void button2_Click(object sender, EventArgs e)
         {
             var searcher = new SearchWordChinese(new WordQueryDAL());
-            var result = searcher.FuzzySearchChinese(textBox1.Text.Trim());
+            var result = searcher.SearchChinese(textBox2.Text.Trim());
             listView1.Items.Clear();
             foreach (var w in result)
             {

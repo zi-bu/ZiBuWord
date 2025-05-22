@@ -1,4 +1,4 @@
-﻿using IBLLBridgeDAL;
+using IBLLBridgeDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,22 +27,36 @@ namespace BLL
             _wordQuery = wordQuery;
         }
 
-        //模糊查找 输入单词的部分
-        public List<IWord> FuzzySearch(string input)
-        {
-            if (string.IsNullOrWhiteSpace(input))
-                return new List<IWord>();
 
-            var exact = _wordQuery.FindExactWord(input);
-            if (exact != null)
-                return new List<IWord> { exact };
+            public SearchWordEnglish(IWordQuery wordQuery)
+            {
+                _wordQuery = wordQuery;
+            }
+        /// <summary>
+        //调用_wordQuery接口的FindExactWord方法查找单词
+        //如果找到，返回该单词的列表，否则调用FindFuzzyWords方法查找模糊匹配的单词列表
+        //如果输入为空，返回空列表
+        /// <summary>
+        /// 模糊查询
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns> 
 
-            return _wordQuery.FindFuzzyWords(input);
-        }//返回一个模糊查找搜索的列表（可是这个列表并不是动态的）
-        //原则上是每当搜索栏的内容更新了一次就会调用一次这个方法
+        public List<IWord> SearchEnglish(string input)
+            {
+                if (string.IsNullOrWhiteSpace(input))
+                    return new List<IWord>();
+        //检查输入字符串 input 是否为空或仅包含空白字符如果是，则返回一个空的 IWord 列表
 
-    }
-    //单词查找中文意思？
+                var exact = _wordQuery.FindExactWordByEnglish(input);
+                if (exact != null)
+                    return new List<IWord> { exact };
+
+                return _wordQuery.FindFuzzyWordsByEnglish(input);
+            }
+            
+        }
+
     public class SearchWordChinese
     {
         private readonly IWordQuery _wordQuery;
@@ -50,7 +64,7 @@ namespace BLL
         {
             _wordQuery = wordQuery;
         }
-        public List<IWord> FuzzySearchChinese(string chinese)
+        public List<IWord> SearchChinese(string chinese)
         {
             if (string.IsNullOrWhiteSpace(chinese))
                 return new List<IWord>();
