@@ -84,7 +84,15 @@ public static class WordMover
             }
         }
     }
-
+    /// <summary>
+    ///     参数：一个formid枚举值，用于指定单词来源表，一个int值，用于指定单词的id。<br />
+    ///     返回值：一个单词的字符串。<br />
+    ///     功能：获得精确id的单词。
+    /// </summary>
+    /// <param name="formid"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
     public static string GetWord(Formid formid, int id) //获得精确id的单词
     {
         using (var db = new SqlDataContext())
@@ -251,8 +259,7 @@ public static class WordMover
     /// <param name="word"></param>
     /// <param name="id"></param>
     /// <returns></returns>
-    public static void FindPhrases(string word, Formid id, ref List<string>? phrases,
-        ref List<string>? phraseTranslations) //在对应表查找单词短语
+    public static void FindPhrases(string word, Formid id, ref List<string>? phrases,ref List<string>? phraseTranslations) //在对应表查找单词短语
     {
         using (var db = new SqlDataContext())
         {

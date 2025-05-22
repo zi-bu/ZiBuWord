@@ -7,9 +7,9 @@ using IBLLBridgeDAL;
 using DAL;
 namespace BLL.HandleUserInput
 {
-    public static class UserInputDeliver
+    public static class UserStateDeliver
     {
-        static IUserInputDeliver Deliverymen = new UserDataNow();
+        static IUserStateDeliver Deliverymen = new UserDataNow();
         /// <summary>
         /// 让程序定位到指定的词典<br/>
         /// 传递到DAL层词典信息，用于linq查询定位词库
@@ -36,6 +36,15 @@ namespace BLL.HandleUserInput
         public static bool RememberUser (string? user)
         {
             Deliverymen.RememberUser(user);
+            return true;
+        }
+        /// <summary>
+        /// 使程序单词进度与对应用户的数据库里的进度同步<br/>
+        /// 使用地点：选择表时触发一下；中断背诵触发。
+        /// </summary>
+        public static bool ProgressSync() 
+        {
+            Deliverymen.ProgressSync();
             return true;
         }
     }

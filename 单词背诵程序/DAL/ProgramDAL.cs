@@ -18,6 +18,9 @@ internal class ProgramDAL
             Console.WriteLine(user.First(f=>f.UserID==1).UserName);
 
             Console.WriteLine(user.Include(f=>f.UserWord).First(f=>f.UserID==1).UserWord.TF);
+
+            int a =UserDataMover.GetFormProgress("test", Formid.CET4);
+            Console.WriteLine(a);
         }
     }
 }
