@@ -7,14 +7,22 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class UserDataNow:IUserInputDeliver
+    /// <summary>
+    /// 暂存用户的状态信息。
+    /// </summary>
+    public class UserDataNow:IUserStateDeliver
     {
         internal static Formid userDictionarySelect;
 
         internal static string? NowUser;
+
+        internal static int Progress = 0;//索引
+
+
         /// <summary>
-        /// 让程序定位到指定的词典<br/>
-        /// 传递到DAL层词典信息，用于linq查询定位词库
+        /// 让程序定位到用户指定的词典<br/>
+        /// 传递到DAL层词典信息，用于linq查询定位词库<br/>
+        /// 同时提取出背诵进度
         /// </summary>
         /// <param name="word"></param>
         /// <returns></returns>
@@ -29,6 +37,8 @@ namespace DAL
                 throw;
             }
         }
+
+
         /// <summary>
         /// 让程序记住现在是哪个用户<br/>
         /// 传递到DAL层用户名信息，用于linq查询定位用户数据<br/>
@@ -46,6 +56,18 @@ namespace DAL
             {
                 throw;
             }  
+        }
+
+
+        /// <summary>
+        /// 使程序单词进度与对应用户的数据库里的进度同步<br/>
+        /// 传递到DAL层更新指示<br/>
+        /// 使用地点：选择表时触发一下；中断背诵触发。
+        /// </summary>
+        public void ProgressSync()
+        {
+            if (NowUser == null) return;
+            Progress = UserDataMover.GetFormProgress(NowUser, userDictionarySelect);
         }
     }
 }

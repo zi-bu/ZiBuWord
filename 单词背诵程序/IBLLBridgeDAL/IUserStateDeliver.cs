@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace IBLLBridgeDAL
 {
-    public interface IUserInputDeliver
+    public interface IUserStateDeliver
     {
          void SelectDictionary(string word);
          void RememberUser(string? user);
-    }
+         void ProgressSync();
+     }
 }
