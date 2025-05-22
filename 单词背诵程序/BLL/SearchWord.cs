@@ -1,4 +1,4 @@
-﻿using IBLLBridgeDAL;
+using IBLLBridgeDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +20,13 @@ namespace BLL
         /// <summary>
         /// 在所有表中查找，优先精确匹配，否则合并所有表的模糊匹配
         /// </summary>
-            private readonly IWordQuery _wordQuery;
+        private readonly IWordQuery _wordQuery;
+        //单词集合 依赖注入
+        public SearchWordEnglish(IWordQuery wordQuery)
+        {
+            _wordQuery = wordQuery;
+        }
+
 
             public SearchWordEnglish(IWordQuery wordQuery)
             {
@@ -50,6 +56,7 @@ namespace BLL
             }
             
         }
+
     public class SearchWordChinese
     {
         private readonly IWordQuery _wordQuery;
@@ -69,5 +76,5 @@ namespace BLL
             return _wordQuery.FindFuzzyWordsByChinese(chinese);
         }
     }
-    }
-    
+}
+

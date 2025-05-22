@@ -45,7 +45,7 @@ public partial class Login : MaterialForm
             int result = userData.UserRegister(textUserName.Text, textPassword.Text);
             if (result == 10)
             {
-                MessageBox.Show("注册失败：用户名已存在", 
+                MessageBox.Show("注册失败：用户名已存在",
                               "注册失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (result == 11)
