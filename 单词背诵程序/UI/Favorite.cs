@@ -10,18 +10,16 @@ public partial class Favorite : MaterialForm
     public Favorite()
     {
         InitializeComponent();
+        dataGridViewFavorites.AutoGenerateColumns = false;
         LoadFavorites();
         dataGridViewFavorites.CellContentClick += DataGridViewFavorites_CellContentClick;
+        dataGridViewFavorites.DataBindingComplete += DataGridViewFavorites_DataBindingComplete;
     }
+
     private void LoadFavorites()
     {
         var details = _favoriteService.GetFavoriteDetails(_userId);
         dataGridViewFavorites.DataSource = details;
-        // 可选：设置只读、列宽等属性
-        dataGridViewFavorites.Columns["Id"].Visible = false; // 隐藏内部ID
-        dataGridViewFavorites.Columns["DictionaryType"].HeaderText = "词典";
-        dataGridViewFavorites.Columns["Word"].HeaderText = "单词";
-        dataGridViewFavorites.Columns["Translation"].HeaderText = "释义";
     }
 
     // 处理“移除”按钮点击
@@ -33,6 +31,18 @@ public partial class Favorite : MaterialForm
             _favoriteService.RemoveFavorite(_userId, detail.WordId, detail.DictionaryType);
             LoadFavorites();
         }
+    }
+
+    private void DataGridViewFavorites_DataBindingComplete(object? sender, DataGridViewBindingCompleteEventArgs e)
+    {
+        if (dataGridViewFavorites.Columns["Id"] != null)
+            dataGridViewFavorites.Columns["Id"].Visible = false;
+        if (dataGridViewFavorites.Columns["DictionaryType"] != null)
+            dataGridViewFavorites.Columns["DictionaryType"].HeaderText = "词典";
+        if (dataGridViewFavorites.Columns["Word"] != null)
+            dataGridViewFavorites.Columns["Word"].HeaderText = "单词";
+        if (dataGridViewFavorites.Columns["Translation"] != null)
+            dataGridViewFavorites.Columns["Translation"].HeaderText = "释义";
     }
 
     private void button4_Click(object sender, EventArgs e)

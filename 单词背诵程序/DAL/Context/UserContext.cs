@@ -6,10 +6,10 @@ public class UserContext : DbContext
 {
     public DbSet<User> UserData { get; set; }
     // 对应数据库中的 UserData 表。
-    public DbSet<UserWord> UserWord { get; set; }
-    // 对应数据库中的 UserWord 表。
+    public DbSet<UserWord> ReciteUserWord { get; set; }
+    // 对应数据库中的 ReciteUserWord 表。
     public DbSet<FavoriteWord> FavoriteWords { get; set; }
-    // 对应数据库中的 UserFavoriteWords 表。
+    // 对应数据库中的 FavoriteWords 表。
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
