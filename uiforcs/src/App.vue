@@ -2,6 +2,7 @@
 import Reviewer from "@/components/Reviewer.vue";
 import Riciter from "./components/Riciter.vue";
 import Mainpage from "./components/Mainpage.vue";
+import FindUrWords from "./components/FindUrWords.vue"
 import { ref, computed } from "vue";
 
 const currentPage = ref("Mainpage");
@@ -12,12 +13,13 @@ const currentPageComponent = computed(() => {
   if (currentPage.value === "Mainpage") return Mainpage;
   if (currentPage.value === "ReviewTime") return Reviewer;
   if (currentPage.value === "StartToLearn") return Riciter;
+  if (currentPage.value === "FindUrWords") return FindUrWords;
   return Mainpage;
 });
 </script>
 
 <template>
-  <p class="watermark">图片源于画师pinterest,仅用于展示,非商业用途</p>
+  <p class="watermark">图片源于画师@mutugi,仅用于展示,非商业用途</p>
   <div id="app-root">
     <transition name="scale-page" mode="out-in">
       <component :is="currentPageComponent" @panelClick="switchPage" :key="currentPage" />

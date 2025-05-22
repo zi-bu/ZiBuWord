@@ -6,7 +6,7 @@ const emit = defineEmits(['panelClick'])
 const isExpanding = ref(false) // 控制扩展动画
 const isTitleFading = ref(false); // 控制标题淡出
 
-const containerRef = ref(null)
+const containerRef = ref<HTMLElement | null>(null)
 
 function useContainerMouse() {
     const { x, y } = useMouse()
@@ -33,7 +33,7 @@ const panels = ref([
     { title: 'StartToLearn', bg: "/img/background/bg-Recite.jpg" },
     { title: 'ReviewTime', bg: "/img/background/bg-Review.jpg" },
     { title: 'FindUrWords', bg: "/img/background/bg-Select.jpg" },
-    { title: 'UrFavorite', bg: "/img/background/bg-Favorites.jpg" },
+
     { title: 'Profile', bg: "/img/background/bg-Profile.jpg" },
 ])
 

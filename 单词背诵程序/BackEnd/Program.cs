@@ -16,6 +16,7 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
+builder.Services.AddScoped<IBLLBridgeDAL.IWordQuery, DAL.WordQueryDAL>();
 var app = builder.Build();
 app.UseCors("AllowAll");
 /// <summary>
@@ -137,6 +138,16 @@ app.MapPost("/api/RiciterWord/NewList", () =>
     RiciterOrder.Index = 0;
     return Results.Ok("新队列已生成");
 });
+
+//提供搜索查询的方法
+app.MapGet("/api/search", ([FromQuery] string kw, IBLLBridgeDAL.IWordQuery wordQuery) =>
+{
+    var searcher = new SearchWordEnglish(wordQuery);
+    var result = searcher.FuzzySearch(kw);
+    return Results.Ok(result);
+});
+
+
 
 
 /// <summary>
