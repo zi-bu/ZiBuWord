@@ -7,11 +7,11 @@ namespace DAL
     {
         //实现查询接口
         //根据英文查找单词
-        public IWord? FindExactWord(string input)
+        public IWord? FindExactWordByEnglish(string input)
         {
             foreach (Formid formid in Enum.GetValues(typeof(Formid)))   //遍历所有的单词表
             {
-                var result = WordMover.FindExactWord(input, formid); //查找精确匹配的单词
+                var result = WordMover.FindExactWordByEnglish(input, formid); //查找精确匹配的单词
                 if (!string.IsNullOrEmpty(result)) //如果找到，返回该单词
                 {
                     return new Word(result, formid); 
@@ -20,12 +20,12 @@ namespace DAL
             return null;
         }
 
-        public List<IWord> FindFuzzyWords(string input)
+        public List<IWord> FindFuzzyWordsByEnglish(string input)
         {
             var list = new List<IWord>();
             foreach (Formid formid in Enum.GetValues(typeof(Formid)))
             {
-                var results = WordMover.FindFuzzyWords(input, formid);
+                var results = WordMover.FindFuzzyWordsByEnglish(input, formid);
                 foreach (var word in results)
                 {
                     list.Add(new Word(word, formid)); 
