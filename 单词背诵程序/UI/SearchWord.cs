@@ -76,7 +76,7 @@ namespace UI
         private void button2_Click(object sender, EventArgs e)
         {
             var searcher = new SearchWordChinese(new WordQueryDAL());
-            var result = searcher.FuzzySearchChinese(textBox1.Text.Trim());
+            var result = searcher.FuzzySearchChinese(textBox2.Text.Trim());
             listView1.Items.Clear();
             foreach (var w in result)
             {
