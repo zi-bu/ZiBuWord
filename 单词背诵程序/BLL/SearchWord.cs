@@ -1,4 +1,4 @@
-﻿using IBLLBridgeDAL;
+using IBLLBridgeDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +20,13 @@ namespace BLL
         /// <summary>
         /// 在所有表中查找，优先精确匹配，否则合并所有表的模糊匹配
         /// </summary>
-            private readonly IWordQuery _wordQuery;
+        private readonly IWordQuery _wordQuery;
+        //单词集合 依赖注入
+        public SearchWordEnglish(IWordQuery wordQuery)
+        {
+            _wordQuery = wordQuery;
+        }
 
-            public SearchWordEnglish(IWordQuery wordQuery)
-            {
-                _wordQuery = wordQuery;
-            }
         /// <summary>
         //调用_wordQuery接口的FindExactWord方法查找单词
         //如果找到，返回该单词的列表，否则调用FindFuzzyWords方法查找模糊匹配的单词列表
@@ -36,20 +37,21 @@ namespace BLL
         /// <param name="input"></param>
         /// <returns></returns> 
 
-        public List<IWord> FuzzySearch(string input)
+        public List<IWord> SearchEnglish(string input)
             {
                 if (string.IsNullOrWhiteSpace(input))
                     return new List<IWord>();
         //检查输入字符串 input 是否为空或仅包含空白字符如果是，则返回一个空的 IWord 列表
 
-                var exact = _wordQuery.FindExactWord(input);
+                var exact = _wordQuery.FindExactWordByEnglish(input);
                 if (exact != null)
                     return new List<IWord> { exact };
 
-                return _wordQuery.FindFuzzyWords(input);
+                return _wordQuery.FindFuzzyWordsByEnglish(input);
             }
             
         }
+
     public class SearchWordChinese
     {
         private readonly IWordQuery _wordQuery;
@@ -57,7 +59,7 @@ namespace BLL
         {
             _wordQuery = wordQuery;
         }
-        public List<IWord> FuzzySearchChinese(string chinese)
+        public List<IWord> SearchChinese(string chinese)
         {
             if (string.IsNullOrWhiteSpace(chinese))
                 return new List<IWord>();
@@ -69,5 +71,5 @@ namespace BLL
             return _wordQuery.FindFuzzyWordsByChinese(chinese);
         }
     }
-    }
-    
+}
+

@@ -1,4 +1,4 @@
-﻿using IBLLBridgeDAL;
+using IBLLBridgeDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
+
     /// <summary>
     /// 暂存用户的状态信息。
     /// </summary>
     public class UserDataNow:IUserStateDeliver
+
     {
-        internal static Formid userDictionarySelect;
+        internal static Formid userDictionarySelect = Formid.CET4;
 
         internal static string? NowUser;
 
@@ -55,7 +57,7 @@ namespace DAL
             catch
             {
                 throw;
-            }  
+            }
         }
 
 
