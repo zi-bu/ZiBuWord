@@ -76,7 +76,11 @@ public class Word : IWord
         WordMover.FindTranslations(word, formid, ref Translations, ref Pos);
         WordMover.FindPhrases(word, formid, ref Phrases, ref PhraseTranslations);
     }
-
+    /// <summary>
+    /// 按照单词id和来源构造单词对象
+    /// </summary>
+    /// <param name="wordid"></param>
+    /// <param name="formid"></param>
     public Word(int wordid, Formid formid)
     {
         tableid = formid;

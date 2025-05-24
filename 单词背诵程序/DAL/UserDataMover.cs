@@ -32,5 +32,47 @@ namespace DAL
                 return userData;
             }
         }
+        /// <summary>
+        /// 更新某用户对应某表的背诵进度<br/>
+        /// 第三个参数为增量，可以为负数<br/>
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="id"></param>
+        /// <param name="upprogress"></param>
+        /// <exception cref="ArgumentException"></exception>
+        public static void UpdateFormProgress(string user, Formid id, int upprogress)
+        {
+            using (var db = new UserContext())
+            {
+                var userData = db.UserData.Include(f => f.UserWord)
+                               .Where(f => f.UserName == user)
+                               .Select(f => f.UserWord)
+                               .First();
+                if (userData == null) { throw new ArgumentException("用户不存在"); }
+                switch (id)
+                {
+                    case Formid.CET4:
+                        userData.CET4 += upprogress;
+                        break;
+                    case Formid.CET6:
+                        userData.CET6 += upprogress;
+                        break;
+                    case Formid.HighSchool:
+                        userData.HighSchool += upprogress;
+                        break;
+                    case Formid.MiddleSchool:
+                        userData.MiddleSchool += upprogress;
+                        break;
+                    case Formid.KY:
+                        userData.KY += upprogress;
+                        
+                        break;
+                    case Formid.TF:
+                        userData.TF += upprogress;
+                        break;
+                }
+                db.SaveChanges();
+            }
+        }
     }
 }

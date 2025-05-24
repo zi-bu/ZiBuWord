@@ -69,5 +69,16 @@ namespace DAL
             if (NowUser == null) return;
             Progress = UserDataMover.GetFormProgress(NowUser, userDictionarySelect);
         }
+        /// <summary>
+        /// 更新用户的进度<br/>
+        /// 参数为进度增加值，可以为负数
+        /// </summary>
+        /// <param name="upprogress"></param>
+        public void UpdateProgress(int upprogress)
+        {
+            if (NowUser == null) return;
+            UserDataMover.UpdateFormProgress(NowUser, userDictionarySelect, upprogress);
+        }
+
     }
 }

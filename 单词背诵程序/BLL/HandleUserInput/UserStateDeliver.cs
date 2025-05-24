@@ -7,6 +7,9 @@ using IBLLBridgeDAL;
 using DAL;
 namespace BLL.HandleUserInput
 {
+    /// <summary>
+    /// 该类本质上是DAL的UserDataNow的搬运，外加一点点安全检验
+    /// </summary>
     public static class UserStateDeliver
     {
         static IUserStateDeliver Deliverymen = new UserDataNow();
@@ -35,6 +38,7 @@ namespace BLL.HandleUserInput
         /// <returns></returns>
         public static bool RememberUser (string? user)
         {
+            if(user == null)return false;
             Deliverymen.RememberUser(user);
             return true;
         }
@@ -45,6 +49,16 @@ namespace BLL.HandleUserInput
         public static bool ProgressSync() 
         {
             Deliverymen.ProgressSync();
+            return true;
+        }
+        /// <summary>
+        /// 更新用户的进度<br/>
+        /// 参数为进度增加值，可以为负数
+        /// </summary>
+        /// <param name="upprogress"></param>
+        public static bool UpdateProgress(int upprogress)
+        {
+            Deliverymen.UpdateProgress(upprogress);
             return true;
         }
     }
