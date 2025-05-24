@@ -190,6 +190,11 @@ public class UserReview
 
     public string Word { get; set; } = null!;
 
+    public int WordId { get; set; } // 单词编号
+
+    public string Form { get; set; } = null!; // 来源单词表
+    //此处的问题在于如果多个表都有一个单词，但翻译的详尽不同。暂时假设我们的单词表只有单词不同，没有翻译短语的区别。
+
     // 导航属性
     public User? User { get; set; }
 }
