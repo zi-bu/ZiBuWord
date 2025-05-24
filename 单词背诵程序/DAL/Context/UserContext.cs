@@ -35,6 +35,13 @@ public class UserContext : DbContext
             .WithOne(w => w.User)
             .HasForeignKey<UserWord>(w => w.UserID);
 
+        modelBuilder.Entity<UserReview>().ToTable("ReviewUserWord"); // 映射到 UserReview 表。
+        modelBuilder.Entity<UserReview>().HasKey(r => r.ID); // 配置主键。
+        modelBuilder.Entity<User>()
+            .HasOne(u => u.UserReview)
+            .WithOne(r => r.User)
+            .HasForeignKey<UserReview>(r => r.UserID);
+
         modelBuilder.Entity<FavoriteWord>().HasKey(f => f.Id); // 配置主键。
         modelBuilder.Entity<FavoriteWord>().ToTable("FavoriteWords"); // 映射到 FavoriteWords 表。
         modelBuilder.Entity<FavoriteWord>()
