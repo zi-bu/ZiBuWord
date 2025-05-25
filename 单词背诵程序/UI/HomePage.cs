@@ -74,7 +74,7 @@ public partial class HomePage : MaterialForm
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) != DialogResult.Yes)
             return;
-        UserInputDeliver.RememberUser(null);//清空存储用户名的静态变量。
+        UserStateDeliver.RememberUser(null);//清空存储用户名的静态变量。
         var login = new Login();
         FormHelper.ShowNewForm(this, login);
     }
@@ -108,7 +108,8 @@ public partial class HomePage : MaterialForm
     /// <param name="e"></param>
     private void comboBoxSelectDict_SelectedIndexChanged(object sender, EventArgs e)
     {
-        UserInputDeliver.DeliverDictionarySelect(SelectedDictionaryCode);
+        UserStateDeliver.DeliverDictionarySelect(SelectedDictionaryCode);//传递选表数据
+        UserStateDeliver.ProgressSync(); // 同步进度信号
     }
 
     private void button1_Click(object sender, EventArgs e)

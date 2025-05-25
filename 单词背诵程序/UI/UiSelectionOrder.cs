@@ -1,4 +1,6 @@
 ﻿using BLL;
+using BLL.HandleUserInput;
+using IBLLBridgeDAL;
 using MaterialSkin.Controls;
 
 namespace UI;
@@ -57,12 +59,13 @@ public partial class UiSelectionOrder : MaterialForm
                 RiciterOrder.Index = 0;
             _selectionClass.AddWordToReViewList(); //将当前的单词加入到复习列表
             RiciterOrder.WordList.RemoveAt(RiciterOrder.Index); //将当前序列的内容移出列表
-            _selectionClass.DeleteWordFromLearningList(); //将当前的单词移出学习列表
+                                                                //将当前的单词移出学习列表
             if (RiciterOrder.WordList.Count == 0) //检验是否完成当前队列的背诵
             {
                 MessageBox.Show(@"背诵队列完成,即将关闭该界面");
                 RiciterOrder.Index = 0; //回拨索引
                 RiciterOrder.CreateOrRefreshNewWordList(); //创建新的列表
+                UserStateDeliver.UpdateProgress(10);//更新单词背诵进度
                 Close(); //关闭当前窗口
             }
         }
@@ -106,5 +109,6 @@ public partial class UiSelectionOrder : MaterialForm
         HomePage homePage = new HomePage(); //创建一个新的主页窗口对象
         FormHelper.ShowNewForm(this, homePage); //显示新窗口
         Close(); //关闭当前窗口
+        BLL.HandleUserInput.UserStateDeliver.ProgressSync();//进度同步，中断背诵时归正进度
     }
 }

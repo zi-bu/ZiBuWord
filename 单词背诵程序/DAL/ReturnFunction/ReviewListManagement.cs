@@ -19,7 +19,7 @@ public class ReviewListManagement : IReviewListManagement
     }
 
     /// <summary>
-    ///     添加单词到复习列表<br />
+    ///     从复习单词列表中移除单词<br />
     /// </summary>
     /// <param name="word"></param>
     public void RemoveWordFromReview(IWord word)

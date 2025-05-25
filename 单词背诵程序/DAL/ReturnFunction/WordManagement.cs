@@ -10,12 +10,14 @@ namespace DAL;
 public class WordManagement : IWordManagement
 {
     /// <summary>
-    ///     获取随机单词的IWord实例
+    ///     获取随机单词的IWord实例(按照进度获取单词，游客除外)
     /// </summary>
     /// <returns></returns>
     public IWord GetRandomWordForReciter()
     {
-        return new Word(UserDataNow.userDictionarySelect);
+        if (UserDataNow.NowUser == null) return new Word(1);//游客模式
+        
+        return new Word(UserDataNow.Progress++,UserDataNow.userDictionarySelect);//创建单词，将临时进度加一
     }
 
     /// <summary>

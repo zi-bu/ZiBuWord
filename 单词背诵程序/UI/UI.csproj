@@ -9,7 +9,26 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\BLL\BLL.csproj"/>
+      <EmbeddedResource Include="build\assets\index-Cy_omxnR.css">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="build\assets\index-y7-vA_tr.js">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="build\favicon.ico">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="build\index.html">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3240.44" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BLL\BLL.csproj" />
     </ItemGroup>
 
     <ItemGroup>
