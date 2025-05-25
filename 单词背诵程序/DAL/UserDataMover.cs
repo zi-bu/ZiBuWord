@@ -74,5 +74,18 @@ namespace DAL
                 db.SaveChanges();
             }
         }
+        /// <summary>
+        /// 获取某用户的ID<br/>
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public static int GetUserId(string user)
+        {
+            using (var db = new UserContext())
+            {
+                var userId = db.UserData.First(f => f.UserName == user).UserID;
+                return userId;
+            }
+        }
     }
 }

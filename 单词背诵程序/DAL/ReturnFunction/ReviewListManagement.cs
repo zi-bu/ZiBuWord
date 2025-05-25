@@ -19,11 +19,12 @@ public class ReviewListManagement : IReviewListManagement
     }
 
     /// <summary>
-    ///     从复习单词列表中移除单词<br />
+    /// 从复习单词列表中移除单词<br />
     /// </summary>
     /// <param name="word"></param>
     public void RemoveWordFromReview(IWord word)
     {
-        //先挂着
+        if(UserDataNow.NowUser == null) { return; }
+        WordMover.UpdateReviewWord(UserDataMover.GetUserId(UserDataNow.NowUser),word.word);
     }
 }
