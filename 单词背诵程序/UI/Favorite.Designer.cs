@@ -51,6 +51,7 @@
             // dataGridViewFavorites
             // 
             dataGridViewFavorites.AllowUserToResizeColumns = false;
+            dataGridViewFavorites.AllowUserToResizeRows = false;
             dataGridViewFavorites.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewFavorites.Columns.AddRange(new DataGridViewColumn[] { colWord, colTranslation, colDict, colRemove });
             dataGridViewFavorites.Location = new Point(6, 67);
@@ -96,6 +97,7 @@
             colRemove.HeaderText = "移除";
             colRemove.MinimumWidth = 8;
             colRemove.Name = "colRemove";
+            colRemove.ReadOnly = true;
             colRemove.UseColumnTextForButtonValue = true;
             colRemove.Width = 52;
             // 
