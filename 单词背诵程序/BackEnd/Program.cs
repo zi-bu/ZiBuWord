@@ -19,10 +19,6 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IBLLBridgeDAL.IWordQuery, DAL.WordQueryDAL>();
 var app = builder.Build();
 app.UseCors("AllowAll");
-/// <summary>
-/// 复习列表的交互
-/// </summary>
-/// <returns></returns>
 var reviewer = new ReviewClass(ReviewOrder.WordList[ReviewOrder.Index]);
 //显示用单词内容的提供
 app.MapGet("/api/ReviewWord/wordListCount",
@@ -86,9 +82,9 @@ app.MapGet("/api/RiciterWord/selection",
         }
         else
         {
-            var Selection = new SelectionClass(RiciterOrder.WordList[RiciterOrder.Index]);
-            var accurateWord = Selection.AccurateWord.word;
-            var selection = Selection.Selection;
+            var selectionClass = new SelectionClass(RiciterOrder.WordList[RiciterOrder.Index]);
+            var accurateWord = selectionClass.AccurateWord.word;
+            var selection = selectionClass.Selection;
             var result = new
             {
                 accurateWord,
@@ -148,16 +144,10 @@ app.MapGet("/api/search", ([FromQuery] string kw, IBLLBridgeDAL.IWordQuery wordQ
 });
 
 
-
-
-/// <summary>
-/// 保持后端持续开放
-/// </summary>
-
 app.Run();
 
-public class AnswerRequest
+public class AnswerRequest(bool result)
 {
-    public bool Result { get; set; }
+    public bool Result { get;} = result;
 }
 
