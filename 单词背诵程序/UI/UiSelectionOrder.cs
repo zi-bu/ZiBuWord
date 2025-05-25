@@ -8,6 +8,8 @@ namespace UI;
 public partial class UiSelectionOrder : MaterialForm
 {
     private SelectionClass _selectionClass;
+    private readonly FavoriteWordService _favoriteService = new();
+    private int _userId = 1; // 实际项目应获取真实用户ID
 
     public UiSelectionOrder()
     {
@@ -110,5 +112,22 @@ public partial class UiSelectionOrder : MaterialForm
         FormHelper.ShowNewForm(this, homePage); //显示新窗口
         Close(); //关闭当前窗口
         BLL.HandleUserInput.UserStateDeliver.ProgressSync();//进度同步，中断背诵时归正进度
+    }
+
+    private void btnFavorite_Click(object sender, EventArgs e)
+    {
+        // 1. 获取当前正确单词原文
+        string word = _selectionClass.AccurateWord.word;
+
+        // 2. 获取当前词典类型（如从主页传递或全局变量）
+        string dictType = "CET4"; // 示例，实际应动态获取
+
+        // 3. 获取单词ID
+        int wordId = _favoriteService.GetWordId(word, dictType);
+
+        // 4. 添加到收藏
+        _favoriteService.AddFavorite(_userId, wordId, dictType);
+
+        MessageBox.Show("已收藏该单词！");
     }
 }

@@ -33,8 +33,8 @@ public partial class HomePage : MaterialForm
     {
         get
         {
-            if (comboBoxSelectDict.SelectedItem != null &&
-                dictionaries.TryGetValue(comboBoxSelectDict.SelectedItem.ToString(), out var code))
+            var selected = comboBoxSelectDict.SelectedItem as string;
+            if (!string.IsNullOrEmpty(selected) && dictionaries.TryGetValue(selected, out var code))
                 return code;
             return "CET4"; // 默认返回四级词汇
         }
