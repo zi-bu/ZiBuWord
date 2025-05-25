@@ -1,11 +1,4 @@
-using IBLLBridgeDAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL
+﻿namespace BLL
 {
     using DAL;
     using IBLLBridgeDAL;
@@ -26,8 +19,6 @@ namespace BLL
         {
             _wordQuery = wordQuery;
         }
-
-        /// <summary>
         //调用_wordQuery接口的FindExactWord方法查找单词
         //如果找到，返回该单词的列表，否则调用FindFuzzyWords方法查找模糊匹配的单词列表
         //如果输入为空，返回空列表
