@@ -35,7 +35,7 @@ public class WordManagement : IWordManagement
     public void AddWordToReview(IWord word)
     {
         if(UserDataNow.NowUser == null) return;
-        WordMover.AddReviewWord(UserDataMover.GetUserId(UserDataNow.NowUser),
+        WordMover.(UserDataMover.GetUserId(UserDataNow.NowUser),
                                 word.word,
                                 WordMover.GetWordId(word.word,UserDataNow.userDictionarySelect),
                                 UserDataNow.userDictionarySelect);

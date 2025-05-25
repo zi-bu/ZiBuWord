@@ -548,8 +548,10 @@ public static class WordMover
                 default:
                     throw new ArgumentException("未知单词来源表");
             }
+            return fuzzyList;
         }
     }
+    
     /// <summary>
     /// 添加单词到复习表
     /// </summary>
