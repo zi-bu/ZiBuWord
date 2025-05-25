@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BLL.FavoriteWordService">
+    <Position X="3.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAACAAAAAAAAAAAIAAQQAAAAAA=</HashCode>
+      <FileName>FavoriteWordService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.FavoriteWordDetail">
+    <Position X="2" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAAAAAAACAAAAAAAAAAAAAAAAIAAACAAAAAA=</HashCode>
+      <FileName>FavoriteWordService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.ReviewClass">
+    <Position X="5.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAgAAAAAAABAAAAAAAgACAAAAA=</HashCode>
+      <FileName>ReviewClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.ReviewOrder">
+    <Position X="7.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>ReviewOrder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.RiciterOrder">
+    <Position X="2" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAABABIAAAAAAAAAAAAAAAgACAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>RiciterOrder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.SearchWordEnglish">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>SearchWord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.SearchWordChinese">
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SearchWord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.SelectionClass">
+    <Position X="7.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABACAAAAAAAAAAAACAAAAAgAAAAAAAAAAAAQAI=</HashCode>
+      <FileName>SelectionClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.TestArea">
+    <Position X="2" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Test.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.WordAnalyse">
+    <Position X="7.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WordAnalyse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.HandleUserInput.UserData">
+    <Position X="3.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAEAAAAAAACggAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HandleUserInput\UserData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.HandleUserInput.UserStateDeliver">
+    <Position X="5.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAEAAAAAAAAAAAAAgAAAAAAAEAAAAAA=</HashCode>
+      <FileName>HandleUserInput\UserStateDeliver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
