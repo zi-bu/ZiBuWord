@@ -111,4 +111,9 @@ public partial class Login : MaterialForm
         var test = new 测试();
         FormHelper.ShowNewForm(this, test);
     }
+
+    private void Login_Load(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -1,72 +1,59 @@
 using System.Collections.Generic;
 using IBLLBridgeDAL;
 
+
 namespace DAL
-{
-    public class WordQueryDAL : IWordQuery
     {
-        //实现查询接口
-        //根据英文查找单词
-        public IWord? FindExactWordByEnglish(string input)
+        public class WordQueryDAL : IWordQuery
         {
-            foreach (Formid formid in Enum.GetValues(typeof(Formid)))   //遍历所有的单词表
+        public List<IWord> FindWordsByEnglish(string input)
+        {
+            foreach (Formid formid in Enum.GetValues(typeof(Formid)))
             {
-                var result = WordMover.FindExactWordByEnglish(input, formid); //查找精确匹配的单词
-                if (!string.IsNullOrEmpty(result)) //如果找到，返回该单词
+                var results = WordMover.FindWordsByEnglish(input, formid);
+                // 如果当前表有精确匹配（即只返回一个且等于输入），直接返回
+                if (results.Count == 1 && results[0].Equals(input, StringComparison.OrdinalIgnoreCase))
                 {
-                    return new Word(result, formid); 
+                    return new List<IWord> { new Word(results[0], formid) };
                 }
             }
-            return null;
-        }
-
-        public List<IWord> FindFuzzyWordsByEnglish(string input)
-        {
+            // 没有精确匹配，合并所有表的模糊结果
             var list = new List<IWord>();
             foreach (Formid formid in Enum.GetValues(typeof(Formid)))
             {
-                var results = WordMover.FindFuzzyWordsByEnglish(input, formid);
+                var results = WordMover.FindWordsByEnglish(input, formid);
                 foreach (var word in results)
                 {
-                    list.Add(new Word(word, formid)); 
+                    list.Add(new Word(word, formid));
                 }
             }
-            
+            // 去重
             return list.GroupBy(w => w.word).Select(g => g.First()).ToList();
-            //由于不同单词表可能有相同的单词，这里用 GroupBy 按单词内容分组，只取每组的第一个，实现去重
         }
 
-
-
-        //根据中文查找单词
-        public IWord? FindExactWordByChinese(string chinese)
+        public List<IWord> FindWordsByChinese(string input)
         {
             foreach (Formid formid in Enum.GetValues(typeof(Formid)))
             {
-                var result = WordMover.FindExactWordByChinese(chinese, formid);
-                if (!string.IsNullOrEmpty(result))
+                var results = WordMover.FindWordsByChinese(input, formid);
+                // 如果当前表有精确匹配（即只返回一个且等于输入），直接返回
+                if (results.Count == 1 && results[0].Equals(input, StringComparison.OrdinalIgnoreCase))
                 {
-
-                    return new Word(result, formid);
+                    return new List<IWord> { new Word(results[0], formid) };
                 }
             }
-            return null;
-        }
-
-        public List<IWord> FindFuzzyWordsByChinese(string chinese)
-        {
+            // 没有精确匹配，合并所有表的模糊结果
             var list = new List<IWord>();
             foreach (Formid formid in Enum.GetValues(typeof(Formid)))
             {
-                var results = WordMover.FindFuzzyWordsByChinese(chinese, formid); // 查所有单词
+                var results = WordMover.FindWordsByChinese(input, formid);
                 foreach (var word in results)
                 {
-                    var w = new Word(word, formid);
-                    if (w.translations.Any(t => t.Contains(chinese)))
-                        list.Add(w);
+                    list.Add(new Word(word, formid));
                 }
             }
+            // 去重
             return list.GroupBy(w => w.word).Select(g => g.First()).ToList();
         }
     }
-}
+    }
