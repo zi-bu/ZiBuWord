@@ -62,6 +62,19 @@ namespace BLL
             }
             return result;
         }
+        /// <summary>
+        /// 调用DAL层获取单词ID
+        /// </summary>
+        /// <param name="word">单词</param>
+        /// <param name="dictType">词典类型</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public int GetWordId(string word, string dictType)
+        {
+            if (!Enum.TryParse<Formid>(dictType, out var formid))
+                throw new ArgumentException("未知词典类型", nameof(dictType));
+            return WordMover.GetWordId(word, formid);
+        }
     }
 
     public class FavoriteWordDetail
