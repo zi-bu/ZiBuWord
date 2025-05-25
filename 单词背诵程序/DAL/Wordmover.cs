@@ -447,6 +447,7 @@ public static class WordMover
     {
         using (var db = new SqlDataContext())
         {
+            
             switch (formid)
             {
                 case Formid.CET4:
@@ -484,6 +485,7 @@ public static class WordMover
             }
         }
     }
+
     public static string? FindExactWordByChinese(string chinese, Formid formid)
     {
         using (var db = new SqlDataContext())

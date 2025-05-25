@@ -25,6 +25,7 @@ namespace DAL.ReturnFunction
             // 如果没有收藏，则添加
             if (!db.FavoriteWords.Any(f => f.UserId == userId && f.WordId == wordId && f.DictionaryType == dictType))
             {
+                // 添加收藏单词
                 db.FavoriteWords.Add(new FavoriteWord
                 {
                     UserId = userId,
@@ -43,9 +44,11 @@ namespace DAL.ReturnFunction
         public void RemoveFavorite(int userId, int wordId, string dictType)
         {
             using var db = new UserContext();
+            // 查找已有的收藏记录
             var fav = db.FavoriteWords.FirstOrDefault(f => f.UserId == userId && f.WordId == wordId && f.DictionaryType == dictType);
             if (fav != null)
             {
+                // 删除收藏单词
                 db.FavoriteWords.Remove(fav);
                 db.SaveChanges();
             }
@@ -58,6 +61,7 @@ namespace DAL.ReturnFunction
         public List<FavoriteWord> GetFavorites(int userId)
         {
             using var db = new UserContext();
+            // 获取用户的所有收藏单词
             return db.FavoriteWords.Where(f => f.UserId == userId).ToList();
         }
     }

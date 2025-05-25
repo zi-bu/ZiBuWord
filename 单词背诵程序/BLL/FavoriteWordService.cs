@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL;
 using DAL.ReturnFunction;
+using IBLLBridgeDAL;
 
 namespace BLL
 {
@@ -13,7 +14,9 @@ namespace BLL
     /// </summary>
     public class FavoriteWordService
     {
+        //DAL层对象，只读属性保证始终指向同一个对象，用于后续调用方法
         private readonly FavoriteWordsManagement _dal = new FavoriteWordsManagement();
+        private readonly FavoriteWordDetailQueryDAL _detailDal = new FavoriteWordDetailQueryDAL();
 
         /// <summary>
         /// 添加收藏
@@ -28,110 +31,39 @@ namespace BLL
         /// </summary>
         public void RemoveFavorite(int userId, int wordId, string dictType)
         {
+            if (string.IsNullOrEmpty(dictType))
+                throw new ArgumentNullException(nameof(dictType), "词典类型不能为空");
+                
             _dal.RemoveFavorite(userId, wordId, dictType);
         }
 
         /// <summary>
         /// 获取用户所有收藏
         /// </summary>
+        /// <param name="userId">用户ID</param>
         public List<FavoriteWordDetail> GetFavoriteDetails(int userId)
         {
-            var favorites = _dal.GetFavorites(userId);
-            var result = new List<FavoriteWordDetail>();
-            using var db = new DAL.Context.SqlDataContext();
-            foreach (var fav in favorites)
+            var favorites = _dal.GetFavorites(userId); // 获取用户的收藏列表
+            var result = new List<FavoriteWordDetail>(); // 创建一个列表来存储结果
+            foreach (var fav in favorites) // 遍历每个收藏
             {
-                string word = "";
-                string translation = "";
-
-                // 1. 先查出单词原文
-                switch (fav.DictionaryType)
+                // 获取单词原文、词性和释义
+                var (word, posList, translationsList) = _detailDal.GetWordDetail(fav.DictionaryType, fav.WordId);
+                // 把词性和释义拼接成字符串
+                var translation = string.Join("; ", translationsList.Zip(posList, (tran, p) => $"{p}. {tran}"));
+                result.Add(new FavoriteWordDetail // 组装成 FavoriteWordDetail 对象后添加到列表
                 {
-                    case "CET4":
-                        var cet4 = db.CET4.FirstOrDefault(w => w.Id == fav.WordId);
-                        if (cet4 != null)
-                        {
-                            word = cet4.Word;
-                        }
-                        break;
-                    case "CET6":
-                        var cet6 = db.CET6.FirstOrDefault(w => w.Id == fav.WordId);
-                        if (cet6 != null)
-                        {
-                            word = cet6.Word;
-                        }
-                        break;
-                    case "HighSchool":
-                        var hs = db.HighSchool.FirstOrDefault(w => w.Id == fav.WordId);
-                        if (hs != null)
-                        {
-                            word = hs.Word;
-                        }
-                        break;
-                    case "MiddleSchool":
-                        var ms = db.MiddleSchool.FirstOrDefault(w => w.Id == fav.WordId);
-                        if (ms != null)
-                        {
-                            word = ms.Word;
-                        }
-                        break;
-                    case "KY":
-                        var ky = db.KY.FirstOrDefault(w => w.Id == fav.WordId);
-                        if (ky != null)
-                        {
-                            word = ky.Word;
-                        }
-                        break;
-                    case "TF":
-                        var tf = db.TF.FirstOrDefault(w => w.Id == fav.WordId);
-                        if (tf != null)
-                        {
-                            word = tf.Word;
-                        }
-                        break;
-                    case "SAT":
-                        var sat = db.SAT.FirstOrDefault(w => w.Id == fav.WordId);
-                        if (sat != null)
-                        {
-                            word = sat.Word;
-                        }
-                        break;
-                }
-
-                // 2. 获取 Formid
-                Formid formid = fav.DictionaryType switch
-                {
-                    "CET4" => Formid.CET4,
-                    "CET6" => Formid.CET6,
-                    "HighSchool" => Formid.HighSchool,
-                    "MiddleSchool" => Formid.MiddleSchool,
-                    "KY" => Formid.KY,
-                    "TF" => Formid.TF,
-                    _ => throw new Exception("未知词典类型")
-                };
-
-                // 3. 用 Word 类查释义和词性
-                string pos = "";
-                if (!string.IsNullOrEmpty(word))
-                {
-                    var wordObj = new DAL.Word(word, formid);
-                    var pairs = wordObj.translations.Zip(wordObj.pos, (tran, p) => $"{p}. {tran}");
-                    translation = string.Join("; ", pairs);
-                }
-
-                result.Add(new FavoriteWordDetail
-                {
-                    Id = fav.Id,
-                    DictionaryType = fav.DictionaryType,
-                    WordId = fav.WordId,
-                    Word = word,
-                    Translation = translation,
-                    Pos = pos
+                    Id = fav.Id, // 收藏ID
+                    DictionaryType = fav.DictionaryType, // 词典类型
+                    WordId = fav.WordId, // 单词ID
+                    Word = word, // 单词原文
+                    Translation = translation // 词性+释义
                 });
             }
             return result;
         }
     }
+
     public class FavoriteWordDetail
     {
         public int Id { get; set; }
@@ -139,6 +71,5 @@ namespace BLL
         public int WordId { get; set; }
         public string? Word { get; set; }
         public string? Translation { get; set; }
-        public string? Pos { get; set; } 
     }
 }

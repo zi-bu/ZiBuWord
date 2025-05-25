@@ -111,7 +111,6 @@
             Name = "Login";
             Padding = new Padding(10);
             Text = " 登录";
-            Load += Login_Load;
             ResumeLayout(false);
             PerformLayout();
         }

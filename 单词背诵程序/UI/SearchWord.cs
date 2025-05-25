@@ -67,14 +67,19 @@ namespace UI
         {
 
             var searcher = new SearchWordEnglish(new WordQueryDAL());
+            //创建一个 SearchWordEnglish 对象，并把 WordQueryDAL 作为参数传进去
             var result = searcher.SearchEnglish(textBox1.Text.Trim());
             listView1.Items.Clear();
             foreach (var w in result)
             {
-                var item = new ListViewItem(w.word);
-                item.SubItems.Add(string.Join("/", w.pos));
-                item.SubItems.Add(string.Join("；", w.translations));
-                listView1.Items.Add(item);
+                var item = new ListViewItem(w.word); 
+                // 创建一行，第一列是单词
+                item.SubItems.Add(string.Join("/", w.pos)); 
+                // 第二列是词性，多个词性用“/”分隔
+                item.SubItems.Add(string.Join("；", w.translations)); 
+                // 第三列是释义，多个释义用“；”分隔
+                listView1.Items.Add(item); 
+                // 把这一行加到 ListView 控件中
             }
         }
 

@@ -28,8 +28,15 @@ public partial class Favorite : MaterialForm
         if (e.ColumnIndex == dataGridViewFavorites.Columns["colRemove"].Index && e.RowIndex >= 0)
         {
             var detail = (FavoriteWordDetail)dataGridViewFavorites.Rows[e.RowIndex].DataBoundItem;
-            _favoriteService.RemoveFavorite(_userId, detail.WordId, detail.DictionaryType);
-            LoadFavorites();
+            if (!string.IsNullOrEmpty(detail.DictionaryType))
+            {
+                _favoriteService.RemoveFavorite(_userId, detail.WordId, detail.DictionaryType);
+                LoadFavorites();
+            }
+            else
+            {
+                MessageBox.Show("词典类型不能为空！");
+            }
         }
     }
 
