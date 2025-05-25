@@ -116,10 +116,9 @@ public partial class UiSelectionOrder : MaterialForm
 
     private void btnFavorite_Click(object sender, EventArgs e)
     {
-        string word = _selectionClass.AccurateWord.word;// 获取当前单词原文
-        string dictType = "CET4";// 获取当前词典类型(先用CET4占着)
-        int wordId = _favoriteService.GetWordId(word, dictType);// 获取单词ID
-        _favoriteService.AddFavorite(_userId, wordId, dictType);// 添加到收藏夹
+        string word = _selectionClass.AccurateWord.word; // 获取当前单词原文
+        string dictType = "CET4"; // 获取当前词典类型(实际应动态获取)
+        _favoriteService.AddFavorite(word, dictType); //添加收藏
         MessageBox.Show("已收藏该单词！");
     }
 }
