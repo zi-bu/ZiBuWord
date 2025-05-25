@@ -14,6 +14,7 @@ namespace BLL
     /// </summary>
     public class FavoriteWordService
     {
+        //DAL层对象，只读属性保证始终指向同一个对象，用于后续调用方法
         private readonly FavoriteWordsManagement _dal = new FavoriteWordsManagement();
         private readonly FavoriteWordDetailQueryDAL _detailDal = new FavoriteWordDetailQueryDAL();
 
@@ -32,7 +33,7 @@ namespace BLL
         {
             if (string.IsNullOrEmpty(dictType))
                 throw new ArgumentNullException(nameof(dictType), "词典类型不能为空");
-
+                
             _dal.RemoveFavorite(userId, wordId, dictType);
         }
 
@@ -43,14 +44,14 @@ namespace BLL
         public List<FavoriteWordDetail> GetFavoriteDetails(int userId)
         {
             var favorites = _dal.GetFavorites(userId); // 获取用户的收藏列表
-            var result = new List<FavoriteWordDetail>(); // 创建一个新的列表来存储结果
+            var result = new List<FavoriteWordDetail>(); // 创建一个列表来存储结果
             foreach (var fav in favorites) // 遍历每个收藏
             {
                 // 获取单词原文、词性和释义
                 var (word, posList, translationsList) = _detailDal.GetWordDetail(fav.DictionaryType, fav.WordId);
                 // 把词性和释义拼接成字符串
                 var translation = string.Join("; ", translationsList.Zip(posList, (tran, p) => $"{p}. {tran}"));
-                result.Add(new FavoriteWordDetail // 创建一个新的 FavoriteWordDetail 对象
+                result.Add(new FavoriteWordDetail // 组装成 FavoriteWordDetail 对象后添加到列表
                 {
                     Id = fav.Id, // 收藏ID
                     DictionaryType = fav.DictionaryType, // 词典类型

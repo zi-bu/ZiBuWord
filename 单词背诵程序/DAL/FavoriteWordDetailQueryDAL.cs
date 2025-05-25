@@ -5,6 +5,10 @@ using DAL.Context;
 
 namespace DAL
 {
+    /// <summary>
+    /// 收藏单词详情查询类
+    /// 提供根据词典类型和单词ID获取单词原文、词性和释义的方法
+    /// </summary>
     public class FavoriteWordDetailQueryDAL
     {
         /// <summary>
