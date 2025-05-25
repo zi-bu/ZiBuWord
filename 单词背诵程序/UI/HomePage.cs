@@ -81,8 +81,15 @@ public partial class HomePage : MaterialForm
 
     private void btnFavorite_Click(object sender, EventArgs e)
     {
-        var favorite = new Favorite();
-        FormHelper.ShowNewForm(this, favorite);
+        // 判断当前是否已登录
+        string? username = BLL.HandleUserInput.UserStateDeliver.GetCurrentUser();
+        if (string.IsNullOrEmpty(username))
+        {
+            MessageBox.Show("请先登录后再查看收藏单词！", "未登录", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+        var favoriteForm = new Favorite();
+        FormHelper.ShowNewForm(this, favoriteForm);
     }
 
     private void btnStartMemory_Click(object sender, EventArgs e)
