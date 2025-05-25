@@ -6,7 +6,7 @@ namespace UI;
 public partial class Favorite : MaterialForm
 {
     private readonly FavoriteWordService _favoriteService = new();
-    private int _userId = 1; // 这里替换为实际用户ID获取方式
+
     public Favorite()
     {
         InitializeComponent();
@@ -18,7 +18,8 @@ public partial class Favorite : MaterialForm
 
     private void LoadFavorites()
     {
-        var details = _favoriteService.GetFavoriteDetails(_userId);
+        // 只需调用 BLL 层的“获取当前用户收藏”方法
+        var details = _favoriteService.GetCurrentUserFavorites();
         dataGridViewFavorites.DataSource = details;
     }
 
@@ -30,7 +31,8 @@ public partial class Favorite : MaterialForm
             var detail = (FavoriteWordDetail)dataGridViewFavorites.Rows[e.RowIndex].DataBoundItem;
             if (!string.IsNullOrEmpty(detail.DictionaryType))
             {
-                _favoriteService.RemoveFavorite(_userId, detail.WordId, detail.DictionaryType);
+                // 只需传递单词ID和词典类型，用户ID由BLL自动获取
+                _favoriteService.RemoveFavorite(detail.WordId, detail.DictionaryType);
                 LoadFavorites();
             }
             else

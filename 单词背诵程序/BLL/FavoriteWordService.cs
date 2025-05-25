@@ -47,11 +47,11 @@ namespace BLL
         /// <summary>
         /// 移除收藏
         /// </summary>
-        public void RemoveFavorite(int userId, int wordId, string dictType)
+        public void RemoveFavorite(int wordId, string dictType)
         {
+            int userId = GetCurrentUserId();
             if (string.IsNullOrEmpty(dictType))
                 throw new ArgumentNullException(nameof(dictType), "词典类型不能为空");
-                
             _dal.RemoveFavorite(userId, wordId, dictType);
         }
 
