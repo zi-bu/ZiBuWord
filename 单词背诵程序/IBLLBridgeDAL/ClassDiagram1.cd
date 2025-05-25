@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="IBLLBridgeDAL.IUserStateDeliver">
+    <Position X="3" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACAEAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IUserStateDeliver.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IBLLBridgeDAL.IWord">
+    <Position X="4.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAIIAAAAAAAAAIAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>IWord.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IBLLBridgeDAL.IWordQuery">
+    <Position X="3" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAIAAgAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>IWordQuery.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IBLLBridgeDAL.UserManagement.IUserRegisterService">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>UserManagement\IUserService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IBLLBridgeDAL.UserManagement.IUserLoginService">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>UserManagement\IUserService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IBLLBridgeDAL.WordOperation.IReviewListManagement">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WordOperation\IReviewListManagement.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IBLLBridgeDAL.WordOperation.IWordManagement">
+    <Position X="6.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAEAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WordOperation\IWordManagement.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

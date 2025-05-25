@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="UI.Favorite">
+    <Position X="13" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAACAAAYEAAACQCgACBEAAAAAIAAAIgAAAAAA=</HashCode>
+      <FileName>Favorite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.FormHelper">
+    <Position X="4.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FormHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.HomePage">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAQCAAAIAEAACAggAiACAIAgAAKEQAACQAAAQ=</HashCode>
+      <FileName>HomePage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.Login">
+    <Position X="9.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAACAAAAAAAACAAAACAAAIKAABAEAAAABgAEQ=</HashCode>
+      <FileName>Login.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.Program">
+    <Position X="2.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.Reviewer">
+    <Position X="6.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAQAAAACmAECAAAAAGAAAACAAAAAAAEAAAAAAAAAQA=</HashCode>
+      <FileName>Reviewer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.SearchWord">
+    <Position X="8" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ADAQAAAAACAAABQAAECgCAASAAA4AAQAEPAAAYAAAAE=</HashCode>
+      <FileName>SearchWord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.UiSelectionOrder">
+    <Position X="2.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAB4AACAEAh4CAACAAAACAAAIEACEAAAAAAAABAA=</HashCode>
+      <FileName>UiSelectionOrder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.测试">
+    <Position X="4.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>测试.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.Properties.Resources">
+    <Position X="1" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
