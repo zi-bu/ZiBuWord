@@ -177,7 +177,8 @@ public class FavoriteWord
 public class UserReview
 {
     public int ID { get; set; }
-
+    // 定义外键关系
+    [ForeignKey("User")]
     public int UserID { get; set; }
 
     public int Repetition { get; set; }// 复习次数
