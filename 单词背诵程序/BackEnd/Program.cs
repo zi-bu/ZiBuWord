@@ -139,7 +139,7 @@ app.MapPost("/api/RiciterWord/NewList", () =>
 app.MapGet("/api/search", ([FromQuery] string kw, IBLLBridgeDAL.IWordQuery wordQuery) =>
 {
     var searcher = new SearchWordEnglish(wordQuery);
-    var result = searcher.FuzzySearch(kw);
+    var result = searcher.SearchEnglish(kw);
     return Results.Ok(result);
 });
 

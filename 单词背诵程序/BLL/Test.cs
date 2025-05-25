@@ -14,7 +14,7 @@ internal class TestArea
 {
     /// <summary>
     ///     测试的东西可以放在main函数这里，也可以打断点进行测试。
-    ///     写函数时可以像这么写注释。这样只用把鼠标放在函数上就能看到注释了。
+    ///     写函数时可以像这么写注释。这样只用把鼠 标放在函数上就能看到注释了。
     ///     <br />(我不会XML语言)
     /// </summary>
     private static void Main(string[] args)
