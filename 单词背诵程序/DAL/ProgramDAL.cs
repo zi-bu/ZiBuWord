@@ -12,15 +12,9 @@ internal class ProgramDAL
 {
     private static void Main(string[] args)
     {
-        using(Context.UserContext context = new Context.UserContext())
+        using (Context.UserContext context = new Context.UserContext())
         {
-            var user = context.UserData;
-            Console.WriteLine(user.First(f=>f.UserID==1).UserName);
-
-            Console.WriteLine(user.Include(f=>f.UserWord).First(f=>f.UserID==1).UserWord.TF);
-
-            int a =UserDataMover.GetFormProgress("test", Formid.CET4);
-            Console.WriteLine(a);
+            WordMover.AddReviewWord(UserDataMover.GetUserId("test"), "sound", WordMover.GetWordId("sound", Formid.CET4), Formid.CET4);
         }
     }
 }

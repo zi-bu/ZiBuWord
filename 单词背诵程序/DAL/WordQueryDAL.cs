@@ -63,7 +63,7 @@ namespace DAL
                 {
                     var w = new Word(word, formid);
                     if (w.translations.Any(t => t.Contains(chinese)))
-                        list.Add(w);
+                    list.Add(w);
                 }
             }
             return list.GroupBy(w => w.word).Select(g => g.First()).ToList();

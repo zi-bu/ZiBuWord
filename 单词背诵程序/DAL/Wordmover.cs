@@ -594,7 +594,6 @@ public static class WordMover
         using (var db = new UserContext())
         {
             var User = db.UserData.FirstOrDefault(u => u.UserName == user);
-
             if (User!.UserReview == null) { return; }
             var ReviewWord = User.UserReview.Where(f => f.DueDate == time);
             int count = rd.Next(0, ReviewWord.Count());
