@@ -548,7 +548,52 @@ public static class WordMover
                 default:
                     throw new ArgumentException("未知单词来源表");
             }
-            return fuzzyList;
+        }
+    }
+    /// <summary>
+    /// 添加单词到复习表
+    /// </summary>
+    /// <param name="userID"></param>
+    /// <param name="word"></param>
+    /// <param name="wordid"></param>
+    /// <param name="formid"></param>
+    public static void AddReviewWord(int userID, string word, int wordid, Formid formid)
+    {
+        using (var db = new UserContext())
+        {
+            if (db.ReviewUserWord.Any(w => w.UserID == userID && w.Word == word)) { return; }
+            var UserReview = new UserReview
+            {
+                UserID = userID,
+                Repetition = 1,
+                Mistake = 0,
+                Interval = 1,
+                DueDate = DateTime.Now,
+                Word = word,
+                WordID = wordid,
+                Form = formid.ToString()
+            };
+            db.ReviewUserWord.Add(UserReview);
+            db.SaveChanges();
+        }
+    }
+    /// <summary>
+    /// 获取指定日期的复习单词的ID和来源表
+    /// </summary>
+    /// <param name="user"></param>
+    /// <param name="Form"></param>
+    /// <param name="wordid"></param>
+    public static void GetReviewWord(string user,DateTime time, ref string Form,ref int wordid)
+    {
+        using (var db = new UserContext())
+        {
+            var User = db.UserData.FirstOrDefault(u => u.UserName == user);
+            if (User!.UserReview == null) { return; }
+            var ReviewWord = User.UserReview.Where(f => f.DueDate == time);
+            int count = rd.Next(0, ReviewWord.Count());
+            var word = ReviewWord.ElementAt(count);
+            Form = word.Form;
+            wordid = word.WordID;
 
         }
     }
