@@ -597,4 +597,23 @@ public static class WordMover
 
         }
     }
+
+    /// <summary>
+    /// 复习完成，更新复习单词
+    /// </summary>
+    /// <param name="userID"></param>
+    /// <param name="word"></param>
+    /// <exception cref="ArgumentException"></exception>
+    public static void UpdateReviewWord(int userID, string word)
+    {
+        using (var db = new UserContext())
+        {
+            var review = db.ReviewUserWord.Where(w => w.UserID == userID && w.Word == word).FirstOrDefault();
+            if (review == null) { throw new ArgumentException("该用户的背诵表中没有该单词"); }
+            review.Repetition++;
+            review.Interval *= 2;
+            review.DueDate = DateTime.Now.AddDays(review.Interval);
+            db.SaveChanges();
+        }
+    }
 }
