@@ -39,7 +39,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(786, 13);
+            button4.Location = new Point(786, 25);
             button4.Margin = new Padding(4);
             button4.Name = "button4";
             button4.Size = new Size(61, 35);
@@ -50,48 +50,54 @@
             // 
             // dataGridViewFavorites
             // 
+            dataGridViewFavorites.AllowUserToResizeColumns = false;
             dataGridViewFavorites.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewFavorites.Columns.AddRange(new DataGridViewColumn[] { colWord, colTranslation, colDict, colRemove });
             dataGridViewFavorites.Location = new Point(6, 67);
             dataGridViewFavorites.Name = "dataGridViewFavorites";
+            dataGridViewFavorites.ReadOnly = true;
+            dataGridViewFavorites.RowHeadersVisible = false;
             dataGridViewFavorites.RowHeadersWidth = 62;
-            dataGridViewFavorites.Size = new Size(736, 569);
+            dataGridViewFavorites.Size = new Size(841, 736);
             dataGridViewFavorites.TabIndex = 10;
             // 
             // colWord
             // 
+            colWord.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             colWord.DataPropertyName = "Word";
             colWord.HeaderText = "单词";
             colWord.MinimumWidth = 8;
             colWord.Name = "colWord";
             colWord.ReadOnly = true;
-            colWord.Width = 150;
+            colWord.Width = 82;
             // 
             // colTranslation
             // 
+            colTranslation.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             colTranslation.DataPropertyName = "Translation";
             colTranslation.HeaderText = "释义";
             colTranslation.MinimumWidth = 8;
             colTranslation.Name = "colTranslation";
             colTranslation.ReadOnly = true;
-            colTranslation.Width = 150;
             // 
             // colDict
             // 
+            colDict.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             colDict.DataPropertyName = "DictionaryType";
             colDict.HeaderText = "词典类型";
             colDict.MinimumWidth = 8;
             colDict.Name = "colDict";
             colDict.ReadOnly = true;
-            colDict.Width = 150;
+            colDict.Width = 118;
             // 
             // colRemove
             // 
+            colRemove.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             colRemove.HeaderText = "移除";
             colRemove.MinimumWidth = 8;
             colRemove.Name = "colRemove";
             colRemove.UseColumnTextForButtonValue = true;
-            colRemove.Width = 150;
+            colRemove.Width = 52;
             // 
             // Favorite
             // 
