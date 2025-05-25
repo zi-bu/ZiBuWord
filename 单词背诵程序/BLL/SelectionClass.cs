@@ -17,12 +17,12 @@ public class SelectionClass(IWord w1)
     /// <summary>
     ///     被设为正确答案的单词对象
     /// </summary>
-    public IWord AccurateWord { get; } = w1; //正确的
+    public IWord AccurateWord { get; private set; } = w1; //正确的单词
 
     /// <summary>
     ///     被作为选项的列表
     /// </summary>
-    public List<IWord> Selection { get; private set; } =
+    public List<IWord> Selection { get; private set; } = //一键洗好排序的选项列表
         ShuffleList
         (Enumerable
             .Range(0, 3)
@@ -53,13 +53,14 @@ public class SelectionClass(IWord w1)
     /// <summary>
     ///     用于将单词加入到复习列表
     /// </summary>
-    public void DeleteWordFromLearningList()
-    {
-        WordManagement.RemoveWordFromeLearningList(AccurateWord.word);
-    }
 
-    public void AddWordToReViewList()
+    public void AddWordToReViewList()//加入复习列表
     {
         WordManagement.AddWordToReview(AccurateWord);
+    }
+    public void ReflashSelection()//刷新选项
+    {
+        AccurateWord = RiciterOrder.WordList[RiciterOrder.Index];//刷新正确的单词
+        Selection = ShuffleList(Enumerable.Range(0, 3).Select(_ => WordManagement.GetRandomWordForReciter()).Append(AccurateWord).ToList());//刷新选项
     }
 }

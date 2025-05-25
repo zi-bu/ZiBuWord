@@ -28,6 +28,7 @@ public static class ReviewOrder
     public static void ResetIndex() //索引回拨判别
     {
         Index++; //趋势递增
+        Console.WriteLine($"这里递增了,Index为{Index},剩余元素{WordList.Count()}");
         if (!(Index < WordList.Count)) //序列索引回拨
             Index = 0;
     }
@@ -36,6 +37,7 @@ public static class ReviewOrder
     {
         if (WordList.Count != 0) return false; //检验是否完成当前队列的背诵
         Index = 0; //回拨索引
+        Console.WriteLine("队列已经完成了");
         CreateOrRefreshNewWordList(); //创建新的列表
         return true;
     }

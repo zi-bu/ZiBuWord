@@ -8,44 +8,16 @@ namespace DAL;
 /// </summary>
 public class Word : IWord
 {
-    private List<string>? Phrases = new();
-    private List<string>? PhraseTranslations = new();
 
 
     //因为属性本质上是方法，而方法不能ref传入，所以为了传值，这里列出了字段；
+    private List<string>? Phrases = new();
+    private List<string>? PhraseTranslations = new();
     private List<string> Pos = new();
-
     private readonly Formid tableid; // 单词来源的枚举编号。
     private readonly List<string> Translations = new();
 
-    /// <summary>
-    ///     构造函数：通过枚举编号指定单词来源;
-    /// </summary>
-    public Word(int id)
-    {
-        tableid = (Formid)id;
-        word = WordMover.GetWord(tableid);
-        WordMover.FindTranslations(word, tableid, ref Translations, ref Pos);
-        WordMover.FindPhrases(word, tableid, ref Phrases, ref PhraseTranslations);
-    }
-    public Word(Formid id)
-    {
-        tableid = id;
-        word = WordMover.GetWord(tableid);
-        WordMover.FindTranslations(word, tableid, ref Translations, ref Pos);
-        WordMover.FindPhrases(word, tableid, ref Phrases, ref PhraseTranslations);
-    }
-
-    //单词的各种属性
-    public Word(string word, Formid formid)
-    {
-        this.word = word;
-        tableid = formid;
-        WordMover.FindTranslations(word, formid, ref Translations, ref Pos);
-        WordMover.FindPhrases(word, formid, ref Phrases, ref PhraseTranslations);
-    }
-    //专门用于模糊查询的构造函数
-
+    //接口需要的属性
     public string word { get; } // 单词
 
     public List<string> pos
@@ -71,4 +43,49 @@ public class Word : IWord
         get => PhraseTranslations;
         private set => PhraseTranslations = value;
     } // 短语翻译
+
+    /// <summary>
+    ///  构造某表的一个随机单词
+    /// </summary>
+    public Word(int id)
+    {
+        tableid = (Formid)id;
+        word = WordMover.GetWord(tableid);
+        WordMover.FindTranslations(word, tableid, ref Translations, ref Pos);
+        WordMover.FindPhrases(word, tableid, ref Phrases, ref PhraseTranslations);
+    }
+    /// <summary>
+    ///  构造某表的一个随机单词
+    /// </summary>
+    public Word(Formid id)
+    {
+        tableid = id;
+        word = WordMover.GetWord(tableid);
+        WordMover.FindTranslations(word, tableid, ref Translations, ref Pos);
+        WordMover.FindPhrases(word, tableid, ref Phrases, ref PhraseTranslations);
+    }
+
+    /// <summary>
+    ///  构造某表的一个精确单词<br/>
+    ///  专门用于模糊查询的构造函数
+    /// </summary>
+    public Word(string word, Formid formid)
+    {
+        this.word = word;
+        tableid = formid;
+        WordMover.FindTranslations(word, formid, ref Translations, ref Pos);
+        WordMover.FindPhrases(word, formid, ref Phrases, ref PhraseTranslations);
+    }
+    /// <summary>
+    /// 按照单词id和来源构造单词对象
+    /// </summary>
+    /// <param name="wordid"></param>
+    /// <param name="formid"></param>
+    public Word(int wordid, Formid formid)
+    {
+        tableid = formid;
+        word = WordMover.GetWord(formid,wordid);
+        WordMover.FindTranslations(word, formid, ref Translations, ref Pos);
+        WordMover.FindPhrases(word, formid, ref Phrases, ref PhraseTranslations);
+    }
 }
