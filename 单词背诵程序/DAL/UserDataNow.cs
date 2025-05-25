@@ -90,5 +90,14 @@ namespace DAL
         {
             return NowUser;
         }
+
+        /// <summary>
+        /// 获取当前词典类型
+        /// </summary>
+        /// <returns></returns>
+        public string GetCurrentDictType()
+        {
+            return userDictionarySelect.ToString();
+        }
     }
 }

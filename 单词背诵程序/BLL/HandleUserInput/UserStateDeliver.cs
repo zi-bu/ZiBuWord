@@ -21,7 +21,7 @@ namespace BLL.HandleUserInput
         /// <returns></returns>
         public static bool DeliverDictionarySelect(string wordform)
         {
-            if(wordform == null || wordform == "") 
+            if (wordform == null || wordform == "")
             {
                 return false;
                 throw new ArgumentException("word is null or empty");
@@ -36,9 +36,9 @@ namespace BLL.HandleUserInput
         /// </summary>
         /// <param name="word"></param>
         /// <returns></returns>
-        public static bool RememberUser (string? user)
+        public static bool RememberUser(string? user)
         {
-            if(user == null)return false;
+            if (user == null) return false;
             Deliverymen.RememberUser(user);
             return true;
         }
@@ -46,7 +46,7 @@ namespace BLL.HandleUserInput
         /// 使程序单词进度与对应用户的数据库里的进度同步<br/>
         /// 使用地点：选择表时触发一下；中断背诵触发。
         /// </summary>
-        public static bool ProgressSync() 
+        public static bool ProgressSync()
         {
             Deliverymen.ProgressSync();
             return true;
@@ -67,8 +67,14 @@ namespace BLL.HandleUserInput
         /// <returns></returns>
         public static string? GetCurrentUser()
         {
-            // Deliverymen 是 UserDataNow 的实例
             return ((DAL.UserDataNow)Deliverymen).GetNowUser();
+        }
+        /// <summary>
+        /// 获取当前词典类型（如"CET4"、"CET6"等）
+        /// </summary>
+        public static string GetCurrentDictType()
+        {
+            return ((DAL.UserDataNow)Deliverymen).GetCurrentDictType();
         }
     }
 }
