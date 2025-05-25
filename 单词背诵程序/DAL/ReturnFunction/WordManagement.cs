@@ -10,7 +10,7 @@ namespace DAL;
 public class WordManagement : IWordManagement
 {
     /// <summary>
-    ///     获取随机单词的IWord实例(按照进度获取单词，游客除外)
+    /// 获取随机单词的IWord实例(按照进度获取单词，游客除外)
     /// </summary>
     /// <returns></returns>
     public IWord GetRandomWordForReciter()
@@ -21,7 +21,7 @@ public class WordManagement : IWordManagement
     }
 
     /// <summary>
-    ///     移除学习列表中的单词（事实上不需要）
+    /// 移除学习列表中的单词
     /// </summary>
     /// <param name="word"></param>
     public void RemoveWordFromeLearningList(string word)
@@ -29,12 +29,16 @@ public class WordManagement : IWordManagement
     }
 
     /// <summary>
-    ///     把单词添加到复习列表中<br />
+    /// 把单词添加到复习列表中<br />
     /// </summary>
     /// <param name="word"></param>
     public void AddWordToReview(IWord word)
     {
-        //未实现
+        if(UserDataNow.NowUser == null) return;
+        WordMover.AddReviewWord(UserDataMover.GetUserId(UserDataNow.NowUser),
+                                word.word,
+                                WordMover.GetWordId(word.word,UserDataNow.userDictionarySelect),
+                                UserDataNow.userDictionarySelect);
     }
 
 }

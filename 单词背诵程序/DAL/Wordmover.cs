@@ -41,46 +41,46 @@ public static class WordMover
             switch (formid)
             {
                 case Formid.CET4:
-                {
-                    var count = rd.Next(0, db.CET4.Count() - 1); //随机生成索引
-                    var word = db.CET4.ElementAt(count); //跳过count个元素，获取第count+1个元素
-                    return word.Word;
-                }
+                    {
+                        var count = rd.Next(0, db.CET4.Count() - 1); //随机生成索引
+                        var word = db.CET4.ElementAt(count); //跳过count个元素，获取第count+1个元素
+                        return word.Word;
+                    }
                 case Formid.CET6:
-                {
-                    var count = rd.Next(0, db.CET6.Count() - 1);
-                    var word = db.CET6.ElementAt(count);
-                    return word.Word;
-                }
+                    {
+                        var count = rd.Next(0, db.CET6.Count() - 1);
+                        var word = db.CET6.ElementAt(count);
+                        return word.Word;
+                    }
                 case Formid.MiddleSchool:
-                {
-                    var count = rd.Next(0, db.MiddleSchool.Count() - 1);
-                    var word = db.MiddleSchool.ElementAt(count);
-                    return word.Word;
-                }
+                    {
+                        var count = rd.Next(0, db.MiddleSchool.Count() - 1);
+                        var word = db.MiddleSchool.ElementAt(count);
+                        return word.Word;
+                    }
 
                 case Formid.HighSchool:
-                {
-                    var count = rd.Next(0, db.HighSchool.Count() - 1);
-                    var word = db.HighSchool.ElementAt(count);
-                    return word.Word;
-                }
+                    {
+                        var count = rd.Next(0, db.HighSchool.Count() - 1);
+                        var word = db.HighSchool.ElementAt(count);
+                        return word.Word;
+                    }
                 case Formid.KY:
-                {
-                    var count = rd.Next(0, db.KY.Count() - 1);
-                    var word = db.KY.ElementAt(count);
-                    return word.Word;
-                }
+                    {
+                        var count = rd.Next(0, db.KY.Count() - 1);
+                        var word = db.KY.ElementAt(count);
+                        return word.Word;
+                    }
                 case Formid.TF:
-                {
-                    var count = rd.Next(0, db.TF.Count() - 1);
-                    var word = db.TF.ElementAt(count);
-                    return word.Word;
-                }
+                    {
+                        var count = rd.Next(0, db.TF.Count() - 1);
+                        var word = db.TF.ElementAt(count);
+                        return word.Word;
+                    }
                 default:
-                {
-                    throw new ArgumentException("未知单词来源表");
-                }
+                    {
+                        throw new ArgumentException("未知单词来源表");
+                    }
             }
         }
     }
@@ -100,46 +100,46 @@ public static class WordMover
             switch (formid)
             {
                 case Formid.CET4:
-                {
-                    var word = db.CET4.FirstOrDefault(s => s.Id == id)?.Word;
-                    if (word == null) throw new ArgumentException("ID不存在");
-                    return word;
-                }
+                    {
+                        var word = db.CET4.FirstOrDefault(s => s.Id == id)?.Word;
+                        if (word == null) throw new ArgumentException("ID不存在");
+                        return word;
+                    }
                 case Formid.CET6:
-                {
-                    var word = db.CET6.FirstOrDefault(s => s.Id == id)?.Word;
-                    if (word == null) throw new ArgumentException("ID不存在");
-                    return word;
-                }
+                    {
+                        var word = db.CET6.FirstOrDefault(s => s.Id == id)?.Word;
+                        if (word == null) throw new ArgumentException("ID不存在");
+                        return word;
+                    }
                 case Formid.MiddleSchool:
-                {
-                    var word = db.MiddleSchool.FirstOrDefault(s => s.Id == id)?.Word;
-                    if (word == null) throw new ArgumentException("ID不存在");
-                    return word;
-                }
+                    {
+                        var word = db.MiddleSchool.FirstOrDefault(s => s.Id == id)?.Word;
+                        if (word == null) throw new ArgumentException("ID不存在");
+                        return word;
+                    }
 
                 case Formid.HighSchool:
-                {
-                    var word = db.HighSchool.FirstOrDefault(s => s.Id == id)?.Word;
-                    if (word == null) throw new ArgumentException("ID不存在");
-                    return word;
-                }
+                    {
+                        var word = db.HighSchool.FirstOrDefault(s => s.Id == id)?.Word;
+                        if (word == null) throw new ArgumentException("ID不存在");
+                        return word;
+                    }
                 case Formid.KY:
-                {
-                    var word = db.KY.FirstOrDefault(s => s.Id == id)?.Word;
-                    if (word == null) throw new ArgumentException("ID不存在");
-                    return word;
-                }
+                    {
+                        var word = db.KY.FirstOrDefault(s => s.Id == id)?.Word;
+                        if (word == null) throw new ArgumentException("ID不存在");
+                        return word;
+                    }
                 case Formid.TF:
-                {
-                    var word = db.TF.FirstOrDefault(s => s.Id == id)?.Word;
-                    if (word == null) throw new ArgumentException("ID不存在");
-                    return word;
-                }
+                    {
+                        var word = db.TF.FirstOrDefault(s => s.Id == id)?.Word;
+                        if (word == null) throw new ArgumentException("ID不存在");
+                        return word;
+                    }
                 default:
-                {
-                    throw new ArgumentException("未知单词来源表");
-                }
+                    {
+                        throw new ArgumentException("未知单词来源表");
+                    }
             }
         }
     }
@@ -160,94 +160,94 @@ public static class WordMover
             switch (id)
             {
                 case Formid.CET4:
-                {
-                    var TureForm = db.CET4.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
                     {
-                    }
-                    else
-                    {
-                        translations = TureForm.Translations.Select(t => t.Translation).ToList();
-                        pos = TureForm.Translations.Select(t => t.TyPe).ToList();
-                    }
+                        var TureForm = db.CET4.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
+                        if (TureForm == null)
+                        {
+                        }
+                        else
+                        {
+                            translations = TureForm.Translations.Select(t => t.Translation).ToList();
+                            pos = TureForm.Translations.Select(t => t.TyPe).ToList();
+                        }
 
-                    break;
-                }
+                        break;
+                    }
                 case Formid.CET6:
-                {
-                    var TureForm = db.CET6.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
                     {
-                    }
-                    else
-                    {
-                        translations = TureForm.Translations.Select(t => t.Translation).ToList();
-                        pos = TureForm.Translations.Select(t => t.TyPe).ToList();
-                    }
+                        var TureForm = db.CET6.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
+                        if (TureForm == null)
+                        {
+                        }
+                        else
+                        {
+                            translations = TureForm.Translations.Select(t => t.Translation).ToList();
+                            pos = TureForm.Translations.Select(t => t.TyPe).ToList();
+                        }
 
-                    break;
-                }
+                        break;
+                    }
                 case Formid.MiddleSchool:
-                {
-                    var TureForm = db.MiddleSchool.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
                     {
-                    }
-                    else
-                    {
-                        translations = TureForm.Translations.Select(t => t.Translation).ToList();
-                        pos = TureForm.Translations.Select(t => t.TyPe).ToList();
-                    }
+                        var TureForm = db.MiddleSchool.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
+                        if (TureForm == null)
+                        {
+                        }
+                        else
+                        {
+                            translations = TureForm.Translations.Select(t => t.Translation).ToList();
+                            pos = TureForm.Translations.Select(t => t.TyPe).ToList();
+                        }
 
-                    break;
-                }
+                        break;
+                    }
 
                 case Formid.HighSchool:
-                {
-                    var TureForm = db.HighSchool.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
                     {
-                    }
-                    else
-                    {
-                        translations = TureForm.Translations.Select(t => t.Translation).ToList();
-                        pos = TureForm.Translations.Select(t => t.TyPe).ToList();
-                    }
+                        var TureForm = db.HighSchool.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
+                        if (TureForm == null)
+                        {
+                        }
+                        else
+                        {
+                            translations = TureForm.Translations.Select(t => t.Translation).ToList();
+                            pos = TureForm.Translations.Select(t => t.TyPe).ToList();
+                        }
 
-                    break;
-                }
+                        break;
+                    }
                 case Formid.KY:
-                {
-                    var TureForm = db.KY.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
                     {
-                    }
-                    else
-                    {
-                        translations = TureForm.Translations.Select(t => t.Translation).ToList();
-                        pos = TureForm.Translations.Select(t => t.TyPe).ToList();
-                    }
+                        var TureForm = db.KY.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
+                        if (TureForm == null)
+                        {
+                        }
+                        else
+                        {
+                            translations = TureForm.Translations.Select(t => t.Translation).ToList();
+                            pos = TureForm.Translations.Select(t => t.TyPe).ToList();
+                        }
 
-                    break;
-                }
+                        break;
+                    }
                 case Formid.TF:
-                {
-                    var TureForm = db.TF.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
                     {
-                    }
-                    else
-                    {
-                        translations = TureForm.Translations.Select(t => t.Translation).ToList();
-                        pos = TureForm.Translations.Select(t => t.TyPe).ToList();
-                    }
+                        var TureForm = db.TF.Include(f => f.Translations).FirstOrDefault(s => s.Word == word);
+                        if (TureForm == null)
+                        {
+                        }
+                        else
+                        {
+                            translations = TureForm.Translations.Select(t => t.Translation).ToList();
+                            pos = TureForm.Translations.Select(t => t.TyPe).ToList();
+                        }
 
-                    break;
-                }
+                        break;
+                    }
                 default:
-                {
-                    throw new ArgumentException("未知单词来源表");
-                }
+                    {
+                        throw new ArgumentException("未知单词来源表");
+                    }
             }
         }
     }
@@ -259,119 +259,119 @@ public static class WordMover
     /// <param name="word"></param>
     /// <param name="id"></param>
     /// <returns></returns>
-    public static void FindPhrases(string word, Formid id, ref List<string>? phrases,ref List<string>? phraseTranslations) //在对应表查找单词短语
+    public static void FindPhrases(string word, Formid id, ref List<string>? phrases, ref List<string>? phraseTranslations) //在对应表查找单词短语
     {
         using (var db = new SqlDataContext())
         {
             switch (id)
             {
                 case Formid.CET4:
-                {
-                    var TureForm = db.CET4.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
                     {
-                    }
-                    else if (TureForm?.Phrases == null)
-                    {
-                    } //数据库表存在没有短语的情况。
-                    else
-                    {
-                        phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
-                        phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
-                    }
+                        var TureForm = db.CET4.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
+                        if (TureForm == null)
+                        {
+                        }
+                        else if (TureForm?.Phrases == null)
+                        {
+                        } //数据库表存在没有短语的情况。
+                        else
+                        {
+                            phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
+                            phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
+                        }
 
-                    break;
-                }
+                        break;
+                    }
                 case Formid.CET6:
-                {
-                    var TureForm = db.CET6.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
                     {
-                    }
-                    else if (TureForm?.Phrases == null)
-                    {
-                    }
-                    else
-                    {
-                        phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
-                        phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
-                    }
+                        var TureForm = db.CET6.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
+                        if (TureForm == null)
+                        {
+                        }
+                        else if (TureForm?.Phrases == null)
+                        {
+                        }
+                        else
+                        {
+                            phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
+                            phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
+                        }
 
-                    break;
-                }
+                        break;
+                    }
                 case Formid.MiddleSchool:
-                {
-                    var TureForm = db.MiddleSchool.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
                     {
-                    }
-                    else if (TureForm?.Phrases == null)
-                    {
-                    }
-                    else
-                    {
-                        phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
-                        phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
-                    }
+                        var TureForm = db.MiddleSchool.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
+                        if (TureForm == null)
+                        {
+                        }
+                        else if (TureForm?.Phrases == null)
+                        {
+                        }
+                        else
+                        {
+                            phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
+                            phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
+                        }
 
-                    break;
-                }
+                        break;
+                    }
 
                 case Formid.HighSchool:
-                {
-                    var TureForm = db.HighSchool.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
                     {
-                    }
-                    else if (TureForm?.Phrases == null)
-                    {
-                    }
-                    else
-                    {
-                        phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
-                        phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
-                    }
+                        var TureForm = db.HighSchool.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
+                        if (TureForm == null)
+                        {
+                        }
+                        else if (TureForm?.Phrases == null)
+                        {
+                        }
+                        else
+                        {
+                            phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
+                            phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
+                        }
 
-                    break;
-                }
+                        break;
+                    }
                 case Formid.KY:
-                {
-                    var TureForm = db.KY.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
                     {
-                    }
-                    else if (TureForm?.Phrases == null)
-                    {
-                    }
-                    else
-                    {
-                        phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
-                        phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
-                    }
+                        var TureForm = db.KY.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
+                        if (TureForm == null)
+                        {
+                        }
+                        else if (TureForm?.Phrases == null)
+                        {
+                        }
+                        else
+                        {
+                            phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
+                            phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
+                        }
 
-                    break;
-                }
+                        break;
+                    }
                 case Formid.TF:
-                {
-                    var TureForm = db.TF.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
-                    if (TureForm == null)
                     {
-                    }
-                    else if (TureForm?.Phrases == null)
-                    {
-                    }
-                    else
-                    {
-                        phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
-                        phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
-                    }
+                        var TureForm = db.TF.Include(f => f.Phrases).FirstOrDefault(s => s.Word == word);
+                        if (TureForm == null)
+                        {
+                        }
+                        else if (TureForm?.Phrases == null)
+                        {
+                        }
+                        else
+                        {
+                            phrases = TureForm.Phrases.Select(t => t.Phrase).ToList();
+                            phraseTranslations = TureForm.Phrases.Select(t => t.Translation).ToList();
+                        }
 
-                    break;
-                }
+                        break;
+                    }
                 default:
-                {
-                    throw new ArgumentException("未知单词来源表");
-                }
+                    {
+                        throw new ArgumentException("未知单词来源表");
+                    }
             }
         }
     }
@@ -390,33 +390,33 @@ public static class WordMover
             switch (id)
             {
                 case Formid.CET4:
-                {
-                    return db.CET4.First(s => s.Word == word).Id;
-                }
+                    {
+                        return db.CET4.First(s => s.Word == word).Id;
+                    }
                 case Formid.CET6:
-                {
-                    return db.CET6.First(s => s.Word == word).Id;
-                }
+                    {
+                        return db.CET6.First(s => s.Word == word).Id;
+                    }
                 case Formid.MiddleSchool:
-                {
-                    return db.MiddleSchool.First(s => s.Word == word).Id;
-                }
+                    {
+                        return db.MiddleSchool.First(s => s.Word == word).Id;
+                    }
                 case Formid.HighSchool:
-                {
-                    return db.HighSchool.First(s => s.Word == word).Id;
-                }
+                    {
+                        return db.HighSchool.First(s => s.Word == word).Id;
+                    }
                 case Formid.KY:
-                {
-                    return db.KY.First(s => s.Word == word).Id;
-                }
+                    {
+                        return db.KY.First(s => s.Word == word).Id;
+                    }
                 case Formid.TF:
-                {
-                    return db.TF.First(s => s.Word == word).Id;
-                }
+                    {
+                        return db.TF.First(s => s.Word == word).Id;
+                    }
                 default:
-                {
-                    throw new ArgumentException("未知单词来源表");
-                }
+                    {
+                        throw new ArgumentException("未知单词来源表");
+                    }
             }
         }
     }
