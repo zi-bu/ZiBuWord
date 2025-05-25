@@ -61,5 +61,14 @@ namespace BLL.HandleUserInput
             Deliverymen.UpdateProgress(upprogress);
             return true;
         }
+        /// <summary>
+        /// 获取当前用户ID<br/>
+        /// </summary>
+        /// <returns></returns>
+        public static string? GetCurrentUser()
+        {
+            // Deliverymen 是 UserDataNow 的实例
+            return ((DAL.UserDataNow)Deliverymen).GetNowUser();
+        }
     }
 }

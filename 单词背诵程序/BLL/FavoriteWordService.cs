@@ -18,11 +18,29 @@ namespace BLL
         private readonly FavoriteWordsManagement _dal = new FavoriteWordsManagement();
         private readonly FavoriteWordDetailQueryDAL _detailDal = new FavoriteWordDetailQueryDAL();
 
+        // 获取当前用户ID
+        private int GetCurrentUserId()
+        {
+            string? username = BLL.HandleUserInput.UserStateDeliver.GetCurrentUser();
+            if (string.IsNullOrEmpty(username))
+                throw new InvalidOperationException("当前未登录用户");
+            return DAL.UserDataMover.GetUserId(username);
+        }
+
+        // 获取当前用户的所有收藏
+        public List<FavoriteWordDetail> GetCurrentUserFavorites()
+        {
+            int userId = GetCurrentUserId();
+            return GetFavoriteDetails(userId);
+        }
+
         /// <summary>
         /// 添加收藏
         /// </summary>
-        public void AddFavorite(int userId, int wordId, string dictType)
+        public void AddFavorite(string word, string dictType)
         {
+            int userId = GetCurrentUserId();
+            int wordId = GetWordId(word, dictType);
             _dal.AddFavorite(userId, wordId, dictType);
         }
         

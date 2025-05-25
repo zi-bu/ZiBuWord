@@ -64,5 +64,6 @@ namespace DAL.ReturnFunction
             // 获取用户的所有收藏单词
             return db.FavoriteWords.Where(f => f.UserId == userId).ToList();
         }
+        
     }
 }
