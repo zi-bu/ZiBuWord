@@ -38,10 +38,10 @@
             // 
             // btnLogin
             // 
-            btnLogin.Location = new Point(101, 419);
-            btnLogin.Margin = new Padding(2);
+            btnLogin.Location = new Point(130, 493);
+            btnLogin.Margin = new Padding(3, 2, 3, 2);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(249, 41);
+            btnLogin.Size = new Size(320, 48);
             btnLogin.TabIndex = 0;
             btnLogin.Text = "登录";
             btnLogin.UseVisualStyleBackColor = true;
@@ -49,9 +49,10 @@
             // 
             // btnRegister
             // 
-            btnRegister.Location = new Point(101, 465);
+            btnRegister.Location = new Point(130, 547);
+            btnRegister.Margin = new Padding(4, 4, 4, 4);
             btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(249, 41);
+            btnRegister.Size = new Size(320, 48);
             btnRegister.TabIndex = 1;
             btnRegister.Text = "注册";
             btnRegister.UseVisualStyleBackColor = true;
@@ -59,27 +60,28 @@
             // 
             // textPassword
             // 
-            textPassword.Location = new Point(101, 382);
-            textPassword.Margin = new Padding(2);
+            textPassword.Location = new Point(130, 449);
+            textPassword.Margin = new Padding(3, 2, 3, 2);
             textPassword.Name = "textPassword";
-            textPassword.Size = new Size(251, 23);
+            textPassword.Size = new Size(322, 27);
             textPassword.TabIndex = 2;
             textPassword.Text = "密码";
             // 
             // textUserName
             // 
-            textUserName.Location = new Point(101, 346);
-            textUserName.Margin = new Padding(2);
+            textUserName.Location = new Point(130, 407);
+            textUserName.Margin = new Padding(3, 2, 3, 2);
             textUserName.Name = "textUserName";
-            textUserName.Size = new Size(251, 23);
+            textUserName.Size = new Size(322, 27);
             textUserName.TabIndex = 3;
             textUserName.Text = "用户名";
             // 
             // btnVisitorLogin
             // 
-            btnVisitorLogin.Location = new Point(101, 561);
+            btnVisitorLogin.Location = new Point(130, 660);
+            btnVisitorLogin.Margin = new Padding(4, 4, 4, 4);
             btnVisitorLogin.Name = "btnVisitorLogin";
-            btnVisitorLogin.Size = new Size(249, 39);
+            btnVisitorLogin.Size = new Size(320, 46);
             btnVisitorLogin.TabIndex = 4;
             btnVisitorLogin.Text = "游客登录";
             btnVisitorLogin.UseVisualStyleBackColor = true;
@@ -87,9 +89,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(101, 172);
+            button1.Location = new Point(130, 202);
+            button1.Margin = new Padding(4, 4, 4, 4);
             button1.Name = "button1";
-            button1.Size = new Size(249, 39);
+            button1.Size = new Size(320, 46);
             button1.TabIndex = 5;
             button1.Text = "测试";
             button1.UseVisualStyleBackColor = true;
@@ -97,20 +100,21 @@
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(470, 681);
+            ClientSize = new Size(604, 801);
             Controls.Add(button1);
             Controls.Add(btnVisitorLogin);
             Controls.Add(textUserName);
             Controls.Add(textPassword);
             Controls.Add(btnRegister);
             Controls.Add(btnLogin);
-            Margin = new Padding(2);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Login";
-            Padding = new Padding(10);
+            Padding = new Padding(13, 12, 13, 12);
             Text = " 登录";
+            Load += Login_Load;
             ResumeLayout(false);
             PerformLayout();
         }
