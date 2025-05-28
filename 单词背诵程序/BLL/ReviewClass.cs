@@ -1,5 +1,4 @@
-﻿
-using DAL.ReturnFunction;
+﻿using DAL.ReturnFunction;
 using IBLLBridgeDAL;
 using IBLLBridgeDAL.WordOperation;
 
@@ -12,11 +11,8 @@ public class ReviewClass(IWord w1)
 
     public void RemoveWordReviewList()
     {
-        
-        
-            ReviewOrder.WordList.RemoveAt(ReviewOrder.Index);
-            ReviewListManagement.RemoveWordFromReview(Word);
-        
+        ReviewOrder.WordList.RemoveAt(ReviewOrder.Index);
+        ReviewListManagement.RemoveWordFromReview(Word);
     }
 
     public string OutPutWordInfo() //输出单词其他信息
@@ -27,21 +23,13 @@ public class ReviewClass(IWord w1)
     private string HandleOtherInfo()
     {
         string? information = null;
-        for (var i = 0; i < Word.pos.Count; i++)
-        {
-            information += Word.pos[i] + ". " + Word.translations[i]+"\n";
-        }
+        for (var i = 0; i < Word.pos.Count; i++) information += Word.pos[i] + ". " + Word.translations[i] + "\n";
 
         if (Word.phrases != null)
             for (var i = 0; i < Word.phrases.Count; i++)
-            {
                 information += Word.phrases[i] + " " + Word.phraseTranslations?[i] + "\n";
-            }
 
-        if (information!=null)
-        {
-            return information;
-        }
+        if (information != null) return information;
         return " ";
     }
 }
