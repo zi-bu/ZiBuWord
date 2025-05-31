@@ -20,6 +20,51 @@ public partial class Login : MaterialForm
     public Login()
     {
         InitializeComponent();
+        // 为文本框添加Enter事件处理
+        textUserName.Enter += TextBox_Enter;
+        textPassword.Enter += TextBox_Enter;
+        textUserName.Leave += TextBox_Leave;
+        textPassword.Leave += TextBox_Leave;
+        // 为文本框添加TextChanged事件处理
+        textUserName.TextChanged += TextUserName_TextChanged;
+        textPassword.TextChanged += TextPassword_TextChanged;
+
+        // 设置初始默认文本
+        textUserName.Text = "用户名";
+        textPassword.Text = "密码";
+        textPassword.PasswordChar = '\0';
+    }
+    private void TextBox_Enter(object sender, EventArgs e)
+    {
+        // 当文本框获得焦点时清除其内容
+        if (sender is TextBox textBox)
+        {
+            textBox.Clear();
+            // 如果是密码框，确保它显示为密码字符
+            if (textBox == textPassword)
+            {
+                textPassword.PasswordChar = '●'; // 设置密码掩码字符
+            }
+        }
+    }
+    private void TextBox_Leave(object sender, EventArgs e)
+    {
+        // 当文本框失去焦点时，如果为空则恢复默认文本
+        if (sender is TextBox textBox)
+        {
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                if (textBox == textUserName)
+                {
+                    textBox.Text = "用户名";
+                }
+                else if (textBox == textPassword)
+                {
+                    textBox.Text = "密码";
+                    textPassword.PasswordChar = '\0'; // 清除密码掩码字符
+                }
+            }
+        }
     }
     private void btnVisitorLogin_Click(object sender, EventArgs e)
     {
@@ -28,6 +73,39 @@ public partial class Login : MaterialForm
         {
             var homePage = new HomePage(); //创建一个新的主页窗口对象
             FormHelper.ShowNewForm(this, homePage); //显示新窗口
+        }
+    }
+
+    private readonly string _usernamePattern = @"^[a-zA-Z][a-zA-Z0-9_]{4,10}$"; // 用户名：字母开头，5-11位，只允许字母数字下划线
+    private readonly string _passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\W]{8,20}$"; // 密码：必须包含大小写字母和数字，8-20位
+
+    private void TextUserName_TextChanged(object sender, EventArgs e)
+    {
+        // 只在非默认文本状态下验证
+        if (textUserName.Text != "用户名" && !string.IsNullOrEmpty(textUserName.Text))
+        {
+            bool isValid = System.Text.RegularExpressions.Regex.IsMatch(textUserName.Text, _usernamePattern);
+            // 可以通过改变背景色或显示提示来反馈验证结果
+            textUserName.BackColor = isValid ? Color.White : Color.LightPink;
+        }
+        else
+        {
+            textUserName.BackColor = Color.White;
+        }
+    }
+
+    private void TextPassword_TextChanged(object sender, EventArgs e)
+    {
+        // 只在非默认文本状态下验证
+        if (textPassword.Text != "密码" && !string.IsNullOrEmpty(textPassword.Text))
+        {
+            bool isValid = System.Text.RegularExpressions.Regex.IsMatch(textPassword.Text, _passwordPattern);
+            // 可以通过改变背景色或显示提示来反馈验证结果
+            textPassword.BackColor = isValid ? Color.White : Color.LightPink;
+        }
+        else
+        {
+            textPassword.BackColor = Color.White;
         }
     }
 
