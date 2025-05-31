@@ -17,7 +17,7 @@ public static class ReviewOrder
         .ToList();
 
     //创建一个单词列表的认识标记
-    public static void CreateOrRefreshNewWordList()
+    private static void CreateOrRefreshNewWordList()
     {
         WordList = Enumerable
             .Range(0, 10)

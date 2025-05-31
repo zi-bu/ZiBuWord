@@ -12,7 +12,7 @@ public class SelectionClass(IWord w1)
     /// <summary>
     ///     对将接口注入于选择器
     /// </summary>
-    public static IWordManagement WordManagement { get; } = new WordManagement();
+    private static IWordManagement WordManagement { get; } = new WordManagement();
 
     /// <summary>
     ///     被设为正确答案的单词对象
@@ -53,14 +53,15 @@ public class SelectionClass(IWord w1)
     /// <summary>
     ///     用于将单词加入到复习列表
     /// </summary>
-
-    public void AddWordToReViewList()//加入复习列表
+    public void AddWordToReViewList() //加入复习列表
     {
         WordManagement.AddWordToReview(AccurateWord);
     }
-    public void ReflashSelection()//刷新选项
+
+    public void ReflashSelection() //刷新选项
     {
-        AccurateWord = RiciterOrder.WordList[RiciterOrder.Index];//刷新正确的单词
-        Selection = ShuffleList(Enumerable.Range(0, 3).Select(_ => WordManagement.GetRandomWordForReciter()).Append(AccurateWord).ToList());//刷新选项
+        AccurateWord = RiciterOrder.WordList[RiciterOrder.Index]; //刷新正确的单词
+        Selection = ShuffleList(Enumerable.Range(0, 3).Select(_ => WordManagement.GetRandomWordForReciter())
+            .Append(AccurateWord).ToList()); //刷新选项
     }
 }
