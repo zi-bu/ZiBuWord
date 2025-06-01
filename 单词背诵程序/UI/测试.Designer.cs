@@ -40,7 +40,7 @@
             webView2.Dock = DockStyle.Fill;
             webView2.Location = new Point(0, 0);
             webView2.Name = "webView2";
-            webView2.Size = new Size(800, 450);
+            webView2.Size = new Size(604, 811);
             webView2.Source = new Uri(" http://localhost:5173/", UriKind.Absolute);
             webView2.TabIndex = 0;
             webView2.ZoomFactor = 1D;
@@ -49,8 +49,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(604, 811);
             Controls.Add(webView2);
+            MaximumSize = new Size(620, 850);
+            MinimumSize = new Size(620, 850);
             Name = "测试";
             Text = "测试";
             ((System.ComponentModel.ISupportInitialize)webView2).EndInit();
