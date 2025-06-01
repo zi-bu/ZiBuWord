@@ -5,10 +5,12 @@ namespace UI;
 
 public partial class Favorite : MaterialForm
 {
+
     private readonly FavoriteWordService _favoriteService = new();
 
     public Favorite()
     {
+        FormClosing += FormHelper.CloseForm; // 绑定关闭事件
         InitializeComponent();
         dataGridViewFavorites.AutoGenerateColumns = false;
         LoadFavorites();
