@@ -10,6 +10,7 @@ public partial class Reviewer : MaterialForm
     public Reviewer() //构造函数，该页面对内容进行初始化
     {
         InitializeComponent();
+        FormClosing += FormHelper.CloseForm;//绑定关闭事件
         _reviewer = new ReviewClass(ReviewOrder.WordList[ReviewOrder.Index]);
         Question.Text = _reviewer.Word.word;
     }
@@ -30,6 +31,7 @@ public partial class Reviewer : MaterialForm
             {
                 MessageBox.Show(@"已完成当前的复习列表"); //返回结果
                 Close(); //完成时关闭
+                new HomePage().Show(); //打开主页
             }
 
             ReviewOrder.ResetIndex(); //对于选择认识时的下标回拨检验
@@ -58,5 +60,11 @@ public partial class Reviewer : MaterialForm
     private void Context_TextChanged(object sender, EventArgs e)
     {
 
+    }
+
+    private void materialButton1_Click(object sender, EventArgs e)
+    {
+        Hide(); //隐藏当前窗口
+        new HomePage().Show(); //打开主页
     }
 }

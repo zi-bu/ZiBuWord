@@ -28,37 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
-            ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
+            webView2 = new Microsoft.Web.WebView2.WinForms.WebView2();
+            ((System.ComponentModel.ISupportInitialize)webView2).BeginInit();
             SuspendLayout();
             // 
-            // webView21
+            // webView2
             // 
-            webView21.AllowExternalDrop = true;
-            webView21.CreationProperties = null;
-            webView21.DefaultBackgroundColor = Color.White;
-            webView21.Dock = DockStyle.Fill;
-            webView21.Location = new Point(0, 0);
-            webView21.Name = "webView21";
-            webView21.Size = new Size(800, 450);
-            webView21.Source = new Uri("https://www.bilibili.com/", UriKind.Absolute);
-            webView21.TabIndex = 0;
-            webView21.ZoomFactor = 1D;
+            webView2.AllowExternalDrop = true;
+            webView2.CreationProperties = null;
+            webView2.DefaultBackgroundColor = Color.White;
+            webView2.Dock = DockStyle.Fill;
+            webView2.Location = new Point(0, 0);
+            webView2.Name = "webView2";
+            webView2.Size = new Size(800, 450);
+            webView2.Source = new Uri(" http://localhost:5173/", UriKind.Absolute);
+            webView2.TabIndex = 0;
+            webView2.ZoomFactor = 1D;
             // 
             // 测试
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(webView21);
+            Controls.Add(webView2);
             Name = "测试";
             Text = "测试";
-            ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
+            ((System.ComponentModel.ISupportInitialize)webView2).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webView2;
     }
 }

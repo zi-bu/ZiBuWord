@@ -20,6 +20,7 @@ public partial class Login : MaterialForm
     public Login()
     {
         InitializeComponent();
+        FormClosing += FormHelper.CloseForm;// 绑定 FormClosing 事件
         // 为文本框添加Enter事件处理
         textUserName.Enter += TextBox_Enter;
         textPassword.Enter += TextBox_Enter;
