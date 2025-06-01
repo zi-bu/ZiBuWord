@@ -185,12 +185,6 @@ public partial class Login : MaterialForm
         }
     }
 
-    private void button1_Click(object sender, EventArgs e)
-    {
-        var test = new 测试();
-        FormHelper.ShowNewForm(this, test);
-    }
-
     private void Login_Load(object sender, EventArgs e)
     {
 
