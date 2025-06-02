@@ -11,6 +11,7 @@ public partial class UiSelectionOrder : MaterialForm
 
     public UiSelectionOrder()
     {
+        FormClosing += FormHelper.CloseForm;//绑定关闭事件
         _selectionClass = new SelectionClass(RiciterOrder.WordList[RiciterOrder.Index]);
         //选择器内容首次初始化
         InitializeComponent();
@@ -108,7 +109,7 @@ public partial class UiSelectionOrder : MaterialForm
     {
         HomePage homePage = new HomePage(); //创建一个新的主页窗口对象
         FormHelper.ShowNewForm(this, homePage); //显示新窗口
-        Close(); //关闭当前窗口
+        Hide(); //关闭当前窗口
         BLL.HandleUserInput.UserStateDeliver.ProgressSync();//进度同步，中断背诵时归正进度
     }
 }

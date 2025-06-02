@@ -16,7 +16,7 @@ namespace UI
     {
         public SearchWord()
         {
-            
+            FormClosing += FormHelper.CloseForm;//绑定关闭事件
             //给listView1添加列标题
             InitializeComponent();
             listView1.View = View.Details;

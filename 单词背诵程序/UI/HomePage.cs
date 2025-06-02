@@ -118,4 +118,10 @@ public partial class HomePage : MaterialForm
         searchWord.Show(); // 显示搜索单词窗口
         Hide(); // 隐藏当前窗口
     }
+
+    private void test(object sender, EventArgs e)
+    {
+        Hide(); // 隐藏当前窗口  
+        new 测试().Show(); // 显示测试窗口
+    }
 }

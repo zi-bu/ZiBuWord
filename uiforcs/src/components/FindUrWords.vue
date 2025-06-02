@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue"
-import { Back } from '@element-plus/icons-vue'
+import {Back, Star} from '@element-plus/icons-vue'
 import Search from "./Search.vue"
 import BackgroundFindUrWords from "./BackgroundFindUrWords.vue"
 import WordCard from "./WordCard.vue"

@@ -1,5 +1,6 @@
-﻿namespace BLL;
-using BLL.HandleUserInput;
+﻿using BLL.HandleUserInput;
+
+namespace BLL;
 
 /// <summary>
 ///     这是业务逻辑层，用于处理业务逻辑，与数据访问层进行交互。
@@ -10,16 +11,16 @@ using BLL.HandleUserInput;
 
 #region ConsoleLogicTest
 
-internal class TestArea
+internal static class TestArea 
 {
     /// <summary>
     ///     测试的东西可以放在main函数这里，也可以打断点进行测试。
     ///     写函数时可以像这么写注释。这样只用把鼠 标放在函数上就能看到注释了。
     ///     <br />(我不会XML语言)
     /// </summary>
-    private static void Main(string[] args)
+    private static void Main()
     {
-        var userData = new HandleUserInput.UserData();
+        var userData = new UserData();
         userData.UserLogin("原神启动！", "testPassword");
         userData.UserRegister("zi_bu", "Yy114514原神");
     }

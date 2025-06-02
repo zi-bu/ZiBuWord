@@ -3,7 +3,7 @@
 import { defineEmits } from 'vue'
 import { onMounted, ref, computed } from "vue";
 import { useMouse } from "@vueuse/core";
-import { Back } from '@element-plus/icons-vue'
+import {Back, Star} from '@element-plus/icons-vue'
 
 const emit = defineEmits(['panelClick'])
 
@@ -106,6 +106,7 @@ function chooseNo() {
   fetchWordListCount();
   showCondition();
 }
+
 function Next() {
   toggleInfo();
   fetchWord();
@@ -129,6 +130,11 @@ function Next() {
         <el-button circle size="large" @click="goBack">
           <el-icon>
             <Back />
+          </el-icon>
+        </el-button>
+        <el-button circle size="large">
+          <el-icon>
+            <Star />
           </el-icon>
         </el-button>
       </div>
@@ -187,7 +193,7 @@ function Next() {
   position: absolute;
   top: v-bind(mouseY)px;
   left: v-bind(mouseX)px;
-  background: url('img/background/7.jpg') center/cover no-repeat;
+  background: url('/img/background/7.jpg') center/cover no-repeat;
   filter: blur(0px);
   z-index: 0;
 
@@ -275,7 +281,7 @@ function Next() {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('img/background/7.jpg') center/cover no-repeat;
+  background: url('/img/background/7.jpg') center/cover no-repeat;
   filter: blur(4px);
   z-index: -2;
   background-color: rgba(0, 0, 0, 0.4);
@@ -287,7 +293,7 @@ function Next() {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('img/background/7.jpg') center/cover no-repeat;
+  background: url('/img/background/7.jpg') center/cover no-repeat;
   filter: blur(0px);
   z-index: -1;
   mask-image: radial-gradient(circle at center, white 40%, black 70%);
@@ -379,3 +385,4 @@ function Next() {
   z-index: 2;
 }
 </style>
+
