@@ -570,7 +570,7 @@ public static class WordMover
                 Repetition = 1,
                 Mistake = 0,
                 Interval = 1,
-                DueDate = DateTime.Now,
+                DueDate = DateTime.Now.Date,
                 Word = word,
                 WordID = wordid,
                 Form = formid.ToString()
@@ -589,9 +589,9 @@ public static class WordMover
     {
         using (var db = new UserContext())
         {
-            var User = db.UserData.FirstOrDefault(u => u.UserName == user);
-            if (User!.UserReview == null) { return; }
-            var ReviewWord = User.UserReview.Where(f => f.DueDate == time);
+            var User = db.UserData.Include(u => u.UserReview).FirstOrDefault(u => u.UserName == user);//获取用户
+            if (User!.UserReview == null||User.UserReview.Count() == 0) { throw new ArgumentException("已复习完当日所有单词"); }
+            var ReviewWord = User.UserReview.Where(f => f.DueDate.Date == time.Date);//获取对应日期的复习单词
             int count = rd.Next(0, ReviewWord.Count());
             var word = ReviewWord.ElementAt(count);
             Form = word.Form;
@@ -614,7 +614,7 @@ public static class WordMover
             if (review == null) { throw new ArgumentException("该用户的背诵表中没有该单词"); }
             review.Repetition++;
             review.Interval *= 2;
-            review.DueDate = DateTime.Now.AddDays(review.Interval);
+            review.DueDate = DateTime.Now.Date.AddDays(review.Interval);
             db.SaveChanges();
         }
     }

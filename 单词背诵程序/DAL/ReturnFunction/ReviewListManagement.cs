@@ -16,11 +16,13 @@ public class ReviewListManagement : IReviewListManagement
     /// <returns></returns>
     public IWord GetRandomWordForReview()
     {
-        return new Word(UserDataNow.userDictionarySelect);
-        //if (UserDataNow.NowUser == null) { return new Word(UserDataNow.userDictionarySelect); }
-        //int userId=0;
-        //string Form=null;
-        //WordMover.GetReviewWord(UserDataNow.NowUser,DateTime.Now.Date, ref Form!, ref userId);
+        if (UserDataNow.NowUser == null) { return new Word(UserDataNow.userDictionarySelect); }
+        int userId = 0;
+        string Form = null!;
+        DateTime date = new DateTime(2025,5,25);
+        WordMover.GetReviewWord(UserDataNow.NowUser, date, ref Form, ref userId);
+        Formid wordform = (Formid)Enum.Parse(typeof(Formid), Form);
+        return (new Word(userId,wordform)  as IWord);
     }
 
     /// <summary>
