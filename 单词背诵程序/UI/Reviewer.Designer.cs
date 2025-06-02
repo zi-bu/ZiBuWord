@@ -43,10 +43,10 @@ partial class Reviewer
         // 
         Question.BackColor = Color.Transparent;
         Question.Font = new Font("Microsoft YaHei UI", 30F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        Question.Location = new Point(160, 120);
-        Question.Margin = new Padding(1, 0, 1, 0);
+        Question.Location = new Point(251, 169);
+        Question.Margin = new Padding(2, 0, 2, 0);
         Question.Name = "Question";
-        Question.Size = new Size(169, 62);
+        Question.Size = new Size(266, 88);
         Question.TabIndex = 1;
         Question.Text = "label1";
         Question.TextAlign = ContentAlignment.MiddleCenter;
@@ -62,14 +62,14 @@ partial class Reviewer
         ButtonYes.Font = new Font("Microsoft YaHei UI", 20F, FontStyle.Regular, GraphicsUnit.Point, 134);
         ButtonYes.HighEmphasis = true;
         ButtonYes.Icon = null;
-        ButtonYes.Location = new Point(63, 659);
-        ButtonYes.Margin = new Padding(3, 4, 3, 4);
-        ButtonYes.MaximumSize = new Size(160, 71);
-        ButtonYes.MinimumSize = new Size(160, 71);
+        ButtonYes.Location = new Point(99, 930);
+        ButtonYes.Margin = new Padding(5, 6, 5, 6);
+        ButtonYes.MaximumSize = new Size(251, 100);
+        ButtonYes.MinimumSize = new Size(251, 100);
         ButtonYes.MouseState = MaterialSkin.MouseState.HOVER;
         ButtonYes.Name = "ButtonYes";
         ButtonYes.NoAccentTextColor = Color.Empty;
-        ButtonYes.Size = new Size(160, 71);
+        ButtonYes.Size = new Size(251, 100);
         ButtonYes.TabIndex = 2;
         ButtonYes.Text = "认识";
         ButtonYes.Type = MaterialButton.MaterialButtonType.Contained;
@@ -88,13 +88,13 @@ partial class Reviewer
         ButtonNo.Font = new Font("Microsoft YaHei UI", 20F, FontStyle.Regular, GraphicsUnit.Point, 134);
         ButtonNo.HighEmphasis = true;
         ButtonNo.Icon = null;
-        ButtonNo.Location = new Point(279, 659);
-        ButtonNo.Margin = new Padding(3, 4, 3, 4);
-        ButtonNo.MinimumSize = new Size(160, 71);
+        ButtonNo.Location = new Point(438, 930);
+        ButtonNo.Margin = new Padding(5, 6, 5, 6);
+        ButtonNo.MinimumSize = new Size(251, 100);
         ButtonNo.MouseState = MaterialSkin.MouseState.HOVER;
         ButtonNo.Name = "ButtonNo";
         ButtonNo.NoAccentTextColor = Color.Empty;
-        ButtonNo.Size = new Size(160, 71);
+        ButtonNo.Size = new Size(251, 100);
         ButtonNo.TabIndex = 3;
         ButtonNo.Text = "不认识";
         ButtonNo.Type = MaterialButton.MaterialButtonType.Contained;
@@ -107,11 +107,11 @@ partial class Reviewer
         Context.BackColor = Color.White;
         Context.BorderStyle = BorderStyle.None;
         Context.Font = new Font("Microsoft YaHei UI", 15F);
-        Context.Location = new Point(63, 213);
-        Context.Margin = new Padding(1);
+        Context.Location = new Point(99, 301);
+        Context.Margin = new Padding(2, 1, 2, 1);
         Context.Multiline = true;
         Context.Name = "Context";
-        Context.Size = new Size(374, 395);
+        Context.Size = new Size(588, 558);
         Context.TabIndex = 4;
         Context.TextChanged += Context_TextChanged;
         // 
@@ -126,9 +126,9 @@ partial class Reviewer
         materialButton1.Font = new Font("Microsoft YaHei UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 134);
         materialButton1.HighEmphasis = true;
         materialButton1.Icon = null;
-        materialButton1.Location = new Point(117, 40);
-        materialButton1.Margin = new Padding(3, 4, 3, 4);
-        materialButton1.MaximumSize = new Size(160, 71);
+        materialButton1.Location = new Point(184, 56);
+        materialButton1.Margin = new Padding(5, 6, 5, 6);
+        materialButton1.MaximumSize = new Size(251, 100);
         materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
         materialButton1.Name = "materialButton1";
         materialButton1.NoAccentTextColor = Color.Empty;
@@ -142,10 +142,10 @@ partial class Reviewer
         // 
         // Reviewer
         // 
-        AutoScaleDimensions = new SizeF(7F, 17F);
+        AutoScaleDimensions = new SizeF(11F, 24F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = SystemColors.Control;
-        ClientSize = new Size(510, 781);
+        ClientSize = new Size(801, 1103);
         Controls.Add(materialButton1);
         Controls.Add(Context);
         Controls.Add(ButtonNo);
@@ -153,9 +153,9 @@ partial class Reviewer
         Controls.Add(Question);
         FormStyle = FormStyles.ActionBar_64;
         Location = new Point(22, 22);
-        Margin = new Padding(1);
+        Margin = new Padding(2, 1, 2, 1);
         Name = "Reviewer";
-        Padding = new Padding(1, 62, 1, 1);
+        Padding = new Padding(2, 88, 2, 1);
         Text = "Reviewer";
         ResumeLayout(false);
         PerformLayout();

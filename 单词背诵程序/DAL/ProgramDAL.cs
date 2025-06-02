@@ -14,8 +14,12 @@ internal class ProgramDAL
     {
         ReviewListManagement reviewListManagement = new ReviewListManagement();
         UserDataNow.NowUser = "mouse";
-        Word word = (Word)reviewListManagement.GetRandomWordForReview();
-
-        Console.WriteLine("Word: " + word.word);
+        Word word1 = (Word)reviewListManagement.GetRandomWordForReview();
+        Word word2 = (Word)reviewListManagement.GetRandomWordForReview();
+        Word word3 = (Word)reviewListManagement.GetRandomWordForReview();
+        Console.WriteLine("Word: " + word1.word);
+        Console.WriteLine("Word: " + word2.word);
+        Console.WriteLine("Word: " + word3.word);
+        
     }
 }

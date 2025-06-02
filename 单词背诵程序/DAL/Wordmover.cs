@@ -579,6 +579,8 @@ public static class WordMover
             db.SaveChanges();
         }
     }
+
+    static int Reviewcount = 0;
     /// <summary>
     /// 获取指定日期的复习单词的ID和来源表
     /// </summary>
@@ -591,15 +593,30 @@ public static class WordMover
         {
             var User = db.UserData.Include(u => u.UserReview).FirstOrDefault(u => u.UserName == user);//获取用户
             if (User!.UserReview == null||User.UserReview.Count() == 0) { throw new ArgumentException("已复习完当日所有单词"); }
-            var ReviewWord = User.UserReview.Where(f => f.DueDate.Date == time.Date);//获取对应日期的复习单词
-            int count = rd.Next(0, ReviewWord.Count());
-            var word = ReviewWord.ElementAt(count);
+            var ReviewWord = User.UserReview.Where(f => f.DueDate.Date <= time.Date);
+            if (Reviewcount >= ReviewWord.Count() - 1) { Reviewcount = 0; }
+            var word = ReviewWord.ElementAt(Reviewcount++);
             Form = word.Form;
             wordid = word.WordID;
-
         }
     }
-
+    /// <summary>
+    /// 获取指定用户的需要复习的单词数量
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    public static int GetReviewWordCount(string user,DateTime time)
+    {
+        using (var db = new UserContext())
+        {
+            var User = db.UserData.Include(u => u.UserReview).FirstOrDefault(u => u.UserName == user);//获取用户
+            if (User == null) { throw new ArgumentException("用户不存在"); }
+            if (User.UserReview == null || User.UserReview.Count() == 0) { return 0; }
+            var ReviewWord = User.UserReview.Where(f => f.DueDate.Date <= time.Date);
+            return ReviewWord.Count();
+        }
+    }
     /// <summary>
     /// 复习完成，更新复习单词
     /// </summary>
