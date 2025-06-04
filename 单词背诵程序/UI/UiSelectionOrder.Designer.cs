@@ -37,6 +37,7 @@ partial class UiSelectionOrder
         Choice3 = new Button();
         Choice4 = new Button();
         button1 = new Button();
+        btnFavorite = new Button();
         SuspendLayout();
         // 
         // Question
@@ -99,11 +100,22 @@ partial class UiSelectionOrder
         button1.UseVisualStyleBackColor = true;
         button1.Click += GoHome_Click;
         // 
+        // btnFavorite
+        // 
+        btnFavorite.Location = new Point(54, 103);
+        btnFavorite.Name = "btnFavorite";
+        btnFavorite.Size = new Size(124, 43);
+        btnFavorite.TabIndex = 6;
+        btnFavorite.Text = "添加收藏";
+        btnFavorite.UseVisualStyleBackColor = true;
+        btnFavorite.Click += btnFavorite_Click;
+        // 
         // UiSelectionOrder
         // 
         AutoScaleDimensions = new SizeF(11F, 24F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(800, 467);
+        Controls.Add(btnFavorite);
         Controls.Add(button1);
         Controls.Add(Choice4);
         Controls.Add(Choice3);
@@ -126,4 +138,5 @@ partial class UiSelectionOrder
     #endregion
 
     private Button button1;
+    private Button btnFavorite;
 }

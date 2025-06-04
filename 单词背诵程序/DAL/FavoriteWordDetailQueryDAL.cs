@@ -24,68 +24,38 @@ namespace DAL
             switch (dictType)
             {
                 case "CET4":
-                    var cet4 = db.CET4.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId);
-                    if (cet4 != null)
-                    {
-                        var translations = cet4.Translations.Select(t => t.Translation).ToList();
-                        var pos = cet4.Translations.Select(t => t.TyPe).ToList();
-                        return (cet4.Word, pos, translations);
-                    }
-                    break;
+                    return GetDetailFromTable(db.CET4.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId));
                 case "CET6":
-                    var cet6 = db.CET6.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId);
-                    if (cet6 != null)
-                    {
-                        var translations = cet6.Translations.Select(t => t.Translation).ToList();
-                        var pos = cet6.Translations.Select(t => t.TyPe).ToList();
-                        return (cet6.Word, pos, translations);
-                    }
-                    break;
+                    return GetDetailFromTable(db.CET6.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId));
                 case "HighSchool":
-                    var hs = db.HighSchool.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId);
-                    if (hs != null)
-                    {
-                        var translations = hs.Translations.Select(t => t.Translation).ToList();
-                        var pos = hs.Translations.Select(t => t.TyPe).ToList();
-                        return (hs.Word, pos, translations);
-                    }
-                    break;
+                    return GetDetailFromTable(db.HighSchool.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId));
                 case "MiddleSchool":
-                    var ms = db.MiddleSchool.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId);
-                    if (ms != null)
-                    {
-                        var translations = ms.Translations.Select(t => t.Translation).ToList();
-                        var pos = ms.Translations.Select(t => t.TyPe).ToList();
-                        return (ms.Word, pos, translations);
-                    }
-                    break;
+                    return GetDetailFromTable(db.MiddleSchool.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId));
                 case "KY":
-                    var ky = db.KY.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId);
-                    if (ky != null)
-                    {
-                        var translations = ky.Translations.Select(t => t.Translation).ToList();
-                        var pos = ky.Translations.Select(t => t.TyPe).ToList();
-                        return (ky.Word, pos, translations);
-                    }
-                    break;
+                    return GetDetailFromTable(db.KY.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId));
                 case "TF":
-                    var tf = db.TF.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId);
-                    if (tf != null)
-                    {
-                        var translations = tf.Translations.Select(t => t.Translation).ToList();
-                        var pos = tf.Translations.Select(t => t.TyPe).ToList();
-                        return (tf.Word, pos, translations);
-                    }
-                    break;
+                    return GetDetailFromTable(db.TF.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId));
                 case "SAT":
-                    var sat = db.SAT.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId);
-                    if (sat != null)
-                    {
-                        var translations = sat.Translations.Select(t => t.Translation).ToList();
-                        var pos = sat.Translations.Select(t => t.TyPe).ToList();
-                        return (sat.Word, pos, translations);
-                    }
-                    break;
+                    return GetDetailFromTable(db.SAT.Include(w => w.Translations).FirstOrDefault(w => w.Id == wordId));
+                default:
+                    return ("", new List<string>(), new List<string>());
+            }
+        }
+
+        /// <summary>
+        /// 从指定的单词对象中获取单词原文、词性和释义
+        /// </summary>
+        /// <param name="wordObj">dynamic动态类型，表示单词对象，可以传null</param>
+        /// <returns></returns>
+        private (string Word, List<string> Pos, List<string> Translations) GetDetailFromTable(dynamic? wordObj)
+        {
+            if (wordObj != null)
+            {
+                var translations = ((IEnumerable<dynamic>)wordObj.Translations)
+                    .Select(t => (string)t.Translation).ToList();
+                var pos = ((IEnumerable<dynamic>)wordObj.Translations)
+                    .Select(t => (string)t.TyPe).ToList();
+                return (wordObj.Word, pos, translations);
             }
             return ("", new List<string>(), new List<string>());
         }

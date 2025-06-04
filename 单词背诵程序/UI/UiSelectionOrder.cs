@@ -8,6 +8,8 @@ namespace UI;
 public partial class UiSelectionOrder : MaterialForm
 {
     private SelectionClass _selectionClass;
+    private readonly FavoriteWordService _favoriteService = new();
+    private int _userId = 1; // 实际项目应获取真实用户ID
 
     public UiSelectionOrder()
     {
@@ -111,5 +113,13 @@ public partial class UiSelectionOrder : MaterialForm
         FormHelper.ShowNewForm(this, homePage); //显示新窗口
         Hide(); //关闭当前窗口
         BLL.HandleUserInput.UserStateDeliver.ProgressSync();//进度同步，中断背诵时归正进度
+    }
+
+    private void btnFavorite_Click(object sender, EventArgs e)
+    {
+        string word = _selectionClass.AccurateWord.word;
+        string dictType = BLL.HandleUserInput.UserStateDeliver.GetCurrentDictType();
+        _favoriteService.AddFavorite(word, dictType);
+        MessageBox.Show("已收藏该单词！");
     }
 }

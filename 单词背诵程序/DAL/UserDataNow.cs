@@ -81,6 +81,23 @@ namespace DAL
             if (NowUser == null) return;
             UserDataMover.UpdateFormProgress(NowUser, userDictionarySelect, upprogress);
         }
+        
+        /// <summary>
+        /// 获取当前用户
+        /// </summary>
+        /// <returns></returns>
+        public string? GetNowUser()
+        {
+            return NowUser;
+        }
 
+        /// <summary>
+        /// 获取当前词典类型
+        /// </summary>
+        /// <returns></returns>
+        public string GetCurrentDictType()
+        {
+            return userDictionarySelect.ToString();
+        }
     }
 }
