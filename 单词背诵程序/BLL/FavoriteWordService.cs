@@ -21,45 +21,45 @@ public class FavoriteWordService
     }
 
 
-        // 获取当前用户ID
-        private int GetCurrentUserId()
-        {
-            string? username = BLL.HandleUserInput.UserStateDeliver.GetCurrentUser();
-            if (string.IsNullOrEmpty(username))
-                throw new InvalidOperationException("当前未登录用户");
-            return DAL.UserDataMover.GetUserId(username);
-        }
+    // 获取当前用户ID
+    private int GetCurrentUserId()
+    {
+        string? username = BLL.HandleUserInput.UserStateDeliver.GetCurrentUser();
+        if (string.IsNullOrEmpty(username))
+            throw new InvalidOperationException("当前未登录用户");
+        return DAL.UserDataMover.GetUserId(username);
+    }
 
-        // 获取当前用户的所有收藏
-        public List<FavoriteWordDetail> GetCurrentUserFavorites()
-        {
-            int userId = GetCurrentUserId();
-            return GetFavoriteDetails(userId);
-        }
+    // 获取当前用户的所有收藏
+    public List<FavoriteWordDetail> GetCurrentUserFavorites()
+    {
+        int userId = GetCurrentUserId();
+        return GetFavoriteDetails(userId);
+    }
 
-        /// <summary>
-        /// 添加收藏
-        /// </summary>
-        public void AddFavorite(string word, string dictType)
-        {
-            int userId = GetCurrentUserId();
-            int wordId = GetWordId(word, dictType);
-            _dal.AddFavorite(userId, wordId, dictType);
-        }
-        
-        /// <summary>
-        /// 移除收藏
-        /// </summary>
-        public void RemoveFavorite(int wordId, string dictType)
-        {
-            int userId = GetCurrentUserId();
-            if (string.IsNullOrEmpty(dictType))
-                throw new ArgumentNullException(nameof(dictType), "词典类型不能为空");
-            _dal.RemoveFavorite(userId, wordId, dictType);
-        }   /// <summary>
-    ///     获取用户所有收藏
+    /// <summary>
+    /// 添加收藏
     /// </summary>
-    /// <param name="userId">用户ID</param>
+    public void AddFavorite(string word, string dictType)
+    {
+        int userId = GetCurrentUserId();
+        int wordId = GetWordId(word, dictType);
+        _dal.AddFavorite(userId, wordId, dictType);
+    }
+
+    /// <summary>
+    /// 移除收藏
+    /// </summary>
+    public void RemoveFavorite(int wordId, string dictType)
+    {
+        int userId = GetCurrentUserId();
+        if (string.IsNullOrEmpty(dictType))
+            throw new ArgumentNullException(nameof(dictType), "词典类型不能为空");
+        _dal.RemoveFavorite(userId, wordId, dictType);
+    }   /// <summary>
+        ///     获取用户所有收藏
+        /// </summary>
+        /// <param name="userId">用户ID</param>
     public List<FavoriteWordDetail> GetFavoriteDetails(int userId)
     {
         var favorites = _dal.GetFavorites(userId); // 获取用户的收藏列表
@@ -79,29 +79,29 @@ public class FavoriteWordService
                 Translation = translation // 词性+释义
             });
         }
-        /// <summary>
-        /// 调用DAL层获取单词ID
-        /// </summary>
-        /// <param name="word">单词</param>
-        /// <param name="dictType">词典类型</param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
-        public int GetWordId(string word, string dictType)
-        {
-            if (!Enum.TryParse<Formid>(dictType, out var formid))
-                throw new ArgumentException("未知词典类型", nameof(dictType));
-            return WordMover.GetWordId(word, formid);
-        }
-        return result;
+        return result; // 返回结果列表
+    }
+    /// <summary>
+    /// 调用DAL层获取单词ID
+    /// </summary>
+    /// <param name="word">单词</param>
+    /// <param name="dictType">词典类型</param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    public int GetWordId(string word, string dictType)
+    {
+        if (!Enum.TryParse<Formid>(dictType, out var formid))
+            throw new ArgumentException("未知词典类型", nameof(dictType));
+        return WordMover.GetWordId(word, formid);
     }
 }
 
 public class FavoriteWordDetail
 {
-    public int Id { get; set; } 
+    public int Id { get; set; }
     public string? DictionaryType { get; init; }
     public int WordId { get; init; }
-    public string? Word { get; set; } 
+    public string? Word { get; set; }
     public string? Translation { get; set; }
 }
 
