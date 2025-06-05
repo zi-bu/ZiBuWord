@@ -20,12 +20,16 @@ public partial class Favorite : MaterialForm
 
     private void LoadFavorites()
     {
-        // 只需调用 BLL 层的“获取当前用户收藏”方法
+        // 调用BLL层获取当前用户收藏
         var details = _favoriteService.GetCurrentUserFavorites();
         dataGridViewFavorites.DataSource = details;
     }
 
-    // 处理“移除”按钮点击
+    /// <summary>
+    /// 处理移除收藏按钮的点击事件
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void DataGridViewFavorites_CellContentClick(object? sender, DataGridViewCellEventArgs e)
     {
         if (e.ColumnIndex == dataGridViewFavorites.Columns["colRemove"].Index && e.RowIndex >= 0)
@@ -33,7 +37,7 @@ public partial class Favorite : MaterialForm
             var detail = (FavoriteWordDetail)dataGridViewFavorites.Rows[e.RowIndex].DataBoundItem;
             if (!string.IsNullOrEmpty(detail.DictionaryType))
             {
-                // 只需传递单词ID和词典类型，用户ID由BLL自动获取
+                // 移除当前选中的收藏
                 _favoriteService.RemoveFavorite(detail.WordId, detail.DictionaryType);
                 LoadFavorites();
             }
@@ -59,8 +63,5 @@ public partial class Favorite : MaterialForm
     private void button4_Click(object sender, EventArgs e)
     {
         Close();
-  
-       
-        //之后统一用Close()方法关闭子窗口，绑定ReturnHomepage事件，自动返回主界面
     }
 }
