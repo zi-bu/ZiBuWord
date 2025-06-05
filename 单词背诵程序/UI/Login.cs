@@ -72,8 +72,8 @@ public partial class Login : MaterialForm
         if (MessageBox.Show("真的要游客登录吗，你所有的数据将不会保存", " 警告！"
                 , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
         {
-            var homePage = new HomePage(); //创建一个新的主页窗口对象
-            FormHelper.ShowNewForm(this, homePage); //显示新窗口
+            
+            FormHelper.ShowNewForm(this, Program.homePage); //显示新窗口
         }
     }
 

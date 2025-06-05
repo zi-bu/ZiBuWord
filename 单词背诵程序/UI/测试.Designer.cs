@@ -39,20 +39,23 @@
             webView2.DefaultBackgroundColor = Color.White;
             webView2.Dock = DockStyle.Fill;
             webView2.Location = new Point(0, 0);
+            webView2.Margin = new Padding(5, 4, 5, 4);
             webView2.Name = "webView2";
-            webView2.Size = new Size(604, 811);
+            webView2.Size = new Size(940, 1144);
             webView2.Source = new Uri(" http://localhost:5173/", UriKind.Absolute);
             webView2.TabIndex = 0;
             webView2.ZoomFactor = 1D;
+            webView2.Click += webView2_Click;
             // 
             // 测试
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(604, 811);
+            ClientSize = new Size(940, 1144);
             Controls.Add(webView2);
-            MaximumSize = new Size(620, 850);
-            MinimumSize = new Size(620, 850);
+            Margin = new Padding(5, 4, 5, 4);
+            MaximumSize = new Size(962, 1200);
+            MinimumSize = new Size(962, 1200);
             Name = "测试";
             Text = "测试";
             ((System.ComponentModel.ISupportInitialize)webView2).EndInit();

@@ -55,7 +55,7 @@ public partial class UiSelectionOrder : MaterialForm
         {
             //选对了的情况
             MessageBox.Show(@"选对了，真棒！");
-            RiciterOrder.Index++; //趋势递增
+          
             if (!(RiciterOrder.Index < RiciterOrder.WordList.Count)) //序列索引回拨
                 RiciterOrder.Index = 0;
             _selectionClass.AddWordToReViewList(); //将当前的单词加入到复习列表
@@ -68,6 +68,10 @@ public partial class UiSelectionOrder : MaterialForm
                 RiciterOrder.CreateOrRefreshNewWordList(); //创建新的列表
                 UserStateDeliver.UpdateProgress(10);//更新单词背诵进度
                 Close(); //关闭当前窗口
+                
+                
+                FormHelper.ShowNewForm(this, Program.homePage); //显示新窗口 //显示新窗口
+
             }
         }
         else
