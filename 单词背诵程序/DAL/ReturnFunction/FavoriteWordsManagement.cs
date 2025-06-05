@@ -21,18 +21,20 @@ namespace DAL.ReturnFunction
         public void AddFavorite(int userId, int wordId, string dictType)
         {
             using var db = new UserContext();
-            // 检查是否已经收藏
-            // 如果没有收藏，则添加
-            if (!db.FavoriteWords.Any(f => f.UserId == userId && f.WordId == wordId && f.DictionaryType == dictType))
+            // 检查是否已经收藏某单词，如果没有收藏，则添加该单词
+            if (!db.FavoriteWords.Any( // 判断收藏单词表中是否有满足下面条件的单词，然后取反
+                f => f.UserId == userId && 
+                     f.WordId == wordId &&
+                     f.DictionaryType == dictType))
             {
                 // 添加收藏单词
-                db.FavoriteWords.Add(new FavoriteWord
+                db.FavoriteWords.Add(new FavoriteWord // 创建新的收藏单词对象
                 {
                     UserId = userId,
                     WordId = wordId,
                     DictionaryType = dictType
                 });
-                db.SaveChanges();
+                db.SaveChanges(); // 保存更改
             }
         }
         /// <summary>
@@ -45,11 +47,13 @@ namespace DAL.ReturnFunction
         {
             using var db = new UserContext();
             // 查找已有的收藏记录
-            var fav = db.FavoriteWords.FirstOrDefault(f => f.UserId == userId && f.WordId == wordId && f.DictionaryType == dictType);
+            var fav = db.FavoriteWords.FirstOrDefault( // 查找第一个满足下面条件的单词
+                f => f.UserId == userId &&
+                     f.WordId == wordId &&
+                     f.DictionaryType == dictType);
             if (fav != null)
             {
-                // 删除收藏单词
-                db.FavoriteWords.Remove(fav);
+                db.FavoriteWords.Remove(fav); // 删除找到的收藏单词
                 db.SaveChanges();
             }
         }
