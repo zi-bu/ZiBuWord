@@ -64,7 +64,6 @@ public partial class Reviewer : MaterialForm
 
     private void materialButton1_Click(object sender, EventArgs e)
     {
-        Hide(); //隐藏当前窗口
         FormHelper.ShowNewForm(this, Program.homePage);
     }
 }

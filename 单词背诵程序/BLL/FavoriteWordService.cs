@@ -13,15 +13,10 @@ public class FavoriteWordService
     private readonly FavoriteWordDetailQueryDAL _detailDal = new();
 
     /// <summary>
-    ///     添加收藏
+    /// 获取当前用户ID
     /// </summary>
-    public void AddFavorite(int userId, int wordId, string dictType)
-    {
-        _dal.AddFavorite(userId, wordId, dictType);
-    }
-
-
-    // 获取当前用户ID
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
     private int GetCurrentUserId()
     {
         string? username = BLL.HandleUserInput.UserStateDeliver.GetCurrentUser();
@@ -30,7 +25,10 @@ public class FavoriteWordService
         return DAL.UserDataMover.GetUserId(username);
     }
 
-    // 获取当前用户的所有收藏
+    /// <summary>
+    /// 获取当前用户的所有收藏单词详情
+    /// </summary>
+    /// <returns></returns>
     public List<FavoriteWordDetail> GetCurrentUserFavorites()
     {
         int userId = GetCurrentUserId();
@@ -56,10 +54,12 @@ public class FavoriteWordService
         if (string.IsNullOrEmpty(dictType))
             throw new ArgumentNullException(nameof(dictType), "词典类型不能为空");
         _dal.RemoveFavorite(userId, wordId, dictType);
-    }   /// <summary>
-        ///     获取用户所有收藏
-        /// </summary>
-        /// <param name="userId">用户ID</param>
+    }
+
+    /// <summary>
+    /// 获取用户所有收藏
+    /// </summary>
+    /// <param name="userId">用户ID</param>
     public List<FavoriteWordDetail> GetFavoriteDetails(int userId)
     {
         var favorites = _dal.GetFavorites(userId); // 获取用户的收藏列表
@@ -82,7 +82,7 @@ public class FavoriteWordService
         return result; // 返回结果列表
     }
     /// <summary>
-    /// 调用DAL层获取单词ID
+    /// 获取单词ID
     /// </summary>
     /// <param name="word">单词</param>
     /// <param name="dictType">词典类型</param>
