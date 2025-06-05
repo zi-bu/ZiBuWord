@@ -9,10 +9,12 @@ public partial class UiSelectionOrder : MaterialForm
 {
     private SelectionClass _selectionClass;
     private readonly FavoriteWordService _favoriteService = new();
+    private readonly string _currentDictType; //当前词典类型
 
     public UiSelectionOrder()
     {
-        FormClosing += FormHelper.ReturnHomepage;//绑定返回主页事件
+        FormClosing += FormHelper.ReturnHomepage;//绑定关闭事件
+        _currentDictType = BLL.HandleUserInput.UserStateDeliver.GetCurrentDictType(); //获取当前词典类型
         _selectionClass = new SelectionClass(RiciterOrder.WordList[RiciterOrder.Index]);
         //选择器内容首次初始化
         InitializeComponent();
@@ -117,7 +119,7 @@ public partial class UiSelectionOrder : MaterialForm
         // 获取当前显示的单词原文
         string word = _selectionClass.AccurateWord.word;
         // 获取当前单词的词典类型
-        string dictType = BLL.HandleUserInput.UserStateDeliver.GetCurrentDictType();
+        string dictType = _currentDictType;// 获取当前词典类型
         string? username = BLL.HandleUserInput.UserStateDeliver.GetCurrentUser();
         if (string.IsNullOrEmpty(username))
         {
