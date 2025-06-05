@@ -12,9 +12,14 @@ internal class ProgramDAL
 {
     private static void Main(string[] args)
     {
-        using (Context.UserContext context = new Context.UserContext())
-        {
-            WordMover.AddReviewWord(UserDataMover.GetUserId("test"), "sound", WordMover.GetWordId("sound", Formid.CET4), Formid.CET4);
-        }
+        ReviewListManagement reviewListManagement = new ReviewListManagement();
+        UserDataNow.NowUser = "mouse";
+        Word word1 = (Word)reviewListManagement.GetRandomWordForReview();
+        Word word2 = (Word)reviewListManagement.GetRandomWordForReview();
+        Word word3 = (Word)reviewListManagement.GetRandomWordForReview();
+        Console.WriteLine("Word: " + word1.word);
+        Console.WriteLine("Word: " + word2.word);
+        Console.WriteLine("Word: " + word3.word);
+        
     }
 }

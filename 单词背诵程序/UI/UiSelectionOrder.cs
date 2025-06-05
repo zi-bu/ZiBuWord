@@ -9,7 +9,6 @@ public partial class UiSelectionOrder : MaterialForm
 {
     private SelectionClass _selectionClass;
     private readonly FavoriteWordService _favoriteService = new();
-    private int _userId = 1; // 实际项目应获取真实用户ID
 
     public UiSelectionOrder()
     {
@@ -57,7 +56,7 @@ public partial class UiSelectionOrder : MaterialForm
         {
             //选对了的情况
             MessageBox.Show(@"选对了，真棒！");
-            RiciterOrder.Index++; //趋势递增
+          
             if (!(RiciterOrder.Index < RiciterOrder.WordList.Count)) //序列索引回拨
                 RiciterOrder.Index = 0;
             _selectionClass.AddWordToReViewList(); //将当前的单词加入到复习列表
@@ -70,6 +69,10 @@ public partial class UiSelectionOrder : MaterialForm
                 RiciterOrder.CreateOrRefreshNewWordList(); //创建新的列表
                 UserStateDeliver.UpdateProgress(10);//更新单词背诵进度
                 Close(); //关闭当前窗口
+                
+                
+                FormHelper.ShowNewForm(this, Program.homePage); //显示新窗口 //显示新窗口
+
             }
         }
         else
@@ -117,9 +120,20 @@ public partial class UiSelectionOrder : MaterialForm
 
     private void btnFavorite_Click(object sender, EventArgs e)
     {
+        // 获取当前显示的单词原文
         string word = _selectionClass.AccurateWord.word;
+        // 获取当前单词的词典类型
         string dictType = BLL.HandleUserInput.UserStateDeliver.GetCurrentDictType();
-        _favoriteService.AddFavorite(word, dictType);
-        MessageBox.Show("已收藏该单词！");
+        string? username = BLL.HandleUserInput.UserStateDeliver.GetCurrentUser();
+        if (string.IsNullOrEmpty(username))
+        {
+            MessageBox.Show("请先登录后再收藏单词！", "未登录", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+        else
+        {
+            _favoriteService.AddFavorite(word, dictType); //添加收藏
+            MessageBox.Show("单词已成功收藏！", "收藏成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

@@ -2,23 +2,23 @@
 
 namespace BLL;
 
-public class SearchWordEnglish(IWordQuery wordQuery)
+public class SearchWordEnglish
 {
-    /// <summary>
-    ///     查询指定表，先精确查找，找不到再模糊查找
-    /// </summary>
-    /// <summary>
-    ///     在所有表中查找，优先精确匹配，否则合并所有表的模糊匹配
-    /// </summary>
-    private readonly IWordQuery _wordQuery = wordQuery;
+
+    private readonly IWordQuery _wordQuery;
+
+    public SearchWordEnglish(IWordQuery wordQuery)
+    {
+        _wordQuery = wordQuery;
+    }
 
     //单词集合 依赖注入
 
     //调用_wordQuery接口的FindExactWord方法查找单词
-    //如果找到，返回该单词的列表，否则调用FindFuzzyWords方法查找模糊匹配的单词列表
+
     //如果输入为空，返回空列表
     /// <summary>
-    ///     模糊查询
+    ///  查询
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>

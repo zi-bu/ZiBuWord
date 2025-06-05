@@ -18,7 +18,7 @@ public enum Formid
 }
 
 /// <summary>
-///     单词搬运工类，计划封装查询单词和获取单词的方法（目前未完全实现）。<br />
+///     单词搬运工类，计划封装查询单词和获取单词的方法。<br />
 ///     新增了一个GetWords方法，用于随机获取一个单词。<br />
 ///     新增了一个FindTranslations方法，用于查找单词的释义。<br />
 ///     新增了一个FindPhrases方法，用于查找单词的短语。
@@ -423,6 +423,8 @@ public static class WordMover
     public static List<string> FindWordsByEnglish(string input, Formid formid)
     {
         using (var db = new SqlDataContext())
+        //创建一个新的SqlDataContext实例，用于访问数据库
+        //using语句确保在使用完毕后自动释放资源，防止内存泄漏
         {
             List<string> fuzzyList = new();
             switch (formid)
@@ -570,7 +572,7 @@ public static class WordMover
                 Repetition = 1,
                 Mistake = 0,
                 Interval = 1,
-                DueDate = DateTime.Now,
+                DueDate = DateTime.Now.Date,
                 Word = word,
                 WordID = wordid,
                 Form = formid.ToString()
@@ -579,6 +581,8 @@ public static class WordMover
             db.SaveChanges();
         }
     }
+
+    static int Reviewcount = 0;
     /// <summary>
     /// 获取指定日期的复习单词的ID和来源表
     /// </summary>
@@ -589,17 +593,32 @@ public static class WordMover
     {
         using (var db = new UserContext())
         {
-            var User = db.UserData.FirstOrDefault(u => u.UserName == user);
-            if (User!.UserReview == null) { return; }
-            var ReviewWord = User.UserReview.Where(f => f.DueDate == time);
-            int count = rd.Next(0, ReviewWord.Count());
-            var word = ReviewWord.ElementAt(count);
+            var User = db.UserData.Include(u => u.UserReview).FirstOrDefault(u => u.UserName == user);//获取用户
+            if (User!.UserReview == null||User.UserReview.Count() == 0) { throw new ArgumentException("已复习完当日所有单词"); }
+            var ReviewWord = User.UserReview.Where(f => f.DueDate.Date <= time.Date);
+            if (Reviewcount >= ReviewWord.Count() - 1) { Reviewcount = 0; }
+            var word = ReviewWord.ElementAt(Reviewcount++);
             Form = word.Form;
             wordid = word.WordID;
-
         }
     }
-
+    /// <summary>
+    /// 获取指定用户的需要复习的单词数量
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    public static int GetReviewWordCount(string user,DateTime time)
+    {
+        using (var db = new UserContext())
+        {
+            var User = db.UserData.Include(u => u.UserReview).FirstOrDefault(u => u.UserName == user);//获取用户
+            if (User == null) { throw new ArgumentException("用户不存在"); }
+            if (User.UserReview == null || User.UserReview.Count() == 0) { return 0; }
+            var ReviewWord = User.UserReview.Where(f => f.DueDate.Date <= time.Date);
+            return ReviewWord.Count();
+        }
+    }
     /// <summary>
     /// 复习完成，更新复习单词
     /// </summary>
@@ -614,7 +633,7 @@ public static class WordMover
             if (review == null) { throw new ArgumentException("该用户的背诵表中没有该单词"); }
             review.Repetition++;
             review.Interval *= 2;
-            review.DueDate = DateTime.Now.AddDays(review.Interval);
+            review.DueDate = DateTime.Now.Date.AddDays(review.Interval);
             db.SaveChanges();
         }
     }
