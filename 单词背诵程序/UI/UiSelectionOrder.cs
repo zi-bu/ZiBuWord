@@ -71,9 +71,6 @@ public partial class UiSelectionOrder : MaterialForm
                 RiciterOrder.CreateOrRefreshNewWordList(); //创建新的列表
                 UserStateDeliver.UpdateProgress(10);//更新单词背诵进度
                 Close(); //关闭当前窗口
-                
-                
-                FormHelper.ShowNewForm(this, Program.homePage); //显示新窗口 //显示新窗口
 
             }
         }
@@ -114,10 +111,7 @@ public partial class UiSelectionOrder : MaterialForm
 
     private void GoHome_Click(object sender, EventArgs e)
     {
-        HomePage homePage = new HomePage(); //创建一个新的主页窗口对象
-        FormHelper.ShowNewForm(this, homePage); //显示新窗口
-        Hide(); //关闭当前窗口
-        BLL.HandleUserInput.UserStateDeliver.ProgressSync();//进度同步，中断背诵时归正进度
+        Close(); //关闭当前窗口
     }
 
     private void btnFavorite_Click(object sender, EventArgs e)

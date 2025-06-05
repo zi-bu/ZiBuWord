@@ -12,5 +12,7 @@ namespace IBLLBridgeDAL
          void RememberUser(string? user);
          void ProgressSync();
          void UpdateProgress(int upprogress);
+        public string GetCurrentDictType();
+        public string? GetNowUser();
      }
 }

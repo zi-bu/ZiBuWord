@@ -10,7 +10,7 @@ public partial class Favorite : MaterialForm
 
     public Favorite()
     {
-        FormClosing += FormHelper.CloseForm; // 绑定关闭事件
+        FormClosing += FormHelper.ReturnHomepage;//绑定返回主页事件
         InitializeComponent();
         dataGridViewFavorites.AutoGenerateColumns = false;
         LoadFavorites();
@@ -62,8 +62,6 @@ public partial class Favorite : MaterialForm
 
     private void button4_Click(object sender, EventArgs e)
     {
-        var homePage = new HomePage(); //创建一个新的主页窗口对象
-        FormHelper.ShowNewForm(this, homePage); //显示新窗口
-        Hide(); //关闭当前窗口
+        Close();
     }
 }

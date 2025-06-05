@@ -19,8 +19,7 @@ public partial class HomePage : MaterialForm
     public HomePage()
     {
         InitializeComponent();
-        FormClosing += FormHelper.CloseForm; // 绑定 FormClosing 事件
-
+        FormClosing += FormHelper.CloseForm;//绑定关闭事件
         // 初始化ComboBox
         InitializeDictionaryComboBox();
     }
@@ -96,6 +95,7 @@ public partial class HomePage : MaterialForm
     {
         var memory = new UiSelectionOrder();
         FormHelper.ShowNewForm(this, memory);
+        UserStateDeliver.ProgressSync();//进度同步
     }
 
     private void btnStartReview_Click(object sender, EventArgs e)

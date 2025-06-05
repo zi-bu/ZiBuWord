@@ -18,7 +18,16 @@ public static class FormHelper
         newForm.Show();
         currentForm.Hide();
     }
-
+    /// <summary>
+    /// 显示主页面并关闭当前窗口
+    /// </summary>
+    /// <param name="currentForm"></param>
+    /// <param name="newForm"></param>
+    public static void ShowForm(Form currentForm, HomePage homePage)
+    {
+        homePage.Show();
+        currentForm.Close();
+    }
     /// <summary>
     ///     处理窗体关闭事件，显示确认对话框并决定是否退出程序
     /// </summary>
@@ -41,5 +50,14 @@ public static class FormHelper
             // 只在用户明确选择"是"时才退出
             if (!e.Cancel) Application.Exit(); // 统一退出整个应用
         }
+    }
+    /// <summary>
+    /// 返回主页面，包装起来绑定关闭事件用的
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public static void ReturnHomepage(object sender, FormClosingEventArgs e)
+    {
+        Program.homePage.Show();
     }
 }
