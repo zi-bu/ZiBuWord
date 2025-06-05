@@ -20,6 +20,7 @@ namespace UI
             //给listView1添加列标题
             InitializeComponent();
             listView1.View = View.Details;
+            //设置listView1的视图为详细信息视图
             listView1.Columns.Clear();
             listView1.Columns.Add("单词", 120);
             listView1.Columns.Add("词性", 80);

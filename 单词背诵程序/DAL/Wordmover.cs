@@ -423,6 +423,8 @@ public static class WordMover
     public static List<string> FindWordsByEnglish(string input, Formid formid)
     {
         using (var db = new SqlDataContext())
+        //创建一个新的SqlDataContext实例，用于访问数据库
+        //using语句确保在使用完毕后自动释放资源，防止内存泄漏
         {
             List<string> fuzzyList = new();
             switch (formid)
