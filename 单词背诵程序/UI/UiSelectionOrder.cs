@@ -13,7 +13,7 @@ public partial class UiSelectionOrder : MaterialForm
 
     public UiSelectionOrder()
     {
-        FormClosing += FormHelper.CloseForm;//绑定关闭事件
+        FormClosing += FormHelper.ReturnHomepage;//绑定关闭事件
         _currentDictType = BLL.HandleUserInput.UserStateDeliver.GetCurrentDictType(); //获取当前词典类型
         _selectionClass = new SelectionClass(RiciterOrder.WordList[RiciterOrder.Index]);
         //选择器内容首次初始化
