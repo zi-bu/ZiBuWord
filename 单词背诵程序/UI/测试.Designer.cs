@@ -45,7 +45,6 @@
             webView2.Source = new Uri(" http://localhost:5173/", UriKind.Absolute);
             webView2.TabIndex = 0;
             webView2.ZoomFactor = 1D;
-            webView2.Click += webView2_Click;
             // 
             // 测试
             // 
