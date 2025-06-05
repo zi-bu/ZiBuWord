@@ -44,7 +44,7 @@ namespace BLL.HandleUserInput
         }
         /// <summary>
         /// 使程序单词进度与对应用户的数据库里的进度同步<br/>
-        /// 使用地点：选择表时触发一下；中断背诵触发。
+        /// 使用地点：选择表时触发一下获取进度；每次背诵前触发一下，避免中断背诵导致进度不准确。
         /// </summary>
         public static bool ProgressSync()
         {

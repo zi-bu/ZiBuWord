@@ -16,7 +16,7 @@ namespace UI
     {
         public SearchWord()
         {
-            FormClosing += FormHelper.CloseForm;//绑定关闭事件
+            FormClosing += FormHelper.ReturnHomepage;//绑定关闭事件
             //给listView1添加列标题
             InitializeComponent();
             listView1.View = View.Details;
@@ -49,9 +49,7 @@ namespace UI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            HomePage homePage = new HomePage(); //创建一个新的主页窗口对象
-            homePage.Show(); //显示新窗口
-            Hide(); //隐藏当前窗口
+            Close();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
