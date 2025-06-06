@@ -391,27 +391,69 @@ public static class WordMover
             {
                 case Formid.CET4:
                     {
-                        return db.CET4.First(s => s.Word == word).Id;
+                        try
+                        {
+                            return db.CET4.First(s => s.Word == word).Id;
+                        }
+                        catch
+                        {
+                            throw new ArgumentException("ID不存在，可能是因为没背完背诵列表就更换词典类型引起的");
+                        }
                     }
                 case Formid.CET6:
                     {
-                        return db.CET6.First(s => s.Word == word).Id;
+                        try
+                        {
+                            return db.CET6.First(s => s.Word == word).Id;
+                        }
+                        catch
+                        {
+                            throw new ArgumentException("ID不存在，可能是因为没背完背诵列表就更换词典类型引起的");
+                        }
                     }
                 case Formid.MiddleSchool:
                     {
-                        return db.MiddleSchool.First(s => s.Word == word).Id;
+                        try
+                        {
+                            return db.MiddleSchool.First(s => s.Word == word).Id;
+                        }
+                        catch
+                        {
+                            throw new ArgumentException("ID不存在，可能是因为没背完背诵列表就更换词典类型引起的");
+                        }
                     }
                 case Formid.HighSchool:
                     {
-                        return db.HighSchool.First(s => s.Word == word).Id;
+                        try
+                        {
+                            return db.HighSchool.First(s => s.Word == word).Id;
+                        }
+                        catch
+                        {
+                            throw new ArgumentException("ID不存在，可能是因为没背完背诵列表就更换词典类型引起的");
+                        }
                     }
                 case Formid.KY:
                     {
-                        return db.KY.First(s => s.Word == word).Id;
+                        try
+                        {
+                            return db.KY.First(s => s.Word == word).Id;
+                        }
+                        catch
+                        {
+                            throw new ArgumentException("ID不存在，可能是因为没背完背诵列表就更换词典类型引起的");
+                        }
                     }
                 case Formid.TF:
                     {
-                        return db.TF.First(s => s.Word == word).Id;
+                        try
+                        {
+                            return db.TF.First(s => s.Word == word).Id;
+                        }
+                        catch 
+                        {
+                            throw new ArgumentException("ID不存在，可能是因为没背完背诵列表就更换词典类型引起的");
+                        }
                     }
                 default:
                     {
