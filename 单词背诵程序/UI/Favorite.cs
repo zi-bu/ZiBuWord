@@ -19,7 +19,7 @@ public partial class Favorite : MaterialForm
 
     private void LoadFavorites()
     {
-        // 调用BLL层获取当前用户收藏
+        //获取当前用户收藏
         var details = _favoriteService.GetCurrentUserFavorites();
         dataGridViewFavorites.DataSource = details;
     }

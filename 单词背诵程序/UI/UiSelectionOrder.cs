@@ -116,10 +116,10 @@ public partial class UiSelectionOrder : MaterialForm
 
     private void btnFavorite_Click(object sender, EventArgs e)
     {
-        // 获取当前显示的单词原文
+        // 当前显示的单词原文
         string word = _selectionClass.AccurateWord.word;
-        // 获取当前单词的词典类型
-        string dictType = _currentDictType;// 获取当前词典类型
+        // 当前单词的词典类型
+        string dictType = _currentDictType;
         string? username = BLL.HandleUserInput.UserStateDeliver.GetCurrentUser();
         if (string.IsNullOrEmpty(username))
         {
