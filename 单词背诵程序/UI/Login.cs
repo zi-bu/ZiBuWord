@@ -122,6 +122,7 @@ public partial class Login : MaterialForm
             }
 
             int result = userData.UserRegister(textUserName.Text, textPassword.Text);
+            //调用bll层的注册函数
             if (result == 10)
             {
                 MessageBox.Show("注册失败：用户名已存在",

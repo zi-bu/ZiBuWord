@@ -129,10 +129,11 @@ partial class Reviewer
         materialButton1.Location = new Point(184, 56);
         materialButton1.Margin = new Padding(5, 6, 5, 6);
         materialButton1.MaximumSize = new Size(251, 100);
+        materialButton1.MinimumSize = new Size(100, 30);
         materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
         materialButton1.Name = "materialButton1";
         materialButton1.NoAccentTextColor = Color.Empty;
-        materialButton1.Size = new Size(79, 36);
+        materialButton1.Size = new Size(100, 36);
         materialButton1.TabIndex = 5;
         materialButton1.Text = "返回主页";
         materialButton1.Type = MaterialButton.MaterialButtonType.Contained;
