@@ -38,7 +38,6 @@ namespace BLL.HandleUserInput
         /// <returns></returns>
         public static bool RememberUser(string? user)
         {
-            if (user == null) return false;
             Deliverymen.RememberUser(user);
             return true;
         }
@@ -60,6 +59,14 @@ namespace BLL.HandleUserInput
         {
             Deliverymen.UpdateProgress(upprogress);
             return true;
+        }
+        /// <summary>
+        /// 获取当前用户需要复习的单词数量
+        /// </summary>
+        /// <returns></returns>
+        public static int GetReviewCount()
+        {
+            return Deliverymen.GetReviewListCount();
         }
         /// <summary>
         /// 获取当前用户ID<br/>

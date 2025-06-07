@@ -99,5 +99,14 @@ namespace DAL
         {
             return userDictionarySelect.ToString();
         }
+        /// <summary>
+        /// 获取当前用户的需要复习的单词数量
+        /// </summary>
+        /// <returns></returns>
+        public int GetReviewListCount()
+        {
+            if (UserDataNow.NowUser == null) { return -1; }
+            return WordMover.GetReviewWordCount(UserDataNow.NowUser, DateTime.Now.Date);
+        }
     }
 }

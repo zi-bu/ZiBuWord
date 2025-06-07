@@ -12,6 +12,8 @@ namespace IBLLBridgeDAL
          void RememberUser(string? user);
          void ProgressSync();
          void UpdateProgress(int upprogress);
+
+        int GetReviewListCount(); //获取需要复习的单词数量
         public string GetCurrentDictType();
         public string? GetNowUser();
      }

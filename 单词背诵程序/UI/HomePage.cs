@@ -1,6 +1,7 @@
 ﻿using MaterialSkin.Controls;
 using MaterialSkin;
 using BLL.HandleUserInput;
+using BLL;
 namespace UI;
 
 public partial class HomePage : MaterialForm
@@ -100,8 +101,13 @@ public partial class HomePage : MaterialForm
 
     private void btnStartReview_Click(object sender, EventArgs e)
     {
-        var review = new Reviewer();
-        FormHelper.ShowNewForm(this, review);
+        if (UserStateDeliver.GetReviewCount() == -1) MessageBox.Show("请先登录后再开始复习！", "未登录", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        else if (UserStateDeliver.GetReviewCount() < 10) MessageBox.Show("单词复习已基本完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        else
+        {
+            var review = new Reviewer();
+            FormHelper.ShowNewForm(this, review);
+        }
     }
 
     private void HomePage_Load(object sender, EventArgs e)
