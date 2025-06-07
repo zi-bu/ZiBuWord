@@ -15,7 +15,7 @@ public class UserContext : DbContext
     // 对应数据库中的 ReviewUserWord 表。
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (!optionsBuilder.IsConfigured)
+        if (!optionsBuilder.IsConfigured)// 检查是否已配置
         {
             // 使用ConnectionStringProvider获取连接字符串
             optionsBuilder.UseSqlServer("Server = 26.184.142.179, 1433; Database = UserData; User Id = User1; Password = A@114514; Encrypt = False;");
@@ -40,9 +40,9 @@ public class UserContext : DbContext
         modelBuilder.Entity<UserReview>().HasKey(r => r.ID); // 配置主键。
         modelBuilder.Entity<UserReview>().ToTable("ReviewUserWord"); // 映射到 ReviewUserWord 表。
         modelBuilder.Entity<UserReview>()
-            .HasOne(u => u.User)
-            .WithMany(u => u.UserReview)
-            .HasForeignKey(r => r.UserID);
+            .HasOne(u => u.User)// 每个复习记录都对应一个用户
+            .WithMany(u => u.UserReview)// 一个用户可以有多个复习记录
+            .HasForeignKey(r => r.UserID);// 配置外键关联用户Id
 
         modelBuilder.Entity<FavoriteWord>().HasKey(f => f.Id); // 配置主键。
         modelBuilder.Entity<FavoriteWord>().ToTable("FavoriteWords"); // 映射到 FavoriteWords 表。
