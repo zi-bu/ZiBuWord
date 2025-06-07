@@ -1,4 +1,5 @@
 ﻿using MaterialSkin.Controls;
+using System.Text.RegularExpressions;
 using Timer = System.Windows.Forms.Timer;
 
 namespace UI;
@@ -79,6 +80,7 @@ public partial class Login : MaterialForm
 
     private readonly string _usernamePattern = @"^[a-zA-Z][a-zA-Z0-9_]{4,10}$"; // 用户名：字母开头，5-11位，只允许字母数字下划线
     private readonly string _passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\W]{8,20}$"; // 密码：必须包含大小写字母和数字，8-20位
+    //可以去这个网站在线验证正则表达式"https://www.jyshare.com/front-end/854/"
 
     private void TextUserName_TextChanged(object sender, EventArgs e)
     {
@@ -120,6 +122,21 @@ public partial class Login : MaterialForm
                 MessageBox.Show("用户名和密码不能为空", "输入错误", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            // 在UI层进行验证
+            if (!Regex.IsMatch(textUserName.Text, _usernamePattern))
+            {
+                MessageBox.Show("用户名格式不正确，必须以字母开头，长度在5-11之间，只能包含字母、数字和下划线",
+                    "注册失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!Regex.IsMatch(textPassword.Text, _passwordPattern))
+            {
+                MessageBox.Show("密码格式不正确，必须包含大小写字母和数字，长度在8-20之间",
+                    "注册失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
             int result = userData.UserRegister(textUserName.Text, textPassword.Text);
             //调用bll层的注册函数
@@ -127,13 +144,6 @@ public partial class Login : MaterialForm
             {
                 MessageBox.Show("注册失败：用户名已存在",
                               "注册失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (result == 11)
-            {
-                MessageBox.Show("注册失败：用户名或密码格式不正确" +
-                    "\n1.用户名长度在5-11之间，只能包含字母、数字和下划线" +
-                    "\n2.密码必须包含大小写字母和数字的组合，可以使用特殊字符，不能包含汉字和其他非ASCII字符，长度在8-20之间", "注册失败",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (result == 1)
             {
