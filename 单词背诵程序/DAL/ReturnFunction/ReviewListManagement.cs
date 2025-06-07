@@ -34,4 +34,10 @@ public class ReviewListManagement : IReviewListManagement
         if(UserDataNow.NowUser == null) { return; }
         WordMover.UpdateReviewWord(UserDataMover.GetUserId(UserDataNow.NowUser),word.word);
     }
+
+    public int GetReviewListCount()
+    {
+        if (UserDataNow.NowUser == null) { return -1; }
+        return WordMover.GetReviewWordCount(UserDataNow.NowUser, DateTime.Now.Date);
+    }
 }
